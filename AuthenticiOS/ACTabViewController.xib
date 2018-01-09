@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ACTabViewController" customModule="AuthenticiOS" customModuleProvider="target">
             <connections>
+                <outlet property="stackView" destination="kDk-1R-jJN" id="3am-Ha-qkK"/>
                 <outlet property="view" destination="hr2-wv-fGO" id="9eB-yf-pBp"/>
             </connections>
         </placeholder>
@@ -20,19 +21,41 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jTL-44-tf9">
-                    <rect key="frame" x="164" y="318" width="46" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Button"/>
-                    <connections>
-                        <action selector="click:" destination="-1" eventType="touchUpInside" id="7h8-3D-OiP"/>
-                    </connections>
-                </button>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pBc-1B-HJ0">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="kDk-1R-jJN">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                            <subviews>
+                                <view tag="99" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UyA-eY-Dn5">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" id="GDG-eU-2ZR"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="kDk-1R-jJN" firstAttribute="leading" secondItem="pBc-1B-HJ0" secondAttribute="leading" id="7X3-bC-yEa"/>
+                        <constraint firstAttribute="trailing" secondItem="kDk-1R-jJN" secondAttribute="trailing" id="CCC-QS-H7p"/>
+                        <constraint firstItem="kDk-1R-jJN" firstAttribute="width" secondItem="pBc-1B-HJ0" secondAttribute="width" id="Om8-7G-wyK"/>
+                        <constraint firstItem="kDk-1R-jJN" firstAttribute="top" secondItem="pBc-1B-HJ0" secondAttribute="top" id="jHH-G2-X52"/>
+                        <constraint firstAttribute="bottom" secondItem="kDk-1R-jJN" secondAttribute="bottom" id="ncZ-A8-JNf"/>
+                    </constraints>
+                </scrollView>
             </subviews>
             <color key="backgroundColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="pBc-1B-HJ0" firstAttribute="bottom" secondItem="aPx-5P-SkC" secondAttribute="bottom" id="ClO-Gc-6XC"/>
+                <constraint firstItem="pBc-1B-HJ0" firstAttribute="leading" secondItem="aPx-5P-SkC" secondAttribute="leading" id="DLE-z6-8H5"/>
+                <constraint firstItem="pBc-1B-HJ0" firstAttribute="top" secondItem="hr2-wv-fGO" secondAttribute="top" id="SV4-qi-7fV"/>
+                <constraint firstItem="pBc-1B-HJ0" firstAttribute="trailing" secondItem="aPx-5P-SkC" secondAttribute="trailing" id="oNj-LB-fJl"/>
+            </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
             <viewLayoutGuide key="safeArea" id="aPx-5P-SkC"/>
-            <point key="canvasLocation" x="-65" y="-10"/>
+            <point key="canvasLocation" x="-65.5" y="-10.5"/>
         </view>
     </objects>
 </document>

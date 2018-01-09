@@ -19,6 +19,10 @@
 		FC16001D1FFC4BD6001DF3B5 /* ACTabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC16001B1FFC4BD6001DF3B5 /* ACTabViewController.xib */; };
 		FC195DCC1FFBCE4C00F9C9AC /* ACTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC195DCA1FFBCE4C00F9C9AC /* ACTableViewCell.swift */; };
 		FC195DCD1FFBCE4C00F9C9AC /* ACTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC195DCB1FFBCE4C00F9C9AC /* ACTableViewCell.xib */; };
+		FC565D102001395B00DE7C9A /* AuthenticTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC565D0F2001395B00DE7C9A /* AuthenticTab.swift */; };
+		FC565D1220013A9200DE7C9A /* AuthenticBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC565D1120013A9200DE7C9A /* AuthenticBundle.swift */; };
+		FC565D1420013AB600DE7C9A /* AuthenticButtonInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC565D1320013AB600DE7C9A /* AuthenticButtonInfo.swift */; };
+		FC565D1620013ACE00DE7C9A /* AuthenticButtonAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC565D1520013ACE00DE7C9A /* AuthenticButtonAction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +42,11 @@
 		FC16001B1FFC4BD6001DF3B5 /* ACTabViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACTabViewController.xib; sourceTree = "<group>"; };
 		FC195DCA1FFBCE4C00F9C9AC /* ACTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTableViewCell.swift; sourceTree = "<group>"; };
 		FC195DCB1FFBCE4C00F9C9AC /* ACTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACTableViewCell.xib; sourceTree = "<group>"; };
+		FC565D0A200118A400DE7C9A /* AuthenticiOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AuthenticiOS.entitlements; sourceTree = "<group>"; };
+		FC565D0F2001395B00DE7C9A /* AuthenticTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticTab.swift; sourceTree = "<group>"; };
+		FC565D1120013A9200DE7C9A /* AuthenticBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticBundle.swift; sourceTree = "<group>"; };
+		FC565D1320013AB600DE7C9A /* AuthenticButtonInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticButtonInfo.swift; sourceTree = "<group>"; };
+		FC565D1520013ACE00DE7C9A /* AuthenticButtonAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticButtonAction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +82,8 @@
 		2B36305D1FF56BD9002469E5 /* AuthenticiOS */ = {
 			isa = PBXGroup;
 			children = (
+				FC565D0E2001394A00DE7C9A /* Models */,
+				FC565D0A200118A400DE7C9A /* AuthenticiOS.entitlements */,
 				FC1045041FFEF5560010F8A1 /* Assets.xcassets */,
 				FC0998991FFEA74D00BCAD3A /* full.png */,
 				2BEFD14E1FF5820E0094572A /* GoogleService-Info.plist */,
@@ -104,6 +115,17 @@
 				AB7EE5EFB0782B2DC076E74F /* Pods_AuthenticiOS.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FC565D0E2001394A00DE7C9A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FC565D0F2001395B00DE7C9A /* AuthenticTab.swift */,
+				FC565D1120013A9200DE7C9A /* AuthenticBundle.swift */,
+				FC565D1320013AB600DE7C9A /* AuthenticButtonInfo.swift */,
+				FC565D1520013ACE00DE7C9A /* AuthenticButtonAction.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,6 +164,11 @@
 					2B36305A1FF56BD9002469E5 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -233,8 +260,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC565D102001395B00DE7C9A /* AuthenticTab.swift in Sources */,
+				FC565D1420013AB600DE7C9A /* AuthenticButtonInfo.swift in Sources */,
+				FC565D1220013A9200DE7C9A /* AuthenticBundle.swift in Sources */,
 				2B3630611FF56BD9002469E5 /* ViewController.swift in Sources */,
 				2B36305F1FF56BD9002469E5 /* AppDelegate.swift in Sources */,
+				FC565D1620013ACE00DE7C9A /* AuthenticButtonAction.swift in Sources */,
 				FC16001C1FFC4BD6001DF3B5 /* ACTabViewController.swift in Sources */,
 				FC195DCC1FFBCE4C00F9C9AC /* ACTableViewCell.swift in Sources */,
 			);

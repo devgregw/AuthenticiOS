@@ -7,10 +7,20 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseStorageUI
 
 class ACTabViewController: UIViewController {
     
+    @IBOutlet weak var stackView: UIStackView!
+    
     private let tab: AuthenticTab?
+    
+    private func clearViews() {
+        while (self.stackView.arrangedSubviews.count > 1) {
+            self.stackView.removeArrangedSubview(self.stackView.arrangedSubviews[1])
+        }
+    }
     
     public static func present(tab: AuthenticTab, withViewController vc: UIViewController) {
         //vc.navigationController?.present(ACTabViewController(tab: tab), animated: true, completion: nil)
@@ -29,10 +39,39 @@ class ACTabViewController: UIViewController {
         tab!.bundles[0].button?.action.invoke(viewController: self)
     }
     
+    private func initLayout() {
+        self.clearViews()
+        let i = UIImageView()
+        i.contentMode = .scaleAspectFit
+        i.sd_setImage(with: Storage.storage().reference().child(self.tab!.header), placeholderImage: nil, completion: { (image, e, c, r) in
+            let newHeight = (image!.size.height / image!.size.width) * (UIScreen.main.bounds.width)
+            i.addConstraint(NSLayoutConstraint(item: i, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: newHeight))
+        })
+        self.stackView.addArrangedSubview(i)
+        if (self.tab!.bundles.count == 0) {
+            let label = UILabel()
+            label.textColor = UIColor.white
+            label.text = "No content"
+            label.textAlignment = .center
+            self.stackView.addArrangedSubview(label)
+        } else {
+            self.tab!.bundles.forEach { bundle in bundle.createViews(viewController: self).forEach { view in self.stackView.addArrangedSubview(view) } }
+        }
+        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        initLayout()
+    }
+    
     init(tab: AuthenticTab) {
         self.tab = tab
         super.init(nibName: "ACTabViewController", bundle: Bundle.main)
+        NotificationCenter.default.addObserver(forName: .UIDeviceOrientationDidChange, object: nil, queue: .main, using: { notification in self.initLayout() })
         self.title = tab.title
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -74,43 +74,6 @@
             </objects>
             <point key="canvasLocation" x="200.80000000000001" y="44.527736131934034"/>
         </scene>
-        <!--Tabs-->
-        <scene sceneID="KLg-zP-eEa">
-            <objects>
-                <tableViewController id="f8T-7f-Bpk" customClass="ACTableViewController" customModule="AuthenticiOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="WdV-bb-S4L">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="separatorColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="sectionIndexBackgroundColor" red="0.12941176469999999" green="0.12941176469999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ACTableViewCell" id="yWs-Iy-r5d">
-                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yWs-Iy-r5d" id="iAy-NK-XEN">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="f8T-7f-Bpk" id="c7Q-nb-Mxn"/>
-                            <outlet property="delegate" destination="f8T-7f-Bpk" id="4q0-1h-Zpk"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Tabs" id="5hD-ww-byu">
-                        <barButtonItem key="rightBarButtonItem" title="Close" style="done" id="AYF-kV-MP7">
-                            <connections>
-                                <action selector="didRequestClose:" destination="f8T-7f-Bpk" id="fdk-1c-mIf"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XeL-B1-6W5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2366" y="761"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="dRW-ea-igC">
             <objects>
@@ -134,7 +97,7 @@
         <!--Tabs-->
         <scene sceneID="Gvh-8Z-VW8">
             <objects>
-                <viewController id="K1D-mu-W24" customClass="ACTableViewController2" customModule="AuthenticiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="K1D-mu-W24" customClass="ACTableViewController" customModule="AuthenticiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uRL-BK-okT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
