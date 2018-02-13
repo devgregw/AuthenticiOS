@@ -19,6 +19,10 @@
 		FC16001D1FFC4BD6001DF3B5 /* ACTabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC16001B1FFC4BD6001DF3B5 /* ACTabViewController.xib */; };
 		FC195DCC1FFBCE4C00F9C9AC /* ACTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC195DCA1FFBCE4C00F9C9AC /* ACTableViewCell.swift */; };
 		FC195DCD1FFBCE4C00F9C9AC /* ACTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC195DCB1FFBCE4C00F9C9AC /* ACTableViewCell.xib */; };
+		FC4621D52030E31F00761EE9 /* FuturaHeavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC4621D42030E31E00761EE9 /* FuturaHeavy.ttf */; };
+		FC4621D72030E32B00761EE9 /* ProximaNova.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC4621D62030E32A00761EE9 /* ProximaNova.ttf */; };
+		FC490DD2202BA1F4007F270A /* AuthenticElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC490DD1202BA1F4007F270A /* AuthenticElement.swift */; };
+		FC490DD4202BA7FE007F270A /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC490DD3202BA7FE007F270A /* Utilities.swift */; };
 		FC565D102001395B00DE7C9A /* AuthenticTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC565D0F2001395B00DE7C9A /* AuthenticTab.swift */; };
 		FC565D1220013A9200DE7C9A /* AuthenticBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC565D1120013A9200DE7C9A /* AuthenticBundle.swift */; };
 		FC565D1420013AB600DE7C9A /* AuthenticButtonInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC565D1320013AB600DE7C9A /* AuthenticButtonInfo.swift */; };
@@ -42,6 +46,10 @@
 		FC16001B1FFC4BD6001DF3B5 /* ACTabViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACTabViewController.xib; sourceTree = "<group>"; };
 		FC195DCA1FFBCE4C00F9C9AC /* ACTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTableViewCell.swift; sourceTree = "<group>"; };
 		FC195DCB1FFBCE4C00F9C9AC /* ACTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACTableViewCell.xib; sourceTree = "<group>"; };
+		FC4621D42030E31E00761EE9 /* FuturaHeavy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FuturaHeavy.ttf; path = ../../FuturaHeavy.ttf; sourceTree = "<group>"; };
+		FC4621D62030E32A00761EE9 /* ProximaNova.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ProximaNova.ttf; path = ../../ProximaNova.ttf; sourceTree = "<group>"; };
+		FC490DD1202BA1F4007F270A /* AuthenticElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticElement.swift; sourceTree = "<group>"; };
+		FC490DD3202BA7FE007F270A /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		FC565D0A200118A400DE7C9A /* AuthenticiOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AuthenticiOS.entitlements; sourceTree = "<group>"; };
 		FC565D0F2001395B00DE7C9A /* AuthenticTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticTab.swift; sourceTree = "<group>"; };
 		FC565D1120013A9200DE7C9A /* AuthenticBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticBundle.swift; sourceTree = "<group>"; };
@@ -82,6 +90,8 @@
 		2B36305D1FF56BD9002469E5 /* AuthenticiOS */ = {
 			isa = PBXGroup;
 			children = (
+				FC4621D62030E32A00761EE9 /* ProximaNova.ttf */,
+				FC4621D42030E31E00761EE9 /* FuturaHeavy.ttf */,
 				FC565D0E2001394A00DE7C9A /* Models */,
 				FC565D0A200118A400DE7C9A /* AuthenticiOS.entitlements */,
 				FC1045041FFEF5560010F8A1 /* Assets.xcassets */,
@@ -96,6 +106,7 @@
 				FC195DCB1FFBCE4C00F9C9AC /* ACTableViewCell.xib */,
 				FC16001A1FFC4BD6001DF3B5 /* ACTabViewController.swift */,
 				FC16001B1FFC4BD6001DF3B5 /* ACTabViewController.xib */,
+				FC490DD3202BA7FE007F270A /* Utilities.swift */,
 			);
 			path = AuthenticiOS;
 			sourceTree = "<group>";
@@ -124,6 +135,7 @@
 				FC565D1120013A9200DE7C9A /* AuthenticBundle.swift */,
 				FC565D1320013AB600DE7C9A /* AuthenticButtonInfo.swift */,
 				FC565D1520013ACE00DE7C9A /* AuthenticButtonAction.swift */,
+				FC490DD1202BA1F4007F270A /* AuthenticElement.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -196,12 +208,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC195DCD1FFBCE4C00F9C9AC /* ACTableViewCell.xib in Resources */,
+				FC4621D72030E32B00761EE9 /* ProximaNova.ttf in Resources */,
 				2B3630691FF56BD9002469E5 /* LaunchScreen.storyboard in Resources */,
 				FC09989A1FFEA74E00BCAD3A /* full.png in Resources */,
 				FC16001D1FFC4BD6001DF3B5 /* ACTabViewController.xib in Resources */,
 				FC1045051FFEF5560010F8A1 /* Assets.xcassets in Resources */,
 				2BEFD14F1FF5820E0094572A /* GoogleService-Info.plist in Resources */,
 				2B3630641FF56BD9002469E5 /* Main.storyboard in Resources */,
+				FC4621D52030E31F00761EE9 /* FuturaHeavy.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,7 +280,9 @@
 				2B3630611FF56BD9002469E5 /* ViewController.swift in Sources */,
 				2B36305F1FF56BD9002469E5 /* AppDelegate.swift in Sources */,
 				FC565D1620013ACE00DE7C9A /* AuthenticButtonAction.swift in Sources */,
+				FC490DD2202BA1F4007F270A /* AuthenticElement.swift in Sources */,
 				FC16001C1FFC4BD6001DF3B5 /* ACTabViewController.swift in Sources */,
+				FC490DD4202BA7FE007F270A /* Utilities.swift in Sources */,
 				FC195DCC1FFBCE4C00F9C9AC /* ACTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

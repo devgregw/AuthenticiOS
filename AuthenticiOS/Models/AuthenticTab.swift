@@ -17,15 +17,24 @@ class AuthenticTab {
     
     public let index: Int
     
-    public let bundles: [AuthenticBundle]
+    public let elements: [AuthenticElement]
+    
+    public let hideHeader: Bool
+    
+    private let visibilityRules: NSDictionary
+    
+    public func getShouldBeHidden() -> Bool {
+        //TODO
+        return false
+    }
     
     init(dict: NSDictionary) {
         self.id = dict.value(forKey: "id") as! String
         self.title = dict.value(forKey: "title") as! String
         self.header = dict.value(forKey: "header") as! String
         self.index = dict.value(forKey: "index") as! Int
-        self.bundles = (dict.value(forKey: "bundles") as? NSDictionary)?.map({ element in AuthenticBundle(dict: element.value as! NSDictionary) }) ?? []
-        //self.bundles = (dict.value(forKey: "bundles") as? [NSDictionary])?.map({(dictionary) in AuthenticBundle(dict: dictionary)}) ?? []
-        self.bundles.sort(by: { (a, b) in a.index < b.index })
+        self.elements = (dict.value(forKey: "elements") as? NSArray)?.map({ element in AuthenticElement(dict: element as! NSDictionary) }) ?? []
+        self.hideHeader = dict.value(forKey: "hideHeader") as! Bool
+        self.visibilityRules = dict.value(forKey: "visibility") as! NSDictionary
     }
 }

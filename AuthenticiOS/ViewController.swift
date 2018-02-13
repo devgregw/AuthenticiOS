@@ -84,7 +84,7 @@ class ACTableViewController: UIViewController, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Authentic", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
         self.tableView.dataSource = self
         self.tableView.estimatedRowHeight = 220
         self.tableView.rowHeight = UITableViewAutomaticDimension
