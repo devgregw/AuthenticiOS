@@ -9,10 +9,11 @@
 import UIKit
 import Firebase
 
-class ACHomeViewController: UIViewController {
+class ACHomeViewController2: UIViewController {
     
-    @IBOutlet weak var constraint: NSLayoutConstraint!
+    @IBOutlet weak var buttonConstraint: NSLayoutConstraint!
     @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var logo: UIImageView!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -21,13 +22,22 @@ class ACHomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.button.alpha = 0
-        UIView.animate(withDuration: 0.5, delay: 0.5, options: .curveEaseInOut, animations: {
-            self.constraint.constant = 75
+        self.logo.alpha = 0
+        UIView.animate(withDuration: 0.001, animations: {
             self.view.layoutIfNeeded()
         }) { b in
-            UIView.animate(withDuration: 0.25, animations: {
-                self.button.alpha = 1
-            })
+            UIView.animate(withDuration: 0.25, delay: 0.1, options: .curveEaseInOut, animations: {
+                self.logo.alpha = 1
+            }) { b in
+                UIView.animate(withDuration: 0.5, delay: 0.1, options: .curveEaseInOut, animations: {
+                    self.buttonConstraint.constant = CGFloat(75)
+                    self.view.layoutIfNeeded()
+                }) { b in
+                    UIView.animate(withDuration: 0.25, animations: {
+                        self.button.alpha = CGFloat(75)
+                    })
+                }
+            }
         }
     }
 }
@@ -84,6 +94,7 @@ class ACTableViewController: UIViewController, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Utilities.applyTintColor(to: self)
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
         self.tableView.dataSource = self
         self.tableView.estimatedRowHeight = 220

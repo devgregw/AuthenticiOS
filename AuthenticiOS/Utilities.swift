@@ -40,7 +40,11 @@ class GWLabel: UILabel {
     }
 }
 
-class Utilities {    
+class Utilities {
+    static func applyTintColor(to vc: UIViewController) {
+        vc.navigationController?.navigationBar.barTintColor = UIColor.black
+    }
+    
     static func literalToNSDictionary(_ literal: [(key: Any, value: Any)]) -> NSDictionary {
         var k: [NSCopying] = []
         var v: [Any] = []

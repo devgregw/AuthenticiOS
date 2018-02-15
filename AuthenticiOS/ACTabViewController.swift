@@ -78,7 +78,7 @@ class ACTabViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        Utilities.applyTintColor(to: self)
         // Do any additional setup after loading the view.
     }
 

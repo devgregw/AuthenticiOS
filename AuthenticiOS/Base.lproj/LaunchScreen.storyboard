@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="full.png" translatesAutoresizingMaskIntoConstraints="NO" id="dRe-OB-7kZ">
+                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="full.png" translatesAutoresizingMaskIntoConstraints="NO" id="dRe-OB-7kZ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
@@ -28,7 +28,7 @@
                             <constraint firstItem="dRe-OB-7kZ" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="CZB-3p-vcP"/>
                             <constraint firstItem="dRe-OB-7kZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="GzI-1s-piZ"/>
                             <constraint firstItem="dRe-OB-7kZ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Vkn-x6-ryF"/>
-                            <constraint firstItem="dRe-OB-7kZ" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="bPm-N3-xuL"/>
+                            <constraint firstItem="dRe-OB-7kZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-20" id="bPm-N3-xuL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
