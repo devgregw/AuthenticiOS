@@ -21,6 +21,8 @@ class AuthenticTab {
     
     public let hideHeader: Bool
     
+    public let hideTitle: Bool
+    
     private let visibilityRules: NSDictionary
     
     public func getShouldBeHidden() -> Bool {
@@ -34,7 +36,8 @@ class AuthenticTab {
         self.header = dict.value(forKey: "header") as! String
         self.index = dict.value(forKey: "index") as! Int
         self.elements = (dict.value(forKey: "elements") as? NSArray)?.map({ element in AuthenticElement(dict: element as! NSDictionary) }) ?? []
-        self.hideHeader = dict.value(forKey: "hideHeader") as! Bool
+        self.hideHeader = dict.value(forKey: "hideHeader") as? Bool ?? false
+        self.hideTitle = dict.value(forKey: "hideTitle") as? Bool ?? false
         self.visibilityRules = dict.value(forKey: "visibility") as! NSDictionary
     }
 }

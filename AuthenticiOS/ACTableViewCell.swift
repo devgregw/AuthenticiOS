@@ -41,16 +41,23 @@ class ACTableViewCell: UITableViewCell {
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.didRecognizeTap(_:))))
         self.tab = withTab
         self.viewController = viewController
-        self.titleLabel.text = self.tab!.title
+        if (self.tab!.hideTitle) {
+            let c = NSLayoutConstraint(item: self.titleLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 0)
+            c.identifier = "titleLabelHeightConstraint"
+            self.titleLabel.addConstraint(c)
+        } else {
+                self.titleLabel.removeConstraints(self.titleLabel.constraints.filter({ constraint in
+                    return (constraint.identifier ?? "") == "titleLabelHeightConstraint"
+                }))
+            self.titleLabel.text = self.tab!.title
+        }
         self.loadReference(Storage.storage().reference().child(self.tab!.header))
     }
     
     func updateSize(_ image: UIImage?) {
         let i = image ?? self.headerImage.image
         let newHeight = (i!.size.height / i!.size.width) * (UIScreen.main.bounds.width - 20)
-        //self.frame = CGRect(origin: self.frame.origin, size: CGSize(width: UIScreen.main.bounds.width - 20, height: newHeight + titleLabel.frame.height))
         heightConstraint.constant = newHeight
-        //widthConstraint.constant = UIScreen.main.bounds.width - 20
         self.setNeedsLayout()
         self.layoutIfNeeded()
     }
