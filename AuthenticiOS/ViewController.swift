@@ -30,11 +30,11 @@ class ACHomeViewController2: UIViewController {
                 self.logo.alpha = 1
             }) { b in
                 UIView.animate(withDuration: 0.5, delay: 0.1, options: .curveEaseInOut, animations: {
-                    self.buttonConstraint.constant = CGFloat(75)
+                    self.buttonConstraint.constant = 75
                     self.view.layoutIfNeeded()
                 }) { b in
                     UIView.animate(withDuration: 0.25, animations: {
-                        self.button.alpha = CGFloat(75)
+                        self.button.alpha = 1
                     })
                 }
             }
