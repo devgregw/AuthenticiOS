@@ -26,7 +26,22 @@ class AuthenticTab {
     private let visibilityRules: NSDictionary
     
     public func getShouldBeHidden() -> Bool {
-        //TODO
+        if (elements.isEmpty) {
+            return true
+        }
+        if (visibilityRules.value(forKey: "override") as! Bool) {
+            return false
+        }
+        let formatter = DateFormatter()
+        let locale = Locale(identifier: "en_US_POSIX")
+        formatter.locale = locale
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        let end = formatter.date(from: visibilityRules.value(forKey: "end") as! String)!
+        let start = formatter.date(from: visibilityRules.value(forKey: "start") as! String)!
+        let now = Date()
+        if (now >= end || now <= start) {
+            return true
+        }
         return false
     }
     

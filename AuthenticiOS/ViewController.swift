@@ -80,8 +80,10 @@ class ACTableViewController: UIViewController, UITableViewDataSource {
             Database.database().reference().child("tabs").observeSingleEvent(of: .value, with: {snapshot in
                 let val = snapshot.value as? NSDictionary
                 val?.forEach({(key, value) in
-                    let tab = value as! NSDictionary
-                    self.tabs.append(AuthenticTab(dict: tab))
+                    let tab = AuthenticTab(dict: value as! NSDictionary)
+                    if (!tab.getShouldBeHidden()) {
+                        self.tabs.append(tab)
+                    }
                     self.tabs.sort(by: { (a, b) in a.index < b.index })
                     self.tableView.reloadData()
                     self.indicatorView.stopAnimating()
