@@ -51,7 +51,7 @@ class AuthenticButtonAction {
                         errAlert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
                         vc.present(errAlert, animated: true)
                     } else {
-                        MKMapItem.init(placemark: MKPlacemark.init(placemark: placemarks![0])).openInMaps(launchOptions: [ MKLaunchOptionsDirectionsModeDriving : true ])
+                        MKMapItem(placemark: MKPlacemark(placemark: placemarks![0])).openInMaps(launchOptions: [ MKLaunchOptionsDirectionsModeDriving : true ])
                     }
                 }
             }

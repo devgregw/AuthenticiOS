@@ -70,7 +70,7 @@ class AuthenticBundle {
         if (self.button != nil) {
             let button = UIButton(type: .system)
             button.setTitle(self.button!.label, for: .normal)
-            button.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(self.actionButtonClick)))
+            button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.actionButtonClick)))
             views.append(button)
         }
         return views

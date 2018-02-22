@@ -27,7 +27,7 @@ class GWLabel: UILabel {
     }
     
     override func drawText(in rect: CGRect) {
-        super.drawText(in: UIEdgeInsetsInsetRect(rect, UIEdgeInsets.init(top: self.top, left: self.left, bottom: self.bottom, right: self.right)))
+        super.drawText(in: UIEdgeInsetsInsetRect(rect, UIEdgeInsets(top: self.top, left: self.left, bottom: self.bottom, right: self.right)))
     }
     
     override var intrinsicContentSize: CGSize {
