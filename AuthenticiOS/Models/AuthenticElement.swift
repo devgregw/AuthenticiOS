@@ -14,6 +14,8 @@ class AuthenticElement {
     let parent: String
     let type: String
     let properties: NSDictionary
+    private var buttonAction: AuthenticButtonAction? = nil
+    private var buttonViewController: UIViewController? = nil
     
     init(dict: NSDictionary) {
         self.id = dict["id"] as! String
@@ -28,7 +30,13 @@ class AuthenticElement {
         return self.properties[name] as! T
     }
     
-    func getView() -> UIView {
+    @objc private func actionButtonClick() {
+        if (self.buttonAction != nil && self.buttonViewController != nil) {
+            self.buttonAction!.invoke(viewController: self.buttonViewController!)
+        }
+    }
+    
+    func getView(viewController vc: UIViewController) -> UIView {
         switch (type) {
         case "image":
             let image = UIImageView()
@@ -72,8 +80,31 @@ class AuthenticElement {
                 break;
             }
             return label
-        //case "button":
-        //case "separator":
+        case "button":
+            let button = UIButton(type: .system)
+            button.backgroundColor = UIColor.init(red: 0.15, green: 0.15, blue: 0.15, alpha: 1)
+            button.setTitleColor(UIColor.white, for: .normal)
+            button.layer.cornerRadius = 8
+            button.contentEdgeInsets = UIEdgeInsetsMake(15, 5, 15, 5)
+            let info = AuthenticButtonInfo(dict: getProperty("_buttonInfo"))
+            button.setTitle(info.label, for: .normal)
+            self.buttonAction = info.action
+            self.buttonViewController = vc
+            button.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(self.actionButtonClick)))
+            let stackView = UIStackView(arrangedSubviews: [button])
+            stackView.layoutMargins = UIEdgeInsetsMake(5, 10, 5, 10)
+            stackView.isLayoutMarginsRelativeArrangement = true
+            stackView.axis = .vertical
+            return stackView
+        case "separator":
+            let view = UIView()
+            view.backgroundColor = getProperty("visible") ? UIColor.init(red: 0.15, green: 0.15, blue: 0.15, alpha: 1) : UIColor.white
+            view.addConstraint(NSLayoutConstraint.init(item: view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 2))
+            let stackView = UIStackView(arrangedSubviews: [view])
+            stackView.layoutMargins = UIEdgeInsetsMake(10, 10, 10, 10)
+            stackView.isLayoutMarginsRelativeArrangement = true
+            stackView.axis = .vertical
+            return stackView
         default:
             let label = GWLabel()
             label.setInsets(top: 5, left: 10, bottom: 0, right: 10)
