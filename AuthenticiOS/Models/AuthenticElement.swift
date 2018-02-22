@@ -26,8 +26,8 @@ class AuthenticElement {
         }))
     }
     
-    private func getProperty<T>(_ name: String) -> T {
-        return self.properties[name] as! T
+    private func getProperty(_ name: String) -> Any {
+        return self.properties[name]!
     }
     
     @objc private func actionButtonClick() {
@@ -41,15 +41,26 @@ class AuthenticElement {
         case "image":
             let image = UIImageView()
             image.contentMode = .scaleAspectFit
-            Utilities.loadFirebase(image: getProperty("image"), into: image)
+            Utilities.loadFirebase(image: getProperty("image") as! String, into: image)
             return image
-        //case "video":
+        case "video":
+            let webView = UIWebView()
+            let provider = getProperty("provider") as! String
+            let videoId = getProperty("videoId") as! String
+            webView.allowsInlineMediaPlayback = true
+            webView.allowsLinkPreview = true
+            webView.allowsPictureInPictureMediaPlayback = true
+            webView.mediaPlaybackAllowsAirPlay = true
+            webView.loadRequest(URLRequest(url: URL(string: provider == "YouTube" ? "https://www.youtube.com/embed/\(videoId)" : "https://player.vimeo.com/video/\(videoId)")!))
+            webView.backgroundColor = UIColor.black
+            webView.addConstraint(NSLayoutConstraint(item: webView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: (UIApplication.shared.keyWindow?.bounds.width ?? 500) / 3 * 2))
+            return webView
         case "title":
             let label = GWLabel()
             label.setInsets(top: 5, left: 10, bottom: 0, right: 10)
-            label.text = getProperty("title")
+            label.text = (getProperty("title") as! String)
             label.font = UIFont(name: "Futura PT Web Heavy", size: 26)
-            let alignment : String = getProperty("alignment")
+            let alignment = getProperty("alignment") as! String
             switch (alignment) {
             case "center":
                 label.textAlignment = .center
@@ -65,9 +76,9 @@ class AuthenticElement {
         case "text":
             let label = GWLabel()
             label.setInsets(top: 5, left: 10, bottom: 0, right: 10)
-            label.text = getProperty("text")
+            label.text = (getProperty("text") as! String)
             label.font = UIFont(name: "Proxima Nova", size: 16)
-            let alignment : String = getProperty("alignment")
+            let alignment = getProperty("alignment") as! String
             switch (alignment) {
             case "center":
                 label.textAlignment = .center
@@ -82,15 +93,16 @@ class AuthenticElement {
             return label
         case "button":
             let button = UIButton(type: .system)
-            button.backgroundColor = UIColor.init(red: 0.15, green: 0.15, blue: 0.15, alpha: 1)
+            button.backgroundColor = UIColor(red: 0.15, green: 0.15, blue: 0.15, alpha: 1)
             button.setTitleColor(UIColor.white, for: .normal)
+            button.titleLabel?.font = UIFont(name: "Proxima Nova", size: 18) ?? UIFont.systemFont(ofSize: 18)
             button.layer.cornerRadius = 8
             button.contentEdgeInsets = UIEdgeInsetsMake(15, 5, 15, 5)
-            let info = AuthenticButtonInfo(dict: getProperty("_buttonInfo"))
+            let info = AuthenticButtonInfo(dict: getProperty("_buttonInfo") as! NSDictionary)
             button.setTitle(info.label, for: .normal)
             self.buttonAction = info.action
             self.buttonViewController = vc
-            button.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(self.actionButtonClick)))
+            button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.actionButtonClick)))
             let stackView = UIStackView(arrangedSubviews: [button])
             stackView.layoutMargins = UIEdgeInsetsMake(5, 10, 5, 10)
             stackView.isLayoutMarginsRelativeArrangement = true
@@ -98,8 +110,8 @@ class AuthenticElement {
             return stackView
         case "separator":
             let view = UIView()
-            view.backgroundColor = getProperty("visible") ? UIColor.init(red: 0.15, green: 0.15, blue: 0.15, alpha: 1) : UIColor.white
-            view.addConstraint(NSLayoutConstraint.init(item: view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 2))
+            view.backgroundColor = getProperty("visible") as! Bool ? UIColor(red: 0.15, green: 0.15, blue: 0.15, alpha: 1) : UIColor.white
+            view.addConstraint(NSLayoutConstraint(item: view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 2))
             let stackView = UIStackView(arrangedSubviews: [view])
             stackView.layoutMargins = UIEdgeInsetsMake(10, 10, 10, 10)
             stackView.isLayoutMarginsRelativeArrangement = true
