@@ -11,6 +11,32 @@ import UIKit
 import Firebase
 import FirebaseStorageUI
 
+class VersionInfo {
+    static let Version = "1.0.0"
+    static let Update = 0
+}
+
+class Reachability {
+    static func getConnectionStatus(completionHandler: @escaping (Bool) -> Void) {
+        let address = "https://example.com"
+        let url = URL(string: address)!
+        let request = URLRequest(url: url)
+        let session = URLSession.shared
+        let task = session.dataTask(with: request, completionHandler: { (data, response, error) in
+            if (error != nil || response == nil) {
+                DispatchQueue.main.async {
+                    completionHandler(false)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completionHandler(true)
+                }
+            }
+        })
+        task.resume()
+    }
+}
+
 class GWLabel: UILabel {
     private var top: CGFloat = 0
     private var left: CGFloat = 0
@@ -40,7 +66,7 @@ class GWLabel: UILabel {
     }
 }
 
-class Utilities {
+class Utilities {    
     static func applyTintColor(to vc: UIViewController) {
         vc.navigationController?.navigationBar.barTintColor = UIColor.black
     }
