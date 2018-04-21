@@ -26,11 +26,11 @@ class ACTabListController: UIViewController, UITableViewDataSource {
     }
     
     private var appearance: AuthenticAppearance?
-    
+    private var complete = false
     private var tabs: [AuthenticTab] = []
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return tabs.count + 1
+        return self.complete ? tabs.count + 1 : 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -61,6 +61,7 @@ class ACTabListController: UIViewController, UITableViewDataSource {
                             self.tabs.append(tab)
                         }
                         self.tabs.sort(by: { (a, b) in a.index < b.index })
+                        self.complete = true
                         self.tableView.reloadData()
                         self.indicatorView.stopAnimating()
                     })
@@ -84,7 +85,6 @@ class ACTabListController: UIViewController, UITableViewDataSource {
         self.tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         self.tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         self.tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        NotificationCenter.default.addObserver(forName: .UIDeviceOrientationDidChange, object: nil, queue: .main, using: { notification in self.tableView.reloadData() })
         self.loadData()
     }
 }

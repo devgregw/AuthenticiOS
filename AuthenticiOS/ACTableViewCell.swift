@@ -43,7 +43,7 @@ class ACTableViewCell: UITableViewCell {
     func initializeForUpcomingEvents(withAppearance appearance: AuthenticAppearance.Events, viewController: UIViewController) {
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.didRecognizeTap(_:))))
         self.action = {
-            viewController.present(ACEventListController(), animated: true)
+            ACEventListController.present(withAppearance: appearance, viewController: viewController)
         }
         self.viewController = viewController
         if (appearance.hideTitle) {
@@ -56,7 +56,7 @@ class ACTableViewCell: UITableViewCell {
             }))
             self.titleLabel.text = appearance.title
         }
-        self.loadReference(Storage.storage().reference().child(appearance.title))
+        self.loadReference(Storage.storage().reference().child(appearance.header))
     }
     
     func initialize(withTab: AuthenticTab, viewController: UIViewController) {
@@ -80,7 +80,7 @@ class ACTableViewCell: UITableViewCell {
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.didRecognizeTap(_:))))
         self.event = withEvent
         self.viewController = viewController
-        if (self.tab!.hideTitle) {
+        if (self.event!.hideTitle) {
             let c = NSLayoutConstraint(item: self.titleLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 0)
             c.identifier = "titleLabelHeightConstraint"
             self.titleLabel.addConstraint(c)
@@ -105,5 +105,5 @@ class ACTableViewCell: UITableViewCell {
         headerImage.sd_setImage(with: ref, placeholderImage: nil, completion: {(i, e, t, r) in
             self.updateSize(i!)
         })
-    }    
+    }
 }

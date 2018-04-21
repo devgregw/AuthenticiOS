@@ -21,6 +21,7 @@
 		FC16001D1FFC4BD6001DF3B5 /* ACTabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC16001B1FFC4BD6001DF3B5 /* ACTabViewController.xib */; };
 		FC195DCC1FFBCE4C00F9C9AC /* ACTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC195DCA1FFBCE4C00F9C9AC /* ACTableViewCell.swift */; };
 		FC195DCD1FFBCE4C00F9C9AC /* ACTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC195DCB1FFBCE4C00F9C9AC /* ACTableViewCell.xib */; };
+		FC41F7C8208B9CDB0094FF32 /* Events.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC41F7C7208B9CDB0094FF32 /* Events.storyboard */; };
 		FC490DD2202BA1F4007F270A /* AuthenticElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC490DD1202BA1F4007F270A /* AuthenticElement.swift */; };
 		FC490DD4202BA7FE007F270A /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC490DD3202BA7FE007F270A /* Utilities.swift */; };
 		FC565D102001395B00DE7C9A /* AuthenticTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC565D0F2001395B00DE7C9A /* AuthenticTab.swift */; };
@@ -29,7 +30,6 @@
 		FC5D1436208B7C3B00B0E63E /* AuthenticAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5D1435208B7C3B00B0E63E /* AuthenticAppearance.swift */; };
 		FCAD5C0C208597240010B5C9 /* ACTabListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD5C0B208597240010B5C9 /* ACTabListController.swift */; };
 		FCAD5C0F208599E40010B5C9 /* ACEventListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD5C0D208599E40010B5C9 /* ACEventListController.swift */; };
-		FCAD5C10208599E40010B5C9 /* ACEventListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAD5C0E208599E40010B5C9 /* ACEventListController.xib */; };
 		FCAD5C12208624CC0010B5C9 /* AuthenticEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD5C11208624CC0010B5C9 /* AuthenticEvent.swift */; };
 		FCAD5C14208628FF0010B5C9 /* RecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD5C13208628FF0010B5C9 /* RecurrenceRule.swift */; };
 /* End PBXBuildFile section */
@@ -53,6 +53,7 @@
 		FC16001B1FFC4BD6001DF3B5 /* ACTabViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACTabViewController.xib; sourceTree = "<group>"; };
 		FC195DCA1FFBCE4C00F9C9AC /* ACTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTableViewCell.swift; sourceTree = "<group>"; };
 		FC195DCB1FFBCE4C00F9C9AC /* ACTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACTableViewCell.xib; sourceTree = "<group>"; };
+		FC41F7C7208B9CDB0094FF32 /* Events.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Events.storyboard; sourceTree = "<group>"; };
 		FC490DD1202BA1F4007F270A /* AuthenticElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticElement.swift; sourceTree = "<group>"; };
 		FC490DD3202BA7FE007F270A /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		FC565D0A200118A400DE7C9A /* AuthenticiOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AuthenticiOS.entitlements; sourceTree = "<group>"; };
@@ -62,7 +63,6 @@
 		FC5D1435208B7C3B00B0E63E /* AuthenticAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticAppearance.swift; sourceTree = "<group>"; };
 		FCAD5C0B208597240010B5C9 /* ACTabListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabListController.swift; sourceTree = "<group>"; };
 		FCAD5C0D208599E40010B5C9 /* ACEventListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACEventListController.swift; sourceTree = "<group>"; };
-		FCAD5C0E208599E40010B5C9 /* ACEventListController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACEventListController.xib; sourceTree = "<group>"; };
 		FCAD5C11208624CC0010B5C9 /* AuthenticEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticEvent.swift; sourceTree = "<group>"; };
 		FCAD5C13208628FF0010B5C9 /* RecurrenceRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurrenceRule.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -119,7 +119,7 @@
 				2B3630601FF56BD9002469E5 /* ACHomeViewController.swift */,
 				FCAD5C0B208597240010B5C9 /* ACTabListController.swift */,
 				FCAD5C0D208599E40010B5C9 /* ACEventListController.swift */,
-				FCAD5C0E208599E40010B5C9 /* ACEventListController.xib */,
+				FC41F7C7208B9CDB0094FF32 /* Events.storyboard */,
 			);
 			path = AuthenticiOS;
 			sourceTree = "<group>";
@@ -226,9 +226,9 @@
 				2B878E09203356CB0010B549 /* ProximaNova.ttf in Resources */,
 				2B3630691FF56BD9002469E5 /* LaunchScreen.storyboard in Resources */,
 				FC09989A1FFEA74E00BCAD3A /* full.png in Resources */,
+				FC41F7C8208B9CDB0094FF32 /* Events.storyboard in Resources */,
 				FC16001D1FFC4BD6001DF3B5 /* ACTabViewController.xib in Resources */,
 				FC1045051FFEF5560010F8A1 /* Assets.xcassets in Resources */,
-				FCAD5C10208599E40010B5C9 /* ACEventListController.xib in Resources */,
 				2BEFD14F1FF5820E0094572A /* GoogleService-Info.plist in Resources */,
 				2B3630641FF56BD9002469E5 /* Main.storyboard in Resources */,
 				2B878E08203356CB0010B549 /* FuturaHeavy.ttf in Resources */,

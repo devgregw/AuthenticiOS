@@ -12,6 +12,13 @@ import Firebase
 
 class ACEventListController: UIViewController, UITableViewDataSource {
     
+    static private var title = ""
+    
+    static func present(withAppearance app: AuthenticAppearance.Events, viewController: UIViewController) {
+        title = app.title
+        viewController.present(UIStoryboard(name: "Events", bundle: nil).instantiateViewController(withIdentifier: "ueroot"), animated: true)
+    }
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     
@@ -64,6 +71,7 @@ class ACEventListController: UIViewController, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = ACEventListController.title
         Utilities.applyTintColor(to: self)
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
         self.tableView.dataSource = self
@@ -81,15 +89,6 @@ class ACEventListController: UIViewController, UITableViewDataSource {
         super.viewWillAppear(animated)
         Utilities.applyTintColor(to: self)
         self.loadData()
-    }
-    
-    init() {
-        super.init(nibName: "ACEventListController", bundle: Bundle.main)
-        self.title = "Upcoming Events"
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
     }
     
     override func didReceiveMemoryWarning() {

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14092" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14081.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="Qr8-xW-24q">
+            <objects>
+                <navigationController storyboardIdentifier="ueroot" useStoryboardIdentifierAsRestorationIdentifier="YES" id="evp-1V-dwH" sceneMemberID="viewController">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" largeTitles="YES" id="VnF-hC-S6v">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="FuturaPTWeb-Heavy" family="Futura PT Web Heavy" pointSize="21"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <fontDescription key="fontDescription" name="FuturaPTWeb-Heavy" family="Futura PT Web Heavy" pointSize="33"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="haI-Rr-qIH" kind="relationship" relationship="rootViewController" id="DO0-CR-o8u"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pae-7u-V92" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="807" y="45"/>
+        </scene>
+        <!--UPCOMING EVENTS-->
+        <scene sceneID="8dM-0k-EIe">
+            <objects>
+                <viewController id="haI-Rr-qIH" customClass="ACEventListController" customModule="AuthenticiOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rVB-2s-gDG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="black" bouncesZoom="NO" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="NEt-6H-5na">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ACTableViewCell" id="Gep-jZ-uce">
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Gep-jZ-uce" id="Yha-Bd-ySw">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="hVZ-k7-NP3">
+                                <rect key="frame" x="0.0" y="116" width="375" height="551"/>
+                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="UbO-oO-4Zj" firstAttribute="bottom" secondItem="hVZ-k7-NP3" secondAttribute="bottom" id="5wH-hA-iim"/>
+                            <constraint firstItem="hVZ-k7-NP3" firstAttribute="leading" secondItem="UbO-oO-4Zj" secondAttribute="leading" id="HEh-0Q-y3y"/>
+                            <constraint firstItem="UbO-oO-4Zj" firstAttribute="trailing" secondItem="hVZ-k7-NP3" secondAttribute="trailing" id="K5m-Z0-zOk"/>
+                            <constraint firstItem="hVZ-k7-NP3" firstAttribute="top" secondItem="UbO-oO-4Zj" secondAttribute="top" id="dut-rr-J9k"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="UbO-oO-4Zj"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="UPCOMING EVENTS" id="x0L-vs-9nU">
+                        <barButtonItem key="leftBarButtonItem" title="Close" image="ic_keyboard_arrow_down_white_36pt" style="done" id="H2a-2Z-M6J">
+                            <connections>
+                                <action selector="didRequestClose:" destination="haI-Rr-qIH" id="pen-pd-SAD"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="Qqh-QI-t7U">
+                            <connections>
+                                <action selector="didRequestRefresh:" destination="haI-Rr-qIH" id="L4y-Z6-2Qj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="indicatorView" destination="hVZ-k7-NP3" id="9JK-pF-3am"/>
+                        <outlet property="tableView" destination="NEt-6H-5na" id="C1d-sW-Zx8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vlF-hN-csp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1602" y="45"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ic_keyboard_arrow_down_white_36pt" width="36" height="36"/>
+    </resources>
+</document>
