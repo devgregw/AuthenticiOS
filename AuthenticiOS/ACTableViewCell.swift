@@ -16,15 +16,18 @@ class ACTableViewCell: UITableViewCell {
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     
     private var tab: AuthenticTab?
+    private var event: AuthenticEvent?
+    private var action: (() -> Void)?
     private var viewController: UIViewController?
     
     @IBAction func didRecognizeTap(_ sender: UITapGestureRecognizer) {
-        //let alert = UIAlertController(title: "Tab", message: "/tabs/\(self.tab!.id)/", preferredStyle: .alert)
-        //alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
-        //self.viewController!.present(alert, animated: true, completion: nil)
-        //self.viewController!.present(ACTabViewController(tab: self.tab!), animated: true, completion: nil)
-        //self.viewController!.dismiss(animated: false, completion: nil)
-        ACTabViewController.present(tab: self.tab!, withViewController: self.viewController!)
+        if (tab != nil) {
+            ACTabViewController.present(tab: self.tab!, withViewController: self.viewController!)
+        } else if (event != nil) {
+            //ACEventViewController.present(event: self.event!, withViewController: self.viewController!)
+        } else {
+            action!()
+        }
     }
     
     override func layoutSubviews() {
@@ -35,6 +38,25 @@ class ACTableViewCell: UITableViewCell {
         self.contentView.layer.borderColor = UIColor.black.cgColor
         self.contentView.layer.borderWidth = 0.5
         self.contentView.frame = UIEdgeInsetsInsetRect(self.contentView.frame, UIEdgeInsetsMake(0, 10, 0, 10))
+    }
+    
+    func initializeForUpcomingEvents(withAppearance appearance: AuthenticAppearance.Events, viewController: UIViewController) {
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.didRecognizeTap(_:))))
+        self.action = {
+            viewController.present(ACEventListController(), animated: true)
+        }
+        self.viewController = viewController
+        if (appearance.hideTitle) {
+            let c = NSLayoutConstraint(item: self.titleLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 0)
+            c.identifier = "titleLabelHeightConstraint"
+            self.titleLabel.addConstraint(c)
+        } else {
+            self.titleLabel.removeConstraints(self.titleLabel.constraints.filter({ constraint in
+                return (constraint.identifier ?? "") == "titleLabelHeightConstraint"
+            }))
+            self.titleLabel.text = appearance.title
+        }
+        self.loadReference(Storage.storage().reference().child(appearance.title))
     }
     
     func initialize(withTab: AuthenticTab, viewController: UIViewController) {
@@ -52,6 +74,23 @@ class ACTableViewCell: UITableViewCell {
             self.titleLabel.text = self.tab!.title
         }
         self.loadReference(Storage.storage().reference().child(self.tab!.header))
+    }
+    
+    func initialize(withEvent: AuthenticEvent, viewController: UIViewController) {
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.didRecognizeTap(_:))))
+        self.event = withEvent
+        self.viewController = viewController
+        if (self.tab!.hideTitle) {
+            let c = NSLayoutConstraint(item: self.titleLabel, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 0)
+            c.identifier = "titleLabelHeightConstraint"
+            self.titleLabel.addConstraint(c)
+        } else {
+            self.titleLabel.removeConstraints(self.titleLabel.constraints.filter({ constraint in
+                return (constraint.identifier ?? "") == "titleLabelHeightConstraint"
+            }))
+            self.titleLabel.text = self.event!.title
+        }
+        self.loadReference(Storage.storage().reference().child(self.event!.header))
     }
     
     func updateSize(_ image: UIImage?) {

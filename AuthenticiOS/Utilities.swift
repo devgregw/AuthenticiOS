@@ -11,6 +11,23 @@ import UIKit
 import Firebase
 import FirebaseStorageUI
 
+extension Date {
+    static func parseISO8601(string: String) -> Date {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        return formatter.date(from: string)!
+    }
+    
+    func format(dateStyle: DateFormatter.Style, timeStyle: DateFormatter.Style) -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateStyle = dateStyle
+        formatter.timeStyle = timeStyle
+        return formatter.string(from: self)
+    }
+}
+
 class VersionInfo {
     static let Version = "1.0.0"
     static let Update = 0
