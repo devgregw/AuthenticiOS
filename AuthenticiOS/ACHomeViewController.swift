@@ -25,6 +25,7 @@ class ACHomeViewController: UIViewController {
             self.indicator.alpha = 0
             self.logo.alpha = 1
         }) { b in
+            //AppDelegate.respondToShortcut(viewController: self.navigationController!, pop: false)
             UIView.animate(withDuration: 0.5, delay: 0.1, options: .curveEaseInOut, animations: {
                 self.buttonConstraint.constant = 75
                 self.view.layoutIfNeeded()

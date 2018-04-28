@@ -35,7 +35,7 @@ class ACEventListController: UIViewController, UITableViewDataSource {
     private var events: [AuthenticEvent] = []
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return events.count
+        return max(1, events.count)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,6 +43,13 @@ class ACEventListController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if (events.count == 0) {
+            let c = UITableViewCell(style: .default, reuseIdentifier: nil)
+            c.textLabel?.text = "There are no upcoming events."
+            c.textLabel?.font = UIFont(name: "Proxima Nova", size: 18.0)
+            c.textLabel?.textAlignment = .center
+            return c
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "ACTableViewCell", for: indexPath) as! ACTableViewCell
         let event = events[indexPath.section]
         cell.initialize(withEvent: event, viewController: self)

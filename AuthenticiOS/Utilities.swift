@@ -89,7 +89,29 @@ class GWLabel: UILabel {
     }
 }
 
-class Utilities {    
+class Utilities {
+    class MapInterface {
+        static func isGoogleMapsAvailable() -> Bool {
+            return UIApplication.shared.canOpenURL(URL(string: "comgooglemaps://")!)
+        }
+        
+        static func getDirections(toAddress address: String) {
+            if isGoogleMapsAvailable() {
+                UIApplication.shared.openURL(URL(string: "https://www.google.com/maps/dir/?api=1&destination=\(address.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)")!)
+            } else {
+                UIApplication.shared.openURL(URL(string: "http://maps.apple.com/?daddr=\(address.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)")!)
+            }
+        }
+        
+        static func search(forPlace location: String) {
+            if isGoogleMapsAvailable() {
+                UIApplication.shared.openURL(URL(string: "https://www.google.com/maps/search/?api=1&query=\(location.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)")!)
+            } else {
+                UIApplication.shared.openURL(URL(string: "http://maps.apple.com/?q=\(location.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)")!)
+            }
+        }
+    }
+    
     static func applyTintColor(to vc: UIViewController) {
         vc.navigationController?.navigationBar.barTintColor = UIColor.black
     }

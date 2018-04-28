@@ -23,11 +23,11 @@ class AuthenticEvent {
     
     public let address: String
     
-    private let startDate: Date
+    public let startDate: Date
     
-    private let endDate: Date
+    public let endDate: Date
     
-    private let recurrence: RecurrenceRule?
+    public let recurrence: RecurrenceRule?
     
     public let registrationUrl: String?
     

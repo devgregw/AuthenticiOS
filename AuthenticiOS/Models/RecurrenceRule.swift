@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import EventKit
 
 class RecurrenceRule {
     class Occurrence {
@@ -41,9 +42,36 @@ class RecurrenceRule {
         return endDate == nil && count ==  nil
     }
     
+    public func toEKRecurrenceRule() -> EKRecurrenceRule {
+        var end: EKRecurrenceEnd? = nil
+        if (self.endDate != nil) {
+            end = EKRecurrenceEnd(end: self.endDate!)
+        } else if (self.count != nil) {
+            end = EKRecurrenceEnd(occurrenceCount: self.count!)
+        }
+        let freq: EKRecurrenceFrequency!
+        switch (self.frequency) {
+        case "daily":
+            freq = .daily
+            break
+        case "weekly":
+            freq = .weekly
+            break
+        case "monthly":
+            freq = .monthly
+            break
+        case "yearly":
+            freq = .yearly
+            break
+        default:
+            freq = .daily
+        }
+        return EKRecurrenceRule(recurrenceWith: freq, interval: self.interval, end: end)
+    }
+    
     public func format(initialStart s: Date, initialEnd e: Date) -> String {
         let amount = interval == 1 ? "every" : (interval == 2 ? "every other" : "every \(interval)")
-        let main = "Repeats \(amount) \(frequency.replacingOccurrences(of: "ly", with: ""))\(interval > 2 ? "s" : "")"
+        let main = "Repeats \(amount) \(frequency == "daily" ? "day" : frequency.replacingOccurrences(of: "ly", with: ""))\(interval > 2 ? "s" : "")"
         if (endDate != nil) {
             return "\(main) until \(endDate!.format(dateStyle: .long, timeStyle: .long))"
         } else if (count != nil) {

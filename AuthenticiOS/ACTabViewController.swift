@@ -23,16 +23,7 @@ class ACTabViewController: UIViewController {
     }
     
     public static func present(tab: AuthenticTab, withViewController vc: UIViewController) {
-        //vc.navigationController?.present(ACTabViewController(tab: tab), animated: true, completion: nil)
-        //let x = vc.presentingViewController
-        //if (x != nil) {
-            //vc.dismiss(animated: false, completion: nil)
-        //}
-        //let controller = UINavigationController(rootViewController: ACTabViewController(tab: tab))
-        //controller.navigationBar.barStyle = .blackTranslucent
-        //vc.dismiss(animated: true, completion: nil)
         vc.show(ACTabViewController(tab: tab), sender: nil)
-        //vc.present(controller, animated: true, completion: nil)
     }
     
     private func initLayout() {
@@ -66,7 +57,6 @@ class ACTabViewController: UIViewController {
     init(tab: AuthenticTab) {
         self.tab = tab
         super.init(nibName: "ACTabViewController", bundle: Bundle.main)
-        NotificationCenter.default.addObserver(forName: .UIDeviceOrientationDidChange, object: nil, queue: .main, using: { notification in self.initLayout() })
         self.title = tab.title
         
     }
@@ -79,11 +69,5 @@ class ACTabViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Utilities.applyTintColor(to: self)
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
