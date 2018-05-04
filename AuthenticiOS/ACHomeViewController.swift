@@ -38,7 +38,9 @@ class ACHomeViewController: UIViewController {
     }
     
     private func checkForUpdate() {
-        Database.database().reference(withPath: "versions/ios").observeSingleEvent(of: .value, with: { snapshot in
+        let versionRef = Database.database().reference(withPath: "versions/ios")
+        versionRef.keepSynced(true)
+        versionRef.observeSingleEvent(of: .value, with: { snapshot in
             let value = snapshot.value as! Int
             print("LOCAL UPDATE CODE: \(VersionInfo.Update)")
             print("REMOTE UPDATE CODE: \(value)")
