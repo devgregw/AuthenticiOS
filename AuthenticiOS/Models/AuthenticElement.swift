@@ -55,9 +55,9 @@ class AuthenticElement {
         return webView
     }
     
-    static public func createCustomText(text: String, size: Int, futura: Bool, alignment: String, color: UIColor) -> GWLabel {
-        let label = GWLabel()
-        label.setInsets(top: 5, left: 10, bottom: 0, right: 10)
+    static public func createCustomText(text: String, size: Int, futura: Bool, alignment: String, color: UIColor) -> UIStackView {
+        let label = UITextView()
+        label.textContainer.lineBreakMode = .byWordWrapping
         label.text = text
         label.textColor = color
         label.font = UIFont(name: futura ? "Futura PT Web Heavy" : "Proxima Nova", size: CGFloat(size))
@@ -70,41 +70,29 @@ class AuthenticElement {
             break
         default:
             label.textAlignment = .left
-            break;
+            break
         }
-        return label
+        label.isScrollEnabled = false
+        label.sizeToFit()
+        label.layoutIfNeeded()
+        return label.embedInStackViewWithInsets(top: 5, left: 10, bottom: 0, right: 10)
     }
     
-    static public func createTitle(text: String, alignment: String) -> GWLabel {
+    static public func createTitle(text: String, alignment: String) -> UIStackView {
         return createCustomText(text: text, size: 26, futura: true, alignment: alignment, color: UIColor.black)
     }
     
-    static public func createText(text: String, alignment: String) -> GWLabel {
+    static public func createText(text: String, alignment: String) -> UIStackView {
         return createCustomText(text: text, size: 16, futura: false, alignment: alignment, color: UIColor.black)
     }
     
-    class ButtonHandler {
-        @objc public func invoke(_ sender: UIButton) {
-            self.action.invoke(viewController: self.vc)
-        }
-        
-        private let action: AuthenticButtonAction
-        private let vc: UIViewController
-        
-        init(action: AuthenticButtonAction, viewController vc: UIViewController) {
-            self.action = action
-            self.vc = vc
-        }
-    }
-    
-    static public func createButton(dict: NSDictionary, viewController: UIViewController, target: Any?, selector: Selector) -> UIStackView {
+    static public func createButton(info: AuthenticButtonInfo, viewController: UIViewController, target: Any?, selector: Selector) -> UIStackView {
         let button = UIButton(type: .system)
         button.backgroundColor = UIColor(red: 0.15, green: 0.15, blue: 0.15, alpha: 1)
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont(name: "Proxima Nova", size: 18) ?? UIFont.systemFont(ofSize: 18)
         button.layer.cornerRadius = 8
         button.contentEdgeInsets = UIEdgeInsetsMake(15, 5, 15, 5)
-        let info = AuthenticButtonInfo(dict: dict)
         button.setTitle(info.label, for: .normal)
         button.addTarget(target, action: selector, for: .touchUpInside)
         let stackView = UIStackView(arrangedSubviews: [button])
@@ -145,7 +133,7 @@ class AuthenticElement {
         case "button":
             self.action = AuthenticButtonInfo(dict: getProperty("_buttonInfo") as! NSDictionary).action
             self.vc = vc
-            return AuthenticElement.createButton(dict: getProperty("_buttonInfo") as! NSDictionary, viewController: vc, target: self, selector: #selector(self.invoke(_:)))
+            return AuthenticElement.createButton(info: AuthenticButtonInfo(dict: getProperty("_buttonInfo") as! NSDictionary), viewController: vc, target: self, selector: #selector(self.invoke(_:)))
         case "separator":
             return AuthenticElement.createSeparator(visible: getProperty("visible") as! Bool)
         default:
