@@ -19,8 +19,18 @@ class AuthenticButtonAction {
     
     private let properties: NSDictionary
     
+    public let rootDictionary: NSDictionary
+    
+    public static let empty = AuthenticButtonAction(type: "__UNDEFINED__", paramGroup: -1, params: [:])
+    
     public func getProperty(withName name: String) -> Any? {
         return properties[name]
+    }
+    
+    private func presentAlert(title: String, message: String, vc: UIViewController) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+        vc.present(alert, animated: true)
     }
     
     @objc public func invoke(viewController vc: UIViewController) {
@@ -30,16 +40,20 @@ class AuthenticButtonAction {
                 let val = snapshot.value as? NSDictionary
                 if (val != nil) {
                     ACTabViewController.present(tab: AuthenticTab(dict: val!), withViewController: vc)
+                } else {
+                    self.presentAlert(title: "Error", message: "We were unable to open the page because it does not exist.", vc: vc)
                 }
-            }) { error in vc.present(UIAlertController(title: "Error", message: error.localizedDescription as String, preferredStyle: .alert), animated: true) }
+            }) { error in self.presentAlert(title: "Error", message: "We were unable to access the database.\n\n\(error.localizedDescription as String)", vc: vc) }
             break
         case "OpenEventAction":
             Database.database().reference().child("/events/\(self.getProperty(withName: "eventId") as! String)/").observeSingleEvent(of: .value, with: {snapshot in
                 let val = snapshot.value as? NSDictionary
                 if (val != nil) {
                     ACEventViewController.present(event: AuthenticEvent(dict: val!), withViewController: vc)
+                } else {
+                    self.presentAlert(title: "Error", message: "We were unable to open the event because it does not exist.", vc: vc)
                 }
-            }) { error in vc.present(UIAlertController(title: "Error", message: error.localizedDescription as String, preferredStyle: .alert), animated: true) }
+            }) { error in self.presentAlert(title: "Error", message: "We were unable to access the database.\n\n\(error.localizedDescription as String)", vc: vc) }
             break
         case "OpenURLAction":
             let url = getProperty(withName: "url")
@@ -57,74 +71,57 @@ class AuthenticButtonAction {
             if let url = URL(string: "mailto:\(address!)") {
                 UIApplication.shared.openURL(url)
             } else {
-                let alert = UIAlertController(title: "Error", message: "This action could not be invoked: '\(address!)' is not an email address.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-                vc.present(alert, animated: true)
+                presentAlert(title: "Error", message: "This action could not be invoked: '\(address!)' is not a valid email address.", vc: vc)
             }
             break
         case "AddToCalendarAction":
-            var start: Date? = nil
-            var end: Date? = nil
-            var loc: String? = nil
-            var title: String? = nil
-            var rrule: RecurrenceRule?
+            let atcaCompletion = { (start: Date, end: Date, loc: String, title: String, rrule: RecurrenceRule?) in
+                let store = EKEventStore()
+                store.requestAccess(to: .event) { (granted, error) in
+                    if granted {
+                        let event = EKEvent(eventStore: store)
+                        event.isAllDay = false
+                        event.endDate = end
+                        event.startDate = start
+                        event.location = loc
+                        event.title = title
+                        if let rule = rrule {
+                            event.addRecurrenceRule(rule.toEKRecurrenceRule())
+                        }
+                        event.calendar = store.defaultCalendarForNewEvents
+                        do {
+                            try store.save(event, span: .thisEvent, commit: true)
+                            self.presentAlert(title: "Add to Calendar", message: "\"\(title)\" was added to your calendar successfully.", vc: vc)
+                        } catch let saveError {
+                            self.presentAlert(title: "Error", message: "We were unable to add \"\(title)\" to your calendar.\n\n\(saveError.localizedDescription)", vc: vc)
+                        }
+                    } else {
+                        if let e = error {
+                            self.presentAlert(title: "Error", message: "We were unable to access your calendar.\n\n\(e.localizedDescription)", vc: vc)
+                        } else {
+                            self.presentAlert(title: "Error", message: "We were unable to access your calendar because you denied permission.", vc: vc)
+                        }
+                    }
+                }
+            }
             if self.paramGroup == 0 {
                 Database.database().reference().child("/events/\(self.getProperty(withName: "eventId") as! String)/").observeSingleEvent(of: .value, with: {snapshot in
                     let val = snapshot.value as? NSDictionary
                     if (val != nil) {
                         let event = AuthenticEvent(dict: val!)
-                        start = event.startDate
-                        end = event.endDate
-                        loc = event.address == "" ? event.location : event.address
-                        rrule = event.recurrence
+                        atcaCompletion(event.startDate, event.endDate, event.address == "" ? event.location : event.address, event.title, event.recurrence)
+                    } else {
+                        self.presentAlert(title: "Error", message: "We were unable to add this event to your calendar because it does not exist.", vc: vc)
                     }
-                }) { error in vc.present(UIAlertController(title: "Error", message: error.localizedDescription as String, preferredStyle: .alert), animated: true) }
+                }) { error in self.presentAlert(title: "Error", message: "We were unable to access the database.\n\n\(error.localizedDescription as String)", vc: vc) }
             } else if self.paramGroup == 1 {
                 let dates = self.getProperty(withName: "dateTime") as! NSDictionary
-                start = Date.parseISO8601(string: dates["start"] as! String)
-                end = Date.parseISO8601(string: dates["end"] as! String)
-                loc = (self.getProperty(withName: "location") as! String)
-                title = (self.getProperty(withName: "title") as! String)
-                rrule = nil
+                atcaCompletion(Date.parseISO8601(string: dates["start"] as! String), Date.parseISO8601(string: dates["end"] as! String), (self.getProperty(withName: "location") as! String), (self.getProperty(withName: "title") as! String), nil)
             } else {
-                let alert = UIAlertController(title: "Error", message: "We were unable to run this action because an invalid parameter group was specified.\n\n\(self.type): \(self.paramGroup)", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-                vc.present(alert, animated: true)
-            }
-            let store = EKEventStore()
-            store.requestAccess(to: .event) { (granted, error) in
-                if granted {
-                    let event = EKEvent(eventStore: store)
-                    event.isAllDay = false
-                    event.endDate = end
-                    event.startDate = start
-                    event.location = loc
-                    event.title = title
-                    if let rule = rrule {
-                        event.addRecurrenceRule(rule.toEKRecurrenceRule())
-                    }
-                    event.calendar = store.defaultCalendarForNewEvents
-                    do {
-                        try store.save(event, span: .thisEvent, commit: true)
-                    } catch let saveError {
-                        let alert = UIAlertController(title: "Error", message: "We were unable to add \"\(title)\" to your calendar.\n\n\(saveError.localizedDescription)", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-                        vc.present(alert, animated: true)
-                    }
-                } else {
-                    if let e = error {
-                        let alert = UIAlertController(title: "Error", message: "We were unable to access your calendar.\n\n\(e.localizedDescription)", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-                        vc.present(alert, animated: true)
-                    } else {
-                        let alert = UIAlertController(title: "Error", message: "We were unable to access your calendar because you denied permission.", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-                        vc.present(alert, animated: true)
-                    }
-                }
+                self.presentAlert(title: "Error", message: "We were unable to run this action because an invalid parameter group was specified.\n\n\(self.type): \(self.paramGroup)", vc: vc)
             }
         default:
-            let alert = UIAlertController(title: "Error", message: "We were unable to parse this action because the type '\(self.type)' is undefined.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Error", message: "We were unable to parse this action because the type \"\(self.type)\" is not a recognized action.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
             vc.present(alert, animated: true)
             break
@@ -132,12 +129,25 @@ class AuthenticButtonAction {
     }
     
     init(dict: NSDictionary) {
+        self.rootDictionary = dict
         self.type = dict.value(forKey: "type") as! String
         self.paramGroup = dict.value(forKey: "group") as! Int
         var k: [NSCopying] = []
         var v: [Any] = []
         dict.filter({(key, value) in return (key as! String) != "type" && (key as! String) != "group" }).forEach({ e in k.append(e.key as! NSCopying); v.append(e.value) })
         self.properties = NSDictionary(objects: v, forKeys: k)
+    }
+    
+    convenience init(type t: String, paramGroup group: Int, params: [AnyHashable : Any]) {
+        var keys = Array<NSCopying>()
+        keys.append("type" as NSCopying)
+        keys.append("group" as NSCopying)
+        params.keys.forEach({k in keys.append(k as! NSCopying)})
+        var values = Array<Any>()
+        values.append(t)
+        values.append(group)
+        params.values.forEach({v in values.append(v)})
+        self.init(dict: NSDictionary(objects: values, forKeys: keys))
     }
 }
 

@@ -17,5 +17,9 @@ class AuthenticButtonInfo {
         self.label = dict.value(forKey: "label") as! String
         self.action = AuthenticButtonAction(dict: dict.value(forKey: "action") as! NSDictionary)
     }
+    
+    convenience init(label lbl: String, action a: AuthenticButtonAction) {
+        self.init(dict: NSDictionary(dictionary: ["label": lbl, "action": a.rootDictionary]))
+    }
 }
 

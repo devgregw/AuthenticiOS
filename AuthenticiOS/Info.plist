@@ -55,5 +55,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSCalendarsUsageDescription</key>
+	<string>We are asking for permission to access your calendar so we can add events to it.  We never save, access, modify, or transmit your personal data without your permission.</string>
 </dict>
 </plist>
