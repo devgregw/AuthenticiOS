@@ -75,7 +75,7 @@ class RecurrenceRule {
         if (endDate != nil) {
             return "\(main) until \(endDate!.format(dateStyle: .long, timeStyle: .long))"
         } else if (count != nil) {
-            let num = getOccurrences(initialStart: s, initialEnd: e).map { o in o.startDate >= Date() }.count
+            let num = getOccurrences(initialStart: s, initialEnd: e).filter { o in o.startDate >= Date() }.count
             return "\(main) \(num) more time\(num > 1 ? "s" : "")"
         }
         return main
