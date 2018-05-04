@@ -26,15 +26,64 @@ class ACEventViewController: UIViewController {
         vc.show(ACEventViewController(event: event), sender: nil)
     }
     
+    private func addView(_ view: UIView) {
+        self.stackView.addArrangedSubview(view)
+    }
+    
+    @objc public func addToCalendar() {
+        AuthenticButtonAction(dict: NSDictionary(dictionary: [
+            "group": 0,
+            "type": "AddToCalendarAction",
+            "eventId": self.event!.id
+        ])).invoke(viewController: self)
+    }
+    
+    @objc public func getDirections() {
+        AuthenticButtonAction(type: "GetDirectionsAction", paramGroup: 0, params: ["address": self.event!.address]).invoke(viewController: self)
+    }
+    
+    @objc public func showOnMap() {
+        AuthenticButtonAction(type: "ShowMapAction", paramGroup: 0, params: ["address": self.event!.location]).invoke(viewController: self)
+    }
+    
+    @objc public func register() {
+        AuthenticButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": self.event!.registrationUrl!]).invoke(viewController: self)
+    }
+    
     private func initLayout() {
         self.clearViews()
         let i = UIImageView()
         i.contentMode = .scaleAspectFit
         Utilities.loadFirebase(image: self.event!.header, into: i)
-        self.stackView.addArrangedSubview(i)
-        //self.event!.elements.forEach({ element in
-            //self.stackView.addArrangedSubview(element.getView(viewController: self))
-        //})
+        addView(i)
+        addView(AuthenticElement.createTitle(text: self.event!.title, alignment: "center"))
+        addView(AuthenticElement.createText(text: self.event!.description, alignment: "left"))
+        addView(AuthenticElement.createSeparator(visible: true))
+        addView(AuthenticElement.createTitle(text: "Date & Time", alignment: "center"))
+        if let occurrence = self.event!.getNextOccurrence() {
+            addView(AuthenticElement.createText(text: occurrence.format(), alignment: "left"))
+        }
+        addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Add to Calendar", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.addToCalendar)))
+        addView(AuthenticElement.createSeparator(visible: true))
+        addView(AuthenticElement.createTitle(text: "Location", alignment: "center"))
+        addView(AuthenticElement.createText(text: "\(self.event!.location)\(!String.isNilOrEmpty(self.event!.address) ? "\n\(self.event!.address)" : "")", alignment: "left"))
+        if (!String.isNilOrEmpty(self.event!.address)) {
+            addView(AuthenticElement.createText(text: self.event!.address, alignment: "left"))
+            addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Get Directions", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.getDirections)))
+        } else {
+            addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Show on Map", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.showOnMap)))
+        }
+        addView(AuthenticElement.createSeparator(visible: true))
+        addView(AuthenticElement.createTitle(text: "Price & Registration", alignment: "center"))
+        if !String.isNilOrEmpty(self.event!.registrationUrl) {
+            addView(AuthenticElement.createText(text: self.event!.price! > Float(0) ? "$\(self.event!.price!)" : "Free", alignment: "left"))
+            addView(AuthenticElement.createText(text: "Registration is required", alignment: "left"))
+            addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Register Now", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.register)))
+        } else {
+            addView(AuthenticElement.createText(text: "Free", alignment: "left"))
+            addView(AuthenticElement.createText(text: "Registration is not required", alignment: "left"))
+        }
+        addView(AuthenticElement.createSeparator(visible: false))
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
     }

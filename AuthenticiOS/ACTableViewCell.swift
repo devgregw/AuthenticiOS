@@ -24,7 +24,7 @@ class ACTableViewCell: UITableViewCell {
         if (tab != nil) {
             ACTabViewController.present(tab: self.tab!, withViewController: self.viewController!)
         } else if (event != nil) {
-            //ACEventViewController.present(event: self.event!, withViewController: self.viewController!)
+            ACEventViewController.present(event: self.event!, withViewController: self.viewController!)
         } else {
             action!()
         }

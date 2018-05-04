@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ACEventViewController" customModule="AuthenticiOS" customModuleProvider="target">
             <connections>
                 <outlet property="stackView" destination="Y2s-4d-efJ" id="77l-xs-58j"/>
+                <outlet property="view" destination="4A0-4M-0yv" id="rOL-nh-1GR"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
