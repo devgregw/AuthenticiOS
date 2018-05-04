@@ -34,6 +34,22 @@ extension Date {
     }
 }
 
+extension UITextView {
+    public func embedInStackViewWithInsets(top t: CGFloat, left l: CGFloat, bottom b: CGFloat, right r: CGFloat) -> UIStackView {
+        let stack = UIStackView(arrangedSubviews: [self])
+        stack.layoutMargins = UIEdgeInsetsMake(t, l, b, r)
+        stack.sizeToFit()
+        stack.layoutIfNeeded()
+        return stack
+    }
+}
+
+extension String {
+    public static func isNilOrEmpty(_ str: String?) -> Bool {
+        return (str?.count ?? 0) == 0
+    }
+}
+
 class VersionInfo {
     static let Version = "1.0.0"
     static let Update = 0
@@ -57,6 +73,31 @@ class Reachability {
             }
         })
         task.resume()
+    }
+}
+
+class GWTextView: UITextView {
+    private var top: CGFloat = 0
+    private var left: CGFloat = 0
+    private var bottom: CGFloat = 0
+    private var right: CGFloat = 0
+    
+    func setInsets(top t: CGFloat, left l: CGFloat, bottom b: CGFloat, right r: CGFloat) {
+        self.top = t
+        self.left = l
+        self.bottom = b
+        self.right = r
+        self.setNeedsLayout()
+        self.layoutIfNeeded()
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        get {
+            var contentSize = super.intrinsicContentSize
+            contentSize.height += top + bottom
+            contentSize.width += left + right
+            return contentSize
+        }
     }
 }
 
