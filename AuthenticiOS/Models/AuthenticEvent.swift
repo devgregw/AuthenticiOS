@@ -38,20 +38,11 @@ class AuthenticEvent {
     }
     
     public func getShouldBeHidden() -> Bool {
-        let occurrence = getNextOccurrence()
-        if (occurrence == nil) {
-            return true
-        } else {
-            return Date() > occurrence!.endDate
-        }
+        return Date() > getNextOccurrence().endDate
     }
     
-    public func getNextOccurrence() -> RecurrenceRule.Occurrence? {
-        if (self.recurrence != nil) {
-            return recurrence!.getNextOccurrence(initialStart: self.startDate, initialEnd: self.endDate)
-        } else {
-            return RecurrenceRule.Occurrence(start: self.startDate, end: self.endDate)
-        }
+    public func getNextOccurrence() -> RecurrenceRule.Occurrence {
+        return recurrence?.getNextOccurrence(initialStart: self.startDate, initialEnd: self.endDate) ?? RecurrenceRule.Occurrence(start: self.startDate, end: self.endDate)
     }
     
     init(id: String, title: String, hideTitle: Bool, description: String, header: String, location: String, address: String, dateTime: NSDictionary, recurrence: NSDictionary?, registration: NSDictionary?) {

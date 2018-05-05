@@ -66,7 +66,7 @@ class ACEventListController: UIViewController, UITableViewDataSource {
                     if (!event.getShouldBeHidden()) {
                         self.events.append(event)
                     }
-                    self.events.sort(by: { (a, b) in a.getNextOccurrence()!.startDate < b.getNextOccurrence()!.startDate })
+                    self.events.sort(by: { (a, b) in a.getNextOccurrence().startDate < b.getNextOccurrence().startDate })
                     self.tableView.reloadData()
                     self.indicatorView.stopAnimating()
                 })

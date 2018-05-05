@@ -60,15 +60,15 @@ class ACEventViewController: UIViewController {
         addView(AuthenticElement.createText(text: self.event!.description, alignment: "left"))
         addView(AuthenticElement.createSeparator(visible: true))
         addView(AuthenticElement.createTitle(text: "Date & Time", alignment: "center"))
-        if let occurrence = self.event!.getNextOccurrence() {
-            addView(AuthenticElement.createText(text: occurrence.format(), alignment: "left"))
+        addView(AuthenticElement.createText(text: self.event!.getNextOccurrence().format(), alignment: "left"))
+        if let rule = self.event!.recurrence {
+            addView(AuthenticElement.createText(text: rule.format(initialStart: self.event!.startDate, initialEnd: self.event!.endDate), alignment: "left"))
         }
         addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Add to Calendar", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.addToCalendar)))
         addView(AuthenticElement.createSeparator(visible: true))
         addView(AuthenticElement.createTitle(text: "Location", alignment: "center"))
         addView(AuthenticElement.createText(text: "\(self.event!.location)\(!String.isNilOrEmpty(self.event!.address) ? "\n\(self.event!.address)" : "")", alignment: "left"))
         if (!String.isNilOrEmpty(self.event!.address)) {
-            addView(AuthenticElement.createText(text: self.event!.address, alignment: "left"))
             addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Get Directions", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.getDirections)))
         } else {
             addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Show on Map", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.showOnMap)))

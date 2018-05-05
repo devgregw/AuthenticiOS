@@ -18,9 +18,9 @@ class RecurrenceRule {
         public func format() -> String {
             let cal = Calendar.current
             if (cal.component(.year, from: startDate) != cal.component(.year, from: endDate) || cal.ordinality(of: .day, in: .year, for: startDate) != cal.ordinality(of: .day, in: .year, for: endDate)) {
-                return "Starts on \(startDate.format(dateStyle: .long, timeStyle: .none)) at \(startDate.format(dateStyle: .none, timeStyle: .long)) and ends on \(endDate.format(dateStyle: .long, timeStyle: .none)) at \(endDate.format(dateStyle: .none, timeStyle: .long))"
+                return "Starts on \(startDate.format(dateStyle: .full, timeStyle: .none)) at \(startDate.format(dateStyle: .none, timeStyle: .short)) and ends on \(endDate.format(dateStyle: .full, timeStyle: .none)) at \(endDate.format(dateStyle: .none, timeStyle: .short))"
             } else {
-                return "From \(startDate.format(dateStyle: .none, timeStyle: .long)) to \(endDate.format(dateStyle: .none, timeStyle: .long)) on \(startDate.format(dateStyle: .long, timeStyle: .none))"
+                return "From \(startDate.format(dateStyle: .none, timeStyle: .short)) to \(endDate.format(dateStyle: .none, timeStyle: .short)) on \(startDate.format(dateStyle: .full, timeStyle: .none))"
             }
         }
         
@@ -72,34 +72,69 @@ class RecurrenceRule {
     public func format(initialStart s: Date, initialEnd e: Date) -> String {
         let amount = interval == 1 ? "every" : (interval == 2 ? "every other" : "every \(interval)")
         let main = "Repeats \(amount) \(frequency == "daily" ? "day" : frequency.replacingOccurrences(of: "ly", with: ""))\(interval > 2 ? "s" : "")"
-        if (endDate != nil) {
-            return "\(main) until \(endDate!.format(dateStyle: .long, timeStyle: .long))"
+        if (isInfinite()) {
+            return main
+        } else if (endDate != nil) {
+            return "\(main) until \(endDate!.format(dateStyle: .full, timeStyle: .short))"
         } else if (count != nil) {
-            let num = getOccurrences(initialStart: s, initialEnd: e).filter { o in o.startDate >= Date() }.count
-            return "\(main) \(num) more time\(num > 1 ? "s" : "")"
+            let num = getOccurrences(originalStart: s, originalEnd: e).filter { o in o.startDate >= Date() }.count
+            return "\(main) \(num) more time\(num != 1 ? "s" : "")"
+        } else {
+            return "Error"
         }
-        return main
     }
     
-    private func getOccurrences(initialStart s: Date, initialEnd e: Date) -> [Occurrence] {
+    private func getOccurrences(originalStart: Date, originalEnd: Date) -> [Occurrence] {
+        let duration = originalStart.timeIntervalSince(originalEnd)
+        var occurrences = [Occurrence]()
+        if isInfinite() {
+            var firstAfter = originalStart
+            while firstAfter < Date() {
+                firstAfter = addInterval(to: firstAfter)
+            }
+            for _ in 1...10 {
+                occurrences.append(Occurrence(start: firstAfter, end: firstAfter.addingTimeInterval(duration)))
+                firstAfter = addInterval(to: firstAfter)
+            }
+        } else if let until = endDate {
+            var nextStart = originalStart
+            var after = addInterval(to: nextStart)
+            while after < until {
+                occurrences.append(Occurrence(start: nextStart, end: nextStart.addingTimeInterval(duration)))
+                nextStart = after
+                after = addInterval(to: after)
+            }
+        } else if let number = count {
+            occurrences.append(Occurrence(start: originalStart, end: originalEnd))
+            for _ in 1...(number - 1) {
+                let oc = occurrences.last!
+                occurrences.append(Occurrence(start: addInterval(to: oc.startDate), end: addInterval(to: oc.endDate)))
+            }
+        }
+        return occurrences
+    }
+    
+    /*private func getOccurrences(initialStart s: Date, initialEnd e: Date) -> [Occurrence] {
         var list: [Occurrence] = []
         list.append(Occurrence(start: s, end: e))
         if (endDate != nil) {
-            while (list.max { a, b in a.startDate > b.startDate }!.startDate < endDate!) {
-                let max = list.max { a, b in a.startDate > b.startDate }!
+            while (list.max { a, b in a.startDate < b.startDate }!.startDate < endDate!) {
+                let max = list.max { a, b in a.startDate < b.startDate }!
                 list.append(max)
             }
-            if (list.max { a, b in a.startDate > b.startDate }!.startDate > endDate!) {
+            if (list.max { a, b in a.startDate < b.startDate }!.startDate > endDate!) {
                 list.removeLast()
             }
         } else if (count != nil) {
             while (list.count < count!) {
-                let max = list.max { a, b in a.startDate > b.startDate }!
+                let max = list.max { a, b in a.startDate < b.startDate }!
                 list.append(Occurrence(start: addInterval(to: max.startDate), end: addInterval(to: max.endDate)))
             }
+        } else {
+            return RecurrenceRule(freq: frequency, interval: interval, end: nil, count: 30).getOccurrences(initialStart: s, initialEnd: e)
         }
         return list
-    }
+    }*/
     
     private func addInterval(to: Date) -> Date {
         var components = DateComponents()
@@ -123,7 +158,8 @@ class RecurrenceRule {
     }
     
     public func getNextOccurrence(initialStart s: Date, initialEnd e: Date) -> Occurrence? {
-        return getOccurrences(initialStart: s, initialEnd: e).first { o in o.startDate >= Date() }
+        return getOccurrences(originalStart: s, originalEnd: e).first { o in Date() <= o.startDate }
+        //return getOccurrences(initialStart: s, initialEnd: e).first { o in o.startDate <= Date() }
     }
     
     init(freq: String, interval: Int, end: Date?, count: Int?) {
@@ -134,10 +170,7 @@ class RecurrenceRule {
     }
     
     convenience init(dict: NSDictionary) {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-        let e = dict["endDate"] != nil ? formatter.date(from: dict["endDate"] as! String)! : nil
-        self.init(freq: dict["frequency"] as! String, interval: dict["interval"] as! Int, end: e, count: dict["count"] as? Int)
+        let e = dict["date"] != nil ? Date.parseISO8601(string: dict["date"] as! String) : nil
+        self.init(freq: dict["frequency"] as! String, interval: dict["interval"] as! Int, end: e, count: dict["number"] as? Int)
     }
 }
