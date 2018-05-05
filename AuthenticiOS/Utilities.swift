@@ -76,60 +76,6 @@ class Reachability {
     }
 }
 
-class GWTextView: UITextView {
-    private var top: CGFloat = 0
-    private var left: CGFloat = 0
-    private var bottom: CGFloat = 0
-    private var right: CGFloat = 0
-    
-    func setInsets(top t: CGFloat, left l: CGFloat, bottom b: CGFloat, right r: CGFloat) {
-        self.top = t
-        self.left = l
-        self.bottom = b
-        self.right = r
-        self.setNeedsLayout()
-        self.layoutIfNeeded()
-    }
-    
-    override var intrinsicContentSize: CGSize {
-        get {
-            var contentSize = super.intrinsicContentSize
-            contentSize.height += top + bottom
-            contentSize.width += left + right
-            return contentSize
-        }
-    }
-}
-
-class GWLabel: UILabel {
-    private var top: CGFloat = 0
-    private var left: CGFloat = 0
-    private var bottom: CGFloat = 0
-    private var right: CGFloat = 0
-    
-    func setInsets(top t: CGFloat, left l: CGFloat, bottom b: CGFloat, right r: CGFloat) {
-        self.top = t
-        self.left = l
-        self.bottom = b
-        self.right = r
-        self.setNeedsLayout()
-        self.layoutIfNeeded()
-    }
-    
-    override func drawText(in rect: CGRect) {
-        super.drawText(in: UIEdgeInsetsInsetRect(rect, UIEdgeInsets(top: self.top, left: self.left, bottom: self.bottom, right: self.right)))
-    }
-    
-    override var intrinsicContentSize: CGSize {
-        get {
-            var contentSize = super.intrinsicContentSize
-            contentSize.height += top + bottom
-            contentSize.width += left + right
-            return contentSize
-        }
-    }
-}
-
 class Utilities {
     class MapInterface {
         static func isGoogleMapsAvailable() -> Bool {
