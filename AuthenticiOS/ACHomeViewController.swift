@@ -45,8 +45,8 @@ class ACHomeViewController: UIViewController {
             print("LOCAL UPDATE CODE: \(VersionInfo.Update)")
             print("REMOTE UPDATE CODE: \(value)")
             if value > VersionInfo.Update {
-                let alert = UIAlertController.init(title: "Update Available", message: "An update is available for the Authentic City Church app.  We highly recommend that you update to avoid missing out on new features.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction.init(title: "Not Now", style: .default, handler: { _ in self.displayMainUI() }))
+                let alert = UIAlertController(title: "Update Available", message: "An update is available for the Authentic City Church app.  We highly recommend that you update to avoid missing out on new features.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Not Now", style: .default, handler: { _ in self.displayMainUI() }))
                 alert.addAction(UIAlertAction(title: "Update", style: .default, handler: { _ in UIApplication.shared.openURL(URL(string: "itms-apps://phobos.apple.com/WebObjects/MZStore.woa/wa/viewSoftwareUpdate?id=1164541935&mt=8")!)
                     self.displayMainUI()
                 }))
