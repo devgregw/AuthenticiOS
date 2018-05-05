@@ -30,6 +30,8 @@
 		FC5BF9BC208D18A7002982F1 /* ACEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5BF9BA208D18A7002982F1 /* ACEventViewController.swift */; };
 		FC5BF9BD208D18A7002982F1 /* ACEventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC5BF9BB208D18A7002982F1 /* ACEventViewController.xib */; };
 		FC5BF9BF20910101002982F1 /* ACNewTabListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5BF9BE20910101002982F1 /* ACNewTabListController.swift */; };
+		FC5BF9C2209D0238002982F1 /* ACAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5BF9C0209D0238002982F1 /* ACAboutViewController.swift */; };
+		FC5BF9C3209D0238002982F1 /* ACAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC5BF9C1209D0238002982F1 /* ACAboutViewController.xib */; };
 		FC5D1436208B7C3B00B0E63E /* AuthenticAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5D1435208B7C3B00B0E63E /* AuthenticAppearance.swift */; };
 		FCAD5C0F208599E40010B5C9 /* ACEventListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD5C0D208599E40010B5C9 /* ACEventListController.swift */; };
 		FCAD5C12208624CC0010B5C9 /* AuthenticEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD5C11208624CC0010B5C9 /* AuthenticEvent.swift */; };
@@ -65,6 +67,8 @@
 		FC5BF9BA208D18A7002982F1 /* ACEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACEventViewController.swift; sourceTree = "<group>"; };
 		FC5BF9BB208D18A7002982F1 /* ACEventViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACEventViewController.xib; sourceTree = "<group>"; };
 		FC5BF9BE20910101002982F1 /* ACNewTabListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACNewTabListController.swift; sourceTree = "<group>"; };
+		FC5BF9C0209D0238002982F1 /* ACAboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACAboutViewController.swift; sourceTree = "<group>"; };
+		FC5BF9C1209D0238002982F1 /* ACAboutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACAboutViewController.xib; sourceTree = "<group>"; };
 		FC5D1435208B7C3B00B0E63E /* AuthenticAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticAppearance.swift; sourceTree = "<group>"; };
 		FCAD5C0D208599E40010B5C9 /* ACEventListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACEventListController.swift; sourceTree = "<group>"; };
 		FCAD5C11208624CC0010B5C9 /* AuthenticEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticEvent.swift; sourceTree = "<group>"; };
@@ -104,6 +108,8 @@
 		2B36305D1FF56BD9002469E5 /* AuthenticiOS */ = {
 			isa = PBXGroup;
 			children = (
+				FC5BF9C0209D0238002982F1 /* ACAboutViewController.swift */,
+				FC5BF9C1209D0238002982F1 /* ACAboutViewController.xib */,
 				2B878E06203356CB0010B549 /* FuturaHeavy.ttf */,
 				2B878E07203356CB0010B549 /* ProximaNova.ttf */,
 				FC195DCA1FFBCE4C00F9C9AC /* ACTableViewCell.swift */,
@@ -236,6 +242,7 @@
 				FC41F7C8208B9CDB0094FF32 /* Events.storyboard in Resources */,
 				FC16001D1FFC4BD6001DF3B5 /* ACTabViewController.xib in Resources */,
 				FC1045051FFEF5560010F8A1 /* Assets.xcassets in Resources */,
+				FC5BF9C3209D0238002982F1 /* ACAboutViewController.xib in Resources */,
 				2BEFD14F1FF5820E0094572A /* GoogleService-Info.plist in Resources */,
 				2B3630641FF56BD9002469E5 /* Main.storyboard in Resources */,
 				2B878E08203356CB0010B549 /* FuturaHeavy.ttf in Resources */,
@@ -301,6 +308,7 @@
 				FC565D102001395B00DE7C9A /* AuthenticTab.swift in Sources */,
 				FC565D1420013AB600DE7C9A /* AuthenticButtonInfo.swift in Sources */,
 				FC5D1436208B7C3B00B0E63E /* AuthenticAppearance.swift in Sources */,
+				FC5BF9C2209D0238002982F1 /* ACAboutViewController.swift in Sources */,
 				2B3630611FF56BD9002469E5 /* ACHomeViewController.swift in Sources */,
 				2B36305F1FF56BD9002469E5 /* AppDelegate.swift in Sources */,
 				FC5BF9BC208D18A7002982F1 /* ACEventViewController.swift in Sources */,
