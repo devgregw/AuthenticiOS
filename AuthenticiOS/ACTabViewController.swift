@@ -44,6 +44,7 @@ class ACTabViewController: UIViewController {
             self.tab!.elements.forEach({ element in
                 self.stackView.addArrangedSubview(element.getView(viewController: self))
             })
+            self.stackView.addArrangedSubview(AuthenticElement.createSeparator(visible: false))
         }
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
