@@ -35,6 +35,30 @@ class ACAboutViewController: UIViewController {
         AuthenticButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": "https://www.authenticcity.church/give/"]).invoke(viewController: self)
     }
     
+    @objc public func fb() {
+        AuthenticButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": "https://www.facebook.com/AuthenticCityChurch/"]).invoke(viewController: self)
+    }
+    
+    @objc public func ig() {
+        AuthenticButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": "https://instagram.com/authentic_city_church"]).invoke(viewController: self)
+    }
+    
+    @objc public func tw() {
+        AuthenticButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": "https://twitter.com/AuthenticCity_"]).invoke(viewController: self)
+    }
+    
+    @objc public func dev() {
+        AuthenticButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": "https://devgregw.com"]).invoke(viewController: self)
+    }
+    
+    @objc public func gh() {
+        AuthenticButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": "https://github.com/devgregw/AuthenticiOS"]).invoke(viewController: self)
+    }
+    
+    @objc public func tr() {
+        AuthenticButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": "https://trello.com/b/QUgekVh6"]).invoke(viewController: self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "ABOUT"
@@ -52,9 +76,21 @@ class ACAboutViewController: UIViewController {
         addView(AuthenticElement.createSeparator(visible: true))
         addView(AuthenticElement.createCustomText(text: "FOR ALL TO LOVE GOD, LOVE PEOPLE, AND IMPACT THE KINGDOM.", size: 33, futura: false, alignment: "center", color: UIColor.black))
         addView(AuthenticElement.createSeparator(visible: true))
-        addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "authenticcity.church", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.home)))
-        addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Impact the Kingdom", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.getInvolved)))
+        addView(AuthenticElement.createTitle(text: "CONNECT WITH US", alignment: "center"))
+        addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Visit Our Website", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.home)))
+        addView(AuthenticElement.createSeparator(visible: false))
+        addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Take the Next Step", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.getInvolved)))
         addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Merchandise", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.merch)))
         addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Give", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.give)))
+        addView(AuthenticElement.createSeparator(visible: false))
+        addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Instagram", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.ig)))
+        addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Facebook", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.fb)))
+        addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Twitter", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.tw)))
+        addView(AuthenticElement.createSeparator(visible: true))
+        addView(AuthenticElement.createText(text: "Designed and developed by Greg Whatley for Authentic City Church", alignment: "center"))
+        addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Learn More", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.dev)))
+        addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "GitHub Repository", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.gh)))
+        addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Trello Roadmap", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.tr)))
+        addView(AuthenticElement.createSeparator(visible: false))
     }
 }
