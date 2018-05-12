@@ -10,23 +10,67 @@ import UIKit
 import Firebase
 import Foundation
 import AVKit
+import UserNotifications
+
+@available(iOS 10, *)
+extension AppDelegate : UNUserNotificationCenterDelegate {
+    
+    // Receive displayed notifications for iOS 10 devices.
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        //let userInfo = notification.request.content.userInfo
+        completionHandler([.alert, .sound])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        completionHandler()
+    }
+}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private var launchedItem: UIApplicationShortcutItem?
+    private static var notificationAction: AuthenticButtonAction? = nil
     
     var window: UIWindow?
 
+    public static func invokeNotificationAction(withViewController vc: UIViewController) {
+        notificationAction?.invoke(viewController: vc)
+        notificationAction = nil
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+        AppDelegate.notificationAction = AuthenticButtonAction(dict: NSDictionary(dictionary: userInfo.filter({ (arg) -> Bool in
+            let (key, _) = arg
+            return key as! String != "aps"
+        })))
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        self.application(application, didReceiveRemoteNotification: userInfo)
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         Database.database().isPersistenceEnabled = true
+        application.applicationIconBadgeNumber = 0
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
         } catch let error as NSError {
             print(error)
         }
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font : UIFont(name: "Proxima Nova", size: 18) ?? UIFont.systemFont(ofSize: 18)], for: .normal)
+        Messaging.messaging().subscribe(toTopic: "main")
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().delegate = self
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: {_, _ in })
+        } else {
+            application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
+        }
         if let shortcut = launchOptions?[.shortcutItem] as? UIApplicationShortcutItem {
             self.launchedItem = shortcut
             _ = respondToShortcut()

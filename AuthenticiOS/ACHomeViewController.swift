@@ -21,6 +21,7 @@ class ACHomeViewController: UIViewController {
     }
     
     private func displayMainUI() {
+        AppDelegate.invokeNotificationAction(withViewController: self)
         UIView.animate(withDuration: 0.25, delay: 0.1, options: .curveEaseInOut, animations: {
             self.indicator.alpha = 0
             self.logo.alpha = 1
