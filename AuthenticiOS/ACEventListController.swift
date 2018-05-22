@@ -39,6 +39,7 @@ class ACEventListController: UITableViewController {
             c.textLabel?.text = "There are no upcoming events."
             c.textLabel?.font = UIFont(name: "Proxima Nova", size: 18.0)
             c.textLabel?.textAlignment = .center
+            c.backgroundColor = UIColor.clear
             return c
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "ACTableViewCell", for: indexPath) as! ACTableViewCell
