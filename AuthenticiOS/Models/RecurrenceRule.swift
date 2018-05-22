@@ -85,7 +85,7 @@ class RecurrenceRule {
     }
     
     private func getOccurrences(originalStart: Date, originalEnd: Date) -> [Occurrence] {
-        let duration = originalStart.timeIntervalSince(originalEnd)
+        let duration = originalEnd.timeIntervalSince(originalStart)
         var occurrences = [Occurrence]()
         if isInfinite() {
             var firstAfter = originalStart
