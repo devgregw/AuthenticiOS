@@ -55,8 +55,10 @@ class AuthenticElement {
         return webView
     }
     
-    static public func createCustomText(text: String, size: Int, futura: Bool, alignment: String, color: UIColor) -> UIStackView {
+    static public func createCustomText(text: String, size: Int, futura: Bool, alignment: String, color: UIColor, selectable: Bool = false) -> UIStackView {
         let label = UITextView()
+        label.isEditable = false
+        label.isSelectable = selectable
         label.textContainer.lineBreakMode = .byWordWrapping
         label.text = text
         label.textColor = color
@@ -78,12 +80,12 @@ class AuthenticElement {
         return label.embedInStackViewWithInsets(top: 5, left: 10, bottom: 0, right: 10)
     }
     
-    static public func createTitle(text: String, alignment: String) -> UIStackView {
-        return createCustomText(text: text, size: 26, futura: true, alignment: alignment, color: UIColor.black)
+    static public func createTitle(text: String, alignment: String, selectable: Bool = false) -> UIStackView {
+        return createCustomText(text: text, size: 26, futura: true, alignment: alignment, color: UIColor.black, selectable: selectable)
     }
     
-    static public func createText(text: String, alignment: String) -> UIStackView {
-        return createCustomText(text: text, size: 16, futura: false, alignment: alignment, color: UIColor.black)
+    static public func createText(text: String, alignment: String, selectable: Bool = false) -> UIStackView {
+        return createCustomText(text: text, size: 16, futura: false, alignment: alignment, color: UIColor.black, selectable: selectable)
     }
     
     static public func createButton(info: AuthenticButtonInfo, viewController: UIViewController, target: Any?, selector: Selector) -> UIStackView {

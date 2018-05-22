@@ -67,7 +67,7 @@ class ACEventViewController: UIViewController {
         addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Add to Calendar", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.addToCalendar)))
         addView(AuthenticElement.createSeparator(visible: true))
         addView(AuthenticElement.createTitle(text: "Location", alignment: "center"))
-        addView(AuthenticElement.createText(text: "\(self.event!.location)\(!String.isNilOrEmpty(self.event!.address) ? "\n\(self.event!.address)" : "")", alignment: "left"))
+        addView(AuthenticElement.createText(text: "\(self.event!.location)\(!String.isNilOrEmpty(self.event!.address) ? "\n\(self.event!.address)" : "")", alignment: "left", selectable: true))
         if (!String.isNilOrEmpty(self.event!.address)) {
             addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Get Directions", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.getDirections)))
         } else {
