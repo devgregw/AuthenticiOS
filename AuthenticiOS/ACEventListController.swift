@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Firebase
 
-class ACEventListController: UIViewController, UITableViewDataSource {
+class ACEventListController: UITableViewController {
     
     static private var title = ""
     
@@ -19,30 +19,21 @@ class ACEventListController: UIViewController, UITableViewDataSource {
         viewController.present(UIStoryboard(name: "Events", bundle: nil).instantiateViewController(withIdentifier: "ueroot"), animated: true)
     }
     
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var indicatorView: UIActivityIndicatorView!
-    
     @IBAction func didRequestClose(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func didRequestRefresh(_ sender: Any) {
-        self.events = []
-        self.tableView.reloadData()
-        self.loadData()
-    }
-    
     private var events: [AuthenticEvent] = []
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return max(1, events.count)
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (events.count == 0) {
             let c = UITableViewCell(style: .default, reuseIdentifier: nil)
             c.textLabel?.text = "There are no upcoming events."
@@ -56,10 +47,11 @@ class ACEventListController: UIViewController, UITableViewDataSource {
         return cell
     }
     
-    private func loadData() {
-        if (self.events.count == 0) {
-            indicatorView.startAnimating()
-            Database.database().reference().child("events").observeSingleEvent(of: .value, with: {snapshot in
+    @objc public func loadData() {
+        self.events = []
+        let eventsRef = Database.database().reference().child("events")
+        eventsRef.keepSynced(true)
+            eventsRef.observeSingleEvent(of: .value, with: {snapshot in
                 let val = snapshot.value as? NSDictionary
                 val?.forEach({(key, value) in
                     let event = AuthenticEvent(dict: value as! NSDictionary)
@@ -68,12 +60,9 @@ class ACEventListController: UIViewController, UITableViewDataSource {
                     }
                     self.events.sort(by: { (a, b) in a.getNextOccurrence().startDate < b.getNextOccurrence().startDate })
                     self.tableView.reloadData()
-                    self.indicatorView.stopAnimating()
+                    self.refreshControl?.endRefreshing()
                 })
             }) { error in self.present(UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert), animated: true) }
-        } else {
-            self.tableView.reloadData()
-        }
     }
     
     override func viewDidLoad() {
@@ -85,11 +74,8 @@ class ACEventListController: UIViewController, UITableViewDataSource {
         self.tableView.estimatedRowHeight = 220
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.register(UINib(nibName: "ACTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "ACTableViewCell")
-        self.tableView.translatesAutoresizingMaskIntoConstraints = false
-        self.tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        self.tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        self.tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        self.tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        self.refreshControl?.tintColor = UIColor.white
+        self.refreshControl?.addTarget(self, action: #selector(self.loadData), for: .valueChanged)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -102,4 +88,3 @@ class ACEventListController: UIViewController, UITableViewDataSource {
         super.didReceiveMemoryWarning()
     }
 }
-
