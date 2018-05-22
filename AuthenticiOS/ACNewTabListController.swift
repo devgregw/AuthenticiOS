@@ -90,7 +90,6 @@ class ACNewTabListController: UITableViewController {
         self.tableView.register(UINib(nibName: "ACTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "ACTableViewCell")
         self.refreshControl?.tintColor = UIColor.white
         self.refreshControl?.addTarget(self, action: #selector(self.loadData), for: .valueChanged)
-        self.refreshControl?.attributedTitle = NSAttributedString(string: "Pull to Refresh", attributes: [.font: UIFont(name: "Proxima Nova", size: 12.0)!, .foregroundColor: UIColor.white])
         self.loadData()
     }
 }
