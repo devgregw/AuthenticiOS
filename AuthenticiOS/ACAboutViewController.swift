@@ -47,6 +47,10 @@ class ACAboutViewController: UIViewController {
         AuthenticButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": "https://twitter.com/AuthenticCity_"]).invoke(viewController: self)
     }
     
+    @objc public func yt() {
+        AuthenticButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": "https://www.youtube.com/channel/UCxrYck_z50n5It7ifj1LCjA"]).invoke(viewController: self)
+    }
+    
     @objc public func dev() {
         AuthenticButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": "https://devgregw.com"]).invoke(viewController: self)
     }
@@ -86,6 +90,7 @@ class ACAboutViewController: UIViewController {
         addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Instagram", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.ig)))
         addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Facebook", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.fb)))
         addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Twitter", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.tw)))
+        addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "YouTube", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.yt)))
         addView(AuthenticElement.createSeparator(visible: true))
         addView(AuthenticElement.createText(text: "Designed and developed by Greg Whatley for Authentic City Church", alignment: "center"))
         addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Learn More", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.dev)))
