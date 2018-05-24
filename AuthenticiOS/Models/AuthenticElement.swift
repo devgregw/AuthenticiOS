@@ -55,14 +55,48 @@ class AuthenticElement {
         return webView
     }
     
-    static public func createCustomText(text: String, size: Int, futura: Bool, alignment: String, color: UIColor, selectable: Bool = false) -> UIStackView {
+    static public func createTitle(text: String, alignment: String, size: Int = 26, color: UIColor = UIColor.black, selectable: Bool = false) -> UIView {
+        let label = ACInsetLabel()
+        label.attributedText = NSAttributedString(string: text, attributes: [
+            .kern: 1.5,
+            .foregroundColor: color,
+            .font: UIFont(name: "Effra", size: CGFloat(size))!
+        ])
+        label.layer.borderColor = UIColor.black.cgColor
+        label.layer.borderWidth = 2
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.sizeToFit()
+        let sv = label.embedInStackViewWithInsets(top: 5, left: 10, bottom: 0, right: 10)
+        sv.axis = .vertical
+        switch (alignment) {
+        case "center":
+            label.textAlignment = .center
+            sv.alignment = .center
+            break
+        case "right":
+            label.textAlignment = .right
+            sv.alignment = .trailing
+            break
+        default:
+            label.textAlignment = .left
+            sv.alignment = .leading
+            break
+        }
+        
+        //label.addConstraint(NSLayoutConstraint(item: label, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: UIApplication.shared.keyWindow!.frame.width / 2))
+        
+        return sv
+    }
+    
+    static public func createText(text: String, alignment: String, size: Int = 16, color: UIColor = UIColor.black, selectable: Bool = false) -> UIStackView {
         let label = UITextView()
         label.isEditable = false
         label.isSelectable = selectable
         label.textContainer.lineBreakMode = .byWordWrapping
         label.text = text
         label.textColor = color
-        label.font = UIFont(name: futura ? "Futura PT Web Heavy" : "Proxima Nova", size: CGFloat(size))
+        label.font = UIFont(name: "Proxima Nova", size: CGFloat(size))
         switch (alignment) {
         case "center":
             label.textAlignment = .center
@@ -78,14 +112,6 @@ class AuthenticElement {
         label.sizeToFit()
         label.layoutIfNeeded()
         return label.embedInStackViewWithInsets(top: 5, left: 10, bottom: 0, right: 10)
-    }
-    
-    static public func createTitle(text: String, alignment: String, selectable: Bool = false) -> UIStackView {
-        return createCustomText(text: text, size: 26, futura: true, alignment: alignment, color: UIColor.black, selectable: selectable)
-    }
-    
-    static public func createText(text: String, alignment: String, selectable: Bool = false) -> UIStackView {
-        return createCustomText(text: text, size: 16, futura: false, alignment: alignment, color: UIColor.black, selectable: selectable)
     }
     
     static public func createButton(info: AuthenticButtonInfo, viewController: UIViewController, target: Any?, selector: Selector) -> UIStackView {
@@ -139,7 +165,7 @@ class AuthenticElement {
         case "separator":
             return AuthenticElement.createSeparator(visible: getProperty("visible") as! Bool)
         default:
-            return AuthenticElement.createCustomText(text: "Unknown element: \(type)", size: 16, futura: false, alignment: "left", color: UIColor.red)
+            return AuthenticElement.createText(text: "Unknown element: \(type)", alignment: "left", size: 16, color: UIColor.red)
         }
     }
 }

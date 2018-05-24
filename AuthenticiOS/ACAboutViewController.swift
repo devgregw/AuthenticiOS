@@ -78,7 +78,7 @@ class ACAboutViewController: UIViewController {
         addView(AuthenticElement.createTitle(text: "AUTHENTIC CITY CHURCH", alignment: "center"))
         addView(AuthenticElement.createText(text: "Version \(VersionInfo.Version)-u\(VersionInfo.Update) for iOS devices", alignment: "center"))
         addView(AuthenticElement.createSeparator(visible: true))
-        addView(AuthenticElement.createCustomText(text: "FOR ALL TO LOVE GOD, LOVE PEOPLE, AND IMPACT THE KINGDOM.", size: 33, futura: false, alignment: "center", color: UIColor.black))
+        addView(AuthenticElement.createText(text: "FOR ALL TO LOVE GOD, LOVE PEOPLE, AND IMPACT THE KINGDOM.", alignment: "center", size: 33, color: UIColor.black))
         addView(AuthenticElement.createSeparator(visible: true))
         addView(AuthenticElement.createTitle(text: "CONNECT WITH US", alignment: "center"))
         addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Visit Our Website", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.home)))

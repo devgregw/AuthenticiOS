@@ -10,8 +10,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="FuturaHeavy.ttf">
-            <string>FuturaPTWeb-Heavy</string>
+        <array key="EffraRegular.ttf">
+            <string>Effra-Regular</string>
         </array>
     </customFonts>
     <objects>
@@ -32,7 +32,7 @@
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kiU-cg-B3I">
                         <rect key="frame" x="20" y="236.5" width="478" height="37"/>
-                        <fontDescription key="fontDescription" name="FuturaPTWeb-Heavy" family="Futura PT Web Heavy" pointSize="26"/>
+                        <fontDescription key="fontDescription" name="Effra-Regular" family="Effra" pointSize="26"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>

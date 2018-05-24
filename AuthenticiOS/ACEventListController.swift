@@ -70,7 +70,9 @@ class ACEventListController: UITableViewController {
         super.viewDidLoad()
         self.navigationItem.title = ACEventListController.title
         Utilities.applyTintColor(to: self)
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Events", style: .plain, target: nil, action: nil)
+        let btn = UIBarButtonItem(title: "Events", style: .plain, target: nil, action: nil)
+        btn.tintColor = UIColor.white
+        self.navigationItem.backBarButtonItem = btn
         self.tableView.dataSource = self
         self.tableView.estimatedRowHeight = 220
         self.tableView.rowHeight = UITableViewAutomaticDimension

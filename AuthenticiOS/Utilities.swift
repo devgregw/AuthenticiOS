@@ -37,7 +37,7 @@ extension Date {
     }
 }
 
-extension UITextView {
+extension UIView {
     public func embedInStackViewWithInsets(top t: CGFloat, left l: CGFloat, bottom b: CGFloat, right r: CGFloat) -> UIStackView {
         let stack = UIStackView(arrangedSubviews: [self])
         stack.layoutMargins = UIEdgeInsetsMake(t, l, b, r)
@@ -76,6 +76,25 @@ class Reachability {
             }
         })
         task.resume()
+    }
+}
+
+class ACInsetLabel: UILabel {
+    override var alignmentRectInsets: UIEdgeInsets {
+        return UIEdgeInsetsMake(0, -10, 0, -10)
+    }
+    
+    private let insets = UIEdgeInsets(top: 2, left: 8, bottom: 2, right: 8)
+    
+    override func drawText(in rect: CGRect) {
+        super.drawText(in: UIEdgeInsetsInsetRect(rect, insets))
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        let superSize = super.intrinsicContentSize
+        let w = superSize.width + insets.left + insets.right
+        let h = superSize.height + insets.top + insets.bottom
+        return CGSize(width: w, height: h)
     }
 }
 

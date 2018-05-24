@@ -83,7 +83,9 @@ class ACNewTabListController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Utilities.applyTintColor(to: self)
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Home", style: .plain, target: nil, action: nil)
+        let btn = UIBarButtonItem(title: "Home", style: .plain, target: nil, action: nil)
+        btn.tintColor = UIColor.white
+        self.navigationItem.backBarButtonItem = btn
         self.tableView.dataSource = self
         self.tableView.estimatedRowHeight = 220
         self.tableView.rowHeight = UITableViewAutomaticDimension
