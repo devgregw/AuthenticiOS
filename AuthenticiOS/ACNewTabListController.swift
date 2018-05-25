@@ -11,8 +11,13 @@ import UIKit
 import Firebase
 
 class ACNewTabListController: UITableViewController {
+    public var didStartFromSwipe = false
+    
     @IBAction func didRequestClose(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+        if (didStartFromSwipe) {
+            ACHomePageViewController.returnToFirstViewController()
+        }
     }
     
     @IBAction func showMoreOptions(_ sender: UIBarButtonItem) {
