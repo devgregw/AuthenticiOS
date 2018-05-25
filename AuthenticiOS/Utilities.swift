@@ -81,7 +81,7 @@ class Reachability {
 
 class ACInsetLabel: UILabel {
     override var alignmentRectInsets: UIEdgeInsets {
-        return UIEdgeInsetsMake(0, -10, 0, -10)
+        return UIEdgeInsetsMake(-5, -10, -5, -10)
     }
     
     private let insets = UIEdgeInsets(top: 2, left: 8, bottom: 2, right: 8)

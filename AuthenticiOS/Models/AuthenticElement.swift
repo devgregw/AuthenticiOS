@@ -67,7 +67,7 @@ class AuthenticElement {
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.sizeToFit()
-        let sv = label.embedInStackViewWithInsets(top: 5, left: 10, bottom: 0, right: 10)
+        let sv = label.embedInStackViewWithInsets(top: 0, left: 0, bottom: 0, right: 0)
         sv.axis = .vertical
         switch (alignment) {
         case "center":
