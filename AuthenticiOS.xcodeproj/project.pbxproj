@@ -16,6 +16,9 @@
 		718D7CFE064244CE70BEECAF /* Pods_AuthenticiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB7EE5EFB0782B2DC076E74F /* Pods_AuthenticiOS.framework */; };
 		FC03C28120B76BD300D15490 /* EffraRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC03C28020B7637D00D15490 /* EffraRegular.ttf */; };
 		FC03C28320B79FA800D15490 /* ACHomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC03C28220B79FA800D15490 /* ACHomePageViewController.swift */; };
+		FC03C28520B8770900D15490 /* ACTabCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC03C28420B8770900D15490 /* ACTabCollectionViewController.swift */; };
+		FC03C28820B8778600D15490 /* ACCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC03C28620B8778600D15490 /* ACCollectionViewCell.swift */; };
+		FC03C28920B8778600D15490 /* ACCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC03C28720B8778600D15490 /* ACCollectionViewCell.xib */; };
 		FC09989A1FFEA74E00BCAD3A /* full.png in Resources */ = {isa = PBXBuildFile; fileRef = FC0998991FFEA74D00BCAD3A /* full.png */; };
 		FC1045051FFEF5560010F8A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC1045041FFEF5560010F8A1 /* Assets.xcassets */; };
 		FC16001C1FFC4BD6001DF3B5 /* ACTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC16001A1FFC4BD6001DF3B5 /* ACTabViewController.swift */; };
@@ -53,6 +56,9 @@
 		AB7EE5EFB0782B2DC076E74F /* Pods_AuthenticiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AuthenticiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC03C28020B7637D00D15490 /* EffraRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EffraRegular.ttf; sourceTree = "<group>"; };
 		FC03C28220B79FA800D15490 /* ACHomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACHomePageViewController.swift; sourceTree = "<group>"; };
+		FC03C28420B8770900D15490 /* ACTabCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabCollectionViewController.swift; sourceTree = "<group>"; };
+		FC03C28620B8778600D15490 /* ACCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACCollectionViewCell.swift; sourceTree = "<group>"; };
+		FC03C28720B8778600D15490 /* ACCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACCollectionViewCell.xib; sourceTree = "<group>"; };
 		FC0998991FFEA74D00BCAD3A /* full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = full.png; sourceTree = "<group>"; };
 		FC1045041FFEF5560010F8A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC16001A1FFC4BD6001DF3B5 /* ACTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +141,9 @@
 				FC41F7C7208B9CDB0094FF32 /* Events.storyboard */,
 				FC5BF9BE20910101002982F1 /* ACNewTabListController.swift */,
 				FC03C28220B79FA800D15490 /* ACHomePageViewController.swift */,
+				FC03C28420B8770900D15490 /* ACTabCollectionViewController.swift */,
+				FC03C28620B8778600D15490 /* ACCollectionViewCell.swift */,
+				FC03C28720B8778600D15490 /* ACCollectionViewCell.xib */,
 			);
 			path = AuthenticiOS;
 			sourceTree = "<group>";
@@ -238,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC195DCD1FFBCE4C00F9C9AC /* ACTableViewCell.xib in Resources */,
+				FC03C28920B8778600D15490 /* ACCollectionViewCell.xib in Resources */,
 				FC5BF9BD208D18A7002982F1 /* ACEventViewController.xib in Resources */,
 				FC03C28120B76BD300D15490 /* EffraRegular.ttf in Resources */,
 				2B878E09203356CB0010B549 /* ProximaNova.ttf in Resources */,
@@ -313,12 +323,14 @@
 				FC565D1420013AB600DE7C9A /* AuthenticButtonInfo.swift in Sources */,
 				FC5D1436208B7C3B00B0E63E /* AuthenticAppearance.swift in Sources */,
 				FC5BF9C2209D0238002982F1 /* ACAboutViewController.swift in Sources */,
+				FC03C28520B8770900D15490 /* ACTabCollectionViewController.swift in Sources */,
 				2B3630611FF56BD9002469E5 /* ACHomeViewController.swift in Sources */,
 				2B36305F1FF56BD9002469E5 /* AppDelegate.swift in Sources */,
 				FC5BF9BC208D18A7002982F1 /* ACEventViewController.swift in Sources */,
 				FC565D1620013ACE00DE7C9A /* AuthenticButtonAction.swift in Sources */,
 				FC490DD2202BA1F4007F270A /* AuthenticElement.swift in Sources */,
 				FC16001C1FFC4BD6001DF3B5 /* ACTabViewController.swift in Sources */,
+				FC03C28820B8778600D15490 /* ACCollectionViewCell.swift in Sources */,
 				FCAD5C0F208599E40010B5C9 /* ACEventListController.swift in Sources */,
 				FC5BF9BF20910101002982F1 /* ACNewTabListController.swift in Sources */,
 				FC490DD4202BA7FE007F270A /* Utilities.swift in Sources */,

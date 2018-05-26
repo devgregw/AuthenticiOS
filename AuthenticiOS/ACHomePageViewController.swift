@@ -77,7 +77,7 @@ class ACHomePageViewController: UIPageViewController, UIPageViewControllerDataSo
         let main = stbd.instantiateViewController(withIdentifier: "main")
         let home = stbd.instantiateViewController(withIdentifier: "hmroot")
         if let nav = home as? UINavigationController {
-            if let root = nav.viewControllers.first as? ACNewTabListController {
+            if let root = nav.viewControllers.first as? ACTabCollectionViewController {
                 root.didStartFromSwipe = true
             }
         }
