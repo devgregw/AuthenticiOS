@@ -22,9 +22,9 @@ class ACTableViewCell: UITableViewCell {
     
     @IBAction func didRecognizeTap(_ sender: UITapGestureRecognizer) {
         if (tab != nil) {
-            ACTabViewController.present(tab: self.tab!, withViewController: self.viewController!)
+            ACTabViewController.present(tab: self.tab!)
         } else if (event != nil) {
-            ACEventViewController.present(event: self.event!, withViewController: self.viewController!)
+            ACEventViewController.present(event: self.event!)
         } else {
             action!()
         }
@@ -43,7 +43,7 @@ class ACTableViewCell: UITableViewCell {
     func initializeForUpcomingEvents(withAppearance appearance: AuthenticAppearance.Events, viewController: UIViewController) {
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.didRecognizeTap(_:))))
         self.action = {
-            ACEventListController.present(withAppearance: appearance, viewController: viewController)
+            ACEventListController.present(withAppearance: appearance)
         }
         self.viewController = viewController
         if (appearance.hideTitle) {

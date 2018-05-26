@@ -39,20 +39,37 @@ class ACCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
     }
     
-    public func initialize(forUpcomingEvents appearance: AuthenticAppearance.Events) {
+    private var eventsAppearance: AuthenticAppearance.Events!
+    private var viewController: UIViewController!
+    private var tab: AuthenticTab!
+    
+    @objc public func presentUpcomingEvents() {
+        ACEventListController.present(withAppearance: self.eventsAppearance)
+    }
+    
+    @objc public func presentTab() {
+        ACTabViewController.present(tab: self.tab)
+    }
+    
+    public func initialize(forUpcomingEvents appearance: AuthenticAppearance.Events, withViewController vc: UIViewController) {
         self.text = appearance.title
         self.imageName = appearance.header
+        self.eventsAppearance = appearance
+        self.viewController = vc
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.presentUpcomingEvents)))
         self.initialize()
     }
     
-    public func initialize(forTab tab: AuthenticTab) {
+    public func initialize(forTab tab: AuthenticTab, withViewController vc: UIViewController) {
         self.text = tab.title
         self.imageName = tab.header
+        self.tab = tab
+        self.viewController = vc
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.presentTab)))
         self.initialize()
     }
     
     private func initialize() {
-        print("cell initialized: \(self.text), \(self.imageName)")
         let rand = CGFloat(drand48())
         self.backgroundColor = UIColor(red: rand, green: rand, blue: rand, alpha: 1)
         self.setNeedsLayout()

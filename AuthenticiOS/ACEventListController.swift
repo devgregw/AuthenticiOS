@@ -14,9 +14,9 @@ class ACEventListController: UITableViewController {
     
     static private var title = ""
     
-    static func present(withAppearance app: AuthenticAppearance.Events, viewController: UIViewController) {
+    static func present(withAppearance app: AuthenticAppearance.Events) {
         title = app.title
-        viewController.present(UIStoryboard(name: "Events", bundle: nil).instantiateViewController(withIdentifier: "ueroot"), animated: true)
+        AppDelegate.getTopmostViewController().present(UIStoryboard(name: "Events", bundle: nil).instantiateViewController(withIdentifier: "ueroot"), animated: true, completion: nil)
     }
     
     @IBAction func didRequestClose(_ sender: Any) {

@@ -22,8 +22,8 @@ class ACTabViewController: UIViewController {
         }
     }
     
-    public static func present(tab: AuthenticTab, withViewController vc: UIViewController) {
-        vc.show(ACTabViewController(tab: tab), sender: nil)
+    public static func present(tab: AuthenticTab) {
+        AppDelegate.automaticPresent(viewController: ACTabViewController(tab: tab))
     }
     
     private func initLayout() {

@@ -22,8 +22,8 @@ class ACEventViewController: UIViewController {
         }
     }
     
-    public static func present(event: AuthenticEvent, withViewController vc: UIViewController) {
-        vc.show(ACEventViewController(event: event), sender: nil)
+    public static func present(event: AuthenticEvent) {
+        AppDelegate.automaticPresent(viewController: ACEventViewController(event: event))
     }
     
     private func addView(_ view: UIView) {

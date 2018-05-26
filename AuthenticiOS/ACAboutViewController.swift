@@ -67,6 +67,7 @@ class ACAboutViewController: UIViewController {
         super.viewDidLoad()
         self.title = "ABOUT"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Launch AMS", style: .plain, target: self, action: #selector(self.launchAMS))
+        self.navigationItem.rightBarButtonItem!.tintColor = UIColor.white
         Utilities.applyTintColor(to: self)
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit

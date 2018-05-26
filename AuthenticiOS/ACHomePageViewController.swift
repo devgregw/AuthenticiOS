@@ -70,17 +70,12 @@ class ACHomePageViewController: UIPageViewController, UIPageViewControllerDataSo
         }
     }
     
-    static private var controllers: [UIViewController]!
+    static public var controllers: [UIViewController]!
     
     override func viewDidLoad() {
         let stbd = UIStoryboard(name: "Main", bundle: nil)
         let main = stbd.instantiateViewController(withIdentifier: "main")
         let home = stbd.instantiateViewController(withIdentifier: "hmroot")
-        if let nav = home as? UINavigationController {
-            if let root = nav.viewControllers.first as? ACTabCollectionViewController {
-                root.didStartFromSwipe = true
-            }
-        }
         ACHomePageViewController.controllers = [main, home]
         self.dataSource = self
         self.delegate = self

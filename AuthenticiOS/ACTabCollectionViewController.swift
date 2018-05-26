@@ -12,13 +12,9 @@ import Firebase
 private let reuseIdentifier = "accvcell"
 
 class ACTabCollectionViewController: UICollectionViewController {
-    public var didStartFromSwipe = false
-    
     @IBAction func didRequestClose(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
-        if (didStartFromSwipe) {
-            ACHomePageViewController.returnToFirstViewController()
-        }
+        ACHomePageViewController.returnToFirstViewController()
     }
     
     @IBAction func showMoreOptions(_ sender: UIBarButtonItem) {
@@ -33,11 +29,10 @@ class ACTabCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let btn = UIBarButtonItem(title: "Home", style: .plain, target: nil, action: nil)
+        btn.tintColor = UIColor.white
+        self.navigationItem.backBarButtonItem = btn
         Utilities.applyTintColor(to: self)
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
         self.collectionView!.register(UINib(nibName: "ACCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: reuseIdentifier)
         (self.collectionViewLayout as! UICollectionViewFlowLayout).sectionInset = UIEdgeInsets.zero
         if #available(iOS 10.0, *) {
@@ -95,17 +90,15 @@ class ACTabCollectionViewController: UICollectionViewController {
     }
 
 
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return self.complete ? tabs.count + 1 : 0
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {        return self.complete ? tabs.count + 1 : 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ACCollectionViewCell
         if (indexPath.item == 0) {
-            cell.initialize(forUpcomingEvents: self.appearance!.events)
+            cell.initialize(forUpcomingEvents: self.appearance!.events, withViewController: self)
         } else {
-            cell.initialize(forTab: self.tabs[indexPath.item - 1])
+            cell.initialize(forTab: self.tabs[indexPath.item - 1], withViewController: self)
         }
         cell.layoutIfNeeded()
         return cell

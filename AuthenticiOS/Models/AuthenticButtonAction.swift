@@ -39,7 +39,7 @@ class AuthenticButtonAction {
             Database.database().reference().child("/tabs/\(self.getProperty(withName: "tabId") as! String)/").observeSingleEvent(of: .value, with: {snapshot in
                 let val = snapshot.value as? NSDictionary
                 if (val != nil) {
-                    ACTabViewController.present(tab: AuthenticTab(dict: val!), withViewController: vc)
+                    ACTabViewController.present(tab: AuthenticTab(dict: val!))
                 } else {
                     self.presentAlert(title: "Error", message: "We were unable to open the page because it does not exist.", vc: vc)
                 }
@@ -49,7 +49,7 @@ class AuthenticButtonAction {
             Database.database().reference().child("/events/\(self.getProperty(withName: "eventId") as! String)/").observeSingleEvent(of: .value, with: {snapshot in
                 let val = snapshot.value as? NSDictionary
                 if (val != nil) {
-                    ACEventViewController.present(event: AuthenticEvent(dict: val!), withViewController: vc)
+                    ACEventViewController.present(event: AuthenticEvent(dict: val!))
                 } else {
                     self.presentAlert(title: "Error", message: "We were unable to open the event because it does not exist.", vc: vc)
                 }
@@ -131,7 +131,7 @@ class AuthenticButtonAction {
     init(dict: NSDictionary) {
         self.rootDictionary = dict
         self.type = dict.value(forKey: "type") as! String
-        self.paramGroup = dict.value(forKey: "group") as! Int
+        self.paramGroup = Int(String(describing: dict.value(forKey: "group")!))!
         var k: [NSCopying] = []
         var v: [Any] = []
         dict.filter({(key, value) in return (key as! String) != "type" && (key as! String) != "group" }).forEach({ e in k.append(e.key as! NSCopying); v.append(e.value) })
