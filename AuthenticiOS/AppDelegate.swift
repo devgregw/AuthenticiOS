@@ -112,7 +112,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     public static func automaticPresent(viewController newVC: UIViewController) {
-        var vc = getTopmostViewController()
+        let vc = getTopmostViewController()
         if let hp = vc as? ACHomePageViewController {
             let index = ACHomePageViewController.controllers.index(of: hp.viewControllers!.first!)
             if index == 0 {

@@ -15,11 +15,14 @@ class RecurrenceRule {
         
         public let endDate: Date
         
-        public func format() -> String {
+        public func format(hideEndDate: Bool) -> String {
             let cal = Calendar.current
             if (cal.component(.year, from: startDate) != cal.component(.year, from: endDate) || cal.ordinality(of: .day, in: .year, for: startDate) != cal.ordinality(of: .day, in: .year, for: endDate)) {
                 return "Starts on \(startDate.format(dateStyle: .full, timeStyle: .none)) at \(startDate.format(dateStyle: .none, timeStyle: .short)) and ends on \(endDate.format(dateStyle: .full, timeStyle: .none)) at \(endDate.format(dateStyle: .none, timeStyle: .short))"
             } else {
+                if hideEndDate {
+                    return "Starts on \(startDate.format(dateStyle: .full, timeStyle: .none)) at \(startDate.format(dateStyle: .none, timeStyle: .short))"
+                }
                 return "From \(startDate.format(dateStyle: .none, timeStyle: .short)) to \(endDate.format(dateStyle: .none, timeStyle: .short)) on \(startDate.format(dateStyle: .full, timeStyle: .none))"
             }
         }

@@ -60,7 +60,7 @@ class ACEventViewController: UIViewController {
         addView(AuthenticElement.createText(text: self.event!.description, alignment: "left"))
         addView(AuthenticElement.createSeparator(visible: true))
         addView(AuthenticElement.createTitle(text: "Date & Time", alignment: "center"))
-        addView(AuthenticElement.createText(text: self.event!.getNextOccurrence().format(), alignment: "left"))
+        addView(AuthenticElement.createText(text: self.event!.getNextOccurrence().format(hideEndDate: self.event!.hideEndDate), alignment: "left"))
         if let rule = self.event!.recurrence {
             addView(AuthenticElement.createText(text: rule.format(initialStart: self.event!.startDate, initialEnd: self.event!.endDate), alignment: "left"))
         }

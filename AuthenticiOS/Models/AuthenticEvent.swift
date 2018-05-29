@@ -27,6 +27,8 @@ class AuthenticEvent {
     
     public let endDate: Date
     
+    public let hideEndDate: Bool
+    
     public let recurrence: RecurrenceRule?
     
     public let registrationUrl: String?
@@ -45,7 +47,7 @@ class AuthenticEvent {
         return recurrence?.getNextOccurrence(initialStart: self.startDate, initialEnd: self.endDate) ?? RecurrenceRule.Occurrence(start: self.startDate, end: self.endDate)
     }
     
-    init(id: String, title: String, hideTitle: Bool, description: String, header: String, location: String, address: String, dateTime: NSDictionary, recurrence: NSDictionary?, registration: NSDictionary?) {
+    init(id: String, title: String, hideTitle: Bool, description: String, header: String, location: String, address: String, dateTime: NSDictionary, hideEndDate: Bool, recurrence: NSDictionary?, registration: NSDictionary?) {
         self.id = id
         self.title = title
         self.hideTitle = hideTitle
@@ -55,6 +57,7 @@ class AuthenticEvent {
         self.address = address
         self.startDate = Date.parseISO8601(string: dateTime["start"] as! String)
         self.endDate = Date.parseISO8601(string: dateTime["end"] as! String)
+        self.hideEndDate = hideEndDate
         self.recurrence = recurrence != nil ? RecurrenceRule(dict: recurrence!) : nil
         if (registration != nil) {
             self.registrationUrl = registration!["url"] as? String
@@ -66,6 +69,6 @@ class AuthenticEvent {
     }
     
     convenience init(dict: NSDictionary) {
-        self.init(id: dict["id"] as! String, title: dict["title"] as! String, hideTitle: dict["hideTitle"] as! Bool, description: dict["description"] as! String, header: dict["header"] as! String, location: dict["location"] as! String, address: dict["address"] as! String, dateTime: dict["dateTime"] as! NSDictionary, recurrence: dict["recurrence"] as? NSDictionary, registration: dict["registration"] as? NSDictionary)
+        self.init(id: dict["id"] as! String, title: dict["title"] as! String, hideTitle: dict["hideTitle"] as! Bool, description: dict["description"] as! String, header: dict["header"] as! String, location: dict["location"] as! String, address: dict["address"] as! String, dateTime: dict["dateTime"] as! NSDictionary, hideEndDate: dict["hideEndDate"] as! Bool, recurrence: dict["recurrence"] as? NSDictionary, registration: dict["registration"] as? NSDictionary)
     }
 }

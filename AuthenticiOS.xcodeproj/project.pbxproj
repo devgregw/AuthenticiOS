@@ -40,6 +40,8 @@
 		FCAD5C0F208599E40010B5C9 /* ACEventListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD5C0D208599E40010B5C9 /* ACEventListController.swift */; };
 		FCAD5C12208624CC0010B5C9 /* AuthenticEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD5C11208624CC0010B5C9 /* AuthenticEvent.swift */; };
 		FCAD5C14208628FF0010B5C9 /* RecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD5C13208628FF0010B5C9 /* RecurrenceRule.swift */; };
+		FCBD36FA20BC93160066ED19 /* ACLivestreamCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD36F820BC93160066ED19 /* ACLivestreamCollectionViewCell.swift */; };
+		FCBD36FB20BC93160066ED19 /* ACLivestreamCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBD36F920BC93160066ED19 /* ACLivestreamCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +83,8 @@
 		FCAD5C0D208599E40010B5C9 /* ACEventListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACEventListController.swift; sourceTree = "<group>"; };
 		FCAD5C11208624CC0010B5C9 /* AuthenticEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticEvent.swift; sourceTree = "<group>"; };
 		FCAD5C13208628FF0010B5C9 /* RecurrenceRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurrenceRule.swift; sourceTree = "<group>"; };
+		FCBD36F820BC93160066ED19 /* ACLivestreamCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLivestreamCollectionViewCell.swift; sourceTree = "<group>"; };
+		FCBD36F920BC93160066ED19 /* ACLivestreamCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACLivestreamCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,34 +120,19 @@
 		2B36305D1FF56BD9002469E5 /* AuthenticiOS */ = {
 			isa = PBXGroup;
 			children = (
-				FC5BF9C0209D0238002982F1 /* ACAboutViewController.swift */,
-				FC5BF9C1209D0238002982F1 /* ACAboutViewController.xib */,
+				FCBD36F720BC902E0066ED19 /* User Interfaces */,
+				FCBD36F620BC8C280066ED19 /* View Controllers */,
+				FCBD36F520BC8BF40066ED19 /* Cells */,
+				FC565D0E2001394A00DE7C9A /* Models */,
 				2B878E07203356CB0010B549 /* ProximaNova.ttf */,
 				FC03C28020B7637D00D15490 /* EffraRegular.ttf */,
-				FC195DCA1FFBCE4C00F9C9AC /* ACTableViewCell.swift */,
-				FC195DCB1FFBCE4C00F9C9AC /* ACTableViewCell.xib */,
-				FC16001A1FFC4BD6001DF3B5 /* ACTabViewController.swift */,
-				FC16001B1FFC4BD6001DF3B5 /* ACTabViewController.xib */,
-				FC5BF9BA208D18A7002982F1 /* ACEventViewController.swift */,
-				FC5BF9BB208D18A7002982F1 /* ACEventViewController.xib */,
 				2B36305E1FF56BD9002469E5 /* AppDelegate.swift */,
 				FC1045041FFEF5560010F8A1 /* Assets.xcassets */,
 				FC565D0A200118A400DE7C9A /* AuthenticiOS.entitlements */,
 				FC0998991FFEA74D00BCAD3A /* full.png */,
 				2BEFD14E1FF5820E0094572A /* GoogleService-Info.plist */,
 				2B36306A1FF56BD9002469E5 /* Info.plist */,
-				2B3630671FF56BD9002469E5 /* LaunchScreen.storyboard */,
-				2B3630621FF56BD9002469E5 /* Main.storyboard */,
-				FC565D0E2001394A00DE7C9A /* Models */,
 				FC490DD3202BA7FE007F270A /* Utilities.swift */,
-				2B3630601FF56BD9002469E5 /* ACHomeViewController.swift */,
-				FCAD5C0D208599E40010B5C9 /* ACEventListController.swift */,
-				FC41F7C7208B9CDB0094FF32 /* Events.storyboard */,
-				FC5BF9BE20910101002982F1 /* ACNewTabListController.swift */,
-				FC03C28220B79FA800D15490 /* ACHomePageViewController.swift */,
-				FC03C28420B8770900D15490 /* ACTabCollectionViewController.swift */,
-				FC03C28620B8778600D15490 /* ACCollectionViewCell.swift */,
-				FC03C28720B8778600D15490 /* ACCollectionViewCell.xib */,
 			);
 			path = AuthenticiOS;
 			sourceTree = "<group>";
@@ -177,6 +166,47 @@
 				FC5D1435208B7C3B00B0E63E /* AuthenticAppearance.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		FCBD36F520BC8BF40066ED19 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				FCBD36F820BC93160066ED19 /* ACLivestreamCollectionViewCell.swift */,
+				FC195DCA1FFBCE4C00F9C9AC /* ACTableViewCell.swift */,
+				FC03C28620B8778600D15490 /* ACCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		FCBD36F620BC8C280066ED19 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FC5BF9BE20910101002982F1 /* ACNewTabListController.swift */,
+				FC03C28420B8770900D15490 /* ACTabCollectionViewController.swift */,
+				FC03C28220B79FA800D15490 /* ACHomePageViewController.swift */,
+				2B3630601FF56BD9002469E5 /* ACHomeViewController.swift */,
+				FC5BF9C0209D0238002982F1 /* ACAboutViewController.swift */,
+				FC16001A1FFC4BD6001DF3B5 /* ACTabViewController.swift */,
+				FC5BF9BA208D18A7002982F1 /* ACEventViewController.swift */,
+				FCAD5C0D208599E40010B5C9 /* ACEventListController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		FCBD36F720BC902E0066ED19 /* User Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				FC03C28720B8778600D15490 /* ACCollectionViewCell.xib */,
+				FC5BF9C1209D0238002982F1 /* ACAboutViewController.xib */,
+				FC195DCB1FFBCE4C00F9C9AC /* ACTableViewCell.xib */,
+				FC16001B1FFC4BD6001DF3B5 /* ACTabViewController.xib */,
+				FC5BF9BB208D18A7002982F1 /* ACEventViewController.xib */,
+				FC41F7C7208B9CDB0094FF32 /* Events.storyboard */,
+				2B3630671FF56BD9002469E5 /* LaunchScreen.storyboard */,
+				2B3630621FF56BD9002469E5 /* Main.storyboard */,
+				FCBD36F920BC93160066ED19 /* ACLivestreamCollectionViewCell.xib */,
+			);
+			path = "User Interfaces";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,6 +285,7 @@
 				FC03C28120B76BD300D15490 /* EffraRegular.ttf in Resources */,
 				2B878E09203356CB0010B549 /* ProximaNova.ttf in Resources */,
 				2B3630691FF56BD9002469E5 /* LaunchScreen.storyboard in Resources */,
+				FCBD36FB20BC93160066ED19 /* ACLivestreamCollectionViewCell.xib in Resources */,
 				FC09989A1FFEA74E00BCAD3A /* full.png in Resources */,
 				FC41F7C8208B9CDB0094FF32 /* Events.storyboard in Resources */,
 				FC16001D1FFC4BD6001DF3B5 /* ACTabViewController.xib in Resources */,
@@ -322,6 +353,7 @@
 			files = (
 				FCAD5C14208628FF0010B5C9 /* RecurrenceRule.swift in Sources */,
 				FC03C28320B79FA800D15490 /* ACHomePageViewController.swift in Sources */,
+				FCBD36FA20BC93160066ED19 /* ACLivestreamCollectionViewCell.swift in Sources */,
 				FC565D102001395B00DE7C9A /* AuthenticTab.swift in Sources */,
 				FC565D1420013AB600DE7C9A /* AuthenticButtonInfo.swift in Sources */,
 				FC5D1436208B7C3B00B0E63E /* AuthenticAppearance.swift in Sources */,

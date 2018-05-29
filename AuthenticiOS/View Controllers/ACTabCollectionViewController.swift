@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 
 private let reuseIdentifier = "accvcell"
+private let livestreamReuseIdentifier = "accvlscell"
 
 class ACTabCollectionViewController: UICollectionViewController {
     @IBAction func didRequestClose(_ sender: Any) {
@@ -34,6 +35,7 @@ class ACTabCollectionViewController: UICollectionViewController {
         self.navigationItem.backBarButtonItem = btn
         Utilities.applyTintColor(to: self)
         self.collectionView!.register(UINib(nibName: "ACCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(UINib(nibName: "ACLivestreamCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: livestreamReuseIdentifier)
         (self.collectionViewLayout as! UICollectionViewFlowLayout).sectionInset = UIEdgeInsets.zero
         if #available(iOS 10.0, *) {
             self.collectionView?.refreshControl = UIRefreshControl()
@@ -90,15 +92,21 @@ class ACTabCollectionViewController: UICollectionViewController {
     }
 
 
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {        return self.complete ? tabs.count + 1 : 0
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {        return self.complete ? tabs.count + 2 : 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ACCollectionViewCell
         if (indexPath.item == 0) {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: livestreamReuseIdentifier, for: indexPath) as! ACLivestreamCollectionViewCell
+            cell.initialize(withViewController: self)
+            cell.layoutIfNeeded()
+            return cell
+        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ACCollectionViewCell
+        if (indexPath.item == 1) {
             cell.initialize(forUpcomingEvents: self.appearance!.events, withViewController: self)
         } else {
-            cell.initialize(forTab: self.tabs[indexPath.item - 1], withViewController: self)
+            cell.initialize(forTab: self.tabs[indexPath.item - 2], withViewController: self)
         }
         cell.layoutIfNeeded()
         return cell
@@ -108,6 +116,9 @@ class ACTabCollectionViewController: UICollectionViewController {
 
 extension ACTabCollectionViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if indexPath.item == 0 {
+            return CGSize(width: view.frame.width, height: view.frame.width / 2)
+        }
         let width = view.frame.width / 2
         return CGSize(width: width, height: 1.5*width)
     }

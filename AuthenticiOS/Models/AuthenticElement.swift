@@ -36,7 +36,13 @@ class AuthenticElement {
         }
     }
     
-    static public func createImage(name: String) -> UIImageView {
+    static public func createImage(name: String, enlargable: Bool, vc: UIViewController?) -> UIView {
+        if enlargable {
+            let view = ACEnlargableImageView(imageName: name, viewController: vc!)
+            let stack = UIStackView(arrangedSubviews: [view, createText(text: "Tap image to enlarge.", alignment: "left", size: 12, color: UIColor.gray, selectable: false)])
+            stack.axis = .vertical
+            return stack
+        }
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
         Utilities.loadFirebase(image: name, into: image)
@@ -83,9 +89,6 @@ class AuthenticElement {
             sv.alignment = .leading
             break
         }
-        
-        //label.addConstraint(NSLayoutConstraint(item: label, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: UIApplication.shared.keyWindow!.frame.width / 2))
-        
         return sv
     }
     
@@ -118,7 +121,7 @@ class AuthenticElement {
         let button = UIButton(type: .system)
         button.backgroundColor = UIColor(red: 0.15, green: 0.15, blue: 0.15, alpha: 1)
         button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = UIFont(name: "Proxima Nova", size: 18) ?? UIFont.systemFont(ofSize: 18)
+        button.titleLabel?.font = UIFont(name: "Proxima Nova", size: 18)!
         button.layer.cornerRadius = 8
         button.contentEdgeInsets = UIEdgeInsetsMake(15, 5, 15, 5)
         button.setTitle(info.label, for: .normal)
@@ -144,14 +147,22 @@ class AuthenticElement {
     private var action: AuthenticButtonAction!
     private var vc: UIViewController!
     
+    private var imageIndex = 0
+    private var images = [String]()
+    
     @objc public func invoke(_ sender: UIButton) {
         action.invoke(viewController: vc)
     }
     
+    @objc public func enlargeImage(_ sender: UIImageView) {
+        AuthenticButtonAction.init(type: "OpenURLAction", paramGroup: 0, params: ["url": "https://accams.devgregw.com/meta/storage/\(images[sender.tag])"]).invoke(viewController: vc)
+    }
+    
     func getView(viewController vc: UIViewController) -> UIView {
+        self.vc = vc
         switch (type) {
         case "image":
-            return AuthenticElement.createImage(name: getProperty("image") as! String)
+            return AuthenticElement.createImage(name: getProperty("image") as! String, enlargable: getProperty("enlargeButton") as! Bool, vc: vc)
         case "video":
             return AuthenticElement.createVideo(provider: getProperty("provider") as! String, videoId: getProperty("videoId") as! String)
         case "title":
@@ -160,7 +171,6 @@ class AuthenticElement {
             return AuthenticElement.createText(text: (getProperty("text") as! String), alignment: getProperty("alignment") as! String)
         case "button":
             self.action = AuthenticButtonInfo(dict: getProperty("_buttonInfo") as! NSDictionary).action
-            self.vc = vc
             return AuthenticElement.createButton(info: AuthenticButtonInfo(dict: getProperty("_buttonInfo") as! NSDictionary), viewController: vc, target: self, selector: #selector(self.invoke(_:)))
         case "separator":
             return AuthenticElement.createSeparator(visible: getProperty("visible") as! Bool)

@@ -79,6 +79,28 @@ class Reachability {
     }
 }
 
+class ACEnlargableImageView: UIImageView {
+    private var imageName: String
+    private var vc: UIViewController
+    
+    init(imageName: String, viewController vc: UIViewController) {
+        self.imageName = imageName
+        self.vc = vc
+        super.init(image: nil)
+        Utilities.loadFirebase(image: imageName, into: self)
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.expand)))
+        self.isUserInteractionEnabled = true
+    }
+    
+    @objc public func expand() {
+        AuthenticButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url":"https://accams.devgregw.com/meta/storage/\(imageName)"]).invoke(viewController: vc)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 class ACInsetLabel: UILabel {
     override var alignmentRectInsets: UIEdgeInsets {
         return UIEdgeInsetsMake(-5, -10, -5, -10)
@@ -134,9 +156,15 @@ class Utilities {
     
     static func loadFirebase(image: String, into: UIImageView) {
         into.sd_setImage(with: Storage.storage().reference().child(image), placeholderImage: nil, completion: { (i, e, c, r) in
-            if (i == nil) {
+            if (e != nil) {
+                print("Image \(image) failed to load with error \(e!.localizedDescription)")
                 return
             }
+            if (i == nil) {
+                print("Image \(image) returned nil")
+                return
+            }
+            print("Image \(image) finished loading from Firebase")
             let newHeight = (i!.size.height / i!.size.width) * (UIScreen.main.bounds.width)
             into.addConstraint(NSLayoutConstraint(item: into, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: newHeight))
         })
