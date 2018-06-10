@@ -20,29 +20,8 @@ class ACHomeViewController: UIViewController {
         return .lightContent
     }
     
-    @objc public func devNotifications() {
-        let settingsAlert = UIAlertController(title: "Development Notifications", message: "Development notifications are for internal testing use only.  Interacting with them may cause instability.\n\n/topics/dev", preferredStyle: .actionSheet)
-        settingsAlert.addAction(UIAlertAction(title: "Subscribe", style: .destructive, handler: { _ in
-            Messaging.messaging().subscribe(toTopic: "dev")
-            let message = UIAlertController(title: "Subscribed to /topics/dev", message: nil, preferredStyle: .alert)
-            message.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-            message.preferredAction = message.actions.first
-            self.present(message, animated: true, completion: nil)
-        }))
-        settingsAlert.addAction(UIAlertAction(title: "Unsubscribe", style: .default, handler: { _ in
-            Messaging.messaging().unsubscribe(fromTopic: "dev")
-            let message = UIAlertController(title: "Unsubscribed from /topics/dev", message: nil, preferredStyle: .alert)
-            message.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-            message.preferredAction = message.actions.first
-            self.present(message, animated: true, completion: nil)
-        }))
-        settingsAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        self.present(settingsAlert, animated: true, completion: nil)
-    }
-    
     private func displayMainUI() {
         self.logo.isUserInteractionEnabled = true
-        self.logo.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(self.devNotifications)))
         AppDelegate.invokeNotificationAction(withViewController: self)
         UIView.animate(withDuration: 0.25, delay: 0.1, options: .curveEaseInOut, animations: {
             self.indicator.alpha = 0

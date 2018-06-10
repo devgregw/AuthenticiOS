@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ACAboutViewController: UIViewController {
     @IBOutlet weak var stackView: UIStackView!
@@ -63,6 +64,26 @@ class ACAboutViewController: UIViewController {
         AuthenticButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": "https://trello.com/b/QUgekVh6"]).invoke(viewController: self)
     }
     
+    @objc public func devNotifications() {
+        let settingsAlert = UIAlertController(title: "Development Notifications", message: "Development notifications are for internal testing use only.  Interacting with them may cause instability.\n\n/topics/dev", preferredStyle: .actionSheet)
+        settingsAlert.addAction(UIAlertAction(title: "Subscribe", style: .destructive, handler: { _ in
+            Messaging.messaging().subscribe(toTopic: "dev")
+            let message = UIAlertController(title: "Subscribed to /topics/dev", message: nil, preferredStyle: .alert)
+            message.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+            message.preferredAction = message.actions.first
+            self.present(message, animated: true, completion: nil)
+        }))
+        settingsAlert.addAction(UIAlertAction(title: "Unsubscribe", style: .default, handler: { _ in
+            Messaging.messaging().unsubscribe(fromTopic: "dev")
+            let message = UIAlertController(title: "Unsubscribed from /topics/dev", message: nil, preferredStyle: .alert)
+            message.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+            message.preferredAction = message.actions.first
+            self.present(message, animated: true, completion: nil)
+        }))
+        settingsAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(settingsAlert, animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "ABOUT"
@@ -75,6 +96,7 @@ class ACAboutViewController: UIViewController {
         imageView.image = banner
         let newHeight = (banner.size.height / banner.size.width) * (UIScreen.main.bounds.width)
         imageView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: newHeight))
+        imageView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(self.devNotifications)))
         addView(imageView)
         addView(AuthenticElement.createTitle(text: "AUTHENTIC CITY CHURCH", alignment: "center"))
         addView(AuthenticElement.createText(text: "Version \(VersionInfo.Version)-u\(VersionInfo.Update) for iOS devices", alignment: "center"))
