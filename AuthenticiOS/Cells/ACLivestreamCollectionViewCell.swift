@@ -54,8 +54,9 @@ class ACLivestreamCollectionViewCell: UICollectionViewCell {
                 self.displayText(isLive: false)
                 return
             }
+            URLCache.shared.removeAllCachedResponses()
             guard let jsonData = data else {
-                print("Livestream: datais nil")
+                print("Livestream: data is nil")
                 self.displayText(isLive: false)
                 return
             }
@@ -80,7 +81,7 @@ class ACLivestreamCollectionViewCell: UICollectionViewCell {
                 print("id: \(videoId), thumbnail: \(thumbnail)")
                 self.videoId = videoId
                 self.displayText(isLive: true)
-            } catch let parseError as Error {
+            } catch let parseError {
                 print("Parse error: \(parseError.localizedDescription)")
                 self.displayText(isLive: false)
             }
