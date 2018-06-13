@@ -69,6 +69,6 @@ class AuthenticEvent {
     }
     
     convenience init(dict: NSDictionary) {
-        self.init(id: dict["id"] as! String, title: dict["title"] as! String, hideTitle: dict["hideTitle"] as! Bool, description: dict["description"] as! String, header: dict["header"] as! String, location: dict["location"] as! String, address: dict["address"] as! String, dateTime: dict["dateTime"] as! NSDictionary, hideEndDate: dict["hideEndDate"] as! Bool, recurrence: dict["recurrence"] as? NSDictionary, registration: dict["registration"] as? NSDictionary)
+        self.init(id: dict.value(forKey: "id", default: "INVALID"), title: dict.value(forKey: "title", default: "INVALID"), hideTitle: dict.value(forKey: "hideTitle", default: false), description: dict.value(forKey: "description", default: "INVALID"), header: dict.value(forKey: "header", default: ""), location: dict.value(forKey: "location", default: "INVALID"), address: dict.value(forKey: "address", default: ""), dateTime: dict.value(forKey: "dateTime", default: Utilities.defaultDateTimeDictionary()), hideEndDate: dict.value(forKey: "hideEndDate", default: false), recurrence: dict["recurrence"] as? NSDictionary, registration: dict["registration"] as? NSDictionary)
     }
 }

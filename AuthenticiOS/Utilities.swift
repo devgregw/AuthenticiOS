@@ -14,16 +14,21 @@ import FirebaseStorageUI
 extension Date {
     
     static func parseISO8601(string: String) -> Date {
-        /*let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-        return formatter.date(from: string)!*/
         let formatter = DateFormatter()
         formatter.calendar = Calendar.autoupdatingCurrent
         formatter.locale = Locale.autoupdatingCurrent
         formatter.timeZone = TimeZone(abbreviation: "GMT")
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         return formatter.date(from: string)!
+    }
+    
+    func formatISO8601() -> String {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar.autoupdatingCurrent
+        formatter.locale = Locale.autoupdatingCurrent
+        formatter.timeZone = TimeZone(abbreviation: "GMT")
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        return formatter.string(from: self)
     }
     
     func format(dateStyle: DateFormatter.Style, timeStyle: DateFormatter.Style) -> String {
@@ -50,6 +55,15 @@ extension UIView {
 extension String {
     public static func isNilOrEmpty(_ str: String?) -> Bool {
         return (str?.count ?? 0) == 0
+    }
+}
+
+extension NSDictionary {
+    public func value<T>(forKey key: String, default def: T) -> T {
+        if let value = self[key] as? T {
+            return value
+        }
+        return def
     }
 }
 
@@ -145,6 +159,10 @@ class Utilities {
     
     static func applyTintColor(to vc: UIViewController) {
         vc.navigationController?.navigationBar.barTintColor = UIColor.black
+    }
+    
+    static func defaultDateTimeDictionary() -> NSDictionary {
+        return NSDictionary(objects: [Date().formatISO8601(), Date().addingTimeInterval(24*3600).formatISO8601()], forKeys: ["start" as NSCopying, "end" as NSCopying])
     }
     
     static func literalToNSDictionary(_ literal: [(key: Any, value: Any)]) -> NSDictionary {
