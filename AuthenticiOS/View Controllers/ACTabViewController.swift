@@ -31,7 +31,7 @@ class ACTabViewController: UIViewController {
         if (!self.tab!.hideHeader) {
             let i = UIImageView()
             i.contentMode = .scaleAspectFit
-            Utilities.loadFirebase(image: self.tab!.header, into: i)
+            Utilities.loadFirebase(image: self.tab!.header.imageName, into: i)
             self.stackView.addArrangedSubview(i)
         }
         if (self.tab!.elements.count == 0) {

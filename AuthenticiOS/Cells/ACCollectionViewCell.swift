@@ -28,7 +28,7 @@ class ACCollectionViewCell: UICollectionViewCell {
                 self.image.alpha = 1
             })
         })
-        let label = (AuthenticElement.createTitle(text: self.text, alignment: "center", size: 22, color: UIColor.white) as! UIStackView).arrangedSubviews[0]
+        let label = (AuthenticElement.createTitle(text: self.text, alignment: "center", border: false, size: 22, color: UIColor.white) as! UIStackView).arrangedSubviews[0]
         self.addSubview(label)
         self.addConstraints([
             NSLayoutConstraint(item: label, attribute: .height, relatedBy: .lessThanOrEqual, toItem: self, attribute: .height, multiplier: 1, constant: 0),
@@ -42,18 +42,23 @@ class ACCollectionViewCell: UICollectionViewCell {
     private var eventsAppearance: AuthenticAppearance.Events!
     private var viewController: UIViewController!
     private var tab: AuthenticTab!
+    private var event: AuthenticEvent!
     
     @objc public func presentUpcomingEvents() {
-        ACEventListController.present(withAppearance: self.eventsAppearance)
+        ACEventCollectionViewController.present(withAppearance: eventsAppearance)
     }
     
     @objc public func presentTab() {
         ACTabViewController.present(tab: self.tab)
     }
     
+    @objc public func presentEvent() {
+        ACEventViewController.present(event: self.event)
+    }
+    
     public func initialize(forUpcomingEvents appearance: AuthenticAppearance.Events, withViewController vc: UIViewController) {
         self.text = appearance.title
-        self.imageName = appearance.header
+        self.imageName = appearance.header.imageName
         self.eventsAppearance = appearance
         self.viewController = vc
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.presentUpcomingEvents)))
@@ -62,10 +67,19 @@ class ACCollectionViewCell: UICollectionViewCell {
     
     public func initialize(forTab tab: AuthenticTab, withViewController vc: UIViewController) {
         self.text = tab.title
-        self.imageName = tab.header
+        self.imageName = tab.header.imageName
         self.tab = tab
         self.viewController = vc
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.presentTab)))
+        self.initialize()
+    }
+    
+    public func initialize(forEvent event: AuthenticEvent, withViewController vc: UIViewController) {
+        self.text = event.title
+        self.imageName = event.header.imageName
+        self.event = event
+        self.viewController = vc
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.presentEvent)))
         self.initialize()
     }
     

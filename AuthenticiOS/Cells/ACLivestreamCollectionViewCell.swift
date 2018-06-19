@@ -24,7 +24,7 @@ class ACLivestreamCollectionViewCell: UICollectionViewCell {
     
     private func displayText(isLive: Bool) {
         DispatchQueue.main.async {
-            let label = (AuthenticElement.createTitle(text: isLive ? "WATCH LIVE ON YOUTUBE" : "SUNDAYS AT 6:30 PM", alignment: "center", size: 22, color: UIColor.white) as! UIStackView).arrangedSubviews[0]
+            let label = (AuthenticElement.createTitle(text: isLive ? "WATCH LIVE ON YOUTUBE" : "SUNDAYS AT 6:30 PM", alignment: "center", border: false, size: 22, color: UIColor.white) as! UIStackView).arrangedSubviews[0]
             label.alpha = 0
             self.addSubview(label)
             self.addConstraints([

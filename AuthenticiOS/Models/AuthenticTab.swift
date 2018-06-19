@@ -13,7 +13,7 @@ class AuthenticTab {
     
     public let title: String
     
-    public let header: String
+    public let header: ImageResource
     
     public let index: Int
     
@@ -39,13 +39,13 @@ class AuthenticTab {
     }
     
     init(dict: NSDictionary) {
-        self.id = dict.value(forKey: "id") as! String
-        self.title = dict.value(forKey: "title") as! String
-        self.header = dict.value(forKey: "header") as! String
-        self.index = dict.value(forKey: "index") as! Int
-        self.elements = (dict.value(forKey: "elements") as? NSArray)?.map({ element in AuthenticElement(dict: element as! NSDictionary) }) ?? []
-        self.hideHeader = dict.value(forKey: "hideHeader") as? Bool ?? false
-        self.hideTitle = dict.value(forKey: "hideTitle") as? Bool ?? false
-        self.visibilityRules = dict.value(forKey: "visibility") as! NSDictionary
+        self.id = dict.value(forKey: "id", default: "INVALID")
+        self.title = dict.value(forKey: "title", default: "INVALID")
+        self.header = ImageResource(dict: dict.value(forKey: "header", default: NSDictionary()))
+        self.index = dict.value(forKey: "index", default: 0)
+        self.elements = (dict.value(forKey: "elements", default: NSArray())).map({ element in AuthenticElement(dict: element as! NSDictionary) })
+        self.hideHeader = dict.value(forKey: "hideHeader", default: false)
+        self.hideTitle = dict.value(forKey: "hideTitle", default: false)
+        self.visibilityRules = dict.value(forKey: "visibility", default: NSDictionary())
     }
 }

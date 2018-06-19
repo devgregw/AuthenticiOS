@@ -14,12 +14,16 @@ class AuthenticAppearance {
         
         let hideTitle: Bool
         
-        let header: String
+        let header: ImageResource
         
-        init(dict: NSDictionary) {
-            self.title = dict["title"] as! String
-            self.hideTitle = dict["hideTitle"] as! Bool
-            self.header = dict["header"] as! String
+        init(title: String, hideTitle: Bool, header: ImageResource) {
+            self.title = title
+            self.hideTitle = hideTitle
+            self.header = header
+        }
+        
+        convenience init(dict: NSDictionary) {
+            self.init(title: dict["title"] as! String, hideTitle: dict["hideTitle"] as! Bool, header: ImageResource(dict: dict["header"] as! NSDictionary))
         }
     }
     

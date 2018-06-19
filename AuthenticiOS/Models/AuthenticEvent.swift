@@ -17,7 +17,7 @@ class AuthenticEvent {
     
     public let description: String
     
-    public let header: String
+    public let header: ImageResource
     
     public let location: String
     
@@ -47,7 +47,7 @@ class AuthenticEvent {
         return recurrence?.getNextOccurrence(initialStart: self.startDate, initialEnd: self.endDate) ?? RecurrenceRule.Occurrence(start: self.startDate, end: self.endDate)
     }
     
-    init(id: String, title: String, hideTitle: Bool, description: String, header: String, location: String, address: String, dateTime: NSDictionary, hideEndDate: Bool, recurrence: NSDictionary?, registration: NSDictionary?) {
+    init(id: String, title: String, hideTitle: Bool, description: String, header: ImageResource, location: String, address: String, dateTime: NSDictionary, hideEndDate: Bool, recurrence: NSDictionary?, registration: NSDictionary?) {
         self.id = id
         self.title = title
         self.hideTitle = hideTitle
@@ -69,6 +69,6 @@ class AuthenticEvent {
     }
     
     convenience init(dict: NSDictionary) {
-        self.init(id: dict.value(forKey: "id", default: "INVALID"), title: dict.value(forKey: "title", default: "INVALID"), hideTitle: dict.value(forKey: "hideTitle", default: false), description: dict.value(forKey: "description", default: "INVALID"), header: dict.value(forKey: "header", default: ""), location: dict.value(forKey: "location", default: "INVALID"), address: dict.value(forKey: "address", default: ""), dateTime: dict.value(forKey: "dateTime", default: Utilities.defaultDateTimeDictionary()), hideEndDate: dict.value(forKey: "hideEndDate", default: false), recurrence: dict["recurrence"] as? NSDictionary, registration: dict["registration"] as? NSDictionary)
+        self.init(id: dict.value(forKey: "id", default: "INVALID"), title: dict.value(forKey: "title", default: "INVALID"), hideTitle: dict.value(forKey: "hideTitle", default: false), description: dict.value(forKey: "description", default: "INVALID"), header: ImageResource(dict:                                         dict.value(forKey: "header", default: NSDictionary())), location: dict.value(forKey: "location", default: "INVALID"), address: dict.value(forKey: "address", default: ""), dateTime: dict.value(forKey: "dateTime", default: Utilities.defaultDateTimeDictionary()), hideEndDate: dict.value(forKey: "hideEndDate", default: false), recurrence: dict["recurrence"] as? NSDictionary, registration: dict["registration"] as? NSDictionary)
     }
 }

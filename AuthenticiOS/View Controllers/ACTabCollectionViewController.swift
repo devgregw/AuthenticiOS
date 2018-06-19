@@ -36,7 +36,7 @@ class ACTabCollectionViewController: UICollectionViewController {
         Utilities.applyTintColor(to: self)
         self.collectionView!.register(UINib(nibName: "ACCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView!.register(UINib(nibName: "ACLivestreamCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: livestreamReuseIdentifier)
-        (self.collectionViewLayout as! UICollectionViewFlowLayout).sectionInset = UIEdgeInsets.zero
+        collectionView?.collectionViewLayout = ACCollectionViewLayout(columns: 2, delegate: self)
         if #available(iOS 10.0, *) {
             self.collectionView?.refreshControl = UIRefreshControl()
             self.collectionView?.refreshControl?.attributedTitle = NSAttributedString(string: "PULL TO REFRESH", attributes: [
@@ -53,6 +53,8 @@ class ACTabCollectionViewController: UICollectionViewController {
     private var appearance: AuthenticAppearance?
     private var complete = false
     private var tabs: [AuthenticTab] = []
+    
+    private var heightCache: [CGFloat]!
     
     @objc public func loadData() {
         self.tabs = []
@@ -71,6 +73,7 @@ class ACTabCollectionViewController: UICollectionViewController {
                         self.tabs.append(tab)
                     }
                     self.tabs.sort(by: { (a, b) in a.index < b.index })
+                    self.heightCache = [CGFloat](repeating: 0, count: self.tabs.count + 1)
                     self.complete = true
                     self.collectionView?.reloadData()
                     if #available(iOS 10.0, *) {
@@ -92,7 +95,8 @@ class ACTabCollectionViewController: UICollectionViewController {
     }
 
 
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {        return self.complete ? tabs.count + 2 : 0
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.complete ? tabs.count + 2 : 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -114,13 +118,33 @@ class ACTabCollectionViewController: UICollectionViewController {
 
 }
 
-extension ACTabCollectionViewController : UICollectionViewDelegateFlowLayout {
+extension ACTabCollectionViewController : ACCollectionViewLayoutDelegate {
+    func collectionView(_ collectionView: UICollectionView, sizeForCellAtIndexPath indexPath: IndexPath) -> CGSize {
+        if indexPath.item == 0 {
+            return CGSize(width: view.frame.width, height: view.frame.width / 2)
+        }
+        if indexPath.item == 1 {
+            let app = appearance!.events
+            let adjustedWidth = view.frame.width / 2
+            let ratio = CGFloat(app.header.width) / CGFloat(app.header.height)
+            let adjustedHeight = adjustedWidth / ratio
+            return CGSize(width: adjustedWidth, height: adjustedHeight)
+        }
+        let tab = self.tabs[indexPath.item - 2]
+        let adjustedWidth = view.frame.width / 2
+        let ratio = CGFloat(tab.header.width) / CGFloat(tab.header.height)
+        let adjustedHeight = adjustedWidth / ratio
+        return CGSize(width: adjustedWidth, height: adjustedHeight)
+    }
+}
+
+/*extension ACTabCollectionViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.item == 0 {
             return CGSize(width: view.frame.width, height: view.frame.width / 2)
         }
         let width = view.frame.width / 2
-        return CGSize(width: width, height: 1.5*width)
+        return CGSize(width: width, height: 1.5*width + CGFloat(indexPath.item % 2 == 0 ? 250 : 0))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -134,4 +158,4 @@ extension ACTabCollectionViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-}
+}*/

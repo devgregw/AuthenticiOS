@@ -135,7 +135,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             case "upcoming_events":
                 Database.database().reference().child("appearance").observeSingleEvent(of: .value, with: { appearanceSnapshot in
                     let appearance = AuthenticAppearance(dict: appearanceSnapshot.value as! NSDictionary)
-                    ACEventListController.present(withAppearance: appearance.events)
+                    ACEventCollectionViewController.present(withAppearance: appearance.events)
                 })
                 handled = true
                 break

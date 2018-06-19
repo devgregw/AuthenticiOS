@@ -54,19 +54,19 @@ class ACEventViewController: UIViewController {
         self.clearViews()
         let i = UIImageView()
         i.contentMode = .scaleAspectFit
-        Utilities.loadFirebase(image: self.event!.header, into: i)
+        Utilities.loadFirebase(image: self.event!.header.imageName, into: i)
         addView(i)
-        addView(AuthenticElement.createTitle(text: self.event!.title, alignment: "center"))
+        addView(AuthenticElement.createTitle(text: self.event!.title, alignment: "center", border: true))
         addView(AuthenticElement.createText(text: self.event!.description, alignment: "left"))
         addView(AuthenticElement.createSeparator(visible: true))
-        addView(AuthenticElement.createTitle(text: "Date & Time", alignment: "center"))
+        addView(AuthenticElement.createTitle(text: "Date & Time", alignment: "center", border: true))
         addView(AuthenticElement.createText(text: self.event!.getNextOccurrence().format(hideEndDate: self.event!.hideEndDate), alignment: "left"))
         if let rule = self.event!.recurrence {
             addView(AuthenticElement.createText(text: rule.format(initialStart: self.event!.startDate, initialEnd: self.event!.endDate), alignment: "left"))
         }
         addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Add to Calendar", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.addToCalendar)))
         addView(AuthenticElement.createSeparator(visible: true))
-        addView(AuthenticElement.createTitle(text: "Location", alignment: "center"))
+        addView(AuthenticElement.createTitle(text: "Location", alignment: "center", border: true))
         addView(AuthenticElement.createText(text: "\(self.event!.location)\(!String.isNilOrEmpty(self.event!.address) ? "\n\(self.event!.address)" : "")", alignment: "left", selectable: true))
         if (!String.isNilOrEmpty(self.event!.address)) {
             addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Get Directions", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.getDirections)))
@@ -74,7 +74,7 @@ class ACEventViewController: UIViewController {
             addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Show on Map", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.showOnMap)))
         }
         addView(AuthenticElement.createSeparator(visible: true))
-        addView(AuthenticElement.createTitle(text: "Price & Registration", alignment: "center"))
+        addView(AuthenticElement.createTitle(text: "Price & Registration", alignment: "center", border: true))
         if !String.isNilOrEmpty(self.event!.registrationUrl) {
             addView(AuthenticElement.createText(text: self.event!.price! > Float(0) ? "$\(self.event!.price!)" : "Free", alignment: "left"))
             addView(AuthenticElement.createText(text: "Registration is required", alignment: "left"))

@@ -61,15 +61,17 @@ class AuthenticElement {
         return webView
     }
     
-    static public func createTitle(text: String, alignment: String, size: Int = 26, color: UIColor = UIColor.black) -> UIView {
+    static public func createTitle(text: String, alignment: String, border: Bool, size: Int = 26, color: UIColor = UIColor.black) -> UIView {
         let label = ACInsetLabel()
         label.attributedText = NSAttributedString(string: text, attributes: [
             .kern: 1.5,
             .foregroundColor: color,
             .font: UIFont(name: "Effra", size: CGFloat(size))!
         ])
-        label.layer.borderColor = color.cgColor
-        label.layer.borderWidth = 2
+        if border {
+            label.layer.borderColor = color.cgColor
+            label.layer.borderWidth = 2
+        }
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.sizeToFit()
@@ -162,11 +164,11 @@ class AuthenticElement {
         self.vc = vc
         switch (type) {
         case "image":
-            return AuthenticElement.createImage(name: getProperty("image") as! String, enlargable: getProperty("enlargeButton") as! Bool, vc: vc)
+            return AuthenticElement.createImage(name: ImageResource(dict: getProperty("image") as! NSDictionary).imageName, enlargable: getProperty("enlargeButton") as! Bool, vc: vc)
         case "video":
             return AuthenticElement.createVideo(provider: getProperty("provider") as! String, videoId: getProperty("videoId") as! String)
         case "title":
-            return AuthenticElement.createTitle(text: (getProperty("title") as! String), alignment: getProperty("alignment") as! String)
+            return AuthenticElement.createTitle(text: (getProperty("title") as! String), alignment: getProperty("alignment") as! String, border: true)
         case "text":
             return AuthenticElement.createText(text: (getProperty("text") as! String), alignment: getProperty("alignment") as! String)
         case "button":
