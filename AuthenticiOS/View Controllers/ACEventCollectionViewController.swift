@@ -12,6 +12,10 @@ import Firebase
 private let reuseIdentifier = "accvcell"
 
 class ACEventCollectionViewController: UICollectionViewController {
+    @IBAction public func close(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     static private var title = ""
     
     static func present(withAppearance app: AuthenticAppearance.Events) {
