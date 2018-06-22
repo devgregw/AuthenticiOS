@@ -125,11 +125,11 @@ class AuthenticElement {
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont(name: "Proxima Nova", size: 18)!
         button.layer.cornerRadius = 8
-        button.contentEdgeInsets = UIEdgeInsetsMake(15, 5, 15, 5)
+        button.contentEdgeInsets = UIEdgeInsets.init(top: 15, left: 5, bottom: 15, right: 5)
         button.setTitle(info.label, for: .normal)
         button.addTarget(target, action: selector, for: .touchUpInside)
         let stackView = UIStackView(arrangedSubviews: [button])
-        stackView.layoutMargins = UIEdgeInsetsMake(5, 10, 5, 10)
+        stackView.layoutMargins = UIEdgeInsets.init(top: 5, left: 10, bottom: 5, right: 10)
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.axis = .vertical
         return stackView
@@ -140,7 +140,7 @@ class AuthenticElement {
         view.backgroundColor = visible ? UIColor(red: 0.15, green: 0.15, blue: 0.15, alpha: 1) : UIColor.white
         view.addConstraint(NSLayoutConstraint(item: view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 2))
         let stackView = UIStackView(arrangedSubviews: [view])
-        stackView.layoutMargins = UIEdgeInsetsMake(10, 10, 10, 10)
+        stackView.layoutMargins = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
         stackView.isLayoutMarginsRelativeArrangement = true
         stackView.axis = .vertical
         return stackView
