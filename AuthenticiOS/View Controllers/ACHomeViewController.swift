@@ -48,7 +48,7 @@ class ACHomeViewController: UIViewController {
             if value > VersionInfo.Update {
                 let alert = UIAlertController(title: "Update Available", message: "An update is available for the Authentic City Church app.  We highly recommend that you update to avoid missing out on new features.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Not Now", style: .default, handler: { _ in self.displayMainUI() }))
-                alert.addAction(UIAlertAction(title: "Update", style: .default, handler: { _ in UIApplication.shared.openURL(URL(string: "itms-apps://phobos.apple.com/WebObjects/MZStore.woa/wa/viewSoftwareUpdate?id=1164541935&mt=8")!)
+                alert.addAction(UIAlertAction(title: "Update", style: .default, handler: { _ in UIApplication.shared.open(URL(string: "itms-apps://phobos.apple.com/WebObjects/MZStore.woa/wa/viewSoftwareUpdate?id=1164541935&mt=8")!, options: [:], completionHandler: nil)
                     self.displayMainUI()
                 }))
                 self.present(alert, animated: true, completion: nil)

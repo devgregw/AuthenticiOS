@@ -82,7 +82,7 @@ class ACTabCollectionViewController: UICollectionViewController {
                     var shortcuts = [UIApplicationShortcutItem]()
                     shortcuts.append(UIMutableApplicationShortcutItem(type: "upcoming_events", localizedTitle: "Upcoming Events", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .date), userInfo: nil))
                     self.tabs.prefix(4).forEach({ t in
-                        shortcuts.append(UIMutableApplicationShortcutItem(type: "tab", localizedTitle: t.title.localizedCapitalized, localizedSubtitle: nil, icon: nil, userInfo: ["id": t.id]))
+                        shortcuts.append(UIMutableApplicationShortcutItem(type: "tab", localizedTitle: t.title.localizedCapitalized, localizedSubtitle: nil, icon: nil, userInfo: ["id": t.id as NSSecureCoding]))
                     })
                     UIApplication.shared.shortcutItems = shortcuts
                 })

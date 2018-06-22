@@ -45,7 +45,7 @@ extension Date {
 extension UIView {
     public func embedInStackViewWithInsets(top t: CGFloat, left l: CGFloat, bottom b: CGFloat, right r: CGFloat) -> UIStackView {
         let stack = UIStackView(arrangedSubviews: [self])
-        stack.layoutMargins = UIEdgeInsetsMake(t, l, b, r)
+        stack.layoutMargins = UIEdgeInsets.init(top: t, left: l, bottom: b, right: r)
         stack.sizeToFit()
         stack.layoutIfNeeded()
         return stack
@@ -117,10 +117,10 @@ class ACEnlargableImageView: UIImageView {
 
 class ACInsetLabel: UILabel {
     override var alignmentRectInsets: UIEdgeInsets {
-        return UIEdgeInsetsMake(-5, -10, -5, -10)
+        return UIEdgeInsets.init(top: -5, left: -10, bottom: -5, right: -10)
     }
     
-    private let insets = UIEdgeInsets(top: 2, left: 8, bottom: 2, right: 8)
+    private let insets = UIEdgeInsets(top: 2, left: 4, bottom: 2, right: 4)
     
     override func drawText(in rect: CGRect) {
         super.drawText(in: UIEdgeInsetsInsetRect(rect, insets))
@@ -142,17 +142,17 @@ class Utilities {
         
         static func getDirections(toAddress address: String) {
             if isGoogleMapsAvailable() {
-                UIApplication.shared.openURL(URL(string: "https://www.google.com/maps/dir/?api=1&destination=\(address.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)")!)
+                UIApplication.shared.open(URL(string: "https://www.google.com/maps/dir/?api=1&destination=\(address.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)")!, options: [:], completionHandler: nil)
             } else {
-                UIApplication.shared.openURL(URL(string: "http://maps.apple.com/?daddr=\(address.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)")!)
+                UIApplication.shared.open(URL(string: "http://maps.apple.com/?daddr=\(address.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)")!, options: [:], completionHandler: nil)
             }
         }
         
         static func search(forPlace location: String) {
             if isGoogleMapsAvailable() {
-                UIApplication.shared.openURL(URL(string: "https://www.google.com/maps/search/?api=1&query=\(location.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)")!)
+                UIApplication.shared.open(URL(string: "https://www.google.com/maps/search/?api=1&query=\(location.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)")!, options: [:], completionHandler: nil)
             } else {
-                UIApplication.shared.openURL(URL(string: "http://maps.apple.com/?q=\(location.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)")!)
+                UIApplication.shared.open(URL(string: "http://maps.apple.com/?q=\(location.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)")!, options: [:], completionHandler: nil)
             }
         }
     }

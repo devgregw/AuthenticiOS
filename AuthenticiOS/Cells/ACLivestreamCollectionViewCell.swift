@@ -19,7 +19,7 @@ class ACLivestreamCollectionViewCell: UICollectionViewCell {
     @objc public func openStream() {
         var components = URLComponents(string: "https://www.youtube.com/watch")!
         components.queryItems = [URLQueryItem(name: "v", value: self.videoId)]
-        UIApplication.shared.openURL(components.url!)
+        UIApplication.shared.open(components.url!, options: [:], completionHandler: nil)
     }
     
     private func displayText(isLive: Bool) {

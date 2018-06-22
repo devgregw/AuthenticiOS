@@ -57,7 +57,7 @@ class AuthenticButtonAction {
             break
         case "OpenURLAction":
             let url = getProperty(withName: "url")
-            UIApplication.shared.openURL(URL(string: url as! String)!)
+            UIApplication.shared.open(URL(string: url as! String)!, options: [:], completionHandler: nil)
             break
         case "ShowMapAction":
             let location = getProperty(withName: "address") as! String
@@ -69,7 +69,7 @@ class AuthenticButtonAction {
         case "EmailAction":
             let address = getProperty(withName: "emailAddress")
             if let url = URL(string: "mailto:\(address!)") {
-                UIApplication.shared.openURL(url)
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
             } else {
                 presentAlert(title: "Error", message: "This action could not be invoked: '\(address!)' is not a valid email address.", vc: vc)
             }
