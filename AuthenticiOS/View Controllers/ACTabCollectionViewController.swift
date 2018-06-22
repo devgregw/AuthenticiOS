@@ -76,6 +76,7 @@ class ACTabCollectionViewController: UICollectionViewController {
                     self.heightCache = [CGFloat](repeating: 0, count: self.tabs.count + 1)
                     self.complete = true
                     self.collectionView?.reloadData()
+                    self.collectionView?.collectionViewLayout.invalidateLayout()
                     if #available(iOS 10.0, *) {
                         self.collectionView?.refreshControl?.endRefreshing()
                     }
@@ -109,7 +110,7 @@ class ACTabCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ACCollectionViewCell
         if (indexPath.item == 1) {
             cell.initialize(forUpcomingEvents: self.appearance!.events, withViewController: self)
-        } else {
+        } else if !self.tabs.isEmpty {
             cell.initialize(forTab: self.tabs[indexPath.item - 2], withViewController: self)
         }
         cell.layoutIfNeeded()
@@ -126,13 +127,16 @@ extension ACTabCollectionViewController : ACCollectionViewLayoutDelegate {
         if indexPath.item == 1 {
             let app = appearance!.events
             let adjustedWidth = view.frame.width / 2
-            let ratio = CGFloat(app.header.width) / CGFloat(app.header.height)
+            let ratio = CGFloat(app.header.width) / CGFloat(app.header.height == 0 ? 1 : app.header.height)
             let adjustedHeight = adjustedWidth / ratio
             return CGSize(width: adjustedWidth, height: adjustedHeight)
         }
+        guard !self.tabs.isEmpty else {
+            return CGSize.zero
+        }
         let tab = self.tabs[indexPath.item - 2]
         let adjustedWidth = view.frame.width / 2
-        let ratio = CGFloat(tab.header.width) / CGFloat(tab.header.height)
+        let ratio = CGFloat(tab.header.width) / CGFloat(tab.header.height == 0 ? 1 : tab.header.height)
         let adjustedHeight = adjustedWidth / ratio
         return CGSize(width: adjustedWidth, height: adjustedHeight)
     }

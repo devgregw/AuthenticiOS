@@ -96,7 +96,7 @@ extension ACEventCollectionViewController : UICollectionViewDelegateFlowLayout {
         }
         let event = self.events[indexPath.item]
         let adjustedWidth = CGFloat(view.frame.width)
-        let ratio = CGFloat(event.header.width) / CGFloat(event.header.height)
+        let ratio = CGFloat(event.header.width) / CGFloat(event.header.height == 0 ? 1 : event.header.height)
         let adjustedHeight = adjustedWidth / ratio
         return CGSize(width: adjustedWidth, height: adjustedHeight)
     }

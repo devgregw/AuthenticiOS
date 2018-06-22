@@ -43,7 +43,7 @@ class AuthenticTab {
         self.title = dict.value(forKey: "title", default: "INVALID")
         self.header = ImageResource(dict: dict.value(forKey: "header", default: NSDictionary()))
         self.index = dict.value(forKey: "index", default: 0)
-        self.elements = (dict.value(forKey: "elements", default: NSArray())).map({ element in AuthenticElement(dict: element as! NSDictionary) })
+        self.elements = (dict.value(forKey: "elements", default: NSArray())).filter({element in (element as? NSDictionary) != nil}).map({ element in AuthenticElement(dict: element as! NSDictionary) })
         self.hideHeader = dict.value(forKey: "hideHeader", default: false)
         self.hideTitle = dict.value(forKey: "hideTitle", default: false)
         self.visibilityRules = dict.value(forKey: "visibility", default: NSDictionary())
