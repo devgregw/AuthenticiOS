@@ -10,12 +10,10 @@ target 'AuthenticiOS' do
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
   pod 'Firebase/Database'
-  # pod 'Firebase/Crash'
-
-  pod 'Fabric', '~> 1.7.7'
-  pod 'Crashlytics', '~> 3.10.2'
-
+  pod 'Firebase/Performance'
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
   pod 'FirebaseUI/Storage'
+  pod 'Fabric', '~> 1.7.7'
+  pod 'Crashlytics', '~> 3.10.2'
 end
