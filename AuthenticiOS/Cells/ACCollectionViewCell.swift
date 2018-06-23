@@ -56,6 +56,10 @@ class ACCollectionViewCell: UICollectionViewCell {
         ACEventViewController.present(event: self.event)
     }
     
+    @objc public func invokeAction() {
+        tab.action?.invoke(viewController: viewController)
+    }
+    
     public func initialize(forUpcomingEvents appearance: AuthenticAppearance.Events, withViewController vc: UIViewController) {
         self.text = appearance.title
         self.imageName = appearance.header.imageName
@@ -70,7 +74,11 @@ class ACCollectionViewCell: UICollectionViewCell {
         self.imageName = tab.header.imageName
         self.tab = tab
         self.viewController = vc
-        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.presentTab)))
+        if tab.action == nil {
+            self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.presentTab)))
+        } else {
+            self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.invokeAction)))
+        }
         self.initialize()
     }
     
