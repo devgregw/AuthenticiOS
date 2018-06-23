@@ -45,20 +45,26 @@ class ACTabCollectionViewController: UICollectionViewController {
                 .foregroundColor: UIColor.white
                 ])
             self.collectionView?.refreshControl?.tintColor = UIColor.white
-            self.collectionView?.refreshControl?.addTarget(self, action: #selector(self.loadData), for: .valueChanged)
+            self.collectionView?.refreshControl?.addTarget(self, action: #selector(self.refreshData), for: .valueChanged)
         }
-        self.loadData()
+        self.loadData(wasRefreshed: false)
     }
 
     private var appearance: AuthenticAppearance?
     private var complete = false
     private var tabs: [AuthenticTab] = []
     
-    private var heightCache: [CGFloat]!
+    @objc public func refreshData() {
+        loadData(wasRefreshed: true)
+    }
     
-    @objc public func loadData() {
+    public func loadData(wasRefreshed: Bool) {
         self.tabs = []
         self.complete = false
+        let trace = Performance.startTrace(name: "load tabs")
+        if wasRefreshed {
+            trace?.incrementCounter(named: "refresh tabs")
+        }
         let appRef = Database.database().reference().child("appearance")
         appRef.keepSynced(true)
         appRef.observeSingleEvent(of: .value, with: { appearanceSnapshot in
@@ -72,22 +78,25 @@ class ACTabCollectionViewController: UICollectionViewController {
                     if (!tab.getShouldBeHidden()) {
                         self.tabs.append(tab)
                     }
-                    self.tabs.sort(by: { (a, b) in a.index < b.index })
-                    self.heightCache = [CGFloat](repeating: 0, count: self.tabs.count + 1)
-                    self.complete = true
-                    self.collectionView?.reloadData()
-                    self.collectionView?.collectionViewLayout.invalidateLayout()
-                    if #available(iOS 10.0, *) {
-                        self.collectionView?.refreshControl?.endRefreshing()
-                    }
-                    var shortcuts = [UIApplicationShortcutItem]()
-                    shortcuts.append(UIMutableApplicationShortcutItem(type: "upcoming_events", localizedTitle: "Upcoming Events", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .date), userInfo: nil))
-                    self.tabs.prefix(4).forEach({ t in
-                        shortcuts.append(UIMutableApplicationShortcutItem(type: "tab", localizedTitle: t.title.localizedCapitalized, localizedSubtitle: nil, icon: nil, userInfo: ["id": t.id as NSSecureCoding]))
-                    })
-                    UIApplication.shared.shortcutItems = shortcuts
                 })
-            }) { error in self.present(UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert), animated: true) }
+                self.tabs.sort(by: { (a, b) in a.index < b.index })
+                self.complete = true
+                self.collectionView?.reloadData()
+                self.collectionView?.collectionViewLayout.invalidateLayout()
+                if #available(iOS 10.0, *) {
+                    self.collectionView?.refreshControl?.endRefreshing()
+                }
+                var shortcuts = [UIApplicationShortcutItem]()
+                shortcuts.append(UIMutableApplicationShortcutItem(type: "upcoming_events", localizedTitle: "Upcoming Events", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .date), userInfo: nil))
+                self.tabs.prefix(4).forEach({ t in
+                    shortcuts.append(UIMutableApplicationShortcutItem(type: "tab", localizedTitle: t.title.localizedCapitalized, localizedSubtitle: nil, icon: nil, userInfo: ["id": t.id as NSSecureCoding]))
+                })
+                UIApplication.shared.shortcutItems = shortcuts
+                trace?.stop()
+            }) { error in
+                self.present(UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert), animated: true)
+                trace?.stop()
+            }
         })
     }
     
@@ -141,25 +150,3 @@ extension ACTabCollectionViewController : ACCollectionViewLayoutDelegate {
         return CGSize(width: adjustedWidth, height: adjustedHeight)
     }
 }
-
-/*extension ACTabCollectionViewController : UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if indexPath.item == 0 {
-            return CGSize(width: view.frame.width, height: view.frame.width / 2)
-        }
-        let width = view.frame.width / 2
-        return CGSize(width: width, height: 1.5*width + CGFloat(indexPath.item % 2 == 0 ? 250 : 0))
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets.zero
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-}*/

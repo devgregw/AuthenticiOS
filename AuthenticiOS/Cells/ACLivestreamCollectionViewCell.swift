@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import Firebase
 
 class ACLivestreamCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
@@ -48,7 +49,9 @@ class ACLivestreamCollectionViewCell: UICollectionViewCell {
     public func initialize(withViewController vc: UIViewController) {
         self.vc = vc
         let url = URL(string: "https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCxrYck_z50n5It7ifj1LCjA&type=video&eventType=live&key=AIzaSyB4w3GIY9AUi6cApXAkB76vlG6K6J4d8XE")!
+        let trace = Performance.startTrace(name: "check livestream")
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            trace?.stop()
             if error != nil {
                 print("YouTube error: \(error!.localizedDescription)")
                 self.displayText(isLive: false)

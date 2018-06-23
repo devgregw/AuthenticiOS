@@ -41,34 +41,46 @@ class ACEventCollectionViewController: UICollectionViewController {
                 .foregroundColor: UIColor.white
                 ])
             self.collectionView?.refreshControl?.tintColor = UIColor.white
-            self.collectionView?.refreshControl?.addTarget(self, action: #selector(self.loadData), for: .valueChanged)
+            self.collectionView?.refreshControl?.addTarget(self, action: #selector(self.refreshData), for: .valueChanged)
         }
-        self.loadData()
+        self.loadData(wasRefreshed: false)
     }
     
     fileprivate var complete = false
     fileprivate var events: [AuthenticEvent] = []
     
-    @objc public func loadData() {
+    @objc public func refreshData() {
+        loadData(wasRefreshed: true)
+    }
+    
+    public func loadData(wasRefreshed: Bool) {
         self.events = []
         self.complete = false
-            let eventsRef = Database.database().reference().child("events")
-            eventsRef.keepSynced(true)
-            eventsRef.observeSingleEvent(of: .value, with: {snapshot in
-                let val = snapshot.value as? NSDictionary
-                val?.forEach({(key, value) in
-                    let event = AuthenticEvent(dict: value as! NSDictionary)
-                    if (!event.getShouldBeHidden()) {
-                        self.events.append(event)
-                    }
-                    self.events.sort(by: { (a, b) in a.getNextOccurrence().startDate < b.getNextOccurrence().startDate })
-                    self.complete = true
-                    self.collectionView?.reloadData()
-                    if #available(iOS 10.0, *) {
-                        self.collectionView?.refreshControl?.endRefreshing()
-                    }
-                })
-            }) { error in self.present(UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert), animated: true) }
+        let trace = Performance.startTrace(name: "load events")
+        if wasRefreshed {
+            trace?.incrementCounter(named: "refresh events")
+        }
+        let eventsRef = Database.database().reference().child("events")
+        eventsRef.keepSynced(true)
+        eventsRef.observeSingleEvent(of: .value, with: {snapshot in
+            let val = snapshot.value as? NSDictionary
+            val?.forEach({(key, value) in
+                let event = AuthenticEvent(dict: value as! NSDictionary)
+                if (!event.getShouldBeHidden()) {
+                    self.events.append(event)
+                }
+            })
+            self.events.sort(by: { (a, b) in a.getNextOccurrence().startDate < b.getNextOccurrence().startDate })
+            self.complete = true
+            self.collectionView?.reloadData()
+            if #available(iOS 10.0, *) {
+                self.collectionView?.refreshControl?.endRefreshing()
+            }
+            trace?.stop()
+        }) { error in
+            self.present(UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert), animated: true)
+            trace?.stop()
+        }
     }
 
 }
