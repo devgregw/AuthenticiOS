@@ -34,8 +34,13 @@ class AuthenticTab {
         if (visibilityRules.value(forKey: "override") as! Bool) {
             return false
         }
-        let end = Date.parseISO8601(string: visibilityRules.value(forKey: "end") as! String)
-        let start = Date.parseISO8601(string: visibilityRules.value(forKey: "start") as! String)
+        let endString = visibilityRules.value(forKey: "end") as! String
+        let startString = visibilityRules.value(forKey: "start") as! String
+        if endString.isEmpty || startString.isEmpty {
+            return true
+        }
+        let end = Date.parseISO8601(string: endString)
+        let start = Date.parseISO8601(string: startString)
         let now = Date()
         return now >= end || now <= start
     }
