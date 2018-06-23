@@ -28,7 +28,7 @@ class ACEventCollectionViewController: UICollectionViewController {
         self.navigationItem.title = ACEventCollectionViewController.title
         self.collectionView!.register(UINib(nibName: "ACCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView!.delegate = self
-        let btn = UIBarButtonItem(title: "Home", style: .plain, target: nil, action: nil)
+        let btn = UIBarButtonItem(title: "Events", style: .plain, target: nil, action: nil)
         btn.tintColor = UIColor.white
         self.navigationItem.backBarButtonItem = btn
         Utilities.applyTintColor(to: self)
