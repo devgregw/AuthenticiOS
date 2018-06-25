@@ -124,7 +124,7 @@ class ACAboutViewController: UIViewController {
         addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "YouTube", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.yt)))
         addView(AuthenticElement.createSeparator(visible: true))
         addView(AuthenticElement.createText(text: "Designed and developed by Greg Whatley for Authentic City Church", alignment: "center"))
-        addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Learn More", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.dev)))
+        addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Visit My Website", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.dev)))
         addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "GitHub Repository", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.gh)))
         addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Trello Roadmap", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.tr)))
         addView(AuthenticElement.createSeparator(visible: true))
