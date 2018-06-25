@@ -64,6 +64,14 @@ class ACAboutViewController: UIViewController {
         AuthenticButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": "https://trello.com/b/QUgekVh6"]).invoke(viewController: self)
     }
     
+    @objc public func docs() {
+        AuthenticButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": "https://docs.accams.devgregw.com"]).invoke(viewController: self)
+    }
+    
+    @objc public func pp() {
+        AuthenticButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": "https://docs.accams.devgregw.com/privacy-policy"]).invoke(viewController: self)
+    }
+    
     @objc public func devNotifications() {
         let settingsAlert = UIAlertController(title: "Development Notifications", message: "Development notifications are for internal testing use only.  Interacting with them may cause instability.\n\n/topics/dev", preferredStyle: .actionSheet)
         settingsAlert.addAction(UIAlertAction(title: "Subscribe", style: .destructive, handler: { _ in
@@ -119,6 +127,9 @@ class ACAboutViewController: UIViewController {
         addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Learn More", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.dev)))
         addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "GitHub Repository", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.gh)))
         addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Trello Roadmap", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.tr)))
+        addView(AuthenticElement.createSeparator(visible: true))
+        addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Legal Documentation", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.docs)))
+        addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Privacy Policy", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.pp)))
         addView(AuthenticElement.createSeparator(visible: false))
     }
 }

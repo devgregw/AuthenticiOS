@@ -23,6 +23,7 @@
 		FC1045051FFEF5560010F8A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC1045041FFEF5560010F8A1 /* Assets.xcassets */; };
 		FC16001C1FFC4BD6001DF3B5 /* ACTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC16001A1FFC4BD6001DF3B5 /* ACTabViewController.swift */; };
 		FC16001D1FFC4BD6001DF3B5 /* ACTabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC16001B1FFC4BD6001DF3B5 /* ACTabViewController.xib */; };
+		FC2765D820E02122002A342A /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FC2765D720E02122002A342A /* Settings.bundle */; };
 		FC490DD2202BA1F4007F270A /* AuthenticElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC490DD1202BA1F4007F270A /* AuthenticElement.swift */; };
 		FC490DD4202BA7FE007F270A /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC490DD3202BA7FE007F270A /* Utilities.swift */; };
 		FC565D102001395B00DE7C9A /* AuthenticTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC565D0F2001395B00DE7C9A /* AuthenticTab.swift */; };
@@ -63,6 +64,7 @@
 		FC1045041FFEF5560010F8A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC16001A1FFC4BD6001DF3B5 /* ACTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabViewController.swift; sourceTree = "<group>"; };
 		FC16001B1FFC4BD6001DF3B5 /* ACTabViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACTabViewController.xib; sourceTree = "<group>"; };
+		FC2765D720E02122002A342A /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		FC490DD1202BA1F4007F270A /* AuthenticElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticElement.swift; sourceTree = "<group>"; };
 		FC490DD3202BA7FE007F270A /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		FC565D0A200118A400DE7C9A /* AuthenticiOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AuthenticiOS.entitlements; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 		2B3630521FF56BD9002469E5 = {
 			isa = PBXGroup;
 			children = (
+				FC2765D720E02122002A342A /* Settings.bundle */,
 				2B36305D1FF56BD9002469E5 /* AuthenticiOS */,
 				2B36305C1FF56BD9002469E5 /* Products */,
 				CDA5531FB7C4A05049C194ED /* Pods */,
@@ -285,6 +288,7 @@
 			files = (
 				FC03C28920B8778600D15490 /* ACCollectionViewCell.xib in Resources */,
 				FC5BF9BD208D18A7002982F1 /* ACEventViewController.xib in Resources */,
+				FC2765D820E02122002A342A /* Settings.bundle in Resources */,
 				FC03C28120B76BD300D15490 /* EffraRegular.ttf in Resources */,
 				2B878E09203356CB0010B549 /* ProximaNova.ttf in Resources */,
 				2B3630691FF56BD9002469E5 /* LaunchScreen.storyboard in Resources */,
