@@ -6,30 +6,30 @@
 	<string>Root</string>
 	<key>PreferenceSpecifiers</key>
 	<array>
-        <dict>
-            <key>Type</key>
-            <string>PSGroupSpecifier</string>
-            <key>FooterText</key>
-            <string>Copyright © 2018 Authentic City Church and Greg Whatley</string>
-        </dict>
 		<dict>
-            <key>Type</key>
-            <string>PSChildPaneSpecifier</string>
-            <key>Title</key>
-            <string>Licenses</string>
-            <key>File</key>
-            <string>com.mono0926.LicensePlist</string>
-        </dict>
-        <dict>
-            <key>Type</key>
-            <string>PSTitleValueSpecifier</string>
-            <key>DefaultValue</key>
-            <string>1.0.2</string>
-            <key>Title</key>
-            <string>Version</string>
-            <key>Key</key>
-            <string>sbVersion</string>
-        </dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>FooterText</key>
+			<string>Copyright © 2018 Authentic City Church and Greg Whatley</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+			<key>Title</key>
+			<string>Licenses</string>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>DefaultValue</key>
+			<string>Unavailable</string>
+			<key>Title</key>
+			<string>Version</string>
+			<key>Key</key>
+			<string>sbVersion</string>
+		</dict>
 	</array>
 </dict>
 </plist>

@@ -33,16 +33,19 @@ class ACEventCollectionViewController: UICollectionViewController {
         self.navigationItem.backBarButtonItem = btn
         Utilities.applyTintColor(to: self)
         self.collectionView!.register(UINib(nibName: "ACCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: reuseIdentifier)
-        if #available(iOS 10.0, *) {
-            self.collectionView?.refreshControl = UIRefreshControl()
-            self.collectionView?.refreshControl?.attributedTitle = NSAttributedString(string: "PULL TO REFRESH", attributes: [
-                .kern: 1.5,
-                .font: UIFont(name: "Effra", size: 14)!,
-                .foregroundColor: UIColor.white
-                ])
-            self.collectionView?.refreshControl?.tintColor = UIColor.white
-            self.collectionView?.refreshControl?.addTarget(self, action: #selector(self.refreshData), for: .valueChanged)
-        }
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            .kern: 2.5,
+            .font: UIFont(name: "Effra", size: 21)!,
+            .foregroundColor: UIColor.white
+        ]
+        self.collectionView?.refreshControl = UIRefreshControl()
+        self.collectionView?.refreshControl?.attributedTitle = NSAttributedString(string: "PULL TO REFRESH", attributes: [
+            .kern: 2.5,
+            .font: UIFont(name: "Effra", size: 14)!,
+            .foregroundColor: UIColor.black
+            ])
+        self.collectionView?.refreshControl?.tintColor = UIColor.black
+        self.collectionView?.refreshControl?.addTarget(self, action: #selector(self.refreshData), for: .valueChanged)
         self.loadData(wasRefreshed: false)
     }
     

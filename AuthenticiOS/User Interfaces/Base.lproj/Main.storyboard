@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.12" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vQv-y4-h7R">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.14" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vQv-y4-h7R">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -42,14 +42,14 @@
                             <outlet property="delegate" destination="paX-1Y-06s" id="NvZ-h6-dKQ"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="HOME" id="eNE-9x-m5a">
+                    <navigationItem key="navigationItem" title="HOME" largeTitleDisplayMode="never" id="eNE-9x-m5a">
                         <barButtonItem key="leftBarButtonItem" title="Back" image="ic_keyboard_arrow_down_white_36pt" id="0C2-HJ-XIU">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="didRequestClose:" destination="paX-1Y-06s" id="Mls-eC-sDr"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="More" image="ic_more_horiz_white_36pt" id="ySc-fc-MM7">
+                        <barButtonItem key="rightBarButtonItem" title="More" image="outline_info_white_24pt" id="ySc-fc-MM7">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="showMoreOptions:" destination="paX-1Y-06s" id="ZiQ-uv-Pb3"/>
@@ -90,7 +90,7 @@
                             <outlet property="delegate" destination="LvL-ut-Qfa" id="DtM-Zc-Y9A"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="UPCOMING EVENTS" id="LKQ-m1-jzq">
+                    <navigationItem key="navigationItem" title="UPCOMING EVENTS" largeTitleDisplayMode="never" id="LKQ-m1-jzq">
                         <barButtonItem key="leftBarButtonItem" title="Back" image="ic_keyboard_arrow_down_white_36pt" id="Ibs-GK-w5Z">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -163,8 +163,8 @@
             <objects>
                 <navigationController storyboardIdentifier="hmroot" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ntf-kA-kdS" sceneMemberID="viewController">
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" largeTitles="YES" id="pnq-5w-rn9">
-                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="pnq-5w-rn9">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="Effra-Regular" family="Effra" pointSize="21"/>
@@ -189,8 +189,8 @@
             <objects>
                 <navigationController storyboardIdentifier="evroot" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wnn-2J-Smg" sceneMemberID="viewController">
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" largeTitles="YES" id="ya5-99-qeo">
-                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="ya5-99-qeo">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="Effra-Regular" family="Effra" pointSize="21"/>
@@ -215,6 +215,6 @@
         <image name="full.png" width="1920" height="1280"/>
         <image name="ic_keyboard_arrow_down_white_36pt" width="36" height="36"/>
         <image name="ic_keyboard_arrow_up_white_48pt" width="48" height="48"/>
-        <image name="ic_more_horiz_white_36pt" width="36" height="36"/>
+        <image name="outline_info_white_24pt" width="24" height="24"/>
     </resources>
 </document>

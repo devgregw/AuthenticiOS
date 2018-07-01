@@ -39,7 +39,7 @@ class AuthenticElement {
     static public func createImage(name: String, enlargable: Bool, vc: UIViewController?) -> UIView {
         if enlargable {
             let view = ACEnlargableImageView(imageName: name, viewController: vc!)
-            let stack = UIStackView(arrangedSubviews: [view, createText(text: "Tap image to enlarge.", alignment: "left", size: 12, color: UIColor.gray, selectable: false)])
+            let stack = UIStackView(arrangedSubviews: [view, createText(text: "Tap to open.", alignment: "left", size: 12, color: UIColor.gray, selectable: false)])
             stack.axis = .vertical
             return stack
         }
@@ -61,10 +61,10 @@ class AuthenticElement {
         return webView
     }
     
-    static public func createTitle(text: String, alignment: String, border: Bool, size: Int = 26, color: UIColor = UIColor.black) -> UIView {
+    static public func createTitle(text: String, alignment: String, border: Bool, size: Int = 24, color: UIColor = UIColor.black) -> UIView {
         let label = ACInsetLabel()
         label.attributedText = NSAttributedString(string: text, attributes: [
-            .kern: 1.5,
+            .kern: 2.5,
             .foregroundColor: color,
             .font: UIFont(name: "Effra", size: CGFloat(size))!
         ])

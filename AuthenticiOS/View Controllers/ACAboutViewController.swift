@@ -72,6 +72,10 @@ class ACAboutViewController: UIViewController {
         AuthenticButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": "https://docs.accams.devgregw.com/privacy-policy"]).invoke(viewController: self)
     }
     
+    @objc public func settings() {
+        AuthenticButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": UIApplicationOpenSettingsURLString]).invoke(viewController: self)
+    }
+    
     @objc public func devNotifications() {
         let settingsAlert = UIAlertController(title: "Development Notifications", message: "Development notifications are for internal testing use only.  Interacting with them may cause instability.\n\n/topics/dev", preferredStyle: .actionSheet)
         settingsAlert.addAction(UIAlertAction(title: "Subscribe", style: .destructive, handler: { _ in
@@ -107,7 +111,8 @@ class ACAboutViewController: UIViewController {
         imageView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(self.devNotifications)))
         addView(imageView)
         addView(AuthenticElement.createTitle(text: "AUTHENTIC CITY CHURCH", alignment: "center", border: true))
-        addView(AuthenticElement.createText(text: "Version \(VersionInfo.Version)-u\(VersionInfo.Update) for iOS devices", alignment: "center"))
+        addView(AuthenticElement.createText(text: "Version \(VersionInfo.FullVersion) for iOS devices", alignment: "center"))
+        addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Settings", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.settings)))
         addView(AuthenticElement.createSeparator(visible: true))
         addView(AuthenticElement.createText(text: "FOR ALL TO LOVE GOD, LOVE PEOPLE, AND IMPACT THE KINGDOM.", alignment: "center", size: 33, color: UIColor.black))
         addView(AuthenticElement.createSeparator(visible: true))
@@ -130,6 +135,8 @@ class ACAboutViewController: UIViewController {
         addView(AuthenticElement.createSeparator(visible: true))
         addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Legal Documentation", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.docs)))
         addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Privacy Policy", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.pp)))
+        addView(AuthenticElement.createSeparator(visible: false))
+        addView(AuthenticElement.createText(text: Messaging.messaging().fcmToken ?? "Unavailable", alignment: "center", size: 14, color: UIColor.lightGray, selectable: true))
         addView(AuthenticElement.createSeparator(visible: false))
     }
 }

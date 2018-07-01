@@ -68,8 +68,9 @@ extension NSDictionary {
 }
 
 class VersionInfo {
-    static let Version = "1.0.0"
-    static let Update = 0
+    static let Version = "1.0"
+    static let Update = 4
+    static let FullVersion = "\(Version) build \(Update)"
 }
 
 class Reachability {
@@ -117,7 +118,7 @@ class ACEnlargableImageView: UIImageView {
 
 class ACInsetLabel: UILabel {
     override var alignmentRectInsets: UIEdgeInsets {
-        return UIEdgeInsets.init(top: -5, left: -10, bottom: -5, right: -10)
+        return UIEdgeInsets.init(top: -5, left: -5, bottom: -5, right: -5)
     }
     
     private let insets = UIEdgeInsets(top: 2, left: 4, bottom: 2, right: 4)
@@ -159,6 +160,7 @@ class Utilities {
     
     static func applyTintColor(to vc: UIViewController) {
         vc.navigationController?.navigationBar.barTintColor = UIColor.black
+        vc.navigationController?.navigationBar.isTranslucent = false
     }
     
     static func defaultDateTimeDictionary() -> NSDictionary {

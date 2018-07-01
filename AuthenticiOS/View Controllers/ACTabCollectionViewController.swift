@@ -19,13 +19,14 @@ class ACTabCollectionViewController: UICollectionViewController {
     }
     
     @IBAction func showMoreOptions(_ sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        self.show(ACAboutViewController(), sender: self)
+        /*let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "About This App", style: .default, handler: {a in self.show(ACAboutViewController(), sender: self)}))
         alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: {a in AuthenticButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": UIApplicationOpenSettingsURLString]).invoke(viewController: self)}))
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alert.addAction(cancel)
         alert.preferredAction = cancel
-        self.present(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)*/
     }
     
     override func viewDidLoad() {
@@ -37,16 +38,19 @@ class ACTabCollectionViewController: UICollectionViewController {
         self.collectionView!.register(UINib(nibName: "ACCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView!.register(UINib(nibName: "ACLivestreamCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: livestreamReuseIdentifier)
         collectionView?.collectionViewLayout = ACCollectionViewLayout(columns: 2, delegate: self)
-        if #available(iOS 10.0, *) {
-            self.collectionView?.refreshControl = UIRefreshControl()
-            self.collectionView?.refreshControl?.attributedTitle = NSAttributedString(string: "PULL TO REFRESH", attributes: [
-                .kern: 1.5,
-                .font: UIFont(name: "Effra", size: 14)!,
-                .foregroundColor: UIColor.white
-                ])
-            self.collectionView?.refreshControl?.tintColor = UIColor.white
-            self.collectionView?.refreshControl?.addTarget(self, action: #selector(self.refreshData), for: .valueChanged)
-        }
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            .kern: 2.5,
+            .font: UIFont(name: "Effra", size: 21)!,
+            .foregroundColor: UIColor.white
+        ]
+        self.collectionView?.refreshControl = UIRefreshControl()
+        self.collectionView?.refreshControl?.attributedTitle = NSAttributedString(string: "PULL TO REFRESH", attributes: [
+            .kern: 2.5,
+            .font: UIFont(name: "Effra", size: 14)!,
+            .foregroundColor: UIColor.black
+            ])
+        self.collectionView?.refreshControl?.tintColor = UIColor.black
+        self.collectionView?.refreshControl?.addTarget(self, action: #selector(self.refreshData), for: .valueChanged)
         self.loadData(wasRefreshed: false)
     }
 
@@ -131,7 +135,7 @@ class ACTabCollectionViewController: UICollectionViewController {
 extension ACTabCollectionViewController : ACCollectionViewLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, sizeForCellAtIndexPath indexPath: IndexPath) -> CGSize {
         if indexPath.item == 0 {
-            return CGSize(width: view.frame.width, height: view.frame.width / 2)
+            return CGSize(width: view.frame.width, height: view.frame.width / 3)
         }
         if indexPath.item == 1 {
             let app = appearance!.events

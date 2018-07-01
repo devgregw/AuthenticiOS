@@ -49,10 +49,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
         print("didReceiveRemoteNotification")
-        AppDelegate.notificationAction = AuthenticButtonAction(dict: NSDictionary(dictionary: userInfo.filter({ (arg) -> Bool in
+        let dict = NSDictionary(dictionary: userInfo.filter({ (arg) -> Bool in
             let (key, _) = arg
             return key as! String != "aps"
-        })))
+        }))
+        guard dict.contains(where: { (k, _) -> Bool in
+            return String(describing: k) == "type"
+        }) else {
+            AppDelegate.notificationAction = nil
+            return
+        }
+        AppDelegate.notificationAction = AuthenticButtonAction(dict: dict)
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
@@ -64,6 +71,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         Database.database().isPersistenceEnabled = true
+        UserDefaults.standard.set(VersionInfo.FullVersion, forKey: "sbVersion")
+        UserDefaults.standard.synchronize()
         application.applicationIconBadgeNumber = 0
         do {
             try AVAudioSession.sharedInstance().setCategory("playback")

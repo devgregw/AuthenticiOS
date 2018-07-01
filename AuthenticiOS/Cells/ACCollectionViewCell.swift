@@ -28,7 +28,7 @@ class ACCollectionViewCell: UICollectionViewCell {
                 self.image.alpha = 1
             })
         })
-        let label = (AuthenticElement.createTitle(text: self.text, alignment: "center", border: false, size: 22, color: UIColor.white) as! UIStackView).arrangedSubviews[0]
+        let label = (AuthenticElement.createTitle(text: self.text, alignment: "center", border: false, size: 20, color: UIColor.white) as! UIStackView).arrangedSubviews[0]
         self.addSubview(label)
         self.addConstraints([
             NSLayoutConstraint(item: label, attribute: .height, relatedBy: .lessThanOrEqual, toItem: self, attribute: .height, multiplier: 1, constant: 0),

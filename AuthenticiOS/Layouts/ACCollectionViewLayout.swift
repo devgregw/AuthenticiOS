@@ -58,7 +58,7 @@ class ACCollectionViewLayout: UICollectionViewLayout {
         var yOffset = [CGFloat](repeating: 0, count: numberOfColumns)
         for item in 0 ..< collectionView.numberOfItems(inSection: 0) {
             let indexPath = IndexPath(item: item, section: 0)
-            let extraOffset = indexPath.item == 1 ? collectionView.frame.width / 2 : 0
+            let extraOffset = indexPath.item == 1 ? collectionView.frame.width / 3 : 0
             let size = delegate.collectionView(collectionView, sizeForCellAtIndexPath: indexPath)
             let frame = CGRect(x: xOffset[column], y: yOffset[column] + extraOffset, width: size.width, height: size.height)
             let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
