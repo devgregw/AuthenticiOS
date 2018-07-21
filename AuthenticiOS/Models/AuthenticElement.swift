@@ -39,7 +39,7 @@ class AuthenticElement {
     static public func createImage(name: String, enlargable: Bool, vc: UIViewController?) -> UIView {
         if enlargable {
             let view = ACEnlargableImageView(imageName: name, viewController: vc!)
-            let stack = UIStackView(arrangedSubviews: [view, createText(text: "Tap to open.", alignment: "left", size: 12, color: UIColor.gray, selectable: false)])
+            let stack = UIStackView(arrangedSubviews: [createText(text: "Tap to download.", alignment: "left", size: 12, color: UIColor.gray, selectable: false), view])
             stack.axis = .vertical
             return stack
         }
