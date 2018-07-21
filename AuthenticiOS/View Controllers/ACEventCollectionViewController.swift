@@ -95,10 +95,16 @@ extension ACEventCollectionViewController : UICollectionViewDelegateFlowLayout {
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.complete ? self.events.count : 0
+        return self.complete ? max(1, self.events.count) : 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.item == 0 && self.events.count == 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "none", for: indexPath) as! ACTextCollectionViewCell
+            cell.setText("There are no upcoming events.")
+            cell.layoutIfNeeded()
+            return cell
+        }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ACCollectionViewCell
         cell.initialize(forEvent: self.events[indexPath.item], withViewController: self)
         cell.layoutIfNeeded()
@@ -106,6 +112,9 @@ extension ACEventCollectionViewController : UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if indexPath.item == 0 && self.events.count == 0 {
+            return CGSize(width: view.frame.width, height: view.frame.width / 3)
+        }
         guard indexPath.item < self.events.count else {
             return CGSize.zero
         }
