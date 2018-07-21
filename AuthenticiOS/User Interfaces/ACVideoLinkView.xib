@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="ProximaNova.ttf">
+            <string>ProximaNova-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ACVideoLinkView" customModule="AuthenticiOS" customModuleProvider="target">
+            <connections>
+                <outlet property="thumbnailImage" destination="WWQ-cM-BSC" id="dDD-6Q-0Lq"/>
+                <outlet property="titleLabel" destination="UgW-3z-PWC" id="fea-4c-sWh"/>
+                <outlet property="width" destination="LhW-kV-vpl" id="GFq-fS-dhb"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="o3x-gu-DIb">
+            <rect key="frame" x="0.0" y="0.0" width="560" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView autoresizesSubviews="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WWQ-cM-BSC">
+                    <rect key="frame" x="8" y="8" width="150" height="84"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="LhW-kV-vpl"/>
+                        <constraint firstAttribute="height" constant="84" id="YZ8-Te-F98"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="UgW-3z-PWC">
+                    <rect key="frame" x="166" y="8" width="336" height="84"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <fontDescription key="fontDescription" name="ProximaNova-Regular" family="Proxima Nova" pointSize="16"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="baseline_chevron_right_black_18pt" translatesAutoresizingMaskIntoConstraints="NO" id="gBX-1b-jVd">
+                    <rect key="frame" x="510" y="0.0" width="50" height="100"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="CkH-C7-GT5"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="gBX-1b-jVd" firstAttribute="bottom" secondItem="pc5-Oe-2Ai" secondAttribute="bottom" id="1UU-BX-K4v"/>
+                <constraint firstItem="gBX-1b-jVd" firstAttribute="trailing" secondItem="pc5-Oe-2Ai" secondAttribute="trailing" id="DVO-7w-UTz"/>
+                <constraint firstItem="gBX-1b-jVd" firstAttribute="leading" secondItem="UgW-3z-PWC" secondAttribute="trailing" constant="8" id="JNY-22-mqj"/>
+                <constraint firstItem="WWQ-cM-BSC" firstAttribute="top" secondItem="pc5-Oe-2Ai" secondAttribute="top" constant="8" id="RQ4-1f-Zvi"/>
+                <constraint firstItem="UgW-3z-PWC" firstAttribute="top" secondItem="pc5-Oe-2Ai" secondAttribute="top" constant="8" id="T0z-jH-WXX"/>
+                <constraint firstItem="pc5-Oe-2Ai" firstAttribute="bottom" secondItem="UgW-3z-PWC" secondAttribute="bottom" constant="8" id="UMA-nE-85Z"/>
+                <constraint firstItem="UgW-3z-PWC" firstAttribute="leading" secondItem="WWQ-cM-BSC" secondAttribute="trailing" constant="8" id="WP1-Ol-Aac"/>
+                <constraint firstAttribute="bottom" secondItem="WWQ-cM-BSC" secondAttribute="bottom" constant="8" id="YbB-KC-vFM"/>
+                <constraint firstItem="WWQ-cM-BSC" firstAttribute="leading" secondItem="pc5-Oe-2Ai" secondAttribute="leading" constant="8" id="eN5-RO-hlo"/>
+                <constraint firstItem="gBX-1b-jVd" firstAttribute="top" secondItem="pc5-Oe-2Ai" secondAttribute="top" id="ur2-zE-XXU"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="pc5-Oe-2Ai"/>
+            <point key="canvasLocation" x="123.5" y="-249.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="baseline_chevron_right_black_18pt" width="27" height="27"/>
+    </resources>
+</document>

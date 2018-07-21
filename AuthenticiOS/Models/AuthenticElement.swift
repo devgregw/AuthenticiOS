@@ -49,8 +49,9 @@ class AuthenticElement {
         return image
     }
     
-    static public func createVideo(provider: String, videoId: String) -> UIWebView {
-        let webView = UIWebView()
+    static public func createVideo(provider: String, videoId: String, thumbnail: String, title: String) -> UIView {
+        return ACVideoLinkView(vendor: provider, id: videoId, thumb: thumbnail, title: title)
+        /*let webView = UIWebView()
         webView.allowsInlineMediaPlayback = true
         webView.allowsLinkPreview = true
         webView.allowsPictureInPictureMediaPlayback = true
@@ -58,7 +59,7 @@ class AuthenticElement {
         webView.loadRequest(URLRequest(url: URL(string: provider == "YouTube" ? "https://www.youtube.com/embed/\(videoId)" : "https://player.vimeo.com/video/\(videoId)")!))
         webView.backgroundColor = UIColor.black
         webView.addConstraint(NSLayoutConstraint(item: webView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: (UIApplication.shared.keyWindow?.bounds.width ?? 500) / 3 * 2))
-        return webView
+        return webView*/
     }
     
     static public func createTitle(text: String, alignment: String, border: Bool, size: Int = 24, color: UIColor = UIColor.black) -> UIView {
