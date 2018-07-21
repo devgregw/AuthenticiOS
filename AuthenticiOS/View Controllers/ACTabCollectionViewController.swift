@@ -135,7 +135,7 @@ class ACTabCollectionViewController: UICollectionViewController {
 extension ACTabCollectionViewController : ACCollectionViewLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, sizeForCellAtIndexPath indexPath: IndexPath) -> CGSize {
         if indexPath.item == 0 {
-            return CGSize(width: view.frame.width, height: view.frame.width / 3)
+                return CGSize(width: view.frame.width, height: 60.0)
         }
         if indexPath.item == 1 {
             let app = appearance!.events
