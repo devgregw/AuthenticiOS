@@ -168,7 +168,8 @@ class AuthenticElement {
         case "image":
             return AuthenticElement.createImage(name: ImageResource(dict: getProperty("image") as! NSDictionary).imageName, enlargable: getProperty("enlargeButton") as! Bool, vc: vc)
         case "video":
-            return AuthenticElement.createVideo(provider: getProperty("provider") as! String, videoId: getProperty("videoId") as! String)
+            let videoInfo = getProperty("videoInfo") as! NSDictionary
+            return AuthenticElement.createVideo(provider: videoInfo.object(forKey: "provider") as! String, videoId: videoInfo.object(forKey: "id") as! String, thumbnail: videoInfo.object(forKey: "thumbnail") as! String, title: videoInfo.object(forKey: "title") as! String)
         case "title":
             return AuthenticElement.createTitle(text: (getProperty("title") as! String), alignment: getProperty("alignment") as! String, border: true)
         case "text":
