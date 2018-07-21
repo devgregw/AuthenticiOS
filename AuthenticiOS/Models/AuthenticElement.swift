@@ -62,13 +62,14 @@ class AuthenticElement {
         return webView*/
     }
     
-    static public func createTitle(text: String, alignment: String, border: Bool, size: Int = 24, color: UIColor = UIColor.black) -> UIView {
+    static public func createTitle(text: String, alignment: String, border: Bool, size: Int = 24, color: UIColor = UIColor.black, bold: Bool = false) -> UIView {
         let label = ACInsetLabel()
         label.attributedText = NSAttributedString(string: text, attributes: [
             .kern: 2.5,
             .foregroundColor: color,
-            .font: UIFont(name: "Effra", size: CGFloat(size))!
+            .font: UIFont(name: "Effra" + (bold ? "-Bold" : ""), size: CGFloat(size))!
         ])
+        
         if border {
             label.layer.borderColor = color.cgColor
             label.layer.borderWidth = 2
