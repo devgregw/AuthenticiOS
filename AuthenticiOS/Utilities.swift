@@ -97,18 +97,43 @@ class Reachability {
 class ACEnlargableImageView: UIImageView {
     private var imageName: String
     private var vc: UIViewController
+    private var loadingAlert: UIAlertController
     
     init(imageName: String, viewController vc: UIViewController) {
         self.imageName = imageName
         self.vc = vc
+        loadingAlert = UIAlertController(title: nil, message: "Saving image...", preferredStyle: .alert)
+        let indicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        indicator.hidesWhenStopped = true
+        indicator.activityIndicatorViewStyle = .gray
+        indicator.startAnimating()
+        loadingAlert.view.addSubview(indicator)
         super.init(image: nil)
         Utilities.loadFirebase(image: imageName, into: self)
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.expand)))
         self.isUserInteractionEnabled = true
     }
     
+    @objc public func saveCompletion(_ image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafeMutableRawPointer?) {
+        loadingAlert.dismiss(animated: true, completion: {
+            guard error == nil else {
+                let alert = UIAlertController(title: "Error", message: "An error occurred while saving the image.\n\n\(error!.localizedDescription)", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+                self.vc.present(alert, animated: true, completion: nil)
+                return
+            }
+            let alert = UIAlertController(title: "Image Saved", message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+            self.vc.present(alert, animated: true, completion: nil)
+        })
+    }
+    
     @objc public func expand() {
-        AuthenticButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url":"https://accams.devgregw.com/meta/storage/\(imageName)"]).invoke(viewController: vc)
+        vc.present(loadingAlert, animated: true, completion: {
+            UIImageWriteToSavedPhotosAlbum(self.image!, self, #selector(self.saveCompletion(_:didFinishSavingWithError:contextInfo:)), nil)
+        })
+        
+        //AuthenticButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url":"https://accams.devgregw.com/meta/storage/\(imageName)"]).invoke(viewController: vc)
     }
     
     required init?(coder aDecoder: NSCoder) {
