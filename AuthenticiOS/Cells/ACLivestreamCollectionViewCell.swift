@@ -50,20 +50,24 @@ class ACLivestreamCollectionViewCell: UICollectionViewCell {
         self.vc = vc
         let url = URL(string: "https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCxrYck_z50n5It7ifj1LCjA&type=video&eventType=live&key=AIzaSyB4w3GIY9AUi6cApXAkB76vlG6K6J4d8XE")!
         let trace = Performance.startTrace(name: "check livestream")
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        
+        var request = URLRequest(url: url, cachePolicy: .reloadIgnoringCacheData, timeoutInterval: 10)
+        request.httpMethod = "GET"
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             trace?.stop()
             if error != nil {
                 print("YouTube error: \(error!.localizedDescription)")
                 self.displayText(isLive: false)
                 return
             }
-            URLCache.shared.removeAllCachedResponses()
             guard let jsonData = data else {
                 print("Livestream: data is nil")
                 self.displayText(isLive: false)
                 return
             }
             do {
+                URLCache.shared.removeAllCachedResponses()
                 let dictionary = try JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) as! NSDictionary
                 let items = dictionary.value(forKey: "items") as! NSArray
                 if items.count == 0 {
