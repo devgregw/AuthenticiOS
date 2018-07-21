@@ -31,7 +31,7 @@ class ACTabCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let btn = UIBarButtonItem(title: "Home", style: .plain, target: nil, action: nil)
+        let btn = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         btn.tintColor = UIColor.white
         self.navigationItem.backBarButtonItem = btn
         Utilities.applyTintColor(to: self)
@@ -39,7 +39,7 @@ class ACTabCollectionViewController: UICollectionViewController {
         self.collectionView!.register(UINib(nibName: "ACLivestreamCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: livestreamReuseIdentifier)
         collectionView?.collectionViewLayout = ACCollectionViewLayout(columns: 2, delegate: self)
         self.navigationController?.navigationBar.titleTextAttributes = [
-            .kern: 2.5,
+            .kern: 3.5,
             .font: UIFont(name: "Effra", size: 21)!,
             .foregroundColor: UIColor.white
         ]
