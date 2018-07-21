@@ -153,4 +153,14 @@ extension ACTabCollectionViewController : ACCollectionViewLayoutDelegate {
         let adjustedHeight = adjustedWidth / ratio
         return CGSize(width: adjustedWidth, height: adjustedHeight)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, columnNumberForCellAtIndexPath indexPath: IndexPath) -> Int {
+        if indexPath.item == 0 {
+            return 0
+        }
+        if indexPath.item == 1 {
+            return 1
+        }
+        return self.tabs[indexPath.item - 2].index % 2 == 0 ? 0 : 1
+    }
 }

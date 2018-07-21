@@ -10,6 +10,8 @@ import UIKit
 
 protocol ACCollectionViewLayoutDelegate: class {
     func collectionView(_ collectionView: UICollectionView, sizeForCellAtIndexPath indexPath: IndexPath) -> CGSize
+    
+    func collectionView(_ collectionView: UICollectionView, columnNumberForCellAtIndexPath indexPath: IndexPath) -> Int
 }
 
 class ACCollectionViewLayout: UICollectionViewLayout {
@@ -54,19 +56,19 @@ class ACCollectionViewLayout: UICollectionViewLayout {
         for column in 0 ..< numberOfColumns {
             xOffset.append(CGFloat(column) * columnWidth)
         }
-        var column = 0
         var yOffset = [CGFloat](repeating: 0, count: numberOfColumns)
         for item in 0 ..< collectionView.numberOfItems(inSection: 0) {
             let indexPath = IndexPath(item: item, section: 0)
-            let extraOffset = indexPath.item == 1 ? collectionView.frame.width / 3 : 0
+            let column = delegate.collectionView(collectionView, columnNumberForCellAtIndexPath: indexPath)
+            let extraOffset = CGFloat(indexPath.item == 1 ? 60 : 0)
             let size = delegate.collectionView(collectionView, sizeForCellAtIndexPath: indexPath)
-            let frame = CGRect(x: xOffset[column], y: yOffset[column] + extraOffset, width: size.width, height: size.height)
+            let frameX = columnWidth * CGFloat(column)
+            let frame = CGRect(x: frameX, y: yOffset[column] + extraOffset, width: size.width, height: size.height)
             let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
             attributes.frame = frame
             cache.append(attributes)
             contentHeight = max(contentHeight, frame.maxY)
             yOffset[column] = yOffset[column] + size.height + extraOffset
-            column = column < (numberOfColumns - 1) ? (column + 1) : 0
         }
     }
     
