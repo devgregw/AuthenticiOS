@@ -136,7 +136,7 @@ class ACAboutViewController: UIViewController {
         addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Legal Documentation", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.docs)))
         addView(AuthenticElement.createButton(info: AuthenticButtonInfo(label: "Privacy Policy", action: AuthenticButtonAction.empty), viewController: self, target: self, selector: #selector(self.pp)))
         addView(AuthenticElement.createSeparator(visible: false))
-        addView(AuthenticElement.createText(text: Messaging.messaging().fcmToken ?? "Unavailable", alignment: "center", size: 14, color: UIColor.lightGray, selectable: true))
+        addView(AuthenticElement.createText(text: Messaging.messaging().fcmToken ?? "Unavailable", alignment: "left", size: 14, color: UIColor.gray, selectable: true))
         addView(AuthenticElement.createSeparator(visible: false))
     }
 }
