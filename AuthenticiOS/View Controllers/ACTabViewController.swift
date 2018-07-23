@@ -23,6 +23,10 @@ class ACTabViewController: UIViewController {
     }
     
     public static func present(tab: AuthenticTab) {
+        if tab.action != nil {
+            tab.action!.invoke(viewController: AppDelegate.getTopmostViewController())
+            return
+        }
         AppDelegate.automaticPresent(viewController: ACTabViewController(tab: tab))
     }
     
