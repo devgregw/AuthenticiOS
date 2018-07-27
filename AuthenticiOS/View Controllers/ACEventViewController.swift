@@ -107,6 +107,6 @@ class ACEventViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Utilities.applyTintColor(to: self)
+        applyDefaultSettings()
     }
 }

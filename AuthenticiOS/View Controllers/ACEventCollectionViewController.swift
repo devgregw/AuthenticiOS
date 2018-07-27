@@ -29,10 +29,7 @@ class ACEventCollectionViewController: UICollectionViewController {
         self.collectionView!.register(UINib(nibName: "ACCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView!.register(UINib(nibName: "ACTextCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "none")
         self.collectionView!.delegate = self
-        let btn = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        btn.tintColor = UIColor.white
-        self.navigationItem.backBarButtonItem = btn
-        Utilities.applyTintColor(to: self)
+        applyDefaultSettings()
         self.collectionView!.register(UINib(nibName: "ACCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: reuseIdentifier)
         self.navigationController?.navigationBar.titleTextAttributes = [
             .kern: 3.5,

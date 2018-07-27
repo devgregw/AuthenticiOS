@@ -160,6 +160,16 @@ class ACInsetLabel: UILabel {
     }
 }
 
+extension UIViewController {
+    func applyDefaultSettings() {
+        let btn = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        btn.tintColor = UIColor.white
+        navigationItem.backBarButtonItem = btn
+        navigationController?.navigationBar.barTintColor = UIColor.black
+        navigationController?.navigationBar.isTranslucent = false
+    }
+}
+
 class Utilities {
     class MapInterface {
         static func isGoogleMapsAvailable() -> Bool {
@@ -181,11 +191,6 @@ class Utilities {
                 UIApplication.shared.open(URL(string: "http://maps.apple.com/?q=\(location.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)")!, options: [:], completionHandler: nil)
             }
         }
-    }
-    
-    static func applyTintColor(to vc: UIViewController) {
-        vc.navigationController?.navigationBar.barTintColor = UIColor.black
-        vc.navigationController?.navigationBar.isTranslucent = false
     }
     
     static func defaultDateTimeDictionary() -> NSDictionary {

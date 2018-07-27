@@ -31,10 +31,7 @@ class ACTabCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let btn = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        btn.tintColor = UIColor.white
-        self.navigationItem.backBarButtonItem = btn
-        Utilities.applyTintColor(to: self)
+        applyDefaultSettings()
         self.collectionView!.register(UINib(nibName: "ACCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView!.register(UINib(nibName: "ACLivestreamCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: livestreamReuseIdentifier)
         collectionView?.collectionViewLayout = ACCollectionViewLayout(columns: 2, delegate: self)

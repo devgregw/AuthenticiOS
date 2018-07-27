@@ -101,7 +101,7 @@ class ACAboutViewController: UIViewController {
         self.title = "ABOUT"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Launch AMS", style: .plain, target: self, action: #selector(self.launchAMS))
         self.navigationItem.rightBarButtonItem!.tintColor = UIColor.white
-        Utilities.applyTintColor(to: self)
+        applyDefaultSettings()
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         let banner = #imageLiteral(resourceName: "full.png")
