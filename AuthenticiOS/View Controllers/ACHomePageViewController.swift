@@ -10,6 +10,14 @@ import Foundation
 import UIKit
 
 class ACHomePageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+    override var prefersStatusBarHidden: Bool {
+        return false
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
         return 2
     }
