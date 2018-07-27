@@ -10,6 +10,22 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>FooterText</key>
+			<string>Development notifications are for internal testing use only.  After changing this setting, restart the app to apply changes.</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Development notifications</string>
+			<key>Key</key>
+			<string>devNotifications</string>
+			<key>DefaultValue</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>FooterText</key>
 			<string>Copyright © 2018 Authentic City Church and Greg Whatley</string>
 		</dict>
 		<dict>

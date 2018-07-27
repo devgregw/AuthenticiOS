@@ -19,7 +19,8 @@ class ACTabCollectionViewController: UICollectionViewController {
     }
     
     @IBAction func showMoreOptions(_ sender: UIBarButtonItem) {
-        self.show(ACAboutViewController(), sender: self)
+        present(UIActivityViewController(activityItems: [(Messaging.messaging().fcmToken ?? "<unavailable>") as NSString], applicationActivities: nil), animated: true, completion: nil)
+        //self.show(ACAboutViewController(), sender: self)
         /*let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "About This App", style: .default, handler: {a in self.show(ACAboutViewController(), sender: self)}))
         alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: {a in AuthenticButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": UIApplicationOpenSettingsURLString]).invoke(viewController: self)}))
@@ -31,6 +32,9 @@ class ACTabCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if !UserDefaults.standard.bool(forKey: "devNotifications") {
+            self.navigationItem.rightBarButtonItem = nil
+        }
         applyDefaultSettings()
         self.collectionView!.register(UINib(nibName: "ACCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView!.register(UINib(nibName: "ACLivestreamCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: livestreamReuseIdentifier)

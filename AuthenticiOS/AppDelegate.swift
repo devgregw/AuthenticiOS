@@ -35,8 +35,20 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 }
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
+class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        AppDelegate.updateDevSubscription()
+    }
+    
+    public static func updateDevSubscription() {
+        let devNotifications = UserDefaults.standard.bool(forKey: "devNotifications")
+        if devNotifications {
+            Messaging.messaging().subscribe(toTopic: "dev")
+        } else {
+            Messaging.messaging().unsubscribe(fromTopic: "dev")
+        }
+    }
+    
     private var launchedItem: UIApplicationShortcutItem?
     private static var notificationAction: AuthenticButtonAction? = nil
     
@@ -70,6 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        Messaging.messaging().delegate = self
         Database.database().isPersistenceEnabled = true
         UserDefaults.standard.set(VersionInfo.FullVersion, forKey: "sbVersion")
         UserDefaults.standard.synchronize()
@@ -173,6 +186,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        AppDelegate.updateDevSubscription()
         _ = respondToShortcut()
         self.launchedItem = nil
     }
