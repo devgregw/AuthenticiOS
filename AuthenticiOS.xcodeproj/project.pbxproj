@@ -39,12 +39,18 @@
 		FC5F914320D1731000516095 /* ACCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F914220D1731000516095 /* ACCollectionViewLayout.swift */; };
 		FC5F914520D7FB9800516095 /* ImageResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F914420D7FB9700516095 /* ImageResource.swift */; };
 		FC5F914720D94FB700516095 /* ACEventCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F914620D94FB700516095 /* ACEventCollectionViewController.swift */; };
+		FC75FB70210A271000E396A8 /* ACVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75FB6E210A271000E396A8 /* ACVideoViewController.swift */; };
+		FC75FB71210A271000E396A8 /* ACVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC75FB6F210A271000E396A8 /* ACVideoViewController.xib */; };
+		FC75FB74210A7A3600E396A8 /* ACImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75FB72210A7A3500E396A8 /* ACImageCollectionViewCell.swift */; };
+		FC75FB75210A7A3600E396A8 /* ACImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC75FB73210A7A3500E396A8 /* ACImageCollectionViewCell.xib */; };
+		FC75FB78210ABE0F00E396A8 /* ACWallpaperPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75FB76210ABE0E00E396A8 /* ACWallpaperPreviewViewController.swift */; };
+		FC75FB79210ABE0F00E396A8 /* ACWallpaperPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC75FB77210ABE0E00E396A8 /* ACWallpaperPreviewViewController.xib */; };
 		FCAD5C12208624CC0010B5C9 /* AuthenticEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD5C11208624CC0010B5C9 /* AuthenticEvent.swift */; };
 		FCAD5C14208628FF0010B5C9 /* RecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD5C13208628FF0010B5C9 /* RecurrenceRule.swift */; };
 		FCBD36FA20BC93160066ED19 /* ACLivestreamCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD36F820BC93160066ED19 /* ACLivestreamCollectionViewCell.swift */; };
 		FCBD36FB20BC93160066ED19 /* ACLivestreamCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBD36F920BC93160066ED19 /* ACLivestreamCollectionViewCell.xib */; };
-		FCF184102102123700C9E37A /* ACVideoLinkView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCF1840F2102123700C9E37A /* ACVideoLinkView.xib */; };
-		FCF18412210216EF00C9E37A /* ACVideoLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF18411210216EF00C9E37A /* ACVideoLinkView.swift */; };
+		FCF184102102123700C9E37A /* ACThumbnailButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCF1840F2102123700C9E37A /* ACThumbnailButtonView.xib */; };
+		FCF18412210216EF00C9E37A /* ACThumbnailButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF18411210216EF00C9E37A /* ACThumbnailButtonView.swift */; };
 		FCFE5CAD20FD24A5009B95F3 /* EffraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCFE5CAC20FD24A3009B95F3 /* EffraBold.ttf */; };
 /* End PBXBuildFile section */
 
@@ -86,12 +92,18 @@
 		FC5F914220D1731000516095 /* ACCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACCollectionViewLayout.swift; sourceTree = "<group>"; };
 		FC5F914420D7FB9700516095 /* ImageResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResource.swift; sourceTree = "<group>"; };
 		FC5F914620D94FB700516095 /* ACEventCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACEventCollectionViewController.swift; sourceTree = "<group>"; };
+		FC75FB6E210A271000E396A8 /* ACVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACVideoViewController.swift; sourceTree = "<group>"; };
+		FC75FB6F210A271000E396A8 /* ACVideoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACVideoViewController.xib; sourceTree = "<group>"; };
+		FC75FB72210A7A3500E396A8 /* ACImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		FC75FB73210A7A3500E396A8 /* ACImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACImageCollectionViewCell.xib; sourceTree = "<group>"; };
+		FC75FB76210ABE0E00E396A8 /* ACWallpaperPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACWallpaperPreviewViewController.swift; sourceTree = "<group>"; };
+		FC75FB77210ABE0E00E396A8 /* ACWallpaperPreviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACWallpaperPreviewViewController.xib; sourceTree = "<group>"; };
 		FCAD5C11208624CC0010B5C9 /* AuthenticEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticEvent.swift; sourceTree = "<group>"; };
 		FCAD5C13208628FF0010B5C9 /* RecurrenceRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurrenceRule.swift; sourceTree = "<group>"; };
 		FCBD36F820BC93160066ED19 /* ACLivestreamCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLivestreamCollectionViewCell.swift; sourceTree = "<group>"; };
 		FCBD36F920BC93160066ED19 /* ACLivestreamCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACLivestreamCollectionViewCell.xib; sourceTree = "<group>"; };
-		FCF1840F2102123700C9E37A /* ACVideoLinkView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACVideoLinkView.xib; sourceTree = "<group>"; };
-		FCF18411210216EF00C9E37A /* ACVideoLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACVideoLinkView.swift; sourceTree = "<group>"; };
+		FCF1840F2102123700C9E37A /* ACThumbnailButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACThumbnailButtonView.xib; sourceTree = "<group>"; };
+		FCF18411210216EF00C9E37A /* ACThumbnailButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACThumbnailButtonView.swift; sourceTree = "<group>"; };
 		FCFE5CAC20FD24A3009B95F3 /* EffraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EffraBold.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -194,7 +206,8 @@
 				FCBD36F820BC93160066ED19 /* ACLivestreamCollectionViewCell.swift */,
 				FC03C28620B8778600D15490 /* ACCollectionViewCell.swift */,
 				FC4CD2A220FE94430096ED0D /* ACTextCollectionViewCell.swift */,
-				FCF18411210216EF00C9E37A /* ACVideoLinkView.swift */,
+				FCF18411210216EF00C9E37A /* ACThumbnailButtonView.swift */,
+				FC75FB72210A7A3500E396A8 /* ACImageCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -209,6 +222,8 @@
 				FC16001A1FFC4BD6001DF3B5 /* ACTabViewController.swift */,
 				FC5BF9BA208D18A7002982F1 /* ACEventViewController.swift */,
 				FC5F914620D94FB700516095 /* ACEventCollectionViewController.swift */,
+				FC75FB6E210A271000E396A8 /* ACVideoViewController.swift */,
+				FC75FB76210ABE0E00E396A8 /* ACWallpaperPreviewViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -224,7 +239,10 @@
 				2B3630621FF56BD9002469E5 /* Main.storyboard */,
 				FCBD36F920BC93160066ED19 /* ACLivestreamCollectionViewCell.xib */,
 				FC4CD2A020FE8FA60096ED0D /* ACTextCollectionViewCell.xib */,
-				FCF1840F2102123700C9E37A /* ACVideoLinkView.xib */,
+				FCF1840F2102123700C9E37A /* ACThumbnailButtonView.xib */,
+				FC75FB6F210A271000E396A8 /* ACVideoViewController.xib */,
+				FC75FB73210A7A3500E396A8 /* ACImageCollectionViewCell.xib */,
+				FC75FB77210ABE0E00E396A8 /* ACWallpaperPreviewViewController.xib */,
 			);
 			path = "User Interfaces";
 			sourceTree = "<group>";
@@ -303,19 +321,22 @@
 			files = (
 				FC03C28920B8778600D15490 /* ACCollectionViewCell.xib in Resources */,
 				FC5BF9BD208D18A7002982F1 /* ACEventViewController.xib in Resources */,
+				FC75FB79210ABE0F00E396A8 /* ACWallpaperPreviewViewController.xib in Resources */,
 				FC2765D820E02122002A342A /* Settings.bundle in Resources */,
 				FC03C28120B76BD300D15490 /* EffraRegular.ttf in Resources */,
 				2B878E09203356CB0010B549 /* ProximaNova.ttf in Resources */,
 				2B3630691FF56BD9002469E5 /* LaunchScreen.storyboard in Resources */,
 				FCBD36FB20BC93160066ED19 /* ACLivestreamCollectionViewCell.xib in Resources */,
 				FC09989A1FFEA74E00BCAD3A /* full.png in Resources */,
-				FCF184102102123700C9E37A /* ACVideoLinkView.xib in Resources */,
+				FCF184102102123700C9E37A /* ACThumbnailButtonView.xib in Resources */,
 				FC16001D1FFC4BD6001DF3B5 /* ACTabViewController.xib in Resources */,
+				FC75FB75210A7A3600E396A8 /* ACImageCollectionViewCell.xib in Resources */,
 				FC1045051FFEF5560010F8A1 /* Assets.xcassets in Resources */,
 				FC5BF9C3209D0238002982F1 /* ACAboutViewController.xib in Resources */,
 				FC4CD2A120FE8FA70096ED0D /* ACTextCollectionViewCell.xib in Resources */,
 				2BEFD14F1FF5820E0094572A /* GoogleService-Info.plist in Resources */,
 				FCFE5CAD20FD24A5009B95F3 /* EffraBold.ttf in Resources */,
+				FC75FB71210A271000E396A8 /* ACVideoViewController.xib in Resources */,
 				2B3630641FF56BD9002469E5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -402,7 +423,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC75FB74210A7A3600E396A8 /* ACImageCollectionViewCell.swift in Sources */,
 				FC5F914320D1731000516095 /* ACCollectionViewLayout.swift in Sources */,
+				FC75FB78210ABE0F00E396A8 /* ACWallpaperPreviewViewController.swift in Sources */,
 				FCAD5C14208628FF0010B5C9 /* RecurrenceRule.swift in Sources */,
 				FC03C28320B79FA800D15490 /* ACHomePageViewController.swift in Sources */,
 				FC5F914520D7FB9800516095 /* ImageResource.swift in Sources */,
@@ -410,13 +433,14 @@
 				FC565D102001395B00DE7C9A /* AuthenticTab.swift in Sources */,
 				FC565D1420013AB600DE7C9A /* AuthenticButtonInfo.swift in Sources */,
 				FC5D1436208B7C3B00B0E63E /* AuthenticAppearance.swift in Sources */,
-				FCF18412210216EF00C9E37A /* ACVideoLinkView.swift in Sources */,
+				FCF18412210216EF00C9E37A /* ACThumbnailButtonView.swift in Sources */,
 				FC4CD2A320FE94430096ED0D /* ACTextCollectionViewCell.swift in Sources */,
 				FC5BF9C2209D0238002982F1 /* ACAboutViewController.swift in Sources */,
 				FC03C28520B8770900D15490 /* ACTabCollectionViewController.swift in Sources */,
 				2B3630611FF56BD9002469E5 /* ACHomeViewController.swift in Sources */,
 				2B36305F1FF56BD9002469E5 /* AppDelegate.swift in Sources */,
 				FC5BF9BC208D18A7002982F1 /* ACEventViewController.swift in Sources */,
+				FC75FB70210A271000E396A8 /* ACVideoViewController.swift in Sources */,
 				FC565D1620013ACE00DE7C9A /* AuthenticButtonAction.swift in Sources */,
 				FC490DD2202BA1F4007F270A /* AuthenticElement.swift in Sources */,
 				FC16001C1FFC4BD6001DF3B5 /* ACTabViewController.swift in Sources */,
