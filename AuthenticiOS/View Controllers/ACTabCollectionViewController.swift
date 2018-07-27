@@ -134,8 +134,18 @@ extension ACTabCollectionViewController : ACCollectionViewLayoutDelegate {
         if indexPath.item == 0 {
                 return CGSize(width: view.frame.width, height: 60.0)
         }
+        let isLeftColumn = indexPath.section == 0
+        var tabsInColumn = (isLeftColumn ? self.tabs.filter({t in t.index % 2 == 0}) : self.tabs.filter({t in t.index % 2 > 0})).count
+        if !isLeftColumn {
+            tabsInColumn += 1
+        }
+        let fill = (isLeftColumn ? self.appearance!.tabs.fillLeft : self.appearance!.tabs.fillRight) && tabsInColumn <= 4
+        let availableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - navigationController!.navigationBar.frame.height - 60
         if indexPath.item == 1 {
             let app = appearance!.events
+            if fill {
+                return CGSize(width: view.frame.width / 2, height: availableHeight / CGFloat(tabsInColumn))
+            }
             let adjustedWidth = view.frame.width / 2
             let ratio = CGFloat(app.header.width) / CGFloat(app.header.height == 0 ? 1 : app.header.height)
             let adjustedHeight = adjustedWidth / ratio
@@ -145,6 +155,9 @@ extension ACTabCollectionViewController : ACCollectionViewLayoutDelegate {
             return CGSize.zero
         }
         let tab = self.tabs[indexPath.item - 2]
+        if fill {
+            return CGSize(width: view.frame.width / 2, height: availableHeight / CGFloat(tabsInColumn))
+        }
         let adjustedWidth = view.frame.width / 2
         let ratio = CGFloat(tab.header.width) / CGFloat(tab.header.height == 0 ? 1 : tab.header.height)
         let adjustedHeight = adjustedWidth / ratio

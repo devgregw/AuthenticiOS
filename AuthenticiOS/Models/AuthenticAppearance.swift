@@ -27,9 +27,27 @@ class AuthenticAppearance {
         }
     }
     
+    class Tabs {
+        let fillLeft: Bool
+        
+        let fillRight: Bool
+        
+        init(left: Bool, right: Bool) {
+            fillLeft = left
+            fillRight = right
+        }
+        
+        convenience init(dict: NSDictionary) {
+            self.init(left: dict["fillLeft"] as! Bool, right: dict["fillRight"] as! Bool)
+        }
+    }
+    
     let events: Events
+    
+    let tabs: Tabs
     
     init(dict: NSDictionary) {
         self.events = Events(dict: dict["events"] as! NSDictionary)
+        self.tabs = Tabs(dict: dict["tabs"] as! NSDictionary)
     }
 }
