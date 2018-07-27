@@ -15,11 +15,10 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ACVideoLinkView" customModule="AuthenticiOS" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ACThumbnailButtonView" customModule="AuthenticiOS" customModuleProvider="target">
             <connections>
                 <outlet property="thumbnailImage" destination="WWQ-cM-BSC" id="dDD-6Q-0Lq"/>
                 <outlet property="titleLabel" destination="UgW-3z-PWC" id="fea-4c-sWh"/>
-                <outlet property="width" destination="LhW-kV-vpl" id="GFq-fS-dhb"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

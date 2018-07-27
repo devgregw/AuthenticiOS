@@ -50,16 +50,7 @@ class AuthenticElement {
     }
     
     static public func createVideo(provider: String, videoId: String, thumbnail: String, title: String) -> UIView {
-        return ACVideoLinkView(vendor: provider, id: videoId, thumb: thumbnail, title: title)
-        /*let webView = UIWebView()
-        webView.allowsInlineMediaPlayback = true
-        webView.allowsLinkPreview = true
-        webView.allowsPictureInPictureMediaPlayback = true
-        webView.mediaPlaybackAllowsAirPlay = true
-        webView.loadRequest(URLRequest(url: URL(string: provider == "YouTube" ? "https://www.youtube.com/embed/\(videoId)" : "https://player.vimeo.com/video/\(videoId)")!))
-        webView.backgroundColor = UIColor.black
-        webView.addConstraint(NSLayoutConstraint(item: webView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: (UIApplication.shared.keyWindow?.bounds.width ?? 500) / 3 * 2))
-        return webView*/
+        return ACThumbnailButtonView(vendor: provider, id: videoId, thumb: thumbnail, title: title)
     }
     
     static public func createTitle(text: String, alignment: String, border: Bool, size: Int = 24, color: UIColor = UIColor.black, bold: Bool = false) -> UIView {
@@ -137,6 +128,10 @@ class AuthenticElement {
         return stackView
     }
     
+    static public func createThumbnailButton(info: AuthenticButtonInfo, thumbnail: ImageResource) -> UIView {
+        return ACThumbnailButtonView(label: info.label, thumb: thumbnail.imageName, action: info.action)
+    }
+    
     public static func createSeparator(visible: Bool) -> UIStackView {
         let view = UIView()
         view.backgroundColor = visible ? UIColor(red: 0.15, green: 0.15, blue: 0.15, alpha: 1) : UIColor.white
@@ -177,6 +172,8 @@ class AuthenticElement {
         case "button":
             self.action = AuthenticButtonInfo(dict: getProperty("_buttonInfo") as! NSDictionary).action
             return AuthenticElement.createButton(info: AuthenticButtonInfo(dict: getProperty("_buttonInfo") as! NSDictionary), viewController: vc, target: self, selector: #selector(self.invoke(_:)))
+        case "thumbnailButton":
+            return AuthenticElement.createThumbnailButton(info: AuthenticButtonInfo(dict: getProperty("_buttonInfo") as! NSDictionary), thumbnail: ImageResource(dict: getProperty("thumbnail") as! NSDictionary))
         case "separator":
             return AuthenticElement.createSeparator(visible: getProperty("visible") as! Bool)
         default:
