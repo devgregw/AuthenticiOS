@@ -26,7 +26,7 @@ class AuthenticElement {
         }))
     }
     
-    private func getProperty(_ name: String) -> Any {
+    public func getProperty(_ name: String) -> Any {
         return self.properties[name]!
     }
     

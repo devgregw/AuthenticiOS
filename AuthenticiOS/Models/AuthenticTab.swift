@@ -27,6 +27,8 @@ class AuthenticTab {
     
     public let action: AuthenticButtonAction?
     
+    public let specialType: String?
+    
     public func getShouldBeHidden() -> Bool {
         if (elements.isEmpty) {
             return true
@@ -54,6 +56,7 @@ class AuthenticTab {
         self.hideHeader = dict.value(forKey: "hideHeader", default: false)
         self.hideTitle = dict.value(forKey: "hideTitle", default: false)
         self.visibilityRules = dict.value(forKey: "visibility", default: NSDictionary())
+        self.specialType = dict.value(forKey: "specialType", default: nil)
         if dict.contains(where: { (k, _) -> Bool in
             return (k as! String) == "action"
         }) {
