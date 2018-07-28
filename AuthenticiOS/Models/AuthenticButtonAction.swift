@@ -11,6 +11,7 @@ import UIKit
 import Firebase
 import MapKit
 import EventKit
+import SafariServices
 
 class AuthenticButtonAction {
     public let type: String
@@ -56,8 +57,12 @@ class AuthenticButtonAction {
             }) { error in self.presentAlert(title: "Error", message: "We were unable to access the database.\n\n\(error.localizedDescription as String)", vc: vc) }
             break
         case "OpenURLAction":
-            let url = getProperty(withName: "url")
-            UIApplication.shared.open(URL(string: url as! String)!, options: [:], completionHandler: nil)
+            let url = getProperty(withName: "url") as! String
+            if url.contains("spotify") {
+                UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
+            } else {
+                AppDelegate.getTopmostViewController().present(SFSafariViewController(url: URL(string: url)!), animated: true, completion: nil)
+            }
             break
         case "ShowMapAction":
             let location = getProperty(withName: "address") as! String
