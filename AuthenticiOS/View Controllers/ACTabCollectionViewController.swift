@@ -68,7 +68,7 @@ class ACTabCollectionViewController: UICollectionViewController {
         self.complete = false
         let trace = Performance.startTrace(name: "load tabs")
         if wasRefreshed {
-            trace?.incrementCounter(named: "refresh tabs")
+            trace?.incrementMetric("refresh tabs", by: 1)
         }
         let appRef = Database.database().reference().child("appearance")
         appRef.keepSynced(true)

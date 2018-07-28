@@ -59,7 +59,7 @@ class ACEventCollectionViewController: UICollectionViewController {
         self.complete = false
         let trace = Performance.startTrace(name: "load events")
         if wasRefreshed {
-            trace?.incrementCounter(named: "refresh events")
+            trace?.incrementMetric("refresh events", by: 1)
         }
         let eventsRef = Database.database().reference().child("events")
         eventsRef.keepSynced(true)
