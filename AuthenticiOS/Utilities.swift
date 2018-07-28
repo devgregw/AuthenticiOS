@@ -11,34 +11,39 @@ import UIKit
 import Firebase
 import FirebaseUI
 
+fileprivate var iso8601Formatter: DateFormatter?
+fileprivate var customFormatter: DateFormatter?
+
 extension Date {
+    private static func getIso8601() -> DateFormatter {
+        if iso8601Formatter == nil {
+            iso8601Formatter = DateFormatter()
+            iso8601Formatter!.calendar = Calendar.autoupdatingCurrent
+            iso8601Formatter!.locale = Locale.autoupdatingCurrent
+            iso8601Formatter!.timeZone = TimeZone(abbreviation: "GMT")
+            iso8601Formatter!.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        }
+        return iso8601Formatter!
+    }
     
     static func parseISO8601(string: String) -> Date {
-        let formatter = DateFormatter()
-        formatter.calendar = Calendar.autoupdatingCurrent
-        formatter.locale = Locale.autoupdatingCurrent
-        formatter.timeZone = TimeZone(abbreviation: "GMT")
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-        return formatter.date(from: string)!
+        return getIso8601().date(from: string)!
     }
     
     func formatISO8601() -> String {
-        let formatter = DateFormatter()
-        formatter.calendar = Calendar.autoupdatingCurrent
-        formatter.locale = Locale.autoupdatingCurrent
-        formatter.timeZone = TimeZone(abbreviation: "GMT")
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-        return formatter.string(from: self)
+        return Date.getIso8601().string(from: self)
     }
     
     func format(dateStyle: DateFormatter.Style, timeStyle: DateFormatter.Style) -> String {
-        let formatter = DateFormatter()
-        formatter.calendar = Calendar.autoupdatingCurrent
-        formatter.locale = Locale.autoupdatingCurrent
-        formatter.timeZone = TimeZone.autoupdatingCurrent
-        formatter.dateStyle = dateStyle
-        formatter.timeStyle = timeStyle
-        return formatter.string(from: self)
+        if customFormatter == nil {
+            customFormatter = DateFormatter()
+            customFormatter!.calendar = Calendar.autoupdatingCurrent
+            customFormatter!.locale = Locale.autoupdatingCurrent
+            customFormatter!.timeZone = TimeZone.autoupdatingCurrent
+            customFormatter!.dateStyle = dateStyle
+            customFormatter!.timeStyle = timeStyle
+        }
+        return customFormatter!.string(from: self)
     }
 }
 
