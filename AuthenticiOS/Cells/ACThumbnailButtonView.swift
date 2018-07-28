@@ -69,6 +69,8 @@ class ACThumbnailButtonView: UIView {
         view.layer.addSublayer(bottom)
         view.isUserInteractionEnabled = true
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: action))
+        let rand = CGFloat(drand48())
+        thumbnailImage.backgroundColor = UIColor(red: rand, green: rand, blue: rand, alpha: 1)
         addSubview(view)
     }
     

@@ -26,7 +26,8 @@ class ACImageCollectionViewCell: UICollectionViewCell {
     
     public func setImage(_ resource: ImageResource, viewController: UIViewController) {
         imageView.sd_setImage(with: Storage.storage().reference().child(resource.imageName))
-        imageView.backgroundColor = UIColor.blue
+        let rand = CGFloat(drand48())
+        imageView.backgroundColor = UIColor(red: rand, green: rand, blue: rand, alpha: 1)
         self.viewController = viewController
         self.imageName = resource.imageName
         gestureRecognizers = []
