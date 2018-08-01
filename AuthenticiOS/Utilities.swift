@@ -92,7 +92,7 @@ extension NSDictionary {
 
 class VersionInfo {
     static let Version = "1.0"
-    static let Update = 8
+    static let Update = 9
     static let FullVersion = "\(Version) build \(Update)"
 }
 
