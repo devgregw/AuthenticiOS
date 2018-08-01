@@ -12,6 +12,7 @@ import Firebase
 class ACHomeViewController: UIViewController {
     
     @IBOutlet weak var buttonConstraint: NSLayoutConstraint!
+    @IBOutlet weak var buttonOffsetConstraint: NSLayoutConstraint!
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var logo: UIImageView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
@@ -79,13 +80,18 @@ class ACHomeViewController: UIViewController {
         self.indicator.alpha = 0
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        preInitialize()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.buttonOffsetConstraint.constant = UIApplication.shared.statusBarFrame.size.height + UIApplication.shared.windows[0].safeAreaInsets.bottom
         UIView.animate(withDuration: 0.001, animations: {
             self.view.layoutIfNeeded()
         }) { b in
             self.displayCheckForUpdate()
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        preInitialize()
     }
 }

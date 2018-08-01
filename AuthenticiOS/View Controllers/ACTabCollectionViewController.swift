@@ -12,6 +12,12 @@ import Firebase
 private let reuseIdentifier = "accvcell"
 private let livestreamReuseIdentifier = "accvlscell"
 
+extension UICollectionView {
+    override open var safeAreaInsets: UIEdgeInsets {
+        return UIEdgeInsets.zero
+    }
+}
+
 class ACTabCollectionViewController: UICollectionViewController {
     @IBAction func didRequestClose(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)

@@ -14,6 +14,24 @@ import FirebaseUI
 fileprivate var iso8601Formatter: DateFormatter?
 fileprivate var customFormatter: DateFormatter?
 
+extension UIDevice {
+    var deviceIdentifier: String {
+        if let simulatorModel = ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] {
+            return simulatorModel
+        }
+        var systemInfo = utsname()
+        uname(&systemInfo)
+        return String(bytes: Data(bytes: &systemInfo.machine, count: Int(_SYS_NAMELEN)), encoding: .ascii)!.trimmingCharacters(in: .controlCharacters)
+    }
+    
+    var isiPhoneX: Bool {
+        switch deviceIdentifier {
+        case "iPhone10,3", "iPhone10,6": return true
+        default: return false
+        }
+    }
+}
+
 extension Date {
     private static func getIso8601() -> DateFormatter {
         if iso8601Formatter == nil {

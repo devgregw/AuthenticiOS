@@ -43,7 +43,7 @@ class ACWallpaperPreviewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        visualEffectView.layer.cornerRadius = 16
+        //visualEffectView.layer.cornerRadius = 16
         Utilities.loadFirebase(image: imageName, into: imageView)
         loadingAlert = UIAlertController(title: nil, message: "Saving image...", preferredStyle: .alert)
         let indicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))

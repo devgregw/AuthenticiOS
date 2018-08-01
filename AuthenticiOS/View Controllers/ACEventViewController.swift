@@ -83,7 +83,9 @@ class ACEventViewController: UIViewController {
             addView(AuthenticElement.createText(text: "Free", alignment: "left"))
             addView(AuthenticElement.createText(text: "Registration is not required", alignment: "left"))
         }
-        addView(AuthenticElement.createSeparator(visible: false))
+        if !UIDevice.current.isiPhoneX {
+            addView(AuthenticElement.createSeparator(visible: false))
+        }
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
     }
