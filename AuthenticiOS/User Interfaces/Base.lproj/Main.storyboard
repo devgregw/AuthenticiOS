@@ -149,11 +149,11 @@
                     <navigationItem key="navigationItem" id="L6q-m5-ayj"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="button" destination="Jux-Tt-Jr9" id="o6y-OX-sWK"/>
-                        <outlet property="buttonConstraint" destination="CMl-IG-s6J" id="Hmg-G7-wIj"/>
-                        <outlet property="buttonOffsetConstraint" destination="1mv-y2-2sB" id="HWg-T5-053"/>
-                        <outlet property="indicator" destination="xKZ-1r-QTl" id="Ek1-Ap-tzl"/>
-                        <outlet property="logo" destination="cIm-0w-up9" id="NIA-pK-xqf"/>
+                        <outlet property="button" destination="Jux-Tt-Jr9" id="JlU-X5-mkw"/>
+                        <outlet property="buttonConstraint" destination="CMl-IG-s6J" id="MU6-aT-C83"/>
+                        <outlet property="buttonOffsetConstraint" destination="1mv-y2-2sB" id="rp5-Qu-L8d"/>
+                        <outlet property="indicator" destination="xKZ-1r-QTl" id="gdC-cl-yzK"/>
+                        <outlet property="logo" destination="cIm-0w-up9" id="a9O-6e-2Au"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PKn-6a-uzz" userLabel="First Responder" sceneMemberID="firstResponder"/>
