@@ -16,11 +16,6 @@ class ACCollectionViewCell: UICollectionViewCell {
     private var text: String = ""
     private var imageResource = ACImageResource()
     
-    override func layoutSubviews() {
-        
-        super.layoutSubviews()
-    }
-    
     private var eventsAppearance: ACAppearance.Events!
     private var viewController: UIViewController!
     private var tab: ACTab!
