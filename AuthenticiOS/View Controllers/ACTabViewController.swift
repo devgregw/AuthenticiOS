@@ -14,7 +14,7 @@ class ACTabViewController: UIViewController {
     
     @IBOutlet weak var stackView: UIStackView!
     
-    private let tab: AuthenticTab?
+    private let tab: ACTab?
     
     private var wallpaperManager: ACWallpaperCollectionViewManager!
     
@@ -27,7 +27,7 @@ class ACTabViewController: UIViewController {
         }
     }
     
-    public static func present(tab: AuthenticTab) {
+    public static func present(tab: ACTab) {
         if tab.action != nil {
             tab.action!.invoke(viewController: AppDelegate.getTopmostViewController())
             return
@@ -36,10 +36,10 @@ class ACTabViewController: UIViewController {
     }
     
     class ACWallpaperCollectionViewManager : NSObject, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-        private let elements: [AuthenticElement]
-        private let t: AuthenticTab
+        private let elements: [ACElement]
+        private let t: ACTab
         
-        init(_ elements: [AuthenticElement], _ t: AuthenticTab) {
+        init(_ elements: [ACElement], _ t: ACTab) {
             self.elements = elements
             self.t = t
         }
@@ -50,23 +50,7 @@ class ACTabViewController: UIViewController {
         
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "wallpaper", for: indexPath) as! ACImageCollectionViewCell
-            cell.setImage(ImageResource(dict: elements[indexPath.item].getProperty("image") as! NSDictionary), viewController: AppDelegate.getTopmostViewController())
-            //let image = UIImageView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: collectionView.bounds.width / 2, height: collectionView.bounds.width / 2)))
-            //image.contentMode = .scaleAspectFill
-            /*image.sd_setImage(with: Storage.storage().reference().child(ImageResource(dict: elements[indexPath.item].getProperty("image") as! NSDictionary).imageName), placeholderImage: nil, completion: { (i, e, c, r) in
-                UIView.animate(withDuration: 0.3, animations: {
-                    image.alpha = 1
-                })
-            })
-            cell.backgroundColor = UIColor.blue
-            cell.subviews.forEach {v in v.removeFromSuperview()}
-            cell.addSubview(image)
-            cell.addConstraints([
-                NSLayoutConstraint(item: image, attribute: .leading, relatedBy: .equal, toItem: cell, attribute: .leading, multiplier: 1, constant: 0),
-                NSLayoutConstraint(item: image, attribute: .trailing, relatedBy: .equal, toItem: cell, attribute: .trailing, multiplier: 1, constant: 0),
-                NSLayoutConstraint(item: image, attribute: .top, relatedBy: .equal, toItem: cell, attribute: .top, multiplier: 1, constant: 0),
-                NSLayoutConstraint(item: image, attribute: .bottom, relatedBy: .equal, toItem: cell, attribute: .bottom, multiplier: 1, constant: 0)
-            ])*/
+            cell.setImage(ACImageResource(dict: elements[indexPath.item].getProperty("image") as! NSDictionary), viewController: AppDelegate.getTopmostViewController())
             return cell
         }
         
@@ -113,7 +97,7 @@ class ACTabViewController: UIViewController {
         if (!self.tab!.hideHeader) {
             let i = UIImageView()
             i.contentMode = .scaleAspectFit
-            Utilities.loadFirebase(image: self.tab!.header.imageName, into: i)
+            self.tab!.header.load(intoImageView: i, fadeIn: true, setSize: true)
             self.stackView.addArrangedSubview(i)
         }
         if (self.tab!.specialType != nil) {
@@ -129,7 +113,7 @@ class ACTabViewController: UIViewController {
                 self.stackView.addArrangedSubview(element.getView(viewController: self))
             })
             if !UIDevice.current.isiPhoneX {
-                self.stackView.addArrangedSubview(AuthenticElement.createSeparator(visible: false))
+                self.stackView.addArrangedSubview(ACElement.createSeparator(visible: false))
             }
         }
         self.view.setNeedsLayout()
@@ -141,7 +125,7 @@ class ACTabViewController: UIViewController {
         //initLayout()
     }
     
-    init(tab: AuthenticTab) {
+    init(tab: ACTab) {
         self.tab = tab
         super.init(nibName: "ACTabViewController", bundle: Bundle.main)
         self.title = tab.title

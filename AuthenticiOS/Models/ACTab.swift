@@ -1,5 +1,5 @@
 //
-//  AuthenticTab.swift
+//  ACTab.swift
 //  AuthenticiOS
 //
 //  Created by Greg Whatley on 1/6/18.
@@ -13,11 +13,11 @@ class ACTab {
     
     public let title: String
     
-    public let header: ImageResource
+    public let header: ACImageResource
     
     public let index: Int
     
-    public let elements: [AuthenticElement]
+    public let elements: [ACElement]
     
     public let hideHeader: Bool
     
@@ -25,7 +25,7 @@ class ACTab {
     
     private let visibilityRules: NSDictionary
     
-    public let action: AuthenticButtonAction?
+    public let action: ACButtonAction?
     
     public let specialType: String?
     
@@ -50,9 +50,9 @@ class ACTab {
     init(dict: NSDictionary) {
         self.id = dict.value(forKey: "id", default: "INVALID")
         self.title = dict.value(forKey: "title", default: "INVALID")
-        self.header = ImageResource(dict: dict.value(forKey: "header", default: NSDictionary()))
+        self.header = ACImageResource(dict: dict.value(forKey: "header", default: NSDictionary()))
         self.index = dict.value(forKey: "index", default: 0)
-        self.elements = (dict.value(forKey: "elements", default: NSArray())).filter({element in (element as? NSDictionary) != nil}).map({ element in AuthenticElement(dict: element as! NSDictionary) })
+        self.elements = (dict.value(forKey: "elements", default: NSArray())).filter({element in (element as? NSDictionary) != nil}).map({ element in ACElement(dict: element as! NSDictionary) })
         self.hideHeader = dict.value(forKey: "hideHeader", default: false)
         self.hideTitle = dict.value(forKey: "hideTitle", default: false)
         self.visibilityRules = dict.value(forKey: "visibility", default: NSDictionary())
@@ -60,7 +60,7 @@ class ACTab {
         if dict.contains(where: { (k, _) -> Bool in
             return (k as! String) == "action"
         }) {
-            self.action = AuthenticButtonAction(dict: dict.value(forKey: "action") as! NSDictionary)
+            self.action = ACButtonAction(dict: dict.value(forKey: "action") as! NSDictionary)
         } else {
             self.action = nil
         }

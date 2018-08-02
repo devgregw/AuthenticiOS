@@ -1,5 +1,5 @@
 //
-//  RecurrenceRule.swift
+//  ACRecurrenceRule.swift
 //  AuthenticiOS
 //
 //  Created by Greg Whatley on 4/17/18.
@@ -9,7 +9,7 @@
 import Foundation
 import EventKit
 
-class RecurrenceRule {
+class ACRecurrenceRule {
     class Occurrence {
         public let startDate: Date
         
@@ -134,7 +134,7 @@ class RecurrenceRule {
                 list.append(Occurrence(start: addInterval(to: max.startDate), end: addInterval(to: max.endDate)))
             }
         } else {
-            return RecurrenceRule(freq: frequency, interval: interval, end: nil, count: 30).getOccurrences(initialStart: s, initialEnd: e)
+            return ACRecurrenceRule(freq: frequency, interval: interval, end: nil, count: 30).getOccurrences(initialStart: s, initialEnd: e)
         }
         return list
     }*/

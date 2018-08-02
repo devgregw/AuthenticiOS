@@ -22,7 +22,7 @@ class ACWallpaperPreviewViewController: UIViewController {
         })
     }
     
-    private let imageName: String
+    private let imageResource: ACImageResource
     private var loadingAlert: UIAlertController!
     
     override var prefersStatusBarHidden: Bool {
@@ -43,8 +43,7 @@ class ACWallpaperPreviewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //visualEffectView.layer.cornerRadius = 16
-        Utilities.loadFirebase(image: imageName, into: imageView)
+        imageResource.load(intoImageView: imageView, fadeIn: false, setSize: false, scaleDownLargeImages: false)
         loadingAlert = UIAlertController(title: nil, message: "Saving image...", preferredStyle: .alert)
         let indicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
         indicator.hidesWhenStopped = true
@@ -53,14 +52,14 @@ class ACWallpaperPreviewViewController: UIViewController {
         loadingAlert.view.addSubview(indicator)
     }
 
-    init(imageName: String) {
-        self.imageName = imageName
+    init(imageResource: ACImageResource) {
+        self.imageResource = imageResource
         super.init(nibName: "ACWallpaperPreviewViewController", bundle: Bundle.main)
         
     }
     
     required init?(coder aDecoder: NSCoder) {
-        self.imageName = ""
+        self.imageResource = ACImageResource()
         super.init(coder: aDecoder)
     }
 }

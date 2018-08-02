@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SDWebImage
 
 class ACThumbnailButtonView: UIView {
     
@@ -20,15 +21,19 @@ class ACThumbnailButtonView: UIView {
         self.vendor = vendor
         self.id = id
         titleLabel.text = title
-        thumbnailImage.sd_setImage(with: URL(string: thumb)!, completed: nil)
+        thumbnailImage.sd_setImage(with: URL(string: thumb)!, placeholderImage: nil, options: SDWebImageOptions.scaleDownLargeImages, progress: nil, completed: { _, _, _, _ in
+            UIView.animate(withDuration: 0.3, animations: {
+                self.thumbnailImage.alpha = 1
+            })
+        })
     }
     
-    init(label: String, thumb: String, action: AuthenticButtonAction) {
+    init(label: String, thumb: ACImageResource, action: ACButtonAction) {
         super.init(frame: CGRect.zero)
         initialize(action: #selector(self.open))
         self.buttonAction = action
         titleLabel.text = label
-        thumbnailImage.sd_setImage(with: Storage.storage().reference().child(thumb))
+        thumb.load(intoImageView: thumbnailImage, fadeIn: true, setSize: false)
     }
     
     override init(frame: CGRect) {
@@ -42,7 +47,7 @@ class ACThumbnailButtonView: UIView {
     private var vendor: String!
     private var id: String!
     
-    private var buttonAction: AuthenticButtonAction!
+    private var buttonAction: ACButtonAction!
     
     private var title: String!
     

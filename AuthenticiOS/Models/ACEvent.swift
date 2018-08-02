@@ -1,5 +1,5 @@
 //
-//  AuthenticEvent.swift
+//  ACEvent.swift
 //  AuthenticiOS
 //
 //  Created by Greg Whatley on 4/17/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AuthenticEvent {
+class ACEvent {
     public let id: String
     
     public let title: String
@@ -17,7 +17,7 @@ class AuthenticEvent {
     
     public let description: String
     
-    public let header: ImageResource
+    public let header: ACImageResource
     
     public let location: String
     
@@ -29,7 +29,7 @@ class AuthenticEvent {
     
     public let hideEndDate: Bool
     
-    public let recurrence: RecurrenceRule?
+    public let recurrence: ACRecurrenceRule?
     
     public let registrationUrl: String?
     
@@ -43,11 +43,11 @@ class AuthenticEvent {
         return Date() > getNextOccurrence().endDate
     }
     
-    public func getNextOccurrence() -> RecurrenceRule.Occurrence {
-        return recurrence?.getNextOccurrence(initialStart: self.startDate, initialEnd: self.endDate) ?? RecurrenceRule.Occurrence(start: self.startDate, end: self.endDate)
+    public func getNextOccurrence() -> ACRecurrenceRule.Occurrence {
+        return recurrence?.getNextOccurrence(initialStart: self.startDate, initialEnd: self.endDate) ?? ACRecurrenceRule.Occurrence(start: self.startDate, end: self.endDate)
     }
     
-    init(id: String, title: String, hideTitle: Bool, description: String, header: ImageResource, location: String, address: String, dateTime: NSDictionary, hideEndDate: Bool, recurrence: NSDictionary?, registration: NSDictionary?) {
+    init(id: String, title: String, hideTitle: Bool, description: String, header: ACImageResource, location: String, address: String, dateTime: NSDictionary, hideEndDate: Bool, recurrence: NSDictionary?, registration: NSDictionary?) {
         self.id = id
         self.title = title
         self.hideTitle = hideTitle
@@ -58,7 +58,7 @@ class AuthenticEvent {
         self.startDate = Date.parseISO8601(string: dateTime["start"] as! String)
         self.endDate = Date.parseISO8601(string: dateTime["end"] as! String)
         self.hideEndDate = hideEndDate
-        self.recurrence = recurrence != nil ? RecurrenceRule(dict: recurrence!) : nil
+        self.recurrence = recurrence != nil ? ACRecurrenceRule(dict: recurrence!) : nil
         if (registration != nil) {
             self.registrationUrl = registration!["url"] as? String
             self.price = registration!["price"] as? Float
@@ -69,6 +69,6 @@ class AuthenticEvent {
     }
     
     convenience init(dict: NSDictionary) {
-        self.init(id: dict.value(forKey: "id", default: "INVALID"), title: dict.value(forKey: "title", default: "INVALID"), hideTitle: dict.value(forKey: "hideTitle", default: false), description: dict.value(forKey: "description", default: "INVALID"), header: ImageResource(dict:                                         dict.value(forKey: "header", default: NSDictionary())), location: dict.value(forKey: "location", default: "INVALID"), address: dict.value(forKey: "address", default: ""), dateTime: dict.value(forKey: "dateTime", default: Utilities.defaultDateTimeDictionary()), hideEndDate: dict.value(forKey: "hideEndDate", default: false), recurrence: dict["recurrence"] as? NSDictionary, registration: dict["registration"] as? NSDictionary)
+        self.init(id: dict.value(forKey: "id", default: "INVALID"), title: dict.value(forKey: "title", default: "INVALID"), hideTitle: dict.value(forKey: "hideTitle", default: false), description: dict.value(forKey: "description", default: "INVALID"), header: ACImageResource(dict:                                         dict.value(forKey: "header", default: NSDictionary())), location: dict.value(forKey: "location", default: "INVALID"), address: dict.value(forKey: "address", default: ""), dateTime: dict.value(forKey: "dateTime", default: NSDictionary.defaultDateTimeDictionary), hideEndDate: dict.value(forKey: "hideEndDate", default: false), recurrence: dict["recurrence"] as? NSDictionary, registration: dict["registration"] as? NSDictionary)
     }
 }

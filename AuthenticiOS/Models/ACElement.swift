@@ -1,5 +1,5 @@
 //
-//  AuthenticElement.swift
+//  ACElement.swift
 //  AuthenticiOS
 //
 //  Created by Greg Whatley on 2/7/18.
@@ -9,19 +9,19 @@
 import Foundation
 import UIKit
 
-class AuthenticElement {
+class ACElement {
     let id: String
     let parent: String
     let type: String
     let properties: NSDictionary
-    private var buttonAction: AuthenticButtonAction? = nil
+    private var buttonAction: ACButtonAction? = nil
     private var buttonViewController: UIViewController? = nil
     
     init(dict: NSDictionary) {
         self.id = dict["id"] as! String
         self.parent = dict["parent"] as! String
         self.type = dict["type"] as! String
-        self.properties = Utilities.literalToNSDictionary(dict.filter({ item -> Bool in
+        self.properties = NSDictionary(literal: dict.filter({ item -> Bool in
             return item.key as! String != "id" && item.key as! String != "parent" && item.key as! String != "type"
         }))
     }
@@ -36,20 +36,20 @@ class AuthenticElement {
         }
     }
     
-    static public func createImage(name: String, enlargable: Bool, vc: UIViewController?) -> UIView {
+    static public func createImage(imageResource: ACImageResource, enlargable: Bool, vc: UIViewController?) -> UIView {
         if enlargable {
-            let view = ACEnlargableImageView(imageName: name, viewController: vc!)
+            let view = ACSavableImageView(imageResource: imageResource, viewController: vc!)
             let stack = UIStackView(arrangedSubviews: [createText(text: "Tap to download.", alignment: "left", size: 12, color: UIColor.gray, selectable: false), view])
             stack.axis = .vertical
             return stack
         }
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
-        Utilities.loadFirebase(image: name, into: image)
+        imageResource.load(intoImageView: image, fadeIn: true, setSize: true, scaleDownLargeImages: false)
         return image
     }
     
-    static public func createVideo(provider: String, videoId: String, thumbnail: String, title: String) -> UIView {
+    static public func createVideo(provider: String, videoId: String, thumbnail: String, title: String) -> ACThumbnailButtonView {
         return ACThumbnailButtonView(vendor: provider, id: videoId, thumb: thumbnail, title: title)
     }
     
@@ -112,7 +112,7 @@ class AuthenticElement {
         return label.embedInStackViewWithInsets(top: 5, left: 10, bottom: 0, right: 10)
     }
     
-    static public func createButton(info: AuthenticButtonInfo, viewController: UIViewController, target: Any?, selector: Selector) -> UIStackView {
+    static public func createButton(info: ACButtonInfo, viewController: UIViewController, target: Any?, selector: Selector) -> UIStackView {
         let button = UIButton(type: .system)
         button.backgroundColor = UIColor(red: 0.15, green: 0.15, blue: 0.15, alpha: 1)
         button.setTitleColor(UIColor.white, for: .normal)
@@ -128,8 +128,8 @@ class AuthenticElement {
         return stackView
     }
     
-    static public func createThumbnailButton(info: AuthenticButtonInfo, thumbnail: ImageResource) -> UIView {
-        return ACThumbnailButtonView(label: info.label, thumb: thumbnail.imageName, action: info.action)
+    static public func createThumbnailButton(info: ACButtonInfo, thumbnail: ACImageResource) -> UIView {
+        return ACThumbnailButtonView(label: info.label, thumb: thumbnail, action: info.action)
     }
     
     public static func createSeparator(visible: Bool) -> UIStackView {
@@ -143,7 +143,7 @@ class AuthenticElement {
         return stackView
     }
     
-    private var action: AuthenticButtonAction!
+    private var action: ACButtonAction!
     private var vc: UIViewController!
     
     private var imageIndex = 0
@@ -154,30 +154,30 @@ class AuthenticElement {
     }
     
     @objc public func enlargeImage(_ sender: UIImageView) {
-        AuthenticButtonAction.init(type: "OpenURLAction", paramGroup: 0, params: ["url": "https://accams.devgregw.com/meta/storage/\(images[sender.tag])"]).invoke(viewController: vc)
+        ACButtonAction.init(type: "OpenURLAction", paramGroup: 0, params: ["url": "https://accams.devgregw.com/meta/storage/\(images[sender.tag])"]).invoke(viewController: vc)
     }
     
     func getView(viewController vc: UIViewController) -> UIView {
         self.vc = vc
         switch (type) {
         case "image":
-            return AuthenticElement.createImage(name: ImageResource(dict: getProperty("image") as! NSDictionary).imageName, enlargable: getProperty("enlargeButton") as! Bool, vc: vc)
+            return ACElement.createImage(imageResource: ACImageResource(dict: getProperty("image") as! NSDictionary), enlargable: getProperty("enlargeButton") as! Bool, vc: vc)
         case "video":
             let videoInfo = getProperty("videoInfo") as! NSDictionary
-            return AuthenticElement.createVideo(provider: videoInfo.object(forKey: "provider") as! String, videoId: videoInfo.object(forKey: "id") as! String, thumbnail: videoInfo.object(forKey: "thumbnail") as! String, title: videoInfo.object(forKey: "title") as! String)
+            return ACElement.createVideo(provider: videoInfo.object(forKey: "provider") as! String, videoId: videoInfo.object(forKey: "id") as! String, thumbnail: videoInfo.object(forKey: "thumbnail") as! String, title: videoInfo.object(forKey: "title") as! String)
         case "title":
-            return AuthenticElement.createTitle(text: (getProperty("title") as! String), alignment: getProperty("alignment") as! String, border: true)
+            return ACElement.createTitle(text: (getProperty("title") as! String), alignment: getProperty("alignment") as! String, border: true)
         case "text":
-            return AuthenticElement.createText(text: (getProperty("text") as! String), alignment: getProperty("alignment") as! String)
+            return ACElement.createText(text: (getProperty("text") as! String), alignment: getProperty("alignment") as! String)
         case "button":
-            self.action = AuthenticButtonInfo(dict: getProperty("_buttonInfo") as! NSDictionary).action
-            return AuthenticElement.createButton(info: AuthenticButtonInfo(dict: getProperty("_buttonInfo") as! NSDictionary), viewController: vc, target: self, selector: #selector(self.invoke(_:)))
+            self.action = ACButtonInfo(dict: getProperty("_buttonInfo") as! NSDictionary).action
+            return ACElement.createButton(info: ACButtonInfo(dict: getProperty("_buttonInfo") as! NSDictionary), viewController: vc, target: self, selector: #selector(self.invoke(_:)))
         case "thumbnailButton":
-            return AuthenticElement.createThumbnailButton(info: AuthenticButtonInfo(dict: getProperty("_buttonInfo") as! NSDictionary), thumbnail: ImageResource(dict: getProperty("thumbnail") as! NSDictionary))
+            return ACElement.createThumbnailButton(info: ACButtonInfo(dict: getProperty("_buttonInfo") as! NSDictionary), thumbnail: ACImageResource(dict: getProperty("thumbnail") as! NSDictionary))
         case "separator":
-            return AuthenticElement.createSeparator(visible: getProperty("visible") as! Bool)
+            return ACElement.createSeparator(visible: getProperty("visible") as! Bool)
         default:
-            return AuthenticElement.createText(text: "Unknown element: \(type)", alignment: "left", size: 16, color: UIColor.red)
+            return ACElement.createText(text: "Unknown element: \(type)", alignment: "left", size: 16, color: UIColor.red)
         }
     }
 }

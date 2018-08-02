@@ -1,5 +1,5 @@
 //
-//  AuthenticButtonAction.swift
+//  ACButtonAction.swift
 //  AuthenticiOS
 //
 //  Created by Greg Whatley on 1/6/18.
@@ -13,7 +13,7 @@ import MapKit
 import EventKit
 import SafariServices
 
-class AuthenticButtonAction {
+class ACButtonAction {
     public let type: String
     
     public let paramGroup: Int
@@ -22,7 +22,7 @@ class AuthenticButtonAction {
     
     public let rootDictionary: NSDictionary
     
-    public static let empty = AuthenticButtonAction(type: "__UNDEFINED__", paramGroup: -1, params: [:])
+    public static let empty = ACButtonAction(type: "__UNDEFINED__", paramGroup: -1, params: [:])
     
     public func getProperty(withName name: String) -> Any? {
         return properties[name]
@@ -40,7 +40,7 @@ class AuthenticButtonAction {
             Database.database().reference().child("/tabs/\(self.getProperty(withName: "tabId") as! String)/").observeSingleEvent(of: .value, with: {snapshot in
                 let val = snapshot.value as? NSDictionary
                 if (val != nil) {
-                    ACTabViewController.present(tab: AuthenticTab(dict: val!))
+                    ACTabViewController.present(tab: ACTab(dict: val!))
                 } else {
                     self.presentAlert(title: "Error", message: "We were unable to open the page because it does not exist.", vc: vc)
                 }
@@ -50,7 +50,7 @@ class AuthenticButtonAction {
             Database.database().reference().child("/events/\(self.getProperty(withName: "eventId") as! String)/").observeSingleEvent(of: .value, with: {snapshot in
                 let val = snapshot.value as? NSDictionary
                 if (val != nil) {
-                    ACEventViewController.present(event: AuthenticEvent(dict: val!))
+                    ACEventViewController.present(event: ACEvent(dict: val!))
                 } else {
                     self.presentAlert(title: "Error", message: "We were unable to open the event because it does not exist.", vc: vc)
                 }
@@ -66,10 +66,10 @@ class AuthenticButtonAction {
             break
         case "ShowMapAction":
             let location = getProperty(withName: "address") as! String
-            Utilities.MapInterface.search(forPlace: location)
+            MapInterface.search(forPlace: location)
         case "GetDirectionsAction":
             let address = getProperty(withName: "address") as! String
-            Utilities.MapInterface.getDirections(toAddress: address)
+            MapInterface.getDirections(toAddress: address)
             break
         case "EmailAction":
             let address = getProperty(withName: "emailAddress")
@@ -80,7 +80,7 @@ class AuthenticButtonAction {
             }
             break
         case "AddToCalendarAction":
-            let atcaCompletion = { (start: Date, end: Date, loc: String, title: String, rrule: RecurrenceRule?) in
+            let atcaCompletion = { (start: Date, end: Date, loc: String, title: String, rrule: ACRecurrenceRule?) in
                 let store = EKEventStore()
                 store.requestAccess(to: .event) { (granted, error) in
                     if granted {
@@ -113,7 +113,7 @@ class AuthenticButtonAction {
                 Database.database().reference().child("/events/\(self.getProperty(withName: "eventId") as! String)/").observeSingleEvent(of: .value, with: {snapshot in
                     let val = snapshot.value as? NSDictionary
                     if (val != nil) {
-                        let event = AuthenticEvent(dict: val!)
+                        let event = ACEvent(dict: val!)
                         atcaCompletion(event.startDate, event.endDate, event.address == "" ? event.location : event.address, event.title, event.recurrence)
                     } else {
                         self.presentAlert(title: "Error", message: "We were unable to add this event to your calendar because it does not exist.", vc: vc)

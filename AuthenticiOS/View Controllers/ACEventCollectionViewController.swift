@@ -18,7 +18,7 @@ class ACEventCollectionViewController: UICollectionViewController {
     
     static private var title = ""
     
-    static func present(withAppearance app: AuthenticAppearance.Events) {
+    static func present(withAppearance app: ACAppearance.Events) {
         title = app.title
         AppDelegate.getTopmostViewController().present(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "evroot"), animated: true, completion: nil)
     }
@@ -48,7 +48,7 @@ class ACEventCollectionViewController: UICollectionViewController {
     }
     
     fileprivate var complete = false
-    fileprivate var events: [AuthenticEvent] = []
+    fileprivate var events: [ACEvent] = []
     
     @objc public func refreshData() {
         loadData(wasRefreshed: true)
@@ -66,7 +66,7 @@ class ACEventCollectionViewController: UICollectionViewController {
         eventsRef.observeSingleEvent(of: .value, with: {snapshot in
             let val = snapshot.value as? NSDictionary
             val?.forEach({(key, value) in
-                let event = AuthenticEvent(dict: value as! NSDictionary)
+                let event = ACEvent(dict: value as! NSDictionary)
                 if (!event.getShouldBeHidden()) {
                     self.events.append(event)
                 }

@@ -13,7 +13,7 @@ class ACTextCollectionViewCell: UICollectionViewCell {
         self.subviews.forEach { v in
             v.removeFromSuperview()
         }
-        let label = AuthenticElement.createText(text: text, alignment: "center", size: 18, color: UIColor.black).arrangedSubviews[0]
+        let label = ACElement.createText(text: text, alignment: "center", size: 18, color: UIColor.black).arrangedSubviews[0]
             label.alpha = 1
             self.addSubview(label)
             self.addConstraints([

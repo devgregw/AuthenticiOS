@@ -29,7 +29,7 @@ class ACTabCollectionViewController: UICollectionViewController {
         //self.show(ACAboutViewController(), sender: self)
         /*let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "About This App", style: .default, handler: {a in self.show(ACAboutViewController(), sender: self)}))
-        alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: {a in AuthenticButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": UIApplicationOpenSettingsURLString]).invoke(viewController: self)}))
+        alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: {a in ACButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": UIApplicationOpenSettingsURLString]).invoke(viewController: self)}))
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alert.addAction(cancel)
         alert.preferredAction = cancel
@@ -61,9 +61,9 @@ class ACTabCollectionViewController: UICollectionViewController {
         self.loadData(wasRefreshed: false)
     }
 
-    private var appearance: AuthenticAppearance?
+    private var appearance: ACAppearance?
     private var complete = false
-    private var tabs: [AuthenticTab] = []
+    private var tabs: [ACTab] = []
     
     @objc public func refreshData() {
         loadData(wasRefreshed: true)
@@ -79,13 +79,13 @@ class ACTabCollectionViewController: UICollectionViewController {
         let appRef = Database.database().reference().child("appearance")
         appRef.keepSynced(true)
         appRef.observeSingleEvent(of: .value, with: { appearanceSnapshot in
-            self.appearance = AuthenticAppearance(dict: appearanceSnapshot.value as! NSDictionary)
+            self.appearance = ACAppearance(dict: appearanceSnapshot.value as! NSDictionary)
             let tabsRef = Database.database().reference().child("tabs")
             tabsRef.keepSynced(true)
             tabsRef.observeSingleEvent(of: .value, with: {snapshot in
                 let val = snapshot.value as? NSDictionary
                 val?.forEach({(key, value) in
-                    let tab = AuthenticTab(dict: value as! NSDictionary)
+                    let tab = ACTab(dict: value as! NSDictionary)
                     if (!tab.getShouldBeHidden()) {
                         self.tabs.append(tab)
                     }

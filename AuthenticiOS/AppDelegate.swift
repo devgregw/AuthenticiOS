@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     }
     
     private var launchedItem: UIApplicationShortcutItem?
-    private static var notificationAction: AuthenticButtonAction? = nil
+    private static var notificationAction: ACButtonAction? = nil
     
     var window: UIWindow?
 
@@ -71,7 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
             AppDelegate.notificationAction = nil
             return
         }
-        AppDelegate.notificationAction = AuthenticButtonAction(dict: dict)
+        AppDelegate.notificationAction = ACButtonAction(dict: dict)
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
@@ -156,7 +156,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
             switch (item.type) {
             case "upcoming_events":
                 Database.database().reference().child("appearance").observeSingleEvent(of: .value, with: { appearanceSnapshot in
-                    let appearance = AuthenticAppearance(dict: appearanceSnapshot.value as! NSDictionary)
+                    let appearance = ACAppearance(dict: appearanceSnapshot.value as! NSDictionary)
                     ACEventCollectionViewController.present(withAppearance: appearance.events)
                 })
                 handled = true
@@ -165,14 +165,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
                 let tabId = item.userInfo!["id"] as! String
                 Database.database().reference().child("tabs/\(tabId)").observeSingleEvent(of: .value, with: {snapshot in
                     let val = snapshot.value as! NSDictionary
-                    ACTabViewController.present(tab: AuthenticTab(dict: val))
+                    ACTabViewController.present(tab: ACTab(dict: val))
                     /*if vc is ACHomePageViewController {
                         let nvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "hmroot")
                         vc.present(nvc, animated: true, completion: {
-                            nvc.show(ACTabViewController(tab: AuthenticTab(dict: val)), sender: nil)
+                            nvc.show(ACTabViewController(tab: ACTab(dict: val)), sender: nil)
                         })
                     } else {
-                        vc.show(ACTabViewController(tab: AuthenticTab(dict: val)), sender: nil)
+                        vc.show(ACTabViewController(tab: ACTab(dict: val)), sender: nil)
                     }*/
                 }) { error in AppDelegate.getTopmostViewController().present(UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert), animated: true) }
                 handled = true

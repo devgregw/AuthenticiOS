@@ -1,5 +1,5 @@
 //
-//  AuthenticButtonInfo.swift
+//  ACButtonInfo.swift
 //  AuthenticiOS
 //
 //  Created by Greg Whatley on 1/6/18.
@@ -8,17 +8,17 @@
 
 import Foundation
 
-class AuthenticButtonInfo {
+class ACButtonInfo {
     public let label: String
     
-    public let action: AuthenticButtonAction
+    public let action: ACButtonAction
     
     init(dict: NSDictionary) {
         self.label = dict.value(forKey: "label") as! String
-        self.action = AuthenticButtonAction(dict: dict.value(forKey: "action") as! NSDictionary)
+        self.action = ACButtonAction(dict: dict.value(forKey: "action") as! NSDictionary)
     }
     
-    convenience init(label lbl: String, action a: AuthenticButtonAction) {
+    convenience init(label lbl: String, action a: ACButtonAction) {
         self.init(dict: NSDictionary(dictionary: ["label": lbl, "action": a.rootDictionary]))
     }
 }

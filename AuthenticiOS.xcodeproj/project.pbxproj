@@ -24,20 +24,30 @@
 		FC16001C1FFC4BD6001DF3B5 /* ACTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC16001A1FFC4BD6001DF3B5 /* ACTabViewController.swift */; };
 		FC16001D1FFC4BD6001DF3B5 /* ACTabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC16001B1FFC4BD6001DF3B5 /* ACTabViewController.xib */; };
 		FC2765D820E02122002A342A /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FC2765D720E02122002A342A /* Settings.bundle */; };
-		FC490DD2202BA1F4007F270A /* AuthenticElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC490DD1202BA1F4007F270A /* AuthenticElement.swift */; };
-		FC490DD4202BA7FE007F270A /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC490DD3202BA7FE007F270A /* Utilities.swift */; };
+		FC3A7FDD2112790A00CAFC90 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3A7FDC2112790A00CAFC90 /* UIDevice.swift */; };
+		FC3A7FDF2112792700CAFC90 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3A7FDE2112792700CAFC90 /* Date.swift */; };
+		FC3A7FE12112793600CAFC90 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3A7FE02112793600CAFC90 /* UIView.swift */; };
+		FC3A7FE32112798E00CAFC90 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3A7FE22112798E00CAFC90 /* String.swift */; };
+		FC3A7FE5211279B800CAFC90 /* NSDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3A7FE4211279B800CAFC90 /* NSDictionary.swift */; };
+		FC3A7FE7211279D500CAFC90 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3A7FE6211279D500CAFC90 /* UIViewController.swift */; };
+		FC3A7FE921127AFD00CAFC90 /* VersionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3A7FE821127AFD00CAFC90 /* VersionInfo.swift */; };
+		FC3A7FEB21127B3800CAFC90 /* ACSavableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3A7FEA21127B3800CAFC90 /* ACSavableImageView.swift */; };
+		FC3A7FED21127B4400CAFC90 /* ACInsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3A7FEC21127B4400CAFC90 /* ACInsetLabel.swift */; };
+		FC3A7FEF21127B5200CAFC90 /* MapInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3A7FEE21127B5200CAFC90 /* MapInterface.swift */; };
+		FC3A7FF121127B9A00CAFC90 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3A7FF021127B9A00CAFC90 /* Reachability.swift */; };
+		FC490DD2202BA1F4007F270A /* ACElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC490DD1202BA1F4007F270A /* ACElement.swift */; };
 		FC4CD2A120FE8FA70096ED0D /* ACTextCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC4CD2A020FE8FA60096ED0D /* ACTextCollectionViewCell.xib */; };
 		FC4CD2A320FE94430096ED0D /* ACTextCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4CD2A220FE94430096ED0D /* ACTextCollectionViewCell.swift */; };
-		FC565D102001395B00DE7C9A /* AuthenticTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC565D0F2001395B00DE7C9A /* AuthenticTab.swift */; };
-		FC565D1420013AB600DE7C9A /* AuthenticButtonInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC565D1320013AB600DE7C9A /* AuthenticButtonInfo.swift */; };
-		FC565D1620013ACE00DE7C9A /* AuthenticButtonAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC565D1520013ACE00DE7C9A /* AuthenticButtonAction.swift */; };
+		FC565D102001395B00DE7C9A /* ACTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC565D0F2001395B00DE7C9A /* ACTab.swift */; };
+		FC565D1420013AB600DE7C9A /* ACButtonInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC565D1320013AB600DE7C9A /* ACButtonInfo.swift */; };
+		FC565D1620013ACE00DE7C9A /* ACButtonAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC565D1520013ACE00DE7C9A /* ACButtonAction.swift */; };
 		FC5BF9BC208D18A7002982F1 /* ACEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5BF9BA208D18A7002982F1 /* ACEventViewController.swift */; };
 		FC5BF9BD208D18A7002982F1 /* ACEventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC5BF9BB208D18A7002982F1 /* ACEventViewController.xib */; };
 		FC5BF9C2209D0238002982F1 /* ACAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5BF9C0209D0238002982F1 /* ACAboutViewController.swift */; };
 		FC5BF9C3209D0238002982F1 /* ACAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC5BF9C1209D0238002982F1 /* ACAboutViewController.xib */; };
-		FC5D1436208B7C3B00B0E63E /* AuthenticAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5D1435208B7C3B00B0E63E /* AuthenticAppearance.swift */; };
+		FC5D1436208B7C3B00B0E63E /* ACAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5D1435208B7C3B00B0E63E /* ACAppearance.swift */; };
 		FC5F914320D1731000516095 /* ACCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F914220D1731000516095 /* ACCollectionViewLayout.swift */; };
-		FC5F914520D7FB9800516095 /* ImageResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F914420D7FB9700516095 /* ImageResource.swift */; };
+		FC5F914520D7FB9800516095 /* ACImageResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F914420D7FB9700516095 /* ACImageResource.swift */; };
 		FC5F914720D94FB700516095 /* ACEventCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F914620D94FB700516095 /* ACEventCollectionViewController.swift */; };
 		FC75FB70210A271000E396A8 /* ACVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75FB6E210A271000E396A8 /* ACVideoViewController.swift */; };
 		FC75FB71210A271000E396A8 /* ACVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC75FB6F210A271000E396A8 /* ACVideoViewController.xib */; };
@@ -45,8 +55,8 @@
 		FC75FB75210A7A3600E396A8 /* ACImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC75FB73210A7A3500E396A8 /* ACImageCollectionViewCell.xib */; };
 		FC75FB78210ABE0F00E396A8 /* ACWallpaperPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75FB76210ABE0E00E396A8 /* ACWallpaperPreviewViewController.swift */; };
 		FC75FB79210ABE0F00E396A8 /* ACWallpaperPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC75FB77210ABE0E00E396A8 /* ACWallpaperPreviewViewController.xib */; };
-		FCAD5C12208624CC0010B5C9 /* AuthenticEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD5C11208624CC0010B5C9 /* AuthenticEvent.swift */; };
-		FCAD5C14208628FF0010B5C9 /* RecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD5C13208628FF0010B5C9 /* RecurrenceRule.swift */; };
+		FCAD5C12208624CC0010B5C9 /* ACEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD5C11208624CC0010B5C9 /* ACEvent.swift */; };
+		FCAD5C14208628FF0010B5C9 /* ACRecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD5C13208628FF0010B5C9 /* ACRecurrenceRule.swift */; };
 		FCBD36FA20BC93160066ED19 /* ACLivestreamCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD36F820BC93160066ED19 /* ACLivestreamCollectionViewCell.swift */; };
 		FCBD36FB20BC93160066ED19 /* ACLivestreamCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBD36F920BC93160066ED19 /* ACLivestreamCollectionViewCell.xib */; };
 		FCF184102102123700C9E37A /* ACThumbnailButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCF1840F2102123700C9E37A /* ACThumbnailButtonView.xib */; };
@@ -76,21 +86,31 @@
 		FC16001A1FFC4BD6001DF3B5 /* ACTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabViewController.swift; sourceTree = "<group>"; };
 		FC16001B1FFC4BD6001DF3B5 /* ACTabViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACTabViewController.xib; sourceTree = "<group>"; };
 		FC2765D720E02122002A342A /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		FC490DD1202BA1F4007F270A /* AuthenticElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticElement.swift; sourceTree = "<group>"; };
-		FC490DD3202BA7FE007F270A /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		FC3A7FDC2112790A00CAFC90 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
+		FC3A7FDE2112792700CAFC90 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		FC3A7FE02112793600CAFC90 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		FC3A7FE22112798E00CAFC90 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		FC3A7FE4211279B800CAFC90 /* NSDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSDictionary.swift; sourceTree = "<group>"; };
+		FC3A7FE6211279D500CAFC90 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		FC3A7FE821127AFD00CAFC90 /* VersionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionInfo.swift; sourceTree = "<group>"; };
+		FC3A7FEA21127B3800CAFC90 /* ACSavableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACSavableImageView.swift; sourceTree = "<group>"; };
+		FC3A7FEC21127B4400CAFC90 /* ACInsetLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACInsetLabel.swift; sourceTree = "<group>"; };
+		FC3A7FEE21127B5200CAFC90 /* MapInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapInterface.swift; sourceTree = "<group>"; };
+		FC3A7FF021127B9A00CAFC90 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		FC490DD1202BA1F4007F270A /* ACElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACElement.swift; sourceTree = "<group>"; };
 		FC4CD2A020FE8FA60096ED0D /* ACTextCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACTextCollectionViewCell.xib; sourceTree = "<group>"; };
 		FC4CD2A220FE94430096ED0D /* ACTextCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTextCollectionViewCell.swift; sourceTree = "<group>"; };
 		FC565D0A200118A400DE7C9A /* AuthenticiOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AuthenticiOS.entitlements; sourceTree = "<group>"; };
-		FC565D0F2001395B00DE7C9A /* AuthenticTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticTab.swift; sourceTree = "<group>"; };
-		FC565D1320013AB600DE7C9A /* AuthenticButtonInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticButtonInfo.swift; sourceTree = "<group>"; };
-		FC565D1520013ACE00DE7C9A /* AuthenticButtonAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticButtonAction.swift; sourceTree = "<group>"; };
+		FC565D0F2001395B00DE7C9A /* ACTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTab.swift; sourceTree = "<group>"; };
+		FC565D1320013AB600DE7C9A /* ACButtonInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACButtonInfo.swift; sourceTree = "<group>"; };
+		FC565D1520013ACE00DE7C9A /* ACButtonAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACButtonAction.swift; sourceTree = "<group>"; };
 		FC5BF9BA208D18A7002982F1 /* ACEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACEventViewController.swift; sourceTree = "<group>"; };
 		FC5BF9BB208D18A7002982F1 /* ACEventViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACEventViewController.xib; sourceTree = "<group>"; };
 		FC5BF9C0209D0238002982F1 /* ACAboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACAboutViewController.swift; sourceTree = "<group>"; };
 		FC5BF9C1209D0238002982F1 /* ACAboutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACAboutViewController.xib; sourceTree = "<group>"; };
-		FC5D1435208B7C3B00B0E63E /* AuthenticAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticAppearance.swift; sourceTree = "<group>"; };
+		FC5D1435208B7C3B00B0E63E /* ACAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACAppearance.swift; sourceTree = "<group>"; };
 		FC5F914220D1731000516095 /* ACCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACCollectionViewLayout.swift; sourceTree = "<group>"; };
-		FC5F914420D7FB9700516095 /* ImageResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResource.swift; sourceTree = "<group>"; };
+		FC5F914420D7FB9700516095 /* ACImageResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACImageResource.swift; sourceTree = "<group>"; };
 		FC5F914620D94FB700516095 /* ACEventCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACEventCollectionViewController.swift; sourceTree = "<group>"; };
 		FC75FB6E210A271000E396A8 /* ACVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACVideoViewController.swift; sourceTree = "<group>"; };
 		FC75FB6F210A271000E396A8 /* ACVideoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACVideoViewController.xib; sourceTree = "<group>"; };
@@ -98,8 +118,8 @@
 		FC75FB73210A7A3500E396A8 /* ACImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		FC75FB76210ABE0E00E396A8 /* ACWallpaperPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACWallpaperPreviewViewController.swift; sourceTree = "<group>"; };
 		FC75FB77210ABE0E00E396A8 /* ACWallpaperPreviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACWallpaperPreviewViewController.xib; sourceTree = "<group>"; };
-		FCAD5C11208624CC0010B5C9 /* AuthenticEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticEvent.swift; sourceTree = "<group>"; };
-		FCAD5C13208628FF0010B5C9 /* RecurrenceRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurrenceRule.swift; sourceTree = "<group>"; };
+		FCAD5C11208624CC0010B5C9 /* ACEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACEvent.swift; sourceTree = "<group>"; };
+		FCAD5C13208628FF0010B5C9 /* ACRecurrenceRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACRecurrenceRule.swift; sourceTree = "<group>"; };
 		FCBD36F820BC93160066ED19 /* ACLivestreamCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLivestreamCollectionViewCell.swift; sourceTree = "<group>"; };
 		FCBD36F920BC93160066ED19 /* ACLivestreamCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACLivestreamCollectionViewCell.xib; sourceTree = "<group>"; };
 		FCF1840F2102123700C9E37A /* ACThumbnailButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACThumbnailButtonView.xib; sourceTree = "<group>"; };
@@ -141,11 +161,12 @@
 		2B36305D1FF56BD9002469E5 /* AuthenticiOS */ = {
 			isa = PBXGroup;
 			children = (
+				FC3A7FF221127CD900CAFC90 /* Views */,
+				FC3A7FDA2112768100CAFC90 /* Utilities */,
 				FCFE5CAC20FD24A3009B95F3 /* EffraBold.ttf */,
 				FC5F914120D172D600516095 /* Layouts */,
 				FCBD36F720BC902E0066ED19 /* User Interfaces */,
 				FCBD36F620BC8C280066ED19 /* View Controllers */,
-				FCBD36F520BC8BF40066ED19 /* Cells */,
 				FC565D0E2001394A00DE7C9A /* Models */,
 				2B878E07203356CB0010B549 /* ProximaNova.ttf */,
 				FC03C28020B7637D00D15490 /* EffraRegular.ttf */,
@@ -155,7 +176,6 @@
 				FC0998991FFEA74D00BCAD3A /* full.png */,
 				2BEFD14E1FF5820E0094572A /* GoogleService-Info.plist */,
 				2B36306A1FF56BD9002469E5 /* Info.plist */,
-				FC490DD3202BA7FE007F270A /* Utilities.swift */,
 			);
 			path = AuthenticiOS;
 			sourceTree = "<group>";
@@ -177,17 +197,52 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FC3A7FDA2112768100CAFC90 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				FC3A7FDB2112769500CAFC90 /* Extensions */,
+				FC3A7FE821127AFD00CAFC90 /* VersionInfo.swift */,
+				FC3A7FEE21127B5200CAFC90 /* MapInterface.swift */,
+				FC3A7FF021127B9A00CAFC90 /* Reachability.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		FC3A7FDB2112769500CAFC90 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FC3A7FDC2112790A00CAFC90 /* UIDevice.swift */,
+				FC3A7FDE2112792700CAFC90 /* Date.swift */,
+				FC3A7FE02112793600CAFC90 /* UIView.swift */,
+				FC3A7FE22112798E00CAFC90 /* String.swift */,
+				FC3A7FE4211279B800CAFC90 /* NSDictionary.swift */,
+				FC3A7FE6211279D500CAFC90 /* UIViewController.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		FC3A7FF221127CD900CAFC90 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FCF18411210216EF00C9E37A /* ACThumbnailButtonView.swift */,
+				FC3A7FEA21127B3800CAFC90 /* ACSavableImageView.swift */,
+				FC3A7FEC21127B4400CAFC90 /* ACInsetLabel.swift */,
+				FCBD36F520BC8BF40066ED19 /* Cells */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		FC565D0E2001394A00DE7C9A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				FC565D0F2001395B00DE7C9A /* AuthenticTab.swift */,
-				FC565D1320013AB600DE7C9A /* AuthenticButtonInfo.swift */,
-				FC565D1520013ACE00DE7C9A /* AuthenticButtonAction.swift */,
-				FC490DD1202BA1F4007F270A /* AuthenticElement.swift */,
-				FCAD5C11208624CC0010B5C9 /* AuthenticEvent.swift */,
-				FCAD5C13208628FF0010B5C9 /* RecurrenceRule.swift */,
-				FC5D1435208B7C3B00B0E63E /* AuthenticAppearance.swift */,
-				FC5F914420D7FB9700516095 /* ImageResource.swift */,
+				FC565D0F2001395B00DE7C9A /* ACTab.swift */,
+				FC565D1320013AB600DE7C9A /* ACButtonInfo.swift */,
+				FC565D1520013ACE00DE7C9A /* ACButtonAction.swift */,
+				FC490DD1202BA1F4007F270A /* ACElement.swift */,
+				FCAD5C11208624CC0010B5C9 /* ACEvent.swift */,
+				FCAD5C13208628FF0010B5C9 /* ACRecurrenceRule.swift */,
+				FC5D1435208B7C3B00B0E63E /* ACAppearance.swift */,
+				FC5F914420D7FB9700516095 /* ACImageResource.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -206,7 +261,6 @@
 				FCBD36F820BC93160066ED19 /* ACLivestreamCollectionViewCell.swift */,
 				FC03C28620B8778600D15490 /* ACCollectionViewCell.swift */,
 				FC4CD2A220FE94430096ED0D /* ACTextCollectionViewCell.swift */,
-				FCF18411210216EF00C9E37A /* ACThumbnailButtonView.swift */,
 				FC75FB72210A7A3500E396A8 /* ACImageCollectionViewCell.swift */,
 			);
 			path = Cells;
@@ -423,16 +477,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC3A7FEB21127B3800CAFC90 /* ACSavableImageView.swift in Sources */,
+				FC3A7FE32112798E00CAFC90 /* String.swift in Sources */,
+				FC3A7FEF21127B5200CAFC90 /* MapInterface.swift in Sources */,
 				FC75FB74210A7A3600E396A8 /* ACImageCollectionViewCell.swift in Sources */,
 				FC5F914320D1731000516095 /* ACCollectionViewLayout.swift in Sources */,
 				FC75FB78210ABE0F00E396A8 /* ACWallpaperPreviewViewController.swift in Sources */,
-				FCAD5C14208628FF0010B5C9 /* RecurrenceRule.swift in Sources */,
+				FCAD5C14208628FF0010B5C9 /* ACRecurrenceRule.swift in Sources */,
 				FC03C28320B79FA800D15490 /* ACHomePageViewController.swift in Sources */,
-				FC5F914520D7FB9800516095 /* ImageResource.swift in Sources */,
+				FC5F914520D7FB9800516095 /* ACImageResource.swift in Sources */,
 				FCBD36FA20BC93160066ED19 /* ACLivestreamCollectionViewCell.swift in Sources */,
-				FC565D102001395B00DE7C9A /* AuthenticTab.swift in Sources */,
-				FC565D1420013AB600DE7C9A /* AuthenticButtonInfo.swift in Sources */,
-				FC5D1436208B7C3B00B0E63E /* AuthenticAppearance.swift in Sources */,
+				FC3A7FE5211279B800CAFC90 /* NSDictionary.swift in Sources */,
+				FC565D102001395B00DE7C9A /* ACTab.swift in Sources */,
+				FC565D1420013AB600DE7C9A /* ACButtonInfo.swift in Sources */,
+				FC3A7FED21127B4400CAFC90 /* ACInsetLabel.swift in Sources */,
+				FC3A7FF121127B9A00CAFC90 /* Reachability.swift in Sources */,
+				FC5D1436208B7C3B00B0E63E /* ACAppearance.swift in Sources */,
 				FCF18412210216EF00C9E37A /* ACThumbnailButtonView.swift in Sources */,
 				FC4CD2A320FE94430096ED0D /* ACTextCollectionViewCell.swift in Sources */,
 				FC5BF9C2209D0238002982F1 /* ACAboutViewController.swift in Sources */,
@@ -441,13 +501,17 @@
 				2B36305F1FF56BD9002469E5 /* AppDelegate.swift in Sources */,
 				FC5BF9BC208D18A7002982F1 /* ACEventViewController.swift in Sources */,
 				FC75FB70210A271000E396A8 /* ACVideoViewController.swift in Sources */,
-				FC565D1620013ACE00DE7C9A /* AuthenticButtonAction.swift in Sources */,
-				FC490DD2202BA1F4007F270A /* AuthenticElement.swift in Sources */,
+				FC565D1620013ACE00DE7C9A /* ACButtonAction.swift in Sources */,
+				FC490DD2202BA1F4007F270A /* ACElement.swift in Sources */,
 				FC16001C1FFC4BD6001DF3B5 /* ACTabViewController.swift in Sources */,
+				FC3A7FDD2112790A00CAFC90 /* UIDevice.swift in Sources */,
 				FC03C28820B8778600D15490 /* ACCollectionViewCell.swift in Sources */,
-				FC490DD4202BA7FE007F270A /* Utilities.swift in Sources */,
+				FC3A7FE12112793600CAFC90 /* UIView.swift in Sources */,
+				FC3A7FE7211279D500CAFC90 /* UIViewController.swift in Sources */,
 				FC5F914720D94FB700516095 /* ACEventCollectionViewController.swift in Sources */,
-				FCAD5C12208624CC0010B5C9 /* AuthenticEvent.swift in Sources */,
+				FC3A7FDF2112792700CAFC90 /* Date.swift in Sources */,
+				FC3A7FE921127AFD00CAFC90 /* VersionInfo.swift in Sources */,
+				FCAD5C12208624CC0010B5C9 /* ACEvent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,5 +1,5 @@
 //
-//  AuthenticAppearance.swift
+//  ACAppearance.swift
 //  AuthenticiOS
 //
 //  Created by Greg Whatley on 4/21/18.
@@ -8,22 +8,22 @@
 
 import Foundation
 
-class AuthenticAppearance {
+class ACAppearance {
     class Events {
         let title: String
         
         let hideTitle: Bool
         
-        let header: ImageResource
+        let header: ACImageResource
         
-        init(title: String, hideTitle: Bool, header: ImageResource) {
+        init(title: String, hideTitle: Bool, header: ACImageResource) {
             self.title = title
             self.hideTitle = hideTitle
             self.header = header
         }
         
         convenience init(dict: NSDictionary) {
-            self.init(title: dict["title"] as! String, hideTitle: dict["hideTitle"] as! Bool, header: ImageResource(dict: dict["header"] as! NSDictionary))
+            self.init(title: dict["title"] as! String, hideTitle: dict["hideTitle"] as! Bool, header: ACImageResource(dict: dict["header"] as! NSDictionary))
         }
     }
     
