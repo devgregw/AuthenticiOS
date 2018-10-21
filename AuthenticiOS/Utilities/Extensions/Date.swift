@@ -37,9 +37,9 @@ extension Date {
             customFormatter!.calendar = Calendar.autoupdatingCurrent
             customFormatter!.locale = Locale.autoupdatingCurrent
             customFormatter!.timeZone = TimeZone.autoupdatingCurrent
-            customFormatter!.dateStyle = dateStyle
-            customFormatter!.timeStyle = timeStyle
         }
+        customFormatter!.dateStyle = dateStyle
+        customFormatter!.timeStyle = timeStyle
         return customFormatter!.string(from: self)
     }
 }
