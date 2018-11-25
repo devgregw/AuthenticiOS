@@ -24,13 +24,15 @@
 		FC16001C1FFC4BD6001DF3B5 /* ACTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC16001A1FFC4BD6001DF3B5 /* ACTabViewController.swift */; };
 		FC16001D1FFC4BD6001DF3B5 /* ACTabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC16001B1FFC4BD6001DF3B5 /* ACTabViewController.xib */; };
 		FC2765D820E02122002A342A /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FC2765D720E02122002A342A /* Settings.bundle */; };
+		FC333F0F213F6B1100110BAF /* ACTileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC333F0E213F6B1000110BAF /* ACTileView.xib */; };
+		FC333F11213F6B6600110BAF /* ACTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC333F10213F6B6600110BAF /* ACTileView.swift */; };
+		FC333F1321401D0300110BAF /* ACEventPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC333F1221401D0200110BAF /* ACEventPlaceholder.swift */; };
 		FC3A7FDD2112790A00CAFC90 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3A7FDC2112790A00CAFC90 /* UIDevice.swift */; };
 		FC3A7FDF2112792700CAFC90 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3A7FDE2112792700CAFC90 /* Date.swift */; };
 		FC3A7FE12112793600CAFC90 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3A7FE02112793600CAFC90 /* UIView.swift */; };
 		FC3A7FE32112798E00CAFC90 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3A7FE22112798E00CAFC90 /* String.swift */; };
 		FC3A7FE5211279B800CAFC90 /* NSDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3A7FE4211279B800CAFC90 /* NSDictionary.swift */; };
 		FC3A7FE7211279D500CAFC90 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3A7FE6211279D500CAFC90 /* UIViewController.swift */; };
-		FC3A7FE921127AFD00CAFC90 /* VersionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3A7FE821127AFD00CAFC90 /* VersionInfo.swift */; };
 		FC3A7FEB21127B3800CAFC90 /* ACSavableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3A7FEA21127B3800CAFC90 /* ACSavableImageView.swift */; };
 		FC3A7FED21127B4400CAFC90 /* ACInsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3A7FEC21127B4400CAFC90 /* ACInsetLabel.swift */; };
 		FC3A7FEF21127B5200CAFC90 /* MapInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3A7FEE21127B5200CAFC90 /* MapInterface.swift */; };
@@ -43,8 +45,6 @@
 		FC565D1620013ACE00DE7C9A /* ACButtonAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC565D1520013ACE00DE7C9A /* ACButtonAction.swift */; };
 		FC5BF9BC208D18A7002982F1 /* ACEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5BF9BA208D18A7002982F1 /* ACEventViewController.swift */; };
 		FC5BF9BD208D18A7002982F1 /* ACEventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC5BF9BB208D18A7002982F1 /* ACEventViewController.xib */; };
-		FC5BF9C2209D0238002982F1 /* ACAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5BF9C0209D0238002982F1 /* ACAboutViewController.swift */; };
-		FC5BF9C3209D0238002982F1 /* ACAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC5BF9C1209D0238002982F1 /* ACAboutViewController.xib */; };
 		FC5D1436208B7C3B00B0E63E /* ACAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5D1435208B7C3B00B0E63E /* ACAppearance.swift */; };
 		FC5F914320D1731000516095 /* ACCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F914220D1731000516095 /* ACCollectionViewLayout.swift */; };
 		FC5F914520D7FB9800516095 /* ACImageResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5F914420D7FB9700516095 /* ACImageResource.swift */; };
@@ -55,6 +55,8 @@
 		FC75FB75210A7A3600E396A8 /* ACImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC75FB73210A7A3500E396A8 /* ACImageCollectionViewCell.xib */; };
 		FC75FB78210ABE0F00E396A8 /* ACWallpaperPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75FB76210ABE0E00E396A8 /* ACWallpaperPreviewViewController.swift */; };
 		FC75FB79210ABE0F00E396A8 /* ACWallpaperPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC75FB77210ABE0E00E396A8 /* ACWallpaperPreviewViewController.xib */; };
+		FCAC5ADA215FF4000013FD52 /* ACToolbarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAC5AD9215FF4000013FD52 /* ACToolbarView.xib */; };
+		FCAC5ADC215FF7EA0013FD52 /* ACToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAC5ADB215FF7EA0013FD52 /* ACToolbarView.swift */; };
 		FCAD5C12208624CC0010B5C9 /* ACEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD5C11208624CC0010B5C9 /* ACEvent.swift */; };
 		FCAD5C14208628FF0010B5C9 /* ACRecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD5C13208628FF0010B5C9 /* ACRecurrenceRule.swift */; };
 		FCBD36FA20BC93160066ED19 /* ACLivestreamCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD36F820BC93160066ED19 /* ACLivestreamCollectionViewCell.swift */; };
@@ -86,13 +88,15 @@
 		FC16001A1FFC4BD6001DF3B5 /* ACTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabViewController.swift; sourceTree = "<group>"; };
 		FC16001B1FFC4BD6001DF3B5 /* ACTabViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACTabViewController.xib; sourceTree = "<group>"; };
 		FC2765D720E02122002A342A /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		FC333F0E213F6B1000110BAF /* ACTileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACTileView.xib; sourceTree = "<group>"; };
+		FC333F10213F6B6600110BAF /* ACTileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ACTileView.swift; sourceTree = "<group>"; };
+		FC333F1221401D0200110BAF /* ACEventPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACEventPlaceholder.swift; sourceTree = "<group>"; };
 		FC3A7FDC2112790A00CAFC90 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		FC3A7FDE2112792700CAFC90 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		FC3A7FE02112793600CAFC90 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		FC3A7FE22112798E00CAFC90 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		FC3A7FE4211279B800CAFC90 /* NSDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSDictionary.swift; sourceTree = "<group>"; };
 		FC3A7FE6211279D500CAFC90 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
-		FC3A7FE821127AFD00CAFC90 /* VersionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionInfo.swift; sourceTree = "<group>"; };
 		FC3A7FEA21127B3800CAFC90 /* ACSavableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACSavableImageView.swift; sourceTree = "<group>"; };
 		FC3A7FEC21127B4400CAFC90 /* ACInsetLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACInsetLabel.swift; sourceTree = "<group>"; };
 		FC3A7FEE21127B5200CAFC90 /* MapInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapInterface.swift; sourceTree = "<group>"; };
@@ -106,8 +110,6 @@
 		FC565D1520013ACE00DE7C9A /* ACButtonAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACButtonAction.swift; sourceTree = "<group>"; };
 		FC5BF9BA208D18A7002982F1 /* ACEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACEventViewController.swift; sourceTree = "<group>"; };
 		FC5BF9BB208D18A7002982F1 /* ACEventViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACEventViewController.xib; sourceTree = "<group>"; };
-		FC5BF9C0209D0238002982F1 /* ACAboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACAboutViewController.swift; sourceTree = "<group>"; };
-		FC5BF9C1209D0238002982F1 /* ACAboutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACAboutViewController.xib; sourceTree = "<group>"; };
 		FC5D1435208B7C3B00B0E63E /* ACAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACAppearance.swift; sourceTree = "<group>"; };
 		FC5F914220D1731000516095 /* ACCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACCollectionViewLayout.swift; sourceTree = "<group>"; };
 		FC5F914420D7FB9700516095 /* ACImageResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACImageResource.swift; sourceTree = "<group>"; };
@@ -118,6 +120,8 @@
 		FC75FB73210A7A3500E396A8 /* ACImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		FC75FB76210ABE0E00E396A8 /* ACWallpaperPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACWallpaperPreviewViewController.swift; sourceTree = "<group>"; };
 		FC75FB77210ABE0E00E396A8 /* ACWallpaperPreviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACWallpaperPreviewViewController.xib; sourceTree = "<group>"; };
+		FCAC5AD9215FF4000013FD52 /* ACToolbarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACToolbarView.xib; sourceTree = "<group>"; };
+		FCAC5ADB215FF7EA0013FD52 /* ACToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACToolbarView.swift; sourceTree = "<group>"; };
 		FCAD5C11208624CC0010B5C9 /* ACEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACEvent.swift; sourceTree = "<group>"; };
 		FCAD5C13208628FF0010B5C9 /* ACRecurrenceRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACRecurrenceRule.swift; sourceTree = "<group>"; };
 		FCBD36F820BC93160066ED19 /* ACLivestreamCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLivestreamCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -201,7 +205,6 @@
 			isa = PBXGroup;
 			children = (
 				FC3A7FDB2112769500CAFC90 /* Extensions */,
-				FC3A7FE821127AFD00CAFC90 /* VersionInfo.swift */,
 				FC3A7FEE21127B5200CAFC90 /* MapInterface.swift */,
 				FC3A7FF021127B9A00CAFC90 /* Reachability.swift */,
 			);
@@ -224,10 +227,12 @@
 		FC3A7FF221127CD900CAFC90 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FC333F10213F6B6600110BAF /* ACTileView.swift */,
 				FCF18411210216EF00C9E37A /* ACThumbnailButtonView.swift */,
 				FC3A7FEA21127B3800CAFC90 /* ACSavableImageView.swift */,
 				FC3A7FEC21127B4400CAFC90 /* ACInsetLabel.swift */,
 				FCBD36F520BC8BF40066ED19 /* Cells */,
+				FCAC5ADB215FF7EA0013FD52 /* ACToolbarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -243,6 +248,7 @@
 				FCAD5C13208628FF0010B5C9 /* ACRecurrenceRule.swift */,
 				FC5D1435208B7C3B00B0E63E /* ACAppearance.swift */,
 				FC5F914420D7FB9700516095 /* ACImageResource.swift */,
+				FC333F1221401D0200110BAF /* ACEventPlaceholder.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -272,7 +278,6 @@
 				FC03C28420B8770900D15490 /* ACTabCollectionViewController.swift */,
 				FC03C28220B79FA800D15490 /* ACHomePageViewController.swift */,
 				2B3630601FF56BD9002469E5 /* ACHomeViewController.swift */,
-				FC5BF9C0209D0238002982F1 /* ACAboutViewController.swift */,
 				FC16001A1FFC4BD6001DF3B5 /* ACTabViewController.swift */,
 				FC5BF9BA208D18A7002982F1 /* ACEventViewController.swift */,
 				FC5F914620D94FB700516095 /* ACEventCollectionViewController.swift */,
@@ -285,8 +290,8 @@
 		FCBD36F720BC902E0066ED19 /* User Interfaces */ = {
 			isa = PBXGroup;
 			children = (
+				FC333F0E213F6B1000110BAF /* ACTileView.xib */,
 				FC03C28720B8778600D15490 /* ACCollectionViewCell.xib */,
-				FC5BF9C1209D0238002982F1 /* ACAboutViewController.xib */,
 				FC16001B1FFC4BD6001DF3B5 /* ACTabViewController.xib */,
 				FC5BF9BB208D18A7002982F1 /* ACEventViewController.xib */,
 				2B3630671FF56BD9002469E5 /* LaunchScreen.storyboard */,
@@ -297,6 +302,7 @@
 				FC75FB6F210A271000E396A8 /* ACVideoViewController.xib */,
 				FC75FB73210A7A3500E396A8 /* ACImageCollectionViewCell.xib */,
 				FC75FB77210ABE0E00E396A8 /* ACWallpaperPreviewViewController.xib */,
+				FCAC5AD9215FF4000013FD52 /* ACToolbarView.xib */,
 			);
 			path = "User Interfaces";
 			sourceTree = "<group>";
@@ -384,11 +390,12 @@
 				FC09989A1FFEA74E00BCAD3A /* full.png in Resources */,
 				FCF184102102123700C9E37A /* ACThumbnailButtonView.xib in Resources */,
 				FC16001D1FFC4BD6001DF3B5 /* ACTabViewController.xib in Resources */,
+				FCAC5ADA215FF4000013FD52 /* ACToolbarView.xib in Resources */,
 				FC75FB75210A7A3600E396A8 /* ACImageCollectionViewCell.xib in Resources */,
 				FC1045051FFEF5560010F8A1 /* Assets.xcassets in Resources */,
-				FC5BF9C3209D0238002982F1 /* ACAboutViewController.xib in Resources */,
 				FC4CD2A120FE8FA70096ED0D /* ACTextCollectionViewCell.xib in Resources */,
 				2BEFD14F1FF5820E0094572A /* GoogleService-Info.plist in Resources */,
+				FC333F0F213F6B1100110BAF /* ACTileView.xib in Resources */,
 				FCFE5CAD20FD24A5009B95F3 /* EffraBold.ttf in Resources */,
 				FC75FB71210A271000E396A8 /* ACVideoViewController.xib in Resources */,
 				2B3630641FF56BD9002469E5 /* Main.storyboard in Resources */,
@@ -446,7 +453,7 @@
 		};
 		FC746D0B20BDD08200D0ACB3 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -455,7 +462,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\"";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\"\n";
 		};
 		FCBEC4F920C40AD7008A5050 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -468,7 +475,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/upload-symbols\" -gsp \"${PROJECT_DIR}/AuthenticiOS/GoogleService-Info.plist\" -p ios \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"";
+			shellScript = "\"${PODS_ROOT}/Fabric/upload-symbols\" -gsp \"${PROJECT_DIR}/AuthenticiOS/GoogleService-Info.plist\" -p ios \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -489,16 +496,17 @@
 				FCBD36FA20BC93160066ED19 /* ACLivestreamCollectionViewCell.swift in Sources */,
 				FC3A7FE5211279B800CAFC90 /* NSDictionary.swift in Sources */,
 				FC565D102001395B00DE7C9A /* ACTab.swift in Sources */,
+				FC333F11213F6B6600110BAF /* ACTileView.swift in Sources */,
 				FC565D1420013AB600DE7C9A /* ACButtonInfo.swift in Sources */,
 				FC3A7FED21127B4400CAFC90 /* ACInsetLabel.swift in Sources */,
 				FC3A7FF121127B9A00CAFC90 /* Reachability.swift in Sources */,
 				FC5D1436208B7C3B00B0E63E /* ACAppearance.swift in Sources */,
 				FCF18412210216EF00C9E37A /* ACThumbnailButtonView.swift in Sources */,
 				FC4CD2A320FE94430096ED0D /* ACTextCollectionViewCell.swift in Sources */,
-				FC5BF9C2209D0238002982F1 /* ACAboutViewController.swift in Sources */,
 				FC03C28520B8770900D15490 /* ACTabCollectionViewController.swift in Sources */,
 				2B3630611FF56BD9002469E5 /* ACHomeViewController.swift in Sources */,
 				2B36305F1FF56BD9002469E5 /* AppDelegate.swift in Sources */,
+				FC333F1321401D0300110BAF /* ACEventPlaceholder.swift in Sources */,
 				FC5BF9BC208D18A7002982F1 /* ACEventViewController.swift in Sources */,
 				FC75FB70210A271000E396A8 /* ACVideoViewController.swift in Sources */,
 				FC565D1620013ACE00DE7C9A /* ACButtonAction.swift in Sources */,
@@ -507,10 +515,10 @@
 				FC3A7FDD2112790A00CAFC90 /* UIDevice.swift in Sources */,
 				FC03C28820B8778600D15490 /* ACCollectionViewCell.swift in Sources */,
 				FC3A7FE12112793600CAFC90 /* UIView.swift in Sources */,
+				FCAC5ADC215FF7EA0013FD52 /* ACToolbarView.swift in Sources */,
 				FC3A7FE7211279D500CAFC90 /* UIViewController.swift in Sources */,
 				FC5F914720D94FB700516095 /* ACEventCollectionViewController.swift in Sources */,
 				FC3A7FDF2112792700CAFC90 /* Date.swift in Sources */,
-				FC3A7FE921127AFD00CAFC90 /* VersionInfo.swift in Sources */,
 				FCAD5C12208624CC0010B5C9 /* ACEvent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -679,6 +687,7 @@
 				CODE_SIGN_ENTITLEMENTS = AuthenticiOS/AuthenticiOS.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = L586WSJPG7;
 				INFOPLIST_FILE = AuthenticiOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -686,6 +695,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = church.authenticcity.app.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

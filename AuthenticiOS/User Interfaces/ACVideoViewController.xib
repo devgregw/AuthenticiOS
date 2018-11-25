@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ACVideoViewController" customModule="AuthenticiOS" customModuleProvider="target">
             <connections>
+                <outlet property="indicator" destination="0rs-Er-fCi" id="Plk-7r-7Qw"/>
                 <outlet property="view" destination="FVY-3y-UgL" id="auZ-kd-zCQ"/>
                 <outlet property="webView" destination="g77-3H-V9U" id="bOk-0l-BRf"/>
             </connections>
@@ -37,7 +38,7 @@
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="g77-3H-V9U" firstAttribute="top" secondItem="Xcr-2Y-rsj" secondAttribute="top" id="4w3-6T-Vda"/>
                 <constraint firstItem="g77-3H-V9U" firstAttribute="leading" secondItem="Xcr-2Y-rsj" secondAttribute="leading" id="5WD-2U-8NK"/>

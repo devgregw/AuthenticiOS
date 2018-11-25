@@ -64,6 +64,22 @@ class ACHomePageViewController: UIPageViewController, UIPageViewControllerDataSo
         return ACHomePageViewController.controllers[next]
     }
     
+    static public func goToSecondViewController() {
+        instance.view.subviews.forEach { view in
+            if let scrollView = view as? UIScrollView {
+                scrollView.isScrollEnabled = false
+            }
+        }
+        instance.setViewControllers([controllers.last!], direction: .forward, animated: true, completion: { _ in
+            DispatchQueue.main.async {
+                let f = instance.view.frame
+                instance.view.frame = CGRect(x: 0, y: 0, width: f.size.width, height: f.size.height)
+                instance.view.setNeedsLayout()
+                instance.view.layoutIfNeeded()
+            }
+        })
+    }
+    
     static public func returnToFirstViewController() {
         instance.view.subviews.forEach { view in
             if let scrollView = view as? UIScrollView {
@@ -83,17 +99,19 @@ class ACHomePageViewController: UIPageViewController, UIPageViewControllerDataSo
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         guard previousViewControllers.count > 0 else { return }
         // if the transition completed and the view controller we transitioned from is the first view controller
-        if completed && ACHomePageViewController.controllers.index(of: previousViewControllers.first!) == 0 {
-            self.view.subviews.forEach { view in
-                if let scrollView = view as? UIScrollView {
-                    // disable scrolling because it messes with the collection view
-                    scrollView.isScrollEnabled = false
+        DispatchQueue.main.async {
+            if completed && ACHomePageViewController.controllers.index(of: previousViewControllers.first!) == 0 {
+                self.view.subviews.forEach { view in
+                    if let scrollView = view as? UIScrollView {
+                        // disable scrolling because it messes with the collection view
+                        scrollView.isScrollEnabled = false
+                    }
                 }
+                let f = self.view.frame
+                self.view.frame = CGRect(x: 0, y: 0, width: f.size.width, height: f.size.height)
+                self.view.setNeedsLayout()
+                self.view.layoutIfNeeded()
             }
-            let f = view.frame
-            view.frame = CGRect(x: 0, y: 0, width: f.size.width, height: f.size.height)
-            view.setNeedsLayout()
-            view.layoutIfNeeded()
         }
     }
     

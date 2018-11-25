@@ -11,6 +11,13 @@ import Foundation
 import Firebase
 
 class ACLivestreamCollectionViewCell: UICollectionViewCell {
+    static let cellHeight = CGFloat(80)
+    
+    @IBOutlet weak var watchLabel: UILabel!
+    @IBOutlet weak var sundaysLabel: UILabel!
+    @IBOutlet weak var servicesLabel: UILabel!
+    @IBOutlet weak var stackView: UIStackView!
+    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -18,24 +25,18 @@ class ACLivestreamCollectionViewCell: UICollectionViewCell {
     private var vc: UIViewController!
     
     @objc public func openStream() {
-        var components = URLComponents(string: "https://www.youtube.com/watch")!
-        components.queryItems = [URLQueryItem(name: "v", value: self.videoId)]
-        UIApplication.shared.open(components.url!, options: [:], completionHandler: nil)
+        ACButtonAction(type: "OpenYouTubeAction", paramGroup: 0, params: [
+            "videoId": self.videoId,
+            "watchUrl": "https://youtube.com/watch?v=\(self.videoId!)",
+            "youtubeUri": "youtube://\(self.videoId!)"
+        ]).invoke(viewController: vc)
     }
     
     private func displayText(isLive: Bool) {
         DispatchQueue.main.async {
-            let label = (ACElement.createTitle(text: isLive ? "WATCH LIVE ON YOUTUBE" : "SUNDAY AT 6:30 PM", alignment: "center", border: false, size: 22, color: UIColor.black) as! UIStackView).arrangedSubviews[0]
-            label.alpha = 0
-            self.addSubview(label)
-            self.addConstraints([
-                NSLayoutConstraint(item: label, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1, constant: 0),
-                NSLayoutConstraint(item: label, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 1, constant: 0),
-                NSLayoutConstraint(item: label, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0),
-                NSLayoutConstraint(item: label, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0)
-                ])
             UIView.animate(withDuration: 0.3, animations: {
-                label.alpha = 1
+                self.watchLabel.alpha = isLive ? 1 : 0
+                self.stackView.alpha = isLive ? 0 : 1
                 self.activityIndicator.alpha = 0
             }, completion: { _ in
                 self.activityIndicator.stopAnimating()
@@ -46,8 +47,21 @@ class ACLivestreamCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    private func applyFontStyle(to label: UILabel, withFontSize fontSize: CGFloat) {
+        label.attributedText = NSAttributedString(string: label.text!, attributes: [
+            .kern: 2.5,
+            .foregroundColor: UIColor.black,
+            .font: UIFont(name: "Effra", size: fontSize)!
+            ])
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+    }
+    
     public func initialize(withViewController vc: UIViewController) {
         self.vc = vc
+        applyFontStyle(to: watchLabel, withFontSize: CGFloat(22))
+        applyFontStyle(to: sundaysLabel, withFontSize: CGFloat(22))
+        applyFontStyle(to: servicesLabel, withFontSize: CGFloat(18))
         let url = URL(string: "https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCxrYck_z50n5It7ifj1LCjA&type=video&eventType=live&key=AIzaSyB4w3GIY9AUi6cApXAkB76vlG6K6J4d8XE")!
         let trace = Performance.startTrace(name: "check livestream")
         

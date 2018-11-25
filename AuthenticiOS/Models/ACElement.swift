@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import WebKit
+import SafariServices
 
 class ACElement {
     let id: String
@@ -26,8 +28,8 @@ class ACElement {
         }))
     }
     
-    public func getProperty(_ name: String) -> Any {
-        return self.properties[name]!
+    public func getProperty(_ name: String) -> Any? {
+        return self.properties[name]
     }
     
     @objc private func actionButtonClick() {
@@ -143,6 +145,63 @@ class ACElement {
         return stackView
     }
     
+    public static func createTile(title: String, height: Int, header: ACImageResource, action: ACButtonAction, viewController vc: UIViewController) -> UIView {
+        let tile = UINib(nibName: "ACTileView", bundle: Bundle.main).instantiate(withOwner: nil, options: nil)[0] as! ACTileView
+        tile.initialize(withTitle: title, height: height, header: header, action: action, viewController: vc)
+        return tile//ACTileView(withTitle: title, header: header, action: action, viewController: vc)
+    }
+    
+    public static func createToolbar(image: ACImageResource, leftAction: ACButtonAction, rightAction: ACButtonAction, viewController vc: UIViewController) -> UIView {
+        let toolbar = UINib(nibName: "ACToolbarView", bundle: Bundle.main).instantiate(withOwner: nil, options: nil)[0] as! ACToolbarView
+        toolbar.initialize(withImage: image, leftAction: leftAction, rightAction: rightAction, viewController: vc)
+        return toolbar
+    }
+    
+    class ACHTMLWebViewDelegate: NSObject, UIWebViewDelegate {
+        func webViewDidFinishLoad(_ webView: UIWebView) {
+            var js = webView.stringByEvaluatingJavaScript(from: "document.getElementById(\"root\").offsetHeight;")!
+            if js == "" { js = "0" }
+            let height = Double(js).map { CGFloat($0) }!
+            webView.addConstraint(NSLayoutConstraint(item: webView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height))
+        }
+        
+        func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+            if navigationType == .linkClicked {
+                //UIApplication.shared.open(request.url!, options: [:], completionHandler: nil)
+                ACButtonAction(type: "OpenURLAction", paramGroup: 1, params: [
+                    "url": request.url!.absoluteString
+                ]).invoke(viewController: AppDelegate.getTopmostViewController())
+                return false
+            }
+            return true
+        }
+    }
+    
+    class ACNoZoomScrollViewDelegate: NSObject, UIScrollViewDelegate {
+        func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+            return nil
+        }
+    }
+    
+    static let htmlDelegate = ACHTMLWebViewDelegate()
+    static let noZoomDelegate = ACNoZoomScrollViewDelegate()
+    
+    public static func createHTMLReader(code: String) -> UIView {
+        let webView = UIWebView()
+        webView.delegate = htmlDelegate
+        webView.loadHTMLString("<!DOCTYPE html><html><head><style type=\"text/css\">* { font-family: \"Proxima Nova\"; } p {padding-left: 4px; padding-right: 4px; padding-bottom: 1rem;}</style></head><body><div id=\"root\">\(code)<br></div></body></html>", baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
+        webView.scrollView.delegate = noZoomDelegate
+        webView.scrollView.isScrollEnabled = false
+        return webView
+        /*let label = UILabel()
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
+        let html = "<div id=\"root\" style=\"padding: 8px;\">\(code)</div>"
+        label.attributedText = try! NSAttributedString(data: html.data(using: String.Encoding.unicode, allowLossyConversion: true)!, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil)
+        label.font = UIFont(name: "Proxima Nova", size: 18)!
+        return label*/
+    }
+    
     private var action: ACButtonAction!
     private var vc: UIViewController!
     
@@ -176,6 +235,18 @@ class ACElement {
             return ACElement.createThumbnailButton(info: ACButtonInfo(dict: getProperty("_buttonInfo") as! NSDictionary), thumbnail: ACImageResource(dict: getProperty("thumbnail") as! NSDictionary))
         case "separator":
             return ACElement.createSeparator(visible: getProperty("visible") as! Bool)
+        case "tile":
+            return ACElement.createTile(title: getProperty("title") as! String, height: getProperty("height") as? Int ?? 200, header: ACImageResource(dict: getProperty("header") as! NSDictionary), action: ACButtonAction(dict: getProperty("action") as! NSDictionary), viewController: vc)
+        case "toolbar":
+            return ACElement.createToolbar(image: ACImageResource(dict: getProperty("image") as! NSDictionary), leftAction: ACButtonAction(dict: getProperty("leftAction") as! NSDictionary), rightAction: ACButtonAction(dict: getProperty("rightAction") as! NSDictionary), viewController: vc)
+        case "fullExpController":
+            let controller = UIImageView()
+            controller.contentMode = .scaleAspectFill
+            //controller.autoresizingMask = UIViewAutoresizing(rawValue: UInt(UInt8(UIViewAutoresizing.flexibleWidth.rawValue) | UInt8(UIViewAutoresizing.flexibleHeight.rawValue)))
+            ACImageResource(dict: getProperty("image") as! NSDictionary).load(intoImageView: controller, fadeIn: true, setSize: false, scaleDownLargeImages: false)
+            return controller
+        case "html":
+            return ACElement.createHTMLReader(code: getProperty("html") as! String)
         default:
             return ACElement.createText(text: "Unknown element: \(type)", alignment: "left", size: 16, color: UIColor.red)
         }

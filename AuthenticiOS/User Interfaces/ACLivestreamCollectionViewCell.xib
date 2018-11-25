@@ -13,14 +13,37 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ACLivestreamCollectionViewCell" customModule="AuthenticiOS" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="400" height="200"/>
+            <rect key="frame" x="0.0" y="0.0" width="400" height="80"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="400" height="200"/>
+                <rect key="frame" x="0.0" y="0.0" width="400" height="80"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WATCH LIVE ON YOUTUBE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CzN-ct-boi">
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="80"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <stackView opaque="NO" alpha="0.0" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="BJ7-Fm-Ui8">
+                        <rect key="frame" x="0.0" y="10" width="400" height="60"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SUNDAY NIGHT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iWc-BE-9U1">
+                                <rect key="frame" x="139" y="0.0" width="122.5" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THE 5 | THE 7" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPC-ID-cwa">
+                                <rect key="frame" x="146.5" y="30" width="107.5" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
                     <activityIndicatorView contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="UrX-sl-348">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="200"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="80"/>
                         <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </activityIndicatorView>
                 </subviews>
@@ -28,14 +51,26 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="UrX-sl-348" secondAttribute="trailing" id="ADd-cg-Wg6"/>
+                <constraint firstItem="CzN-ct-boi" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="H5j-ij-a5v"/>
+                <constraint firstAttribute="bottom" secondItem="CzN-ct-boi" secondAttribute="bottom" id="HZh-Xe-oa2"/>
                 <constraint firstItem="UrX-sl-348" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Ml7-g9-hPq"/>
+                <constraint firstAttribute="trailing" secondItem="CzN-ct-boi" secondAttribute="trailing" id="Xst-Kg-4Tx"/>
+                <constraint firstItem="BJ7-Fm-Ui8" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="YUF-3h-6uo"/>
                 <constraint firstItem="UrX-sl-348" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="g8L-lA-Emv"/>
                 <constraint firstAttribute="bottom" secondItem="UrX-sl-348" secondAttribute="bottom" id="j6u-uX-KyY"/>
+                <constraint firstAttribute="trailing" secondItem="BJ7-Fm-Ui8" secondAttribute="trailing" id="jCM-Tw-yhb"/>
+                <constraint firstAttribute="bottom" secondItem="BJ7-Fm-Ui8" secondAttribute="bottom" constant="10" id="mhh-zy-8wq"/>
+                <constraint firstItem="CzN-ct-boi" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="neJ-EV-X9r"/>
+                <constraint firstItem="BJ7-Fm-Ui8" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="wVB-uf-adG"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="400" height="200"/>
             <connections>
                 <outlet property="activityIndicator" destination="UrX-sl-348" id="B3T-DA-VU7"/>
+                <outlet property="servicesLabel" destination="PPC-ID-cwa" id="gTh-5u-Mou"/>
+                <outlet property="stackView" destination="BJ7-Fm-Ui8" id="sxC-34-hgU"/>
+                <outlet property="sundaysLabel" destination="iWc-BE-9U1" id="4pf-Jr-IJJ"/>
+                <outlet property="watchLabel" destination="CzN-ct-boi" id="sLI-Pj-RLx"/>
             </connections>
             <point key="canvasLocation" x="111" y="133"/>
         </collectionViewCell>

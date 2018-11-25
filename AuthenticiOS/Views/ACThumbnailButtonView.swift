@@ -21,6 +21,7 @@ class ACThumbnailButtonView: UIView {
         self.vendor = vendor
         self.id = id
         titleLabel.text = title
+        self.thumbnailImage.alpha = 0
         thumbnailImage.sd_setImage(with: URL(string: thumb)!, placeholderImage: nil, options: SDWebImageOptions.scaleDownLargeImages, progress: nil, completed: { _, _, _, _ in
             UIView.animate(withDuration: 0.3, animations: {
                 self.thumbnailImage.alpha = 1

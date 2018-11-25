@@ -16,6 +16,8 @@ class ACTabViewController: UIViewController {
     
     private let tab: ACTab?
     
+    private var alreadyInitialized = false
+    
     private var wallpaperManager: ACWallpaperCollectionViewManager!
     
     private func clearViews() {
@@ -72,6 +74,12 @@ class ACTabViewController: UIViewController {
         }
     }
     
+    private var fullExpAction: NSDictionary!
+    
+    @objc public func runFullExpAction() {
+        ACButtonAction(dict: self.fullExpAction).invoke(viewController: self)
+    }
+    
     private func initLayout(forSpecialType specialType: String) {
         switch (specialType) {
         case "wallpapers":
@@ -88,11 +96,31 @@ class ACTabViewController: UIViewController {
             collectionView.reloadData()
             collectionView.collectionViewLayout.invalidateLayout()
             collectionView.layoutSubviews()
+            break
+        case "fullexp":
+            view.backgroundColor = UIColor.black
+            let controllerElement = self.tab!.elements[0]
+            self.fullExpAction = controllerElement.getProperty("action") as! NSDictionary
+            let controllerView = controllerElement.getView(viewController: self)
+            controllerView.isUserInteractionEnabled = true
+            controllerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.runFullExpAction)))
+            controllerView.clipsToBounds = true
+            self.stackView.addArrangedSubview(controllerView)
+            if let scroll = self.stackView.superview as? UIScrollView {
+                scroll.isScrollEnabled = false
+            }
+            self.view.addConstraints([
+                NSLayoutConstraint(item: controllerView, attribute: .height, relatedBy: .equal, toItem: self.view, attribute: .height, multiplier: 1, constant: 0),
+                NSLayoutConstraint(item: controllerView, attribute: .width, relatedBy: .equal, toItem: self.view, attribute: .width, multiplier: 1, constant: 0)
+            ])
+            break
         default: return
         }
     }
     
     private func initLayout() {
+        guard !self.alreadyInitialized else {return}
+        self.alreadyInitialized = true
         self.clearViews()
         if (!self.tab!.hideHeader) {
             let i = UIImageView()
@@ -122,7 +150,7 @@ class ACTabViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //initLayout()
+        initLayout()
     }
     
     init(tab: ACTab) {
@@ -140,6 +168,5 @@ class ACTabViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         applyDefaultSettings()
-        initLayout()
     }
 }

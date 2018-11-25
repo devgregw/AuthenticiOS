@@ -42,6 +42,10 @@ class ACCollectionViewLayout: UICollectionViewLayout {
         return collectionView.bounds.width - (insets.left + insets.right)
     }
     
+    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        return true
+    }
+    
     override var collectionViewContentSize: CGSize {
         return CGSize(width: contentWidth, height: contentHeight)
     }
@@ -57,10 +61,11 @@ class ACCollectionViewLayout: UICollectionViewLayout {
             xOffset.append(CGFloat(column) * columnWidth)
         }
         var yOffset = [CGFloat](repeating: 0, count: numberOfColumns)
+        contentHeight = 0
         for item in 0 ..< collectionView.numberOfItems(inSection: 0) {
             let indexPath = IndexPath(item: item, section: 0)
             let column = delegate.collectionView(collectionView, columnNumberForCellAtIndexPath: indexPath)
-            let extraOffset = CGFloat(indexPath.item == 1 ? 60 : 0)
+            let extraOffset = CGFloat(indexPath.item == 1 ? ACLivestreamCollectionViewCell.cellHeight : 0)
             let size = delegate.collectionView(collectionView, sizeForCellAtIndexPath: IndexPath(item: item, section: column))
             let frameX = columnWidth * CGFloat(column)
             let frame = CGRect(x: frameX, y: yOffset[column] + extraOffset, width: size.width, height: size.height)

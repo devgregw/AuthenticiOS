@@ -16,9 +16,14 @@ class ACHomeViewController: UIViewController {
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var logo: UIImageView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
+    @IBOutlet weak var modeLabel: UILabel!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
+    }
+    
+    @IBAction func upButtonClick(_ sender: UIButton) {
+        ACHomePageViewController.goToSecondViewController()
     }
     
     private func displayMainUI() {
@@ -44,12 +49,13 @@ class ACHomeViewController: UIViewController {
         versionRef.keepSynced(true)
         versionRef.observeSingleEvent(of: .value, with: { snapshot in
             let value = snapshot.value as! Int
-            print("LOCAL UPDATE CODE: \(VersionInfo.Update)")
+            let buildNumber = Bundle.main.infoDictionary!["CFBundleVersion"] as! String
+            print("LOCAL UPDATE CODE: \(buildNumber)")
             print("REMOTE UPDATE CODE: \(value)")
-            if value > VersionInfo.Update {
+            if value > Int(buildNumber)! {
                 let alert = UIAlertController(title: "Update Available", message: "An update is available for the Authentic City Church app.  We highly recommend that you update to avoid missing out on new features.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Not Now", style: .default, handler: { _ in self.displayMainUI() }))
-                alert.addAction(UIAlertAction(title: "Update", style: .default, handler: { _ in UIApplication.shared.open(URL(string: "itms-apps://phobos.apple.com/WebObjects/MZStore.woa/wa/viewSoftwareUpdate?id=1402645724&mt=8")!, options: [:], completionHandler: nil)
+                alert.addAction(UIAlertAction(title: "Update", style: .default, handler: { _ in UIApplication.shared.open(URL(string: "itms-apps://itunes.apple.com/app/id1402645724")!, options: [:], completionHandler: nil)
                     self.displayMainUI()
                 }))
                 self.present(alert, animated: true, completion: nil)
@@ -78,16 +84,38 @@ class ACHomeViewController: UIViewController {
         self.button.alpha = 0
         self.logo.alpha = 0
         self.indicator.alpha = 0
+        switch (AppDelegate.appMode) {
+        case .Debug:
+            UserDefaults.standard.set("Development", forKey: "sbMode")
+            modeLabel.text = "DEBUG BUILD NOT FOR PRODUCTION\nVERSION \(Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String) BUILD \(Bundle.main.infoDictionary!["CFBundleVersion"] as! String)"
+            break
+        case .TestFlight:
+            UserDefaults.standard.set("TestFlight", forKey: "sbMode")
+            modeLabel.text = "TestFlight Beta Release\nVersion \(Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String) Build \(Bundle.main.infoDictionary!["CFBundleVersion"] as! String)"
+            UIView.animate(withDuration: 3, delay: 5, options: .curveLinear, animations: { self.modeLabel.alpha = 0 }, completion: nil)
+            break
+        default:
+            UserDefaults.standard.set("Production", forKey: "sbMode")
+            modeLabel.text = ""
+            break
+        }
+        UserDefaults.standard.synchronize()
     }
+    
+    private var alreadyCheckedForUpdates = false
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.buttonOffsetConstraint.constant = UIApplication.shared.statusBarFrame.size.height + UIApplication.shared.windows[0].safeAreaInsets.bottom
-        UIView.animate(withDuration: 0.001, animations: {
+        if alreadyCheckedForUpdates {
+            return
+        }
+        UIView.animate(withDuration: 0.001, delay: 0.1, animations: {
             self.view.layoutIfNeeded()
         }) { b in
             self.displayCheckForUpdate()
         }
+        alreadyCheckedForUpdates = true
     }
     
     override func viewDidLoad() {

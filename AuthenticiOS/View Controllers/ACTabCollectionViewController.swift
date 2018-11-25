@@ -25,7 +25,19 @@ class ACTabCollectionViewController: UICollectionViewController {
     }
     
     @IBAction func showMoreOptions(_ sender: UIBarButtonItem) {
-        present(UIActivityViewController(activityItems: [(Messaging.messaging().fcmToken ?? "<unavailable>") as NSString], applicationActivities: nil), animated: true, completion: nil)
+        let alert = UIAlertController(title: "Development Menu", message: "This menu will not be visible to users.\n\nYour FCM Registration Token is:\n\(Messaging.messaging().fcmToken ?? "<unavailable>")", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Switch to \(AppDelegate.useDevelopmentDatabase ? "Production" : "Development") Database", style: .destructive, handler: {_ in
+            AppDelegate.useDevelopmentDatabase = !AppDelegate.useDevelopmentDatabase
+            self.loadData(wasRefreshed: true)
+        }))
+        alert.addAction(UIAlertAction(title: "Share FCM Registration Token", style: .default, handler: {_ in
+            self.present(UIActivityViewController(activityItems: [(Messaging.messaging().fcmToken ?? "<unavailable>") as NSString], applicationActivities: nil), animated: true, completion: nil)
+        }))
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(cancel)
+        alert.preferredAction = cancel
+        present(alert, animated: true, completion: nil)
+        //present(UIActivityViewController(activityItems: [(Messaging.messaging().fcmToken ?? "<unavailable>") as NSString], applicationActivities: nil), animated: true, completion: nil)
         //self.show(ACAboutViewController(), sender: self)
         /*let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "About This App", style: .default, handler: {a in self.show(ACAboutViewController(), sender: self)}))
@@ -38,7 +50,7 @@ class ACTabCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if !UserDefaults.standard.bool(forKey: "devNotifications") {
+        if AppDelegate.appMode == AppMode.Production {
             self.navigationItem.rightBarButtonItem = nil
         }
         applyDefaultSettings()
@@ -64,6 +76,8 @@ class ACTabCollectionViewController: UICollectionViewController {
     private var appearance: ACAppearance?
     private var complete = false
     private var tabs: [ACTab] = []
+    private var appRef: DatabaseReference!
+    private var tabsRef: DatabaseReference!
     
     @objc public func refreshData() {
         loadData(wasRefreshed: true)
@@ -72,43 +86,65 @@ class ACTabCollectionViewController: UICollectionViewController {
     public func loadData(wasRefreshed: Bool) {
         self.tabs = []
         self.complete = false
+        self.collectionView?.reloadData()
         let trace = Performance.startTrace(name: "load tabs")
         if wasRefreshed {
             trace?.incrementMetric("refresh tabs", by: 1)
         }
-        let appRef = Database.database().reference().child("appearance")
+        if appRef != nil {
+            appRef.removeAllObservers()
+        }
+        appRef = Database.database().reference()
+        if AppDelegate.useDevelopmentDatabase {
+            appRef = appRef.child("dev")
+        }
+        appRef = appRef.child("appearance")
         appRef.keepSynced(true)
-        appRef.observeSingleEvent(of: .value, with: { appearanceSnapshot in
+        //appRef.observeSingleEvent(of: .value, with: { appearanceSnapshot in
+        appRef.observe(.value, with: { appearanceSnapshot in
             self.appearance = ACAppearance(dict: appearanceSnapshot.value as! NSDictionary)
-            let tabsRef = Database.database().reference().child("tabs")
-            tabsRef.keepSynced(true)
-            tabsRef.observeSingleEvent(of: .value, with: {snapshot in
-                let val = snapshot.value as? NSDictionary
-                val?.forEach({(key, value) in
-                    let tab = ACTab(dict: value as! NSDictionary)
-                    if (!tab.getShouldBeHidden()) {
-                        self.tabs.append(tab)
-                    }
-                })
-                self.tabs.sort(by: { (a, b) in a.index < b.index })
-                self.complete = true
-                self.collectionView?.reloadData()
-                self.collectionView?.collectionViewLayout.invalidateLayout()
-                if #available(iOS 10.0, *) {
-                    self.collectionView?.refreshControl?.endRefreshing()
-                }
-                var shortcuts = [UIApplicationShortcutItem]()
-                shortcuts.append(UIMutableApplicationShortcutItem(type: "upcoming_events", localizedTitle: "Upcoming Events", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .date), userInfo: nil))
-                self.tabs.prefix(4).forEach({ t in
-                    shortcuts.append(UIMutableApplicationShortcutItem(type: "tab", localizedTitle: t.title.localizedCapitalized, localizedSubtitle: nil, icon: nil, userInfo: ["id": t.id as NSSecureCoding]))
-                })
-                UIApplication.shared.shortcutItems = shortcuts
-                trace?.stop()
-            }) { error in
-                self.present(UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert), animated: true)
-                trace?.stop()
-            }
+            self.collectionView?.reloadData()
+            self.collectionView?.collectionViewLayout.invalidateLayout()
+            self.collectionView?.invalidateIntrinsicContentSize()
         })
+        if tabsRef != nil {
+            tabsRef.removeAllObservers()
+        }
+        tabsRef = Database.database().reference()
+        if AppDelegate.useDevelopmentDatabase {
+            tabsRef = tabsRef.child("dev")
+        }
+        tabsRef = tabsRef.child("tabs")
+        tabsRef.keepSynced(true)
+        //tabsRef.observeSingleEvent(of: .value, with: {snapshot in
+        tabsRef.observe(.value, with: {snapshot in
+            let val = snapshot.value as? NSDictionary
+            self.tabs.removeAll()
+            val?.forEach({(key, value) in
+                let tab = ACTab(dict: value as! NSDictionary)
+                if (!tab.getShouldBeHidden()) {
+                    self.tabs.append(tab)
+                }
+            })
+            self.tabs.sort(by: { (a, b) in a.index < b.index })
+            self.complete = true
+            self.collectionView?.reloadData()
+            self.collectionView?.collectionViewLayout.invalidateLayout()
+            self.collectionView?.invalidateIntrinsicContentSize()
+            if #available(iOS 10.0, *) {
+                self.collectionView?.refreshControl?.endRefreshing()
+            }
+            var shortcuts = [UIApplicationShortcutItem]()
+            shortcuts.append(UIMutableApplicationShortcutItem(type: "upcoming_events", localizedTitle: "Upcoming Events", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .date), userInfo: nil))
+            self.tabs.prefix(4).forEach({ t in
+                shortcuts.append(UIMutableApplicationShortcutItem(type: "tab", localizedTitle: t.title.localizedCapitalized, localizedSubtitle: nil, icon: nil, userInfo: ["id": t.id as NSSecureCoding]))
+            })
+            UIApplication.shared.shortcutItems = shortcuts
+            trace?.stop()
+        }) { error in
+            self.present(UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert), animated: true)
+            trace?.stop()
+        }
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -142,7 +178,7 @@ class ACTabCollectionViewController: UICollectionViewController {
 extension ACTabCollectionViewController : ACCollectionViewLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, sizeForCellAtIndexPath indexPath: IndexPath) -> CGSize {
         if indexPath.item == 0 {
-                return CGSize(width: view.frame.width, height: 60.0)
+                return CGSize(width: view.frame.width, height: ACLivestreamCollectionViewCell.cellHeight)
         }
         let isLeftColumn = indexPath.section == 0
         var tabsInColumn = (isLeftColumn ? self.tabs.filter({t in t.index % 2 == 0}) : self.tabs.filter({t in t.index % 2 > 0})).count
@@ -150,7 +186,7 @@ extension ACTabCollectionViewController : ACCollectionViewLayoutDelegate {
             tabsInColumn += 1
         }
         let fill = (isLeftColumn ? self.appearance!.tabs.fillLeft : self.appearance!.tabs.fillRight) && tabsInColumn <= 4
-        let availableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - navigationController!.navigationBar.frame.height - 60
+        let availableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - navigationController!.navigationBar.frame.height - ACLivestreamCollectionViewCell.cellHeight
         if indexPath.item == 1 {
             let app = appearance!.events
             if fill {
@@ -181,6 +217,7 @@ extension ACTabCollectionViewController : ACCollectionViewLayoutDelegate {
         if indexPath.item == 1 {
             return 1
         }
+        guard indexPath.item - 2 < self.tabs.count else {return 0}
         return self.tabs[indexPath.item - 2].index % 2 == 0 ? 0 : 1
     }
 }

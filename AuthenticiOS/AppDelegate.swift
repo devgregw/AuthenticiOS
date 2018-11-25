@@ -12,6 +12,34 @@ import Foundation
 import AVKit
 import UserNotifications
 
+enum AppMode {
+    case Debug
+    case TestFlight
+    case Production
+}
+
+extension AppDelegate {
+    private static let isTestFlight = Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt"
+    
+    private static var isDebug: Bool {
+        #if DEBUG
+        return true
+        #else
+        return false
+        #endif
+    }
+    
+    static var appMode: AppMode {
+        if isDebug {
+            return .Debug
+        } else if isTestFlight {
+            return .TestFlight
+        } else {
+            return .Production
+        }
+    }
+}
+
 @available(iOS 10, *)
 extension AppDelegate : UNUserNotificationCenterDelegate {
     
@@ -41,8 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     }
     
     public static func updateDevSubscription() {
-        let devNotifications = UserDefaults.standard.bool(forKey: "devNotifications")
-        if devNotifications {
+        if appMode != .Production {
             Messaging.messaging().subscribe(toTopic: "dev")
         } else {
             Messaging.messaging().unsubscribe(fromTopic: "dev")
@@ -51,6 +78,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     
     private var launchedItem: UIApplicationShortcutItem?
     private static var notificationAction: ACButtonAction? = nil
+    
+    public static var useDevelopmentDatabase = false
     
     var window: UIWindow?
 
@@ -82,9 +111,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        AnalyticsConfiguration.shared().setAnalyticsCollectionEnabled(AppDelegate.appMode != AppMode.Debug)
         Messaging.messaging().delegate = self
         Database.database().isPersistenceEnabled = true
-        UserDefaults.standard.set(VersionInfo.FullVersion, forKey: "sbVersion")
+        let infoDict = Bundle.main.infoDictionary!
+        UserDefaults.standard.set("\(infoDict["CFBundleShortVersionString"] as! String) build \(infoDict["CFBundleVersion"] as! String)", forKey: "sbVersion")
         UserDefaults.standard.synchronize()
         application.applicationIconBadgeNumber = 0
         do {

@@ -16,6 +16,8 @@ class ACEventViewController: UIViewController {
     
     private let event: ACEvent?
     
+    private var alreadyInitialized = false
+    
     private func clearViews() {
         while (self.stackView.arrangedSubviews.count > 1) {
             self.stackView.removeArrangedSubview(self.stackView.arrangedSubviews[1])
@@ -51,7 +53,15 @@ class ACEventViewController: UIViewController {
     }
     
     private func initLayout() {
+        guard !self.alreadyInitialized else {return}
+        self.alreadyInitialized = true
         self.clearViews()
+        if let placeholder = self.event! as? ACEventPlaceholder {
+            placeholder.elements!.forEach { element in
+                self.addView(element.getView(viewController: self))
+            }
+            return
+        }
         let i = UIImageView()
         i.contentMode = .scaleAspectFit
         self.event!.header.load(intoImageView: i, fadeIn: true, setSize: true)

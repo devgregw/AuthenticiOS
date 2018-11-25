@@ -30,6 +30,9 @@ class ACTab {
     public let specialType: String?
     
     public func getShouldBeHidden() -> Bool {
+        if (action != nil) {
+            return false
+        }
         if (elements.isEmpty) {
             return true
         }

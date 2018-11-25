@@ -36,6 +36,9 @@ class ACButtonAction {
     
     @objc public func invoke(viewController vc: UIViewController) {
         switch (self.type) {
+        case "OpenEventsPageAction":
+            ACEventCollectionViewController.present(withTitle: "UPCOMING EVENTS")
+            break
         case "OpenTabAction":
             Database.database().reference().child("/tabs/\(self.getProperty(withName: "tabId") as! String)/").observeSingleEvent(of: .value, with: {snapshot in
                 let val = snapshot.value as? NSDictionary
@@ -50,18 +53,61 @@ class ACButtonAction {
             Database.database().reference().child("/events/\(self.getProperty(withName: "eventId") as! String)/").observeSingleEvent(of: .value, with: {snapshot in
                 let val = snapshot.value as? NSDictionary
                 if (val != nil) {
-                    ACEventViewController.present(event: ACEvent(dict: val!))
+                    let event = ACEvent.createNew(dict: val!)
+                    if let placeholder = event as? ACEventPlaceholder {
+                        if placeholder.action != nil {
+                            placeholder.action!.invoke(viewController: vc)
+                        } else if placeholder.elements?.count ?? 0 > 0 {
+                            ACEventViewController.present(event: placeholder)
+                        }
+                    } else {
+                        ACEventViewController.present(event: event)
+                    }
                 } else {
                     self.presentAlert(title: "Error", message: "We were unable to open the event because it does not exist.", vc: vc)
                 }
             }) { error in self.presentAlert(title: "Error", message: "We were unable to access the database.\n\n\(error.localizedDescription as String)", vc: vc) }
             break
         case "OpenURLAction":
-            let url = getProperty(withName: "url") as! String
-            if url.contains("spotify") {
-                UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
+            let urlString = getProperty(withName: "url") as! String
+            let url = URL(string: urlString)!
+            if !urlString.contains("authentic") && (urlString.contains("http://") || urlString.contains("https://")) {
+                let safari = SFSafariViewController(url: url)
+                safari.preferredBarTintColor = .black
+                safari.preferredControlTintColor = .white
+                AppDelegate.getTopmostViewController().present(safari, animated: true, completion: nil)
             } else {
-                AppDelegate.getTopmostViewController().present(SFSafariViewController(url: URL(string: url)!), animated: true, completion: nil)
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                } else {
+                    let alert = UIAlertController(title: "Error", message: "An app to open the URL \(url) was not found.", preferredStyle: .alert)
+                    let action = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
+                    alert.addAction(action)
+                    alert.preferredAction = action
+                    vc.present(alert, animated: true, completion: nil)
+                }
+            }
+            break
+        case "OpenYouTubeAction":
+            let youtubeUri = URL(string: getProperty(withName: "youtubeUri") as! String)!
+            if UIApplication.shared.canOpenURL(URL(string: "youtube://")!) {
+                UIApplication.shared.open(youtubeUri, options: [:], completionHandler: nil)
+            } else {
+                let safari = SFSafariViewController(url: URL(string: getProperty(withName: "watchUrl") as! String)!)
+                safari.preferredBarTintColor = .black
+                safari.preferredControlTintColor = .white
+                AppDelegate.getTopmostViewController().present(safari, animated: true, completion: nil)
+            }
+            break
+        case "OpenSpotifyAction":
+            let spotifyUri = URL(string: getProperty(withName: "spotifyUri") as! String)!
+            if UIApplication.shared.canOpenURL(spotifyUri) {
+                UIApplication.shared.open(spotifyUri, options: [:], completionHandler: nil)
+            } else {
+                let safari = SFSafariViewController(url: URL(string: getProperty(withName: "spotifyUrl") as! String)!)
+                safari.preferredBarTintColor = .black
+                safari.preferredControlTintColor = .white
+                AppDelegate.getTopmostViewController().present(safari, animated: true, completion: nil)
             }
             break
         case "ShowMapAction":
@@ -113,15 +159,16 @@ class ACButtonAction {
                 Database.database().reference().child("/events/\(self.getProperty(withName: "eventId") as! String)/").observeSingleEvent(of: .value, with: {snapshot in
                     let val = snapshot.value as? NSDictionary
                     if (val != nil) {
-                        let event = ACEvent(dict: val!)
+                        let event = ACEvent.createNew(dict: val!)
                         atcaCompletion(event.startDate, event.endDate, event.address == "" ? event.location : event.address, event.title, event.recurrence)
                     } else {
                         self.presentAlert(title: "Error", message: "We were unable to add this event to your calendar because it does not exist.", vc: vc)
                     }
                 }) { error in self.presentAlert(title: "Error", message: "We were unable to access the database.\n\n\(error.localizedDescription as String)", vc: vc) }
             } else if self.paramGroup == 1 {
-                let dates = self.getProperty(withName: "dateTime") as! NSDictionary
-                atcaCompletion(Date.parseISO8601(string: dates["start"] as! String), Date.parseISO8601(string: dates["end"] as! String), (self.getProperty(withName: "location") as! String), (self.getProperty(withName: "title") as! String), nil)
+                let dates = self.getProperty(withName: "dates") as! NSDictionary
+                let rrule = self.getProperty(withName: "recurrence") as? NSDictionary
+                atcaCompletion(Date.parseISO8601(string: dates["start"] as! String), Date.parseISO8601(string: dates["end"] as! String), (self.getProperty(withName: "location") as! String), (self.getProperty(withName: "title") as! String), rrule == nil ? nil : ACRecurrenceRule(dict: rrule!))
             } else {
                 self.presentAlert(title: "Error", message: "We were unable to run this action because an invalid parameter group was specified.\n\n\(self.type): \(self.paramGroup)", vc: vc)
             }

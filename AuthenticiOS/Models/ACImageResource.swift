@@ -38,14 +38,20 @@ class ACImageResource {
         if let url = ACImageResource.urlCache[imageName] {
             completion(URL(string: url)!)
         } else {
-            Storage.storage().reference().child(imageName).downloadURL(completion: {url, _ in
-                ACImageResource.urlCache[self.imageName] = url!.absoluteString
+            var ref = Storage.storage().reference()
+            if (AppDelegate.useDevelopmentDatabase) {
+                ref = ref.child("dev")
+            }
+            ref.child(imageName).downloadURL(completion: {url, _ in
+                if url != nil {
+                    ACImageResource.urlCache[self.imageName] = url!.absoluteString
+                }
                 completion(url)
             })
         }
     }
     
-    func load(intoImageView view: UIImageView, fadeIn fade: Bool, setSize: Bool, scaleDownLargeImages scale: Bool = true) {
+    func load(intoImageView view: UIImageView, fadeIn fade: Bool, setSize: Bool, scaleDownLargeImages scale: Bool = true, completion: @escaping () -> Void = {}) {
         if fade {
             view.alpha = 0
         }
@@ -54,7 +60,18 @@ class ACImageResource {
             view.addConstraint(NSLayoutConstraint(item: view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: newHeight))
         }
         getDownloadURL(completion: { url in
+            guard url != nil else {
+                view.image = UIImage(named: "unknown")
+                completion()
+                if fade {
+                    UIView.animate(withDuration: 0.3, animations: {
+                        view.alpha = 1
+                    })
+                }
+                return
+            }
             view.sd_setImage(with: url, placeholderImage: nil, options: scale ? SDWebImageOptions.scaleDownLargeImages : SDWebImageOptions(), progress: nil, completed: { _, _, _, _ in
+                completion()
                 if fade {
                     UIView.animate(withDuration: 0.3, animations: {
                         view.alpha = 1

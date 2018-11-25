@@ -18,9 +18,15 @@ class ACEventCollectionViewController: UICollectionViewController {
     
     static private var title = ""
     
+    private var eventsRef: DatabaseReference!
+    
+    static func present(withTitle: String) {
+        title = withTitle
+        AppDelegate.automaticPresent(viewController: UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "evroot"))
+    }
+    
     static func present(withAppearance app: ACAppearance.Events) {
-        title = app.title
-        AppDelegate.getTopmostViewController().present(UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "evroot"), animated: true, completion: nil)
+        present(withTitle: app.title)
     }
     
     override func viewDidLoad() {
@@ -57,23 +63,46 @@ class ACEventCollectionViewController: UICollectionViewController {
     public func loadData(wasRefreshed: Bool) {
         self.events = []
         self.complete = false
+        self.collectionView?.reloadData()
         let trace = Performance.startTrace(name: "load events")
         if wasRefreshed {
             trace?.incrementMetric("refresh events", by: 1)
         }
-        let eventsRef = Database.database().reference().child("events")
-        eventsRef.keepSynced(true)
-        eventsRef.observeSingleEvent(of: .value, with: {snapshot in
+        if eventsRef != nil {
+            eventsRef.removeAllObservers()
+        }
+        eventsRef = Database.database().reference()
+        if AppDelegate.useDevelopmentDatabase {
+            eventsRef = eventsRef.child("dev")
+        }
+        eventsRef = eventsRef.child("events")
+        //eventsRef.observeSingleEvent(of: .value, with: {snapshot in
+        eventsRef.observe(.value, with: {snapshot in
             let val = snapshot.value as? NSDictionary
+            var placeholders = [ACEventPlaceholder]()
+            var regularEvents = [ACEvent]()
             val?.forEach({(key, value) in
-                let event = ACEvent(dict: value as! NSDictionary)
-                if (!event.getShouldBeHidden()) {
-                    self.events.append(event)
+                let dict = value as! NSDictionary
+                if (dict.allKeys.contains(where: { (key) -> Bool in
+                    String(describing: key) == "index"
+                })) {
+                    placeholders.append(ACEventPlaceholder(dict: dict))
+                } else {
+                    let event = ACEvent(dict: dict)
+                    if (!event.getShouldBeHidden()) {
+                        regularEvents.append(event)
+                    }
                 }
             })
-            self.events.sort(by: { (a, b) in a.getNextOccurrence().startDate < b.getNextOccurrence().startDate })
+            placeholders.sort(by: { (a, b) in a.index < b.index })
+            regularEvents.sort(by: { (a, b) in a.getNextOccurrence().startDate < b.getNextOccurrence().startDate })
+            self.events.removeAll()
+            self.events.append(contentsOf: placeholders)
+            self.events.append(contentsOf: regularEvents)
             self.complete = true
             self.collectionView?.reloadData()
+            self.collectionView?.collectionViewLayout.invalidateLayout()
+            self.collectionView?.invalidateIntrinsicContentSize()
             if #available(iOS 10.0, *) {
                 self.collectionView?.refreshControl?.endRefreshing()
             }
@@ -132,6 +161,6 @@ extension ACEventCollectionViewController : UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 1
     }
 }

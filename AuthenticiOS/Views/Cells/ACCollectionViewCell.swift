@@ -12,6 +12,7 @@ import FirebaseStorage
 
 class ACCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var tintView: UIView!
     
     private var text: String = ""
     private var imageResource = ACImageResource()
@@ -20,6 +21,8 @@ class ACCollectionViewCell: UICollectionViewCell {
     private var viewController: UIViewController!
     private var tab: ACTab!
     private var event: ACEvent!
+    private var action: ACButtonAction!
+    private var tint: Bool = true
     
     @objc public func presentUpcomingEvents() {
         ACEventCollectionViewController.present(withAppearance: eventsAppearance)
@@ -33,8 +36,17 @@ class ACCollectionViewCell: UICollectionViewCell {
         ACEventViewController.present(event: self.event)
     }
     
+    @objc public func presentEventPlaceholder() {
+        guard let placeholder = event as? ACEventPlaceholder else {return}
+        if placeholder.action != nil {
+            placeholder.action!.invoke(viewController: self.viewController)
+        } else if placeholder.elements?.count ?? 0 > 0 {
+            self.presentEvent()
+        }
+    }
+    
     @objc public func invokeAction() {
-        tab.action?.invoke(viewController: viewController)
+        action.invoke(viewController: viewController)
     }
     
     public func initialize(forUpcomingEvents appearance: ACAppearance.Events, withViewController vc: UIViewController) {
@@ -54,17 +66,32 @@ class ACCollectionViewCell: UICollectionViewCell {
         if tab.action == nil {
             self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.presentTab)))
         } else {
+            self.action = tab.action!
             self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.invokeAction)))
         }
         self.initialize()
     }
     
     public func initialize(forEvent event: ACEvent, withViewController vc: UIViewController) {
-        self.text = event.title
+        self.text = event.hideTitle ? "" : event.title
         self.imageResource = event.header
         self.event = event
         self.viewController = vc
-        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.presentEvent)))
+        self.tint = !event.hideTitle
+        if event is ACEventPlaceholder {
+            self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.presentEventPlaceholder)))
+        } else {
+            self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.presentEvent)))
+        }
+        self.initialize()
+    }
+    
+    public func initialize(withTitle title: String, header: ACImageResource, action: ACButtonAction, viewController vc: UIViewController) {
+        self.text = title
+        self.imageResource = header
+        self.viewController = vc
+        self.action = action
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.invokeAction)))
         self.initialize()
     }
     
@@ -78,6 +105,7 @@ class ACCollectionViewCell: UICollectionViewCell {
             }
         }
         imageResource.load(intoImageView: image, fadeIn: true, setSize: false)
+        self.tintView.alpha = self.tint ? 1 : 0
         let label = (ACElement.createTitle(text: self.text, alignment: "center", border: false, size: 18, color: UIColor.white, bold: true) as! UIStackView).arrangedSubviews[0]
         self.addSubview(label)
         self.constraints.forEach({c in self.removeConstraint(c)})

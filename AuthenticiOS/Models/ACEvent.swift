@@ -68,6 +68,16 @@ class ACEvent {
         }
     }
     
+    static func createNew(dict: NSDictionary) -> ACEvent {
+        if (dict.allKeys.contains(where: { (key) -> Bool in
+            String(describing: key) == "index"
+        })) {
+            return ACEventPlaceholder(dict: dict)
+        } else {
+            return ACEvent(dict: dict)
+        }
+    }
+    
     convenience init(dict: NSDictionary) {
         self.init(id: dict.value(forKey: "id", default: "INVALID"), title: dict.value(forKey: "title", default: "INVALID"), hideTitle: dict.value(forKey: "hideTitle", default: false), description: dict.value(forKey: "description", default: "INVALID"), header: ACImageResource(dict:                                         dict.value(forKey: "header", default: NSDictionary())), location: dict.value(forKey: "location", default: "INVALID"), address: dict.value(forKey: "address", default: ""), dateTime: dict.value(forKey: "dateTime", default: NSDictionary.defaultDateTimeDictionary), hideEndDate: dict.value(forKey: "hideEndDate", default: false), recurrence: dict["recurrence"] as? NSDictionary, registration: dict["registration"] as? NSDictionary)
     }
