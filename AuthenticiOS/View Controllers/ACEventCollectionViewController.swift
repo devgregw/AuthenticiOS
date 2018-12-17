@@ -100,13 +100,15 @@ class ACEventCollectionViewController: UICollectionViewController {
             self.events.append(contentsOf: placeholders)
             self.events.append(contentsOf: regularEvents)
             self.complete = true
-            self.collectionView?.reloadData()
-            self.collectionView?.collectionViewLayout.invalidateLayout()
-            self.collectionView?.invalidateIntrinsicContentSize()
-            if #available(iOS 10.0, *) {
-                self.collectionView?.refreshControl?.endRefreshing()
+            DispatchQueue.main.async {
+                self.collectionView?.reloadData()
+                self.collectionView?.collectionViewLayout.invalidateLayout()
+                self.collectionView?.invalidateIntrinsicContentSize()
+                if #available(iOS 10.0, *) {
+                    self.collectionView?.refreshControl?.endRefreshing()
+                }
+                trace?.stop()
             }
-            trace?.stop()
         }) { error in
             self.present(UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert), animated: true)
             trace?.stop()

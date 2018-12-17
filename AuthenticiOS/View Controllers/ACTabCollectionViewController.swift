@@ -103,9 +103,11 @@ class ACTabCollectionViewController: UICollectionViewController {
         //appRef.observeSingleEvent(of: .value, with: { appearanceSnapshot in
         appRef.observe(.value, with: { appearanceSnapshot in
             self.appearance = ACAppearance(dict: appearanceSnapshot.value as! NSDictionary)
-            self.collectionView?.reloadData()
-            self.collectionView?.collectionViewLayout.invalidateLayout()
-            self.collectionView?.invalidateIntrinsicContentSize()
+            DispatchQueue.main.async {
+                self.collectionView?.reloadData()
+                self.collectionView?.collectionViewLayout.invalidateLayout()
+                self.collectionView?.invalidateIntrinsicContentSize()
+            }
         })
         if tabsRef != nil {
             tabsRef.removeAllObservers()
@@ -128,19 +130,21 @@ class ACTabCollectionViewController: UICollectionViewController {
             })
             self.tabs.sort(by: { (a, b) in a.index < b.index })
             self.complete = true
-            self.collectionView?.reloadData()
-            self.collectionView?.collectionViewLayout.invalidateLayout()
-            self.collectionView?.invalidateIntrinsicContentSize()
-            if #available(iOS 10.0, *) {
-                self.collectionView?.refreshControl?.endRefreshing()
+            DispatchQueue.main.async {
+                self.collectionView?.reloadData()
+                self.collectionView?.collectionViewLayout.invalidateLayout()
+                self.collectionView?.invalidateIntrinsicContentSize()
+                if #available(iOS 10.0, *) {
+                    self.collectionView?.refreshControl?.endRefreshing()
+                }
+                var shortcuts = [UIApplicationShortcutItem]()
+                shortcuts.append(UIMutableApplicationShortcutItem(type: "upcoming_events", localizedTitle: "Upcoming Events", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .date), userInfo: nil))
+                self.tabs.prefix(4).forEach({ t in
+                    shortcuts.append(UIMutableApplicationShortcutItem(type: "tab", localizedTitle: t.title.localizedCapitalized, localizedSubtitle: nil, icon: nil, userInfo: ["id": t.id as NSSecureCoding]))
+                })
+                UIApplication.shared.shortcutItems = shortcuts
+                trace?.stop()
             }
-            var shortcuts = [UIApplicationShortcutItem]()
-            shortcuts.append(UIMutableApplicationShortcutItem(type: "upcoming_events", localizedTitle: "Upcoming Events", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .date), userInfo: nil))
-            self.tabs.prefix(4).forEach({ t in
-                shortcuts.append(UIMutableApplicationShortcutItem(type: "tab", localizedTitle: t.title.localizedCapitalized, localizedSubtitle: nil, icon: nil, userInfo: ["id": t.id as NSSecureCoding]))
-            })
-            UIApplication.shared.shortcutItems = shortcuts
-            trace?.stop()
         }) { error in
             self.present(UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert), animated: true)
             trace?.stop()
