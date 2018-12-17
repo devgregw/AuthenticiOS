@@ -122,12 +122,6 @@ class ACTabViewController: UIViewController {
         guard !self.alreadyInitialized else {return}
         self.alreadyInitialized = true
         self.clearViews()
-        if (!self.tab!.hideHeader) {
-            let i = UIImageView()
-            i.contentMode = .scaleAspectFit
-            self.tab!.header.load(intoImageView: i, fadeIn: true, setSize: true)
-            self.stackView.addArrangedSubview(i)
-        }
         if (self.tab!.specialType != nil) {
             initLayout(forSpecialType: self.tab!.specialType!)
         } else if (self.tab!.elements.count == 0) {
