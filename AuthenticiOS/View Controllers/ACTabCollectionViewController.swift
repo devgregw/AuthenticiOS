@@ -124,7 +124,7 @@ class ACTabCollectionViewController: UICollectionViewController {
             self.tabs.removeAll()
             val?.forEach({(key, value) in
                 let tab = ACTab(dict: value as! NSDictionary)
-                if (!tab.getShouldBeHidden()) {
+                if (tab.isVisible()) {
                     self.tabs.append(tab)
                 }
             })

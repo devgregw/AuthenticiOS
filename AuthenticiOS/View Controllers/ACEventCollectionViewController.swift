@@ -86,10 +86,13 @@ class ACEventCollectionViewController: UICollectionViewController {
                 if (dict.allKeys.contains(where: { (key) -> Bool in
                     String(describing: key) == "index"
                 })) {
-                    placeholders.append(ACEventPlaceholder(dict: dict))
+                    let placeholder = ACEventPlaceholder(dict: dict)
+                    if (placeholder.isVisible()) {
+                        placeholders.append(placeholder)
+                    }
                 } else {
                     let event = ACEvent(dict: dict)
-                    if (!event.getShouldBeHidden()) {
+                    if (event.isVisible()) {
                         regularEvents.append(event)
                     }
                 }

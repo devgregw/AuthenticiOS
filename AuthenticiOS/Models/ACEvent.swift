@@ -39,7 +39,11 @@ class ACEvent {
         return self.registrationUrl != nil && self.price != nil
     }
     
-    public func getShouldBeHidden() -> Bool {
+    public func isVisible() -> Bool {
+        return !getShouldBeHidden()
+    }
+    
+    private func getShouldBeHidden() -> Bool {
         return Date() > getNextOccurrence().endDate
     }
     

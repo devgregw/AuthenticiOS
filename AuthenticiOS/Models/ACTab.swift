@@ -19,8 +19,6 @@ class ACTab {
     
     public let elements: [ACElement]
     
-    public let hideHeader: Bool
-    
     public let hideTitle: Bool
     
     private let visibilityRules: NSDictionary
@@ -29,7 +27,11 @@ class ACTab {
     
     public let specialType: String?
     
-    public func getShouldBeHidden() -> Bool {
+    public func isVisible() -> Bool {
+        return !getShouldBeHidden()
+    }
+    
+    private func getShouldBeHidden() -> Bool {
         if (action != nil) {
             return false
         }
@@ -56,7 +58,6 @@ class ACTab {
         self.header = ACImageResource(dict: dict.value(forKey: "header", default: NSDictionary()))
         self.index = dict.value(forKey: "index", default: 0)
         self.elements = (dict.value(forKey: "elements", default: NSArray())).filter({element in (element as? NSDictionary) != nil}).map({ element in ACElement(dict: element as! NSDictionary) })
-        self.hideHeader = dict.value(forKey: "hideHeader", default: false)
         self.hideTitle = dict.value(forKey: "hideTitle", default: false)
         self.visibilityRules = dict.value(forKey: "visibility", default: NSDictionary())
         self.specialType = dict.value(forKey: "specialType", default: nil)
