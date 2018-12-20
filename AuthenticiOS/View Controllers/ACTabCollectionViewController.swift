@@ -26,26 +26,20 @@ class ACTabCollectionViewController: UICollectionViewController {
     
     @IBAction func showMoreOptions(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "Development Menu", message: "This menu will not be visible to users.\n\nYour FCM Registration Token is:\n\(Messaging.messaging().fcmToken ?? "<unavailable>")", preferredStyle: .actionSheet)
+        alert.popoverPresentationController?.barButtonItem = sender
         alert.addAction(UIAlertAction(title: "Switch to \(AppDelegate.useDevelopmentDatabase ? "Production" : "Development") Database", style: .destructive, handler: {_ in
             AppDelegate.useDevelopmentDatabase = !AppDelegate.useDevelopmentDatabase
             self.loadData(wasRefreshed: true)
         }))
         alert.addAction(UIAlertAction(title: "Share FCM Registration Token", style: .default, handler: {_ in
-            self.present(UIActivityViewController(activityItems: [(Messaging.messaging().fcmToken ?? "<unavailable>") as NSString], applicationActivities: nil), animated: true, completion: nil)
+            let activityController = UIActivityViewController(activityItems: [(Messaging.messaging().fcmToken ?? "<unavailable>") as NSString], applicationActivities: nil)
+            activityController.popoverPresentationController?.barButtonItem = sender
+            self.present(activityController, animated: true, completion: nil)
         }))
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alert.addAction(cancel)
         alert.preferredAction = cancel
         present(alert, animated: true, completion: nil)
-        //present(UIActivityViewController(activityItems: [(Messaging.messaging().fcmToken ?? "<unavailable>") as NSString], applicationActivities: nil), animated: true, completion: nil)
-        //self.show(ACAboutViewController(), sender: self)
-        /*let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "About This App", style: .default, handler: {a in self.show(ACAboutViewController(), sender: self)}))
-        alert.addAction(UIAlertAction(title: "Settings", style: .default, handler: {a in ACButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": UIApplicationOpenSettingsURLString]).invoke(viewController: self)}))
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alert.addAction(cancel)
-        alert.preferredAction = cancel
-        self.present(alert, animated: true, completion: nil)*/
     }
     
     override func viewDidLoad() {

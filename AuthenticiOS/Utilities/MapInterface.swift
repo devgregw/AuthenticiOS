@@ -25,6 +25,10 @@ class MapInterface {
         let openGoogle = {UIApplication.shared.open(google, options: [:], completionHandler: nil)}
         if gmaps && amaps {
             let alert = UIAlertController(title: "Select App", message: nil, preferredStyle: .actionSheet)
+            let topmostView = AppDelegate.getTopmostViewController().view!
+            alert.popoverPresentationController?.sourceView = topmostView
+            alert.popoverPresentationController?.sourceRect = CGRect(x: topmostView.bounds.midX, y: topmostView.bounds.midY, width: 0, height: 0)
+            alert.popoverPresentationController?.permittedArrowDirections = []
             alert.addAction(UIAlertAction(title: "Apple Maps", style: .default, handler: {_ in openApple()}))
             alert.addAction(UIAlertAction(title: "Google Maps", style: .default, handler: {_ in openGoogle()}))
             let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
