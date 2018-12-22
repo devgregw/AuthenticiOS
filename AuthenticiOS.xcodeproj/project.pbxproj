@@ -40,6 +40,7 @@
 		FC490DD2202BA1F4007F270A /* ACElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC490DD1202BA1F4007F270A /* ACElement.swift */; };
 		FC4CD2A120FE8FA70096ED0D /* ACTextCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC4CD2A020FE8FA60096ED0D /* ACTextCollectionViewCell.xib */; };
 		FC4CD2A320FE94430096ED0D /* ACTextCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4CD2A220FE94430096ED0D /* ACTextCollectionViewCell.swift */; };
+		FC535C0921CC06F800FC5FAA /* AnalyticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC535C0821CC06F800FC5FAA /* AnalyticsHelper.swift */; };
 		FC565D102001395B00DE7C9A /* ACTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC565D0F2001395B00DE7C9A /* ACTab.swift */; };
 		FC565D1420013AB600DE7C9A /* ACButtonInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC565D1320013AB600DE7C9A /* ACButtonInfo.swift */; };
 		FC565D1620013ACE00DE7C9A /* ACButtonAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC565D1520013ACE00DE7C9A /* ACButtonAction.swift */; };
@@ -104,6 +105,7 @@
 		FC490DD1202BA1F4007F270A /* ACElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACElement.swift; sourceTree = "<group>"; };
 		FC4CD2A020FE8FA60096ED0D /* ACTextCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACTextCollectionViewCell.xib; sourceTree = "<group>"; };
 		FC4CD2A220FE94430096ED0D /* ACTextCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTextCollectionViewCell.swift; sourceTree = "<group>"; };
+		FC535C0821CC06F800FC5FAA /* AnalyticsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsHelper.swift; sourceTree = "<group>"; };
 		FC565D0A200118A400DE7C9A /* AuthenticiOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AuthenticiOS.entitlements; sourceTree = "<group>"; };
 		FC565D0F2001395B00DE7C9A /* ACTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTab.swift; sourceTree = "<group>"; };
 		FC565D1320013AB600DE7C9A /* ACButtonInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACButtonInfo.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				FC3A7FDB2112769500CAFC90 /* Extensions */,
 				FC3A7FEE21127B5200CAFC90 /* MapInterface.swift */,
 				FC3A7FF021127B9A00CAFC90 /* Reachability.swift */,
+				FC535C0821CC06F800FC5FAA /* AnalyticsHelper.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-AuthenticiOS/Pods-AuthenticiOS-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -423,6 +427,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -516,6 +521,7 @@
 				FC03C28820B8778600D15490 /* ACCollectionViewCell.swift in Sources */,
 				FC3A7FE12112793600CAFC90 /* UIView.swift in Sources */,
 				FCAC5ADC215FF7EA0013FD52 /* ACToolbarView.swift in Sources */,
+				FC535C0921CC06F800FC5FAA /* AnalyticsHelper.swift in Sources */,
 				FC3A7FE7211279D500CAFC90 /* UIViewController.swift in Sources */,
 				FC5F914720D94FB700516095 /* ACEventCollectionViewController.swift in Sources */,
 				FC3A7FDF2112792700CAFC90 /* Date.swift in Sources */,
