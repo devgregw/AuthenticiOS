@@ -29,9 +29,10 @@ class ACTabViewController: UIViewController {
         }
     }
     
-    public static func present(tab: ACTab) {
+    public static func present(tab: ACTab, origin: String, medium: String) {
+        AnalyticsHelper.activatePage(tab: tab, origin: origin, medium: medium)
         if tab.action != nil {
-            tab.action!.invoke(viewController: AppDelegate.getTopmostViewController())
+            tab.action!.invoke(viewController: AppDelegate.getTopmostViewController(), origin: origin)
             return
         }
         AppDelegate.automaticPresent(viewController: ACTabViewController(tab: tab))
@@ -76,8 +77,8 @@ class ACTabViewController: UIViewController {
     
     private var fullExpAction: NSDictionary!
     
-    @objc public func runFullExpAction() {
-        ACButtonAction(dict: self.fullExpAction).invoke(viewController: self)
+    @objc public func runFullExpAction(origin: String) {
+        ACButtonAction(dict: self.fullExpAction).invoke(viewController: self, origin: origin)
     }
     
     private func initLayout(forSpecialType specialType: String) {
@@ -101,7 +102,7 @@ class ACTabViewController: UIViewController {
             view.backgroundColor = UIColor.black
             let controllerElement = self.tab!.elements[0]
             self.fullExpAction = controllerElement.getProperty("action") as! NSDictionary
-            let controllerView = controllerElement.getView(viewController: self)
+            let controllerView = controllerElement.getView(viewController: self, origin: "/tabs/\(self.tab!.id)")
             controllerView.isUserInteractionEnabled = true
             controllerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.runFullExpAction)))
             controllerView.clipsToBounds = true
@@ -132,7 +133,7 @@ class ACTabViewController: UIViewController {
             self.stackView.addArrangedSubview(label)
         } else {
             self.tab!.elements.forEach({ element in
-                self.stackView.addArrangedSubview(element.getView(viewController: self))
+                self.stackView.addArrangedSubview(element.getView(viewController: self, origin: "/tabs/\(self.tab!.id)"))
             })
             if !UIDevice.current.isiPhoneX {
                 self.stackView.addArrangedSubview(ACElement.createSeparator(visible: false))

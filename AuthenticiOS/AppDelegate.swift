@@ -84,7 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     var window: UIWindow?
 
     public static func invokeNotificationAction(withViewController vc: UIViewController) {
-        notificationAction?.invoke(viewController: vc)
+        notificationAction?.invoke(viewController: vc, origin: "notification")
         notificationAction = nil
     }
     
@@ -196,7 +196,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
                 let tabId = item.userInfo!["id"] as! String
                 Database.database().reference().child("tabs/\(tabId)").observeSingleEvent(of: .value, with: {snapshot in
                     let val = snapshot.value as! NSDictionary
-                    ACTabViewController.present(tab: ACTab(dict: val))
+                    ACTabViewController.present(tab: ACTab(dict: val), origin: "shortcut", medium: "shortcut")
                     /*if vc is ACHomePageViewController {
                         let nvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "hmroot")
                         vc.present(nvc, animated: true, completion: {

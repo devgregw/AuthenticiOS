@@ -15,7 +15,10 @@ class ACThumbnailButtonView: UIView {
     @IBOutlet weak var thumbnailImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
-    init(vendor: String, id: String, thumb: String, title: String) {
+    private var origin: String
+    
+    init(vendor: String, id: String, thumb: String, title: String, origin: String) {
+        self.origin = origin
         super.init(frame: CGRect.zero)
         initialize(action: #selector(self.watch))
         self.vendor = vendor
@@ -29,7 +32,8 @@ class ACThumbnailButtonView: UIView {
         })
     }
     
-    init(label: String, thumb: ACImageResource, action: ACButtonAction) {
+    init(label: String, thumb: ACImageResource, action: ACButtonAction, origin: String) {
+        self.origin = origin
         super.init(frame: CGRect.zero)
         initialize(action: #selector(self.open))
         self.buttonAction = action
@@ -38,10 +42,12 @@ class ACThumbnailButtonView: UIView {
     }
     
     override init(frame: CGRect) {
+        self.origin = "::init"
         super.init(frame: frame)
     }
 
     required init?(coder aDecoder: NSCoder) {
+        self.origin = "::init"
         super.init(coder: aDecoder)
     }
     
@@ -53,7 +59,7 @@ class ACThumbnailButtonView: UIView {
     private var title: String!
     
     @objc func open() {
-        buttonAction.invoke(viewController: AppDelegate.getTopmostViewController())
+        buttonAction.invoke(viewController: AppDelegate.getTopmostViewController(), origin: "thumbnailButton:\(origin)")
     }
     
     @objc func watch() {

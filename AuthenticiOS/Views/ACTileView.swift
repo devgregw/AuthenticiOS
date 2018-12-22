@@ -18,20 +18,23 @@ class ACTileView: UIView {
     private var imageResource = ACImageResource()
     private var height: CGFloat = CGFloat(200)
     
+    private var origin: String!
+    
     private var viewController: UIViewController!
     private var action: ACButtonAction!
     
     @objc public func invokeAction() {
-        action.invoke(viewController: viewController)
+        action.invoke(viewController: viewController, origin: "tile:\(origin!)")
     }
     
-    public func initialize(withTitle title: String, height: Int, header: ACImageResource, action: ACButtonAction, viewController vc: UIViewController) {
+    public func initialize(withTitle title: String, height: Int, header: ACImageResource, action: ACButtonAction, viewController vc: UIViewController, origin: String) {
         self.height = CGFloat(height)
         self.text = title
         self.imageResource = header
         self.viewController = vc
         self.action = action
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.invokeAction)))
+        self.origin = origin
         self.initialize()
     }
     

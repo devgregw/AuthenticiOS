@@ -20,18 +20,21 @@ class ACToolbarView: UIView {
     private var imageResource = ACImageResource()
     private var height: CGFloat = CGFloat(200)
     
+    private var origin: String!
+    
     private var viewController: UIViewController!
     private var action: ACButtonAction!
     
     @objc public func invokeLeftAction() {
-        self.leftAction.invoke(viewController: self.viewController)
+        self.leftAction.invoke(viewController: self.viewController, origin: "toolbar:left:\(origin!)")
     }
     
     @objc public func invokeRightAction() {
-        self.rightAction.invoke(viewController: self.viewController)
+        self.rightAction.invoke(viewController: self.viewController, origin: "toolbar:right:\(origin!)")
     }
     
-    public func initialize(withImage header: ACImageResource, leftAction: ACButtonAction, rightAction: ACButtonAction, viewController vc: UIViewController) {
+    public func initialize(withImage header: ACImageResource, leftAction: ACButtonAction, rightAction: ACButtonAction, viewController vc: UIViewController, origin: String) {
+        self.origin = origin
         self.imageResource = header
         self.viewController = vc
         self.leftAction = leftAction

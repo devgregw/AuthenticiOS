@@ -32,12 +32,6 @@ class ACElement {
         return self.properties[name]
     }
     
-    @objc private func actionButtonClick() {
-        if (self.buttonAction != nil && self.buttonViewController != nil) {
-            self.buttonAction!.invoke(viewController: self.buttonViewController!)
-        }
-    }
-    
     static public func createImage(imageResource: ACImageResource, enlargable: Bool, vc: UIViewController?) -> UIView {
         if enlargable {
             let view = ACSavableImageView(imageResource: imageResource, viewController: vc!)
@@ -51,8 +45,8 @@ class ACElement {
         return image
     }
     
-    static public func createVideo(provider: String, videoId: String, thumbnail: String, title: String) -> ACThumbnailButtonView {
-        return ACThumbnailButtonView(vendor: provider, id: videoId, thumb: thumbnail, title: title)
+    static public func createVideo(provider: String, videoId: String, thumbnail: String, title: String, origin: String) -> ACThumbnailButtonView {
+        return ACThumbnailButtonView(vendor: provider, id: videoId, thumb: thumbnail, title: title, origin: origin)
     }
     
     static public func createTitle(text: String, alignment: String, border: Bool, size: Int = 24, color: UIColor = UIColor.black, bold: Bool = false) -> UIView {
@@ -130,8 +124,8 @@ class ACElement {
         return stackView
     }
     
-    static public func createThumbnailButton(info: ACButtonInfo, thumbnail: ACImageResource) -> UIView {
-        return ACThumbnailButtonView(label: info.label, thumb: thumbnail, action: info.action)
+    static public func createThumbnailButton(info: ACButtonInfo, thumbnail: ACImageResource, origin: String) -> UIView {
+        return ACThumbnailButtonView(label: info.label, thumb: thumbnail, action: info.action, origin: origin)
     }
     
     public static func createSeparator(visible: Bool) -> UIStackView {
@@ -145,15 +139,15 @@ class ACElement {
         return stackView
     }
     
-    public static func createTile(title: String, height: Int, header: ACImageResource, action: ACButtonAction, viewController vc: UIViewController) -> UIView {
+    public static func createTile(title: String, height: Int, header: ACImageResource, action: ACButtonAction, viewController vc: UIViewController, origin: String) -> UIView {
         let tile = UINib(nibName: "ACTileView", bundle: Bundle.main).instantiate(withOwner: nil, options: nil)[0] as! ACTileView
-        tile.initialize(withTitle: title, height: height, header: header, action: action, viewController: vc)
-        return tile//ACTileView(withTitle: title, header: header, action: action, viewController: vc)
+        tile.initialize(withTitle: title, height: height, header: header, action: action, viewController: vc, origin: origin)
+        return tile
     }
     
-    public static func createToolbar(image: ACImageResource, leftAction: ACButtonAction, rightAction: ACButtonAction, viewController vc: UIViewController) -> UIView {
+    public static func createToolbar(image: ACImageResource, leftAction: ACButtonAction, rightAction: ACButtonAction, viewController vc: UIViewController, origin: String) -> UIView {
         let toolbar = UINib(nibName: "ACToolbarView", bundle: Bundle.main).instantiate(withOwner: nil, options: nil)[0] as! ACToolbarView
-        toolbar.initialize(withImage: image, leftAction: leftAction, rightAction: rightAction, viewController: vc)
+        toolbar.initialize(withImage: image, leftAction: leftAction, rightAction: rightAction, viewController: vc, origin: origin)
         return toolbar
     }
     
@@ -170,7 +164,7 @@ class ACElement {
                 //UIApplication.shared.open(request.url!, options: [:], completionHandler: nil)
                 ACButtonAction(type: "OpenURLAction", paramGroup: 1, params: [
                     "url": request.url!.absoluteString
-                ]).invoke(viewController: AppDelegate.getTopmostViewController())
+                    ]).invoke(viewController: AppDelegate.getTopmostViewController(), origin: "html")
                 return false
             }
             return true
@@ -204,26 +198,28 @@ class ACElement {
     
     private var action: ACButtonAction!
     private var vc: UIViewController!
+    private var origin: String!
     
     private var imageIndex = 0
     private var images = [String]()
     
     @objc public func invoke(_ sender: UIButton) {
-        action.invoke(viewController: vc)
+        action.invoke(viewController: vc, origin: "button:\(origin!)")
     }
     
     @objc public func enlargeImage(_ sender: UIImageView) {
-        ACButtonAction.init(type: "OpenURLAction", paramGroup: 0, params: ["url": "https://accams.devgregw.com/meta/storage/\(images[sender.tag])"]).invoke(viewController: vc)
+        ACButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": "https://accams.devgregw.com/meta/storage/\(images[sender.tag])"]).invoke(viewController: vc, origin: "enlargableImage:\(origin!)")
     }
     
-    func getView(viewController vc: UIViewController) -> UIView {
+    func getView(viewController vc: UIViewController, origin: String) -> UIView {
         self.vc = vc
+        self.origin = origin
         switch (type) {
         case "image":
             return ACElement.createImage(imageResource: ACImageResource(dict: getProperty("image") as! NSDictionary), enlargable: getProperty("enlargeButton") as! Bool, vc: vc)
         case "video":
             let videoInfo = getProperty("videoInfo") as! NSDictionary
-            return ACElement.createVideo(provider: videoInfo.object(forKey: "provider") as! String, videoId: videoInfo.object(forKey: "id") as! String, thumbnail: videoInfo.object(forKey: "thumbnail") as! String, title: videoInfo.object(forKey: "title") as! String)
+            return ACElement.createVideo(provider: videoInfo.object(forKey: "provider") as! String, videoId: videoInfo.object(forKey: "id") as! String, thumbnail: videoInfo.object(forKey: "thumbnail") as! String, title: videoInfo.object(forKey: "title") as! String, origin: origin)
         case "title":
             return ACElement.createTitle(text: (getProperty("title") as! String), alignment: getProperty("alignment") as! String, border: true)
         case "text":
@@ -232,13 +228,13 @@ class ACElement {
             self.action = ACButtonInfo(dict: getProperty("_buttonInfo") as! NSDictionary).action
             return ACElement.createButton(info: ACButtonInfo(dict: getProperty("_buttonInfo") as! NSDictionary), viewController: vc, target: self, selector: #selector(self.invoke(_:)))
         case "thumbnailButton":
-            return ACElement.createThumbnailButton(info: ACButtonInfo(dict: getProperty("_buttonInfo") as! NSDictionary), thumbnail: ACImageResource(dict: getProperty("thumbnail") as! NSDictionary))
+            return ACElement.createThumbnailButton(info: ACButtonInfo(dict: getProperty("_buttonInfo") as! NSDictionary), thumbnail: ACImageResource(dict: getProperty("thumbnail") as! NSDictionary), origin: origin)
         case "separator":
             return ACElement.createSeparator(visible: getProperty("visible") as! Bool)
         case "tile":
-            return ACElement.createTile(title: getProperty("title") as! String, height: getProperty("height") as? Int ?? 200, header: ACImageResource(dict: getProperty("header") as! NSDictionary), action: ACButtonAction(dict: getProperty("action") as! NSDictionary), viewController: vc)
+            return ACElement.createTile(title: getProperty("title") as! String, height: getProperty("height") as? Int ?? 200, header: ACImageResource(dict: getProperty("header") as! NSDictionary), action: ACButtonAction(dict: getProperty("action") as! NSDictionary), viewController: vc, origin: origin)
         case "toolbar":
-            return ACElement.createToolbar(image: ACImageResource(dict: getProperty("image") as! NSDictionary), leftAction: ACButtonAction(dict: getProperty("leftAction") as! NSDictionary), rightAction: ACButtonAction(dict: getProperty("rightAction") as! NSDictionary), viewController: vc)
+            return ACElement.createToolbar(image: ACImageResource(dict: getProperty("image") as! NSDictionary), leftAction: ACButtonAction(dict: getProperty("leftAction") as! NSDictionary), rightAction: ACButtonAction(dict: getProperty("rightAction") as! NSDictionary), viewController: vc, origin: origin)
         case "fullExpController":
             let controller = UIImageView()
             controller.contentMode = .scaleAspectFill

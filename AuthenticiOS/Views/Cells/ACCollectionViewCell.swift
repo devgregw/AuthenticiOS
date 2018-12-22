@@ -29,24 +29,24 @@ class ACCollectionViewCell: UICollectionViewCell {
     }
     
     @objc public func presentTab() {
-        ACTabViewController.present(tab: self.tab)
+        ACTabViewController.present(tab: self.tab, origin: "home:tile:/tabs/\(self.tab.id)", medium: "user")
     }
     
     @objc public func presentEvent() {
-        ACEventViewController.present(event: self.event)
+        ACEventViewController.present(event: self.event, isPlaceholder: false, origin: "home:tile:/events/\(self.event.id)", medium: "user")
     }
     
     @objc public func presentEventPlaceholder() {
         guard let placeholder = event as? ACEventPlaceholder else {return}
         if placeholder.action != nil {
-            placeholder.action!.invoke(viewController: self.viewController)
+            placeholder.action!.invoke(viewController: self.viewController, origin: "home:tile:/events/\(self.event.id)")
         } else if placeholder.elements?.count ?? 0 > 0 {
             self.presentEvent()
         }
     }
     
     @objc public func invokeAction() {
-        action.invoke(viewController: viewController)
+        action.invoke(viewController: viewController, origin: "home:tile:/tabs/\(self.tab.id)")
     }
     
     public func initialize(forUpcomingEvents appearance: ACAppearance.Events, withViewController vc: UIViewController) {

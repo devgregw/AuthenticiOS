@@ -24,7 +24,12 @@ class ACEventViewController: UIViewController {
         }
     }
     
-    public static func present(event: ACEvent) {
+    public static func present(event: ACEvent, isPlaceholder: Bool, origin: String, medium: String) {
+        if isPlaceholder {
+            AnalyticsHelper.activatePage(event: event as! ACEventPlaceholder, origin: origin, medium: medium)
+        } else {
+            AnalyticsHelper.activatePage(event: event, origin: origin, medium: medium)
+        }
         AppDelegate.automaticPresent(viewController: ACEventViewController(event: event))
     }
     
@@ -37,19 +42,19 @@ class ACEventViewController: UIViewController {
             "group": 0,
             "type": "AddToCalendarAction",
             "eventId": self.event!.id
-        ])).invoke(viewController: self)
+            ])).invoke(viewController: self, origin: "/events/\(self.event!.id)")
     }
     
     @objc public func getDirections() {
-        ACButtonAction(type: "GetDirectionsAction", paramGroup: 0, params: ["address": self.event!.address]).invoke(viewController: self)
+        ACButtonAction(type: "GetDirectionsAction", paramGroup: 0, params: ["address": self.event!.address]).invoke(viewController: self, origin: "/events/\(self.event!.id)")
     }
     
     @objc public func showOnMap() {
-        ACButtonAction(type: "ShowMapAction", paramGroup: 0, params: ["address": self.event!.location]).invoke(viewController: self)
+        ACButtonAction(type: "ShowMapAction", paramGroup: 0, params: ["address": self.event!.location]).invoke(viewController: self, origin: "/events/\(self.event!.id)")
     }
     
     @objc public func register() {
-        ACButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": self.event!.registrationUrl!]).invoke(viewController: self)
+        ACButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": self.event!.registrationUrl!]).invoke(viewController: self, origin: "/events/\(self.event!.id)")
     }
     
     private func initLayout() {
@@ -58,7 +63,7 @@ class ACEventViewController: UIViewController {
         self.clearViews()
         if let placeholder = self.event! as? ACEventPlaceholder {
             placeholder.elements!.forEach { element in
-                self.addView(element.getView(viewController: self))
+                self.addView(element.getView(viewController: self, origin: "/events/\(self.event!.id)"))
             }
             return
         }

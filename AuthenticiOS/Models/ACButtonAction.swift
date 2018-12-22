@@ -34,7 +34,7 @@ class ACButtonAction {
         vc.present(alert, animated: true)
     }
     
-    @objc public func invoke(viewController vc: UIViewController) {
+    @objc public func invoke(viewController vc: UIViewController, origin: String) {
         switch (self.type) {
         case "OpenEventsPageAction":
             ACEventCollectionViewController.present(withTitle: "UPCOMING EVENTS")
@@ -43,7 +43,7 @@ class ACButtonAction {
             Database.database().reference().child("/tabs/\(self.getProperty(withName: "tabId") as! String)/").observeSingleEvent(of: .value, with: {snapshot in
                 let val = snapshot.value as? NSDictionary
                 if (val != nil) {
-                    ACTabViewController.present(tab: ACTab(dict: val!))
+                    ACTabViewController.present(tab: ACTab(dict: val!), origin: origin, medium: self.type)
                 } else {
                     self.presentAlert(title: "Error", message: "We were unable to open the page because it does not exist.", vc: vc)
                 }
@@ -56,12 +56,13 @@ class ACButtonAction {
                     let event = ACEvent.createNew(dict: val!)
                     if let placeholder = event as? ACEventPlaceholder {
                         if placeholder.action != nil {
-                            placeholder.action!.invoke(viewController: vc)
+                            AnalyticsHelper.activatePage(event: placeholder, origin: origin, medium: self.type)
+                            placeholder.action!.invoke(viewController: vc, origin: origin)
                         } else if placeholder.elements?.count ?? 0 > 0 {
-                            ACEventViewController.present(event: placeholder)
+                            ACEventViewController.present(event: placeholder, isPlaceholder: true, origin: origin, medium: self.type)
                         }
                     } else {
-                        ACEventViewController.present(event: event)
+                        ACEventViewController.present(event: event, isPlaceholder: false, origin: origin, medium: self.type)
                     }
                 } else {
                     self.presentAlert(title: "Error", message: "We were unable to open the event because it does not exist.", vc: vc)
