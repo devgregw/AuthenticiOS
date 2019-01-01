@@ -42,14 +42,10 @@ class ACTabCollectionViewController: UICollectionViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        if AppDelegate.appMode == AppMode.Production {
-            self.navigationItem.rightBarButtonItem = nil
+    private func configureCollectionView() {
         }
-        applyDefaultSettings()
-        self.collectionView!.register(UINib(nibName: "ACCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: reuseIdentifier)
-        self.collectionView!.register(UINib(nibName: "ACLivestreamCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: livestreamReuseIdentifier)
+        self.collectionView?.register(UINib(nibName: "ACCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView?.register(UINib(nibName: "ACLivestreamCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: livestreamReuseIdentifier)
         collectionView?.collectionViewLayout = ACCollectionViewLayout(columns: 2, delegate: self)
         self.navigationController?.navigationBar.titleTextAttributes = [
             .kern: 3.5,
@@ -64,27 +60,30 @@ class ACTabCollectionViewController: UICollectionViewController {
             ])
         self.collectionView?.refreshControl?.tintColor = UIColor.black
         self.collectionView?.refreshControl?.addTarget(self, action: #selector(self.refreshData), for: .valueChanged)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if AppDelegate.appMode == AppMode.Production {
+            self.navigationItem.rightBarButtonItem = nil
+        }
+        applyDefaultSettings()
+        configureCollectionView()
         self.loadData(wasRefreshed: false)
     }
-
+    
     private var appearance: ACAppearance?
     private var complete = false
     private var tabs: [ACTab] = []
     private var appRef: DatabaseReference!
     private var tabsRef: DatabaseReference!
+    private var trace: Trace!
     
     @objc public func refreshData() {
         loadData(wasRefreshed: true)
     }
     
-    public func loadData(wasRefreshed: Bool) {
-        self.tabs = []
-        self.complete = false
-        self.collectionView?.reloadData()
-        let trace = Performance.startTrace(name: "load tabs")
-        if wasRefreshed {
-            trace?.incrementMetric("refresh tabs", by: 1)
-        }
+    private func listenForAppearanceChange() {
         if appRef != nil {
             appRef.removeAllObservers()
         }
@@ -94,15 +93,13 @@ class ACTabCollectionViewController: UICollectionViewController {
         }
         appRef = appRef.child("appearance")
         appRef.keepSynced(true)
-        //appRef.observeSingleEvent(of: .value, with: { appearanceSnapshot in
-        appRef.observe(.value, with: { appearanceSnapshot in
-            self.appearance = ACAppearance(dict: appearanceSnapshot.value as! NSDictionary)
-            DispatchQueue.main.async {
-                self.collectionView?.reloadData()
-                self.collectionView?.collectionViewLayout.invalidateLayout()
-                self.collectionView?.invalidateIntrinsicContentSize()
-            }
-        })
+        appRef.observe(.value, with: self.onAppearanceChange) { error in
+            self.present(UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert), animated: true)
+            self.trace?.stop()
+        }
+    }
+    
+    private func listenForTabChange() {
         if tabsRef != nil {
             tabsRef.removeAllObservers()
         }
@@ -112,48 +109,72 @@ class ACTabCollectionViewController: UICollectionViewController {
         }
         tabsRef = tabsRef.child("tabs")
         tabsRef.keepSynced(true)
-        //tabsRef.observeSingleEvent(of: .value, with: {snapshot in
-        tabsRef.observe(.value, with: {snapshot in
-            let val = snapshot.value as? NSDictionary
-            self.tabs.removeAll()
-            val?.forEach({(key, value) in
-                let tab = ACTab(dict: value as! NSDictionary)
-                if (tab.isVisible()) {
-                    self.tabs.append(tab)
-                }
-            })
-            self.tabs.sort(by: { (a, b) in a.index < b.index })
-            self.complete = true
-            DispatchQueue.main.async {
-                self.collectionView?.reloadData()
-                self.collectionView?.collectionViewLayout.invalidateLayout()
-                self.collectionView?.invalidateIntrinsicContentSize()
-                if #available(iOS 10.0, *) {
-                    self.collectionView?.refreshControl?.endRefreshing()
-                }
-                var shortcuts = [UIApplicationShortcutItem]()
-                shortcuts.append(UIMutableApplicationShortcutItem(type: "upcoming_events", localizedTitle: "Upcoming Events", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .date), userInfo: nil))
-                self.tabs.prefix(4).forEach({ t in
-                    shortcuts.append(UIMutableApplicationShortcutItem(type: "tab", localizedTitle: t.title.localizedCapitalized, localizedSubtitle: nil, icon: nil, userInfo: ["id": t.id as NSSecureCoding]))
-                })
-                UIApplication.shared.shortcutItems = shortcuts
-                trace?.stop()
-            }
-        }) { error in
+        tabsRef.observe(.value, with: self.onTabChange) { error in
             self.present(UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert), animated: true)
-            trace?.stop()
+            self.trace?.stop()
         }
     }
     
+    private func onAppearanceChange(_ appearanceSnapshot: DataSnapshot) {
+        self.appearance = ACAppearance(dict: appearanceSnapshot.value as! NSDictionary)
+        DispatchQueue.main.async {
+            self.collectionView?.reloadData()
+            self.collectionView?.collectionViewLayout.invalidateLayout()
+            self.collectionView?.invalidateIntrinsicContentSize()
+        }
+    }
+    
+    private func onTabChange(_ snapshot: DataSnapshot) {
+        let val = snapshot.value as? NSDictionary
+        self.tabs.removeAll()
+        val?.forEach({(key, value) in
+            let tab = ACTab(dict: value as! NSDictionary)
+            if (tab.isVisible()) {
+                self.tabs.append(tab)
+            }
+        })
+        self.tabs.sort(by: { (a, b) in a.index < b.index })
+        self.complete = true
+        DispatchQueue.main.async {
+            self.collectionView?.reloadData()
+            self.collectionView?.collectionViewLayout.invalidateLayout()
+            self.collectionView?.invalidateIntrinsicContentSize()
+            if #available(iOS 10.0, *) {
+                self.collectionView?.refreshControl?.endRefreshing()
+            }
+            var shortcuts = [UIApplicationShortcutItem]()
+            shortcuts.append(UIMutableApplicationShortcutItem(type: "upcoming_events", localizedTitle: "Upcoming Events", localizedSubtitle: nil, icon: UIApplicationShortcutIcon(type: .date), userInfo: nil))
+            self.tabs.prefix(4).forEach({ t in
+                shortcuts.append(UIMutableApplicationShortcutItem(type: "tab", localizedTitle: t.title.localizedCapitalized, localizedSubtitle: nil, icon: nil, userInfo: ["id": t.id as NSSecureCoding]))
+            })
+            UIApplication.shared.shortcutItems = shortcuts
+            self.trace?.stop()
+        }
+    }
+    
+    public func loadData(wasRefreshed: Bool) {
+        self.tabs = []
+        self.complete = false
+        self.collectionView?.reloadData()
+        trace = Performance.startTrace(name: "load tabs")
+        if wasRefreshed {
+            trace?.incrementMetric("refresh tabs", by: 1)
+        }
+        listenForAppearanceChange()
+        listenForTabChange()
+    }
+}
+
+extension ACTabCollectionViewController {
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-
-
+    
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.complete ? tabs.count + 2 : 0
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if (indexPath.item == 0) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: livestreamReuseIdentifier, for: indexPath) as! ACLivestreamCollectionViewCell
@@ -170,13 +191,12 @@ class ACTabCollectionViewController: UICollectionViewController {
         cell.layoutIfNeeded()
         return cell
     }
-
 }
 
 extension ACTabCollectionViewController : ACCollectionViewLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, sizeForCellAtIndexPath indexPath: IndexPath) -> CGSize {
         if indexPath.item == 0 {
-                return CGSize(width: view.frame.width, height: ACLivestreamCollectionViewCell.cellHeight)
+            return CGSize(width: view.frame.width, height: ACLivestreamCollectionViewCell.cellHeight)
         }
         let isLeftColumn = indexPath.section == 0
         var tabsInColumn = (isLeftColumn ? self.tabs.filter({t in t.index % 2 == 0}) : self.tabs.filter({t in t.index % 2 > 0})).count

@@ -16,7 +16,7 @@ class ACEventCollectionViewController: UICollectionViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    static private var title = ""
+    static public var title = ""
     
     private var eventsRef: DatabaseReference!
     
@@ -29,19 +29,9 @@ class ACEventCollectionViewController: UICollectionViewController {
         present(withTitle: app.title)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.navigationItem.title = ACEventCollectionViewController.title
-        self.collectionView!.register(UINib(nibName: "ACCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
-        self.collectionView!.register(UINib(nibName: "ACTextCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "none")
-        self.collectionView!.delegate = self
-        applyDefaultSettings()
-        self.collectionView!.register(UINib(nibName: "ACCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: reuseIdentifier)
-        self.navigationController?.navigationBar.titleTextAttributes = [
-            .kern: 3.5,
-            .font: UIFont(name: "Effra", size: 21)!,
-            .foregroundColor: UIColor.white
-        ]
+    private func configureCollectionView() {
+        collectionView?.register(UINib(nibName: "ACCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView?.register(UINib(nibName: "ACTextCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "none")
         self.collectionView?.refreshControl = UIRefreshControl()
         self.collectionView?.refreshControl?.attributedTitle = NSAttributedString(string: "PULL TO REFRESH", attributes: [
             .kern: 2.5,
@@ -50,24 +40,31 @@ class ACEventCollectionViewController: UICollectionViewController {
             ])
         self.collectionView?.refreshControl?.tintColor = UIColor.black
         self.collectionView?.refreshControl?.addTarget(self, action: #selector(self.refreshData), for: .valueChanged)
+        collectionView?.delegate = self
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        applyDefaultSettings()
+        self.navigationItem.title = ACEventCollectionViewController.title
+        self.navigationController?.navigationBar.titleTextAttributes = [
+            .kern: 3.5,
+            .font: UIFont(name: "Effra", size: 21)!,
+            .foregroundColor: UIColor.white
+        ]
+        configureCollectionView()
         self.loadData(wasRefreshed: false)
     }
     
-    fileprivate var complete = false
-    fileprivate var events: [ACEvent] = []
+    private var complete = false
+    private var events: [ACEvent] = []
+    private var trace: Trace!
     
     @objc public func refreshData() {
         loadData(wasRefreshed: true)
     }
     
-    public func loadData(wasRefreshed: Bool) {
-        self.events = []
-        self.complete = false
-        self.collectionView?.reloadData()
-        let trace = Performance.startTrace(name: "load events")
-        if wasRefreshed {
-            trace?.incrementMetric("refresh events", by: 1)
-        }
+    private func listenForEventChange() {
         if eventsRef != nil {
             eventsRef.removeAllObservers()
         }
@@ -76,46 +73,58 @@ class ACEventCollectionViewController: UICollectionViewController {
             eventsRef = eventsRef.child("dev")
         }
         eventsRef = eventsRef.child("events")
-        //eventsRef.observeSingleEvent(of: .value, with: {snapshot in
-        eventsRef.observe(.value, with: {snapshot in
-            let val = snapshot.value as? NSDictionary
-            var placeholders = [ACEventPlaceholder]()
-            var regularEvents = [ACEvent]()
-            val?.forEach({(key, value) in
-                let dict = value as! NSDictionary
-                if (dict.allKeys.contains(where: { (key) -> Bool in
-                    String(describing: key) == "index"
-                })) {
-                    let placeholder = ACEventPlaceholder(dict: dict)
-                    if (placeholder.isVisible()) {
-                        placeholders.append(placeholder)
-                    }
-                } else {
-                    let event = ACEvent(dict: dict)
-                    if (event.isVisible()) {
-                        regularEvents.append(event)
-                    }
-                }
-            })
-            placeholders.sort(by: { (a, b) in a.index < b.index })
-            regularEvents.sort(by: { (a, b) in a.getNextOccurrence().startDate < b.getNextOccurrence().startDate })
-            self.events.removeAll()
-            self.events.append(contentsOf: placeholders)
-            self.events.append(contentsOf: regularEvents)
-            self.complete = true
-            DispatchQueue.main.async {
-                self.collectionView?.reloadData()
-                self.collectionView?.collectionViewLayout.invalidateLayout()
-                self.collectionView?.invalidateIntrinsicContentSize()
-                if #available(iOS 10.0, *) {
-                    self.collectionView?.refreshControl?.endRefreshing()
-                }
-                trace?.stop()
-            }
-        }) { error in
+        eventsRef.observe(.value, with: self.onEventChange) { error in
             self.present(UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert), animated: true)
-            trace?.stop()
+            self.trace?.stop()
         }
+    }
+    
+    private func onEventChange(_ snapshot: DataSnapshot) {
+        let val = snapshot.value as? NSDictionary
+        var placeholders = [ACEventPlaceholder]()
+        var regularEvents = [ACEvent]()
+        val?.forEach({(key, value) in
+            let dict = value as! NSDictionary
+            if (dict.allKeys.contains(where: { (key) -> Bool in
+                String(describing: key) == "index"
+            })) {
+                let placeholder = ACEventPlaceholder(dict: dict)
+                if (placeholder.isVisible()) {
+                    placeholders.append(placeholder)
+                }
+            } else {
+                let event = ACEvent(dict: dict)
+                if (event.isVisible()) {
+                    regularEvents.append(event)
+                }
+            }
+        })
+        placeholders.sort(by: { (a, b) in a.index < b.index })
+        regularEvents.sort(by: { (a, b) in a.getNextOccurrence().startDate < b.getNextOccurrence().startDate })
+        self.events.removeAll()
+        self.events.append(contentsOf: placeholders)
+        self.events.append(contentsOf: regularEvents)
+        self.complete = true
+        DispatchQueue.main.async {
+            self.collectionView?.reloadData()
+            self.collectionView?.collectionViewLayout.invalidateLayout()
+            self.collectionView?.invalidateIntrinsicContentSize()
+            if #available(iOS 10.0, *) {
+                self.collectionView?.refreshControl?.endRefreshing()
+            }
+            self.trace?.stop()
+        }
+    }
+    
+    public func loadData(wasRefreshed: Bool) {
+        self.events = []
+        self.complete = false
+        self.collectionView?.reloadData()
+        trace = Performance.startTrace(name: "load events")
+        if wasRefreshed {
+            trace?.incrementMetric("refresh events", by: 1)
+        }
+        listenForEventChange()
     }
 
 }
