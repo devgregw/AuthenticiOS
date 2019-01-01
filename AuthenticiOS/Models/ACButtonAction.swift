@@ -37,38 +37,33 @@ class ACButtonAction {
     @objc public func invoke(viewController vc: UIViewController, origin: String) {
         switch (self.type) {
         case "OpenEventsPageAction":
-            ACEventCollectionViewController.present(withTitle: "UPCOMING EVENTS")
-            break
+            return ACEventCollectionViewController.present(withTitle: "UPCOMING EVENTS")
         case "OpenTabAction":
             Database.database().reference().child("/tabs/\(self.getProperty(withName: "tabId") as! String)/").observeSingleEvent(of: .value, with: {snapshot in
-                let val = snapshot.value as? NSDictionary
-                if (val != nil) {
-                    ACTabViewController.present(tab: ACTab(dict: val!), origin: origin, medium: self.type)
-                } else {
+                guard let val = snapshot.value as? NSDictionary else {
                     self.presentAlert(title: "Error", message: "We were unable to open the page because it does not exist.", vc: vc)
+                    return
                 }
+                ACTabViewController.present(tab: ACTab(dict: val), origin: origin, medium: self.type)
             }) { error in self.presentAlert(title: "Error", message: "We were unable to access the database.\n\n\(error.localizedDescription as String)", vc: vc) }
-            break
         case "OpenEventAction":
             Database.database().reference().child("/events/\(self.getProperty(withName: "eventId") as! String)/").observeSingleEvent(of: .value, with: {snapshot in
-                let val = snapshot.value as? NSDictionary
-                if (val != nil) {
-                    let event = ACEvent.createNew(dict: val!)
-                    if let placeholder = event as? ACEventPlaceholder {
-                        if placeholder.action != nil {
-                            AnalyticsHelper.activatePage(event: placeholder, origin: origin, medium: self.type)
-                            placeholder.action!.invoke(viewController: vc, origin: origin)
-                        } else if placeholder.elements?.count ?? 0 > 0 {
-                            ACEventViewController.present(event: placeholder, isPlaceholder: true, origin: origin, medium: self.type)
-                        }
-                    } else {
-                        ACEventViewController.present(event: event, isPlaceholder: false, origin: origin, medium: self.type)
+                guard let val = snapshot.value as? NSDictionary else {
+                    self.presentAlert(title: "Error", message: "We were unable to open the event because it does not exist.", vc: vc)
+                    return
+                }
+                let event = ACEvent.createNew(dict: val)
+                if let placeholder = event as? ACEventPlaceholder {
+                    if placeholder.action != nil {
+                        AnalyticsHelper.activatePage(event: placeholder, origin: origin, medium: self.type)
+                        placeholder.action!.invoke(viewController: vc, origin: origin)
+                    } else if placeholder.elements?.count ?? 0 > 0 {
+                        ACEventViewController.present(event: placeholder, isPlaceholder: true, origin: origin, medium: self.type)
                     }
                 } else {
-                    self.presentAlert(title: "Error", message: "We were unable to open the event because it does not exist.", vc: vc)
+                    ACEventViewController.present(event: event, isPlaceholder: false, origin: origin, medium: self.type)
                 }
             }) { error in self.presentAlert(title: "Error", message: "We were unable to access the database.\n\n\(error.localizedDescription as String)", vc: vc) }
-            break
         case "OpenURLAction":
             let urlString = getProperty(withName: "url") as! String
             let url = URL(string: urlString)!
@@ -88,7 +83,6 @@ class ACButtonAction {
                     vc.present(alert, animated: true, completion: nil)
                 }
             }
-            break
         case "OpenYouTubeAction":
             let youtubeUri = URL(string: getProperty(withName: "youtubeUri") as! String)!
             if UIApplication.shared.canOpenURL(URL(string: "youtube://")!) {
@@ -99,7 +93,6 @@ class ACButtonAction {
                 safari.preferredControlTintColor = .white
                 AppDelegate.getTopmostViewController().present(safari, animated: true, completion: nil)
             }
-            break
         case "OpenSpotifyAction":
             let spotifyUri = URL(string: getProperty(withName: "spotifyUri") as! String)!
             if UIApplication.shared.canOpenURL(spotifyUri) {
@@ -110,14 +103,12 @@ class ACButtonAction {
                 safari.preferredControlTintColor = .white
                 AppDelegate.getTopmostViewController().present(safari, animated: true, completion: nil)
             }
-            break
         case "ShowMapAction":
             let location = getProperty(withName: "address") as! String
             MapInterface.search(forPlace: location)
         case "GetDirectionsAction":
             let address = getProperty(withName: "address") as! String
             MapInterface.getDirections(toAddress: address)
-            break
         case "EmailAction":
             let address = getProperty(withName: "emailAddress")
             if let url = URL(string: "mailto:\(address!)") {
@@ -125,36 +116,40 @@ class ACButtonAction {
             } else {
                 presentAlert(title: "Error", message: "This action could not be invoked: '\(address!)' is not a valid email address.", vc: vc)
             }
-            break
         case "AddToCalendarAction":
             let atcaCompletion = { (start: Date, end: Date, loc: String, title: String, rrule: ACRecurrenceRule?) in
-                let store = EKEventStore()
-                store.requestAccess(to: .event) { (granted, error) in
-                    if granted {
-                        let event = EKEvent(eventStore: store)
-                        event.isAllDay = false
-                        event.endDate = end
-                        event.startDate = start
-                        event.location = loc
-                        event.title = title
-                        if let rule = rrule {
-                            event.addRecurrenceRule(rule.toEKRecurrenceRule())
-                        }
-                        event.calendar = store.defaultCalendarForNewEvents
-                        do {
-                            try store.save(event, span: .thisEvent, commit: true)
-                            self.presentAlert(title: "Add to Calendar", message: "\"\(title)\" was added to your calendar successfully.", vc: vc)
-                        } catch let saveError {
-                            self.presentAlert(title: "Error", message: "We were unable to add \"\(title)\" to your calendar.\n\n\(saveError.localizedDescription)", vc: vc)
-                        }
-                    } else {
-                        if let e = error {
-                            self.presentAlert(title: "Error", message: "We were unable to access your calendar.\n\n\(e.localizedDescription)", vc: vc)
+                let prompt = UIAlertController(title: "Add to Calendar", message: "Would you like to add \"\(title)\" to your calendar?", preferredStyle: .alert)
+                prompt.addAction(UIAlertAction(title: "Yes", style: .default, handler: {_ in
+                    let store = EKEventStore()
+                    store.requestAccess(to: .event) { (granted, error) in
+                        if granted {
+                            let event = EKEvent(eventStore: store)
+                            event.isAllDay = false
+                            event.endDate = end
+                            event.startDate = start
+                            event.location = loc
+                            event.title = title
+                            if let rule = rrule {
+                                event.addRecurrenceRule(rule.toEKRecurrenceRule())
+                            }
+                            event.calendar = store.defaultCalendarForNewEvents
+                            do {
+                                try store.save(event, span: .thisEvent, commit: true)
+                                self.presentAlert(title: "Add to Calendar", message: "\"\(title)\" was added to your calendar successfully.", vc: vc)
+                            } catch let saveError {
+                                self.presentAlert(title: "Error", message: "We were unable to add \"\(title)\" to your calendar.\n\n\(saveError.localizedDescription)", vc: vc)
+                            }
                         } else {
-                            self.presentAlert(title: "Error", message: "We were unable to access your calendar because you denied permission.", vc: vc)
+                            if let e = error {
+                                self.presentAlert(title: "Error", message: "We were unable to access your calendar.\n\n\(e.localizedDescription)", vc: vc)
+                            } else {
+                                self.presentAlert(title: "Error", message: "We were unable to access your calendar because you denied permission.", vc: vc)
+                            }
                         }
                     }
-                }
+                }))
+                prompt.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+                vc.present(prompt, animated: true, completion: nil)
             }
             if self.paramGroup == 0 {
                 Database.database().reference().child("/events/\(self.getProperty(withName: "eventId") as! String)/").observeSingleEvent(of: .value, with: {snapshot in
@@ -177,7 +172,6 @@ class ACButtonAction {
             let alert = UIAlertController(title: "Error", message: "We were unable to parse this action because the type \"\(self.type)\" is not a recognized action.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
             vc.present(alert, animated: true)
-            break
         }
     }
     
