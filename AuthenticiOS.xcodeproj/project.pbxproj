@@ -56,6 +56,7 @@
 		FC75FB75210A7A3600E396A8 /* ACImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC75FB73210A7A3500E396A8 /* ACImageCollectionViewCell.xib */; };
 		FC75FB78210ABE0F00E396A8 /* ACWallpaperPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75FB76210ABE0E00E396A8 /* ACWallpaperPreviewViewController.swift */; };
 		FC75FB79210ABE0F00E396A8 /* ACWallpaperPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC75FB77210ABE0E00E396A8 /* ACWallpaperPreviewViewController.xib */; };
+		FC9E7BF221DBE7D5008D8F34 /* ACPeekImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9E7BF121DBE7D5008D8F34 /* ACPeekImageViewController.swift */; };
 		FCAC5ADA215FF4000013FD52 /* ACToolbarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAC5AD9215FF4000013FD52 /* ACToolbarView.xib */; };
 		FCAC5ADC215FF7EA0013FD52 /* ACToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAC5ADB215FF7EA0013FD52 /* ACToolbarView.swift */; };
 		FCAD5C12208624CC0010B5C9 /* ACEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD5C11208624CC0010B5C9 /* ACEvent.swift */; };
@@ -122,6 +123,7 @@
 		FC75FB73210A7A3500E396A8 /* ACImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		FC75FB76210ABE0E00E396A8 /* ACWallpaperPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACWallpaperPreviewViewController.swift; sourceTree = "<group>"; };
 		FC75FB77210ABE0E00E396A8 /* ACWallpaperPreviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACWallpaperPreviewViewController.xib; sourceTree = "<group>"; };
+		FC9E7BF121DBE7D5008D8F34 /* ACPeekImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACPeekImageViewController.swift; sourceTree = "<group>"; };
 		FCAC5AD9215FF4000013FD52 /* ACToolbarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACToolbarView.xib; sourceTree = "<group>"; };
 		FCAC5ADB215FF7EA0013FD52 /* ACToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACToolbarView.swift; sourceTree = "<group>"; };
 		FCAD5C11208624CC0010B5C9 /* ACEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACEvent.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 				FC5F914620D94FB700516095 /* ACEventCollectionViewController.swift */,
 				FC75FB6E210A271000E396A8 /* ACVideoViewController.swift */,
 				FC75FB76210ABE0E00E396A8 /* ACWallpaperPreviewViewController.swift */,
+				FC9E7BF121DBE7D5008D8F34 /* ACPeekImageViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -508,6 +511,7 @@
 				FC5D1436208B7C3B00B0E63E /* ACAppearance.swift in Sources */,
 				FCF18412210216EF00C9E37A /* ACThumbnailButtonView.swift in Sources */,
 				FC4CD2A320FE94430096ED0D /* ACTextCollectionViewCell.swift in Sources */,
+				FC9E7BF221DBE7D5008D8F34 /* ACPeekImageViewController.swift in Sources */,
 				FC03C28520B8770900D15490 /* ACTabCollectionViewController.swift in Sources */,
 				2B3630611FF56BD9002469E5 /* ACHomeViewController.swift in Sources */,
 				2B36305F1FF56BD9002469E5 /* AppDelegate.swift in Sources */,
