@@ -43,6 +43,8 @@ class ACTabCollectionViewController: UICollectionViewController {
     }
     
     private func configureCollectionView() {
+        if traitCollection.forceTouchCapability == .available {
+            registerForPreviewing(with: self, sourceView: collectionView!)
         }
         self.collectionView?.register(UINib(nibName: "ACCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView?.register(UINib(nibName: "ACLivestreamCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: livestreamReuseIdentifier)
@@ -78,6 +80,7 @@ class ACTabCollectionViewController: UICollectionViewController {
     private var appRef: DatabaseReference!
     private var tabsRef: DatabaseReference!
     private var trace: Trace!
+    private var actionToPop: ACButtonAction?
     
     @objc public func refreshData() {
         loadData(wasRefreshed: true)
@@ -237,5 +240,43 @@ extension ACTabCollectionViewController : ACCollectionViewLayoutDelegate {
         }
         guard indexPath.item - 2 < self.tabs.count else {return 0}
         return self.tabs[indexPath.item - 2].index % 2 == 0 ? 0 : 1
+    }
+}
+
+extension ACTabCollectionViewController: UIViewControllerPreviewingDelegate {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        actionToPop = nil
+        guard let indexPath = collectionView?.indexPathForItem(at: location) else {return nil}
+        guard let cell = collectionView?.cellForItem(at: indexPath) as? ACCollectionViewCell else {return nil}
+        guard indexPath.item >= 1 else {return nil}
+        if indexPath.item == 1 {
+            previewingContext.sourceRect = cell.convert(cell.bounds, to: collectionView!)
+            ACEventCollectionViewController.title = appearance?.events.title ?? "UPCOMING EVENTS"
+            return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "evroot")
+        } else {
+            let tab = self.tabs[indexPath.item - 2]
+            previewingContext.sourceRect = cell.convert(cell.bounds, to: collectionView!)
+            guard let action = tab.action else {
+                return ACTabViewController(tab: tab)
+            }
+            actionToPop = action
+            guard let resultViewController = action.resultViewController else {
+                guard let image = cell.image.image else {return nil}
+                ACPeekImageViewController.image = image
+                ACPeekImageViewController.title = tab.title
+                let imageVc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "peek") as! ACPeekImageViewController
+                imageVc.preferredContentSize = CGSize(width: 0, height: cell.frame.size.width * 2)
+                return imageVc
+            }
+            return resultViewController
+        }
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        guard let action = actionToPop else {
+            AppDelegate.automaticPresent(viewController: viewControllerToCommit)
+            return
+        }
+        action.invoke(viewController: self, origin: "pop")
     }
 }
