@@ -51,10 +51,8 @@ class ACTileView: UIView {
     }
     
     private func initialize() {
-        //let view = loadViewFromNib()
         frame = CGRect.zero
         autoresizingMask = UIViewAutoresizing(rawValue: UInt(UInt8(UIViewAutoresizing.flexibleWidth.rawValue) | UInt8(UIViewAutoresizing.flexibleHeight.rawValue)))
-        //view.layoutIfNeeded()
         let rand = CGFloat(drand48())
         self.backgroundColor = UIColor(red: rand, green: rand, blue: rand, alpha: 1)
         image.alpha = 0
@@ -71,14 +69,10 @@ class ACTileView: UIView {
         self.constraints.forEach({c in self.removeConstraint(c)})
         self.addConstraints([
             NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: self.height + 1),
-            //NSLayoutConstraint(item: image, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1, constant: 0),
-            //NSLayoutConstraint(item: image, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: UIScreen.main.bounds.width),
             NSLayoutConstraint(item: image, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: image, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: -1),
             NSLayoutConstraint(item: image, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: image, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: 0),
-            /*NSLayoutConstraint(item: tintView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: self.height),
-            NSLayoutConstraint(item: tintView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: UIScreen.main.bounds.width),*/
             NSLayoutConstraint(item: tintView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: tintView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: -1),
             NSLayoutConstraint(item: tintView, attribute: .leading, relatedBy: .equal, toItem: self, attribute: .leading, multiplier: 1, constant: 0),
@@ -91,6 +85,5 @@ class ACTileView: UIView {
         self.setNeedsLayout()
         self.layoutIfNeeded()
         self.clipsToBounds = true
-        //addSubview(view)
     }
 }
