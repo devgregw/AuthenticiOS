@@ -37,6 +37,7 @@
 		FC3A7FED21127B4400CAFC90 /* ACInsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3A7FEC21127B4400CAFC90 /* ACInsetLabel.swift */; };
 		FC3A7FEF21127B5200CAFC90 /* MapInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3A7FEE21127B5200CAFC90 /* MapInterface.swift */; };
 		FC3A7FF121127B9A00CAFC90 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3A7FF021127B9A00CAFC90 /* Reachability.swift */; };
+		FC3CC55B21DD997F000C59B0 /* CalendarInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3CC55A21DD997F000C59B0 /* CalendarInterface.swift */; };
 		FC490DD2202BA1F4007F270A /* ACElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC490DD1202BA1F4007F270A /* ACElement.swift */; };
 		FC4CD2A120FE8FA70096ED0D /* ACTextCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC4CD2A020FE8FA60096ED0D /* ACTextCollectionViewCell.xib */; };
 		FC4CD2A320FE94430096ED0D /* ACTextCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4CD2A220FE94430096ED0D /* ACTextCollectionViewCell.swift */; };
@@ -103,6 +104,7 @@
 		FC3A7FEC21127B4400CAFC90 /* ACInsetLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACInsetLabel.swift; sourceTree = "<group>"; };
 		FC3A7FEE21127B5200CAFC90 /* MapInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapInterface.swift; sourceTree = "<group>"; };
 		FC3A7FF021127B9A00CAFC90 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		FC3CC55A21DD997F000C59B0 /* CalendarInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarInterface.swift; sourceTree = "<group>"; };
 		FC490DD1202BA1F4007F270A /* ACElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACElement.swift; sourceTree = "<group>"; };
 		FC4CD2A020FE8FA60096ED0D /* ACTextCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACTextCollectionViewCell.xib; sourceTree = "<group>"; };
 		FC4CD2A220FE94430096ED0D /* ACTextCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTextCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				FC3A7FEE21127B5200CAFC90 /* MapInterface.swift */,
 				FC3A7FF021127B9A00CAFC90 /* Reachability.swift */,
 				FC535C0821CC06F800FC5FAA /* AnalyticsHelper.swift */,
+				FC3CC55A21DD997F000C59B0 /* CalendarInterface.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 				2B36305F1FF56BD9002469E5 /* AppDelegate.swift in Sources */,
 				FC333F1321401D0300110BAF /* ACEventPlaceholder.swift in Sources */,
 				FC5BF9BC208D18A7002982F1 /* ACEventViewController.swift in Sources */,
+				FC3CC55B21DD997F000C59B0 /* CalendarInterface.swift in Sources */,
 				FC75FB70210A271000E396A8 /* ACVideoViewController.swift in Sources */,
 				FC565D1620013ACE00DE7C9A /* ACButtonAction.swift in Sources */,
 				FC490DD2202BA1F4007F270A /* ACElement.swift in Sources */,

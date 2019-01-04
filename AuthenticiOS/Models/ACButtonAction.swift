@@ -154,7 +154,36 @@ class ACButtonAction {
             }
         case "AddToCalendarAction":
             let atcaCompletion = { (start: Date, end: Date, loc: String, title: String, rrule: ACRecurrenceRule?) in
-                let prompt = UIAlertController(title: "Add to Calendar", message: "Would you like to add \"\(title)\" to your calendar?", preferredStyle: .alert)
+                let store = EKEventStore()
+                store.requestAccess(to: .event) { (granted, error) in
+                    if granted {
+                        let event = EKEvent(eventStore: store)
+                        event.isAllDay = false
+                        event.endDate = end
+                        event.startDate = start
+                        //event.location = loc
+                        event.structuredLocation = EKStructuredLocation(title: loc)
+                        event.title = title
+                        if let rule = rrule {
+                            event.addRecurrenceRule(rule.toEKRecurrenceRule())
+                        }
+                        event.calendar = store.defaultCalendarForNewEvents
+                        /*do {
+                            try store.save(event, span: .thisEvent, commit: true)
+                            self.presentAlert(title: "Add to Calendar", message: "\"\(title)\" was added to your calendar successfully.", vc: vc)
+                        } catch let saveError {
+                            self.presentAlert(title: "Error", message: "We were unable to add \"\(title)\" to your calendar.\n\n\(saveError.localizedDescription)", vc: vc)
+                        }*/
+                        CalendarInterface.add(eventToCalendar: event, withEventStore: store, withViewController: vc)
+                    } else {
+                        if let e = error {
+                            self.presentAlert(title: "Error", message: "We were unable to access your calendar.\n\n\(e.localizedDescription)", vc: vc)
+                        } else {
+                            self.presentAlert(title: "Error", message: "We were unable to access your calendar because you denied permission.", vc: vc)
+                        }
+                    }
+                }
+                /*let prompt = UIAlertController(title: "Add to Calendar", message: "Would you like to add \"\(title)\" to your calendar?", preferredStyle: .alert)
                 prompt.addAction(UIAlertAction(title: "Yes", style: .default, handler: {_ in
                     let store = EKEventStore()
                     store.requestAccess(to: .event) { (granted, error) in
@@ -185,7 +214,7 @@ class ACButtonAction {
                     }
                 }))
                 prompt.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-                vc.present(prompt, animated: true, completion: nil)
+                vc.present(prompt, animated: true, completion: nil)*/
             }
             if self.paramGroup == 0 {
                 Database.database().reference().child("/events/\(self.getProperty(withName: "eventId") as! String)/").observeSingleEvent(of: .value, with: {snapshot in
