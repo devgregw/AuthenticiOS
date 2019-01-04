@@ -194,9 +194,9 @@ extension ACEventCollectionViewController: UIViewControllerPreviewingDelegate {
             guard let action = placeholder.action else {
                 return ACEventViewController(event: placeholder)
             }
-            actionToPop = action
             guard let resultViewController = action.resultViewController else {
                 guard let image = cell.image.image else {return nil}
+                actionToPop = action
                 ACPeekImageViewController.image = image
                 ACPeekImageViewController.title = placeholder.title
                 let imageVc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "peek") as! ACPeekImageViewController

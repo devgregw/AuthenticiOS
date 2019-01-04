@@ -259,9 +259,9 @@ extension ACTabCollectionViewController: UIViewControllerPreviewingDelegate {
             guard let action = tab.action else {
                 return ACTabViewController(tab: tab)
             }
-            actionToPop = action
             guard let resultViewController = action.resultViewController else {
                 guard let image = cell.image.image else {return nil}
+                actionToPop = action
                 ACPeekImageViewController.image = image
                 ACPeekImageViewController.title = tab.title
                 let imageVc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "peek") as! ACPeekImageViewController
