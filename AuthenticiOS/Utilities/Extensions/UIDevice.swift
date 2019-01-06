@@ -21,7 +21,7 @@ extension UIDevice {
     
     var isiPhoneX: Bool {
         switch deviceIdentifier {
-        case "iPhone10,3", "iPhone10,6": return true
+        case "iPhone10,3", "iPhone10,6", "iPhone11,2", "iPhone11,6", "iPhone11,8": return true
         default: return false
         }
     }
