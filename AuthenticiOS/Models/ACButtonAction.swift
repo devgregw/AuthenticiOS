@@ -112,7 +112,7 @@ class ACButtonAction {
                 let safari = SFSafariViewController(url: url)
                 safari.preferredBarTintColor = .black
                 safari.preferredControlTintColor = .white
-                AppDelegate.getTopmostViewController().present(safari, animated: true, completion: nil)
+                AppDelegate.topViewController.present(safari, animated: true, completion: nil)
             } else {
                 if UIApplication.shared.canOpenURL(url) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -132,7 +132,7 @@ class ACButtonAction {
                 let safari = SFSafariViewController(url: URL(string: getProperty(withName: "watchUrl") as! String)!)
                 safari.preferredBarTintColor = .black
                 safari.preferredControlTintColor = .white
-                AppDelegate.getTopmostViewController().present(safari, animated: true, completion: nil)
+                AppDelegate.topViewController.present(safari, animated: true, completion: nil)
             }
         case "OpenSpotifyAction":
             let spotifyUri = URL(string: getProperty(withName: "spotifyUri") as! String)!

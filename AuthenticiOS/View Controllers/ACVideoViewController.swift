@@ -141,7 +141,7 @@ class ACVideoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        applyDefaultSettings()
+        applyDefaultAppearance()
         let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(self.share))
         shareButton.tintColor = UIColor.white
         navigationItem.setRightBarButton(shareButton, animated: true)

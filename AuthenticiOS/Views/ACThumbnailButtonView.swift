@@ -63,7 +63,7 @@ class ACThumbnailButtonView: UIView {
     }
     
     @objc func watch() {
-        AppDelegate.automaticPresent(viewController: ACVideoViewController(provider: vendor, id: id))
+        ACVideoViewController(provider: vendor, id: id).presentSelf(sender: nil)
     }
     
     func initialize(action: Selector) {

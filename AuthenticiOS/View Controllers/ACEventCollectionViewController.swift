@@ -22,7 +22,7 @@ class ACEventCollectionViewController: UICollectionViewController {
     
     static func present(withTitle: String) {
         title = withTitle
-        AppDelegate.automaticPresent(viewController: UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "evroot"))
+        UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "evroot").presentSelf(sender: nil)
     }
     
     static func present(withAppearance app: ACAppearance.Events) {
@@ -48,7 +48,7 @@ class ACEventCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        applyDefaultSettings()
+        applyDefaultAppearance()
         self.navigationItem.title = ACEventCollectionViewController.title
         self.navigationController?.navigationBar.titleTextAttributes = [
             .kern: 3.5,
@@ -211,7 +211,7 @@ extension ACEventCollectionViewController: UIViewControllerPreviewingDelegate {
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         guard let action = actionToPop else {
-            AppDelegate.automaticPresent(viewController: viewControllerToCommit)
+            viewControllerToCommit.presentSelf(sender: nil)
             return
         }
         action.invoke(viewController: self, origin: "pop", medium: "ACEventCollectionViewController#previewingContext(_:commit:)")

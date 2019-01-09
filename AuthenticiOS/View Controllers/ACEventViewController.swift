@@ -30,7 +30,7 @@ class ACEventViewController: UIViewController {
         } else {
             AnalyticsHelper.activatePage(event: event, origin: origin, medium: medium)
         }
-        AppDelegate.automaticPresent(viewController: ACEventViewController(event: event))
+        ACEventViewController(event: event).presentSelf(sender: nil)
     }
     
     private func addView(_ view: UIView) {
@@ -124,6 +124,6 @@ class ACEventViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        applyDefaultSettings()
+        applyDefaultAppearance()
     }
 }

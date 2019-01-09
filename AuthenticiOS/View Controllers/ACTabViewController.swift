@@ -35,7 +35,7 @@ class ACTabViewController: UIViewController {
             tab.action!.invoke(viewController: AppDelegate.topViewController, origin: origin, medium: medium)
             return
         }
-        AppDelegate.automaticPresent(viewController: ACTabViewController(tab: tab))
+        ACTabViewController(tab: tab).presentSelf(sender: nil)
     }
     
     class ACWallpaperCollectionViewManager : NSObject, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
@@ -53,7 +53,7 @@ class ACTabViewController: UIViewController {
         
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "wallpaper", for: indexPath) as! ACImageCollectionViewCell
-            cell.setImage(ACImageResource(dict: elements[indexPath.item].getProperty("image") as! NSDictionary), viewController: AppDelegate.getTopmostViewController())
+            cell.setImage(ACImageResource(dict: elements[indexPath.item].getProperty("image") as! NSDictionary), viewController: AppDelegate.topViewController)
             return cell
         }
         
@@ -101,7 +101,7 @@ class ACTabViewController: UIViewController {
         case "fullexp":
             view.backgroundColor = UIColor.black
             let controllerElement = self.tab!.elements[0]
-            self.fullExpAction = controllerElement.getProperty("action") as! NSDictionary
+            self.fullExpAction = (controllerElement.getProperty("action") as! NSDictionary)
             let controllerView = controllerElement.getView(viewController: self, origin: "/tabs/\(self.tab!.id)")
             controllerView.isUserInteractionEnabled = true
             controllerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.runFullExpAction)))
@@ -162,6 +162,6 @@ class ACTabViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        applyDefaultSettings()
+        applyDefaultAppearance()
     }
 }

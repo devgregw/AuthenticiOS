@@ -69,7 +69,7 @@ class ACTabCollectionViewController: UICollectionViewController {
         if AppDelegate.appMode == AppMode.Production {
             self.navigationItem.rightBarButtonItem = nil
         }
-        applyDefaultSettings()
+        applyDefaultAppearance()
         configureCollectionView()
         self.loadData(wasRefreshed: false)
     }
@@ -274,7 +274,7 @@ extension ACTabCollectionViewController: UIViewControllerPreviewingDelegate {
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         guard let action = actionToPop else {
-            AppDelegate.automaticPresent(viewController: viewControllerToCommit)
+            viewControllerToCommit.presentSelf(sender: nil)
             return
         }
         action.invoke(viewController: self, origin: "pop", medium: "ACTabCollecionViewController#previewingContext(_:commit:)")
