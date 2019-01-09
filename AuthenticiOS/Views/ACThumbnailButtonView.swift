@@ -59,7 +59,7 @@ class ACThumbnailButtonView: UIView {
     private var title: String!
     
     @objc func open() {
-        buttonAction.invoke(viewController: AppDelegate.getTopmostViewController(), origin: "thumbnailButton:\(origin)")
+        buttonAction.invoke(viewController: AppDelegate.topViewController, origin: "thumbnailButton:\(origin)", medium: "open")
     }
     
     @objc func watch() {

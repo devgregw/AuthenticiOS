@@ -214,6 +214,6 @@ extension ACEventCollectionViewController: UIViewControllerPreviewingDelegate {
             AppDelegate.automaticPresent(viewController: viewControllerToCommit)
             return
         }
-        action.invoke(viewController: self, origin: "pop")
+        action.invoke(viewController: self, origin: "pop", medium: "ACEventCollectionViewController#previewingContext(_:commit:)")
     }
 }

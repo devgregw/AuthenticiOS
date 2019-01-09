@@ -20,6 +20,10 @@ class ACButtonAction {
     
     private let properties: NSDictionary
     
+    var propertyCount: Int {
+        return properties.count
+    }
+    
     public let rootDictionary: NSDictionary
     
     public static let empty = ACButtonAction(type: "__UNDEFINED__", paramGroup: -1, params: [:])
@@ -70,7 +74,8 @@ class ACButtonAction {
         }
     }
     
-    @objc public func invoke(viewController vc: UIViewController, origin: String) {
+    public func invoke(viewController vc: UIViewController, origin: String, medium: String) {
+        AnalyticsHelper.invokeAction(self, origin: origin, medium: medium)
         switch (self.type) {
         case "OpenEventsPageAction":
             return ACEventCollectionViewController.present(withTitle: "UPCOMING EVENTS")
@@ -92,7 +97,7 @@ class ACButtonAction {
                 if let placeholder = event as? ACEventPlaceholder {
                     if placeholder.action != nil {
                         AnalyticsHelper.activatePage(event: placeholder, origin: origin, medium: self.type)
-                        placeholder.action!.invoke(viewController: vc, origin: origin)
+                        placeholder.action!.invoke(viewController: vc, origin: origin, medium: medium)
                     } else if placeholder.elements?.count ?? 0 > 0 {
                         ACEventViewController.present(event: placeholder, isPlaceholder: true, origin: origin, medium: self.type)
                     }
@@ -137,7 +142,7 @@ class ACButtonAction {
                 let safari = SFSafariViewController(url: URL(string: getProperty(withName: "spotifyUrl") as! String)!)
                 safari.preferredBarTintColor = .black
                 safari.preferredControlTintColor = .white
-                AppDelegate.getTopmostViewController().present(safari, animated: true, completion: nil)
+                AppDelegate.topViewController.present(safari, animated: true, completion: nil)
             }
         case "ShowMapAction":
             let location = getProperty(withName: "address") as! String
@@ -161,19 +166,12 @@ class ACButtonAction {
                         event.isAllDay = false
                         event.endDate = end
                         event.startDate = start
-                        //event.location = loc
                         event.structuredLocation = EKStructuredLocation(title: loc)
                         event.title = title
                         if let rule = rrule {
                             event.addRecurrenceRule(rule.toEKRecurrenceRule())
                         }
                         event.calendar = store.defaultCalendarForNewEvents
-                        /*do {
-                            try store.save(event, span: .thisEvent, commit: true)
-                            self.presentAlert(title: "Add to Calendar", message: "\"\(title)\" was added to your calendar successfully.", vc: vc)
-                        } catch let saveError {
-                            self.presentAlert(title: "Error", message: "We were unable to add \"\(title)\" to your calendar.\n\n\(saveError.localizedDescription)", vc: vc)
-                        }*/
                         CalendarInterface.add(eventToCalendar: event, withEventStore: store, withViewController: vc)
                     } else {
                         if let e = error {
@@ -183,38 +181,6 @@ class ACButtonAction {
                         }
                     }
                 }
-                /*let prompt = UIAlertController(title: "Add to Calendar", message: "Would you like to add \"\(title)\" to your calendar?", preferredStyle: .alert)
-                prompt.addAction(UIAlertAction(title: "Yes", style: .default, handler: {_ in
-                    let store = EKEventStore()
-                    store.requestAccess(to: .event) { (granted, error) in
-                        if granted {
-                            let event = EKEvent(eventStore: store)
-                            event.isAllDay = false
-                            event.endDate = end
-                            event.startDate = start
-                            event.location = loc
-                            event.title = title
-                            if let rule = rrule {
-                                event.addRecurrenceRule(rule.toEKRecurrenceRule())
-                            }
-                            event.calendar = store.defaultCalendarForNewEvents
-                            do {
-                                try store.save(event, span: .thisEvent, commit: true)
-                                self.presentAlert(title: "Add to Calendar", message: "\"\(title)\" was added to your calendar successfully.", vc: vc)
-                            } catch let saveError {
-                                self.presentAlert(title: "Error", message: "We were unable to add \"\(title)\" to your calendar.\n\n\(saveError.localizedDescription)", vc: vc)
-                            }
-                        } else {
-                            if let e = error {
-                                self.presentAlert(title: "Error", message: "We were unable to access your calendar.\n\n\(e.localizedDescription)", vc: vc)
-                            } else {
-                                self.presentAlert(title: "Error", message: "We were unable to access your calendar because you denied permission.", vc: vc)
-                            }
-                        }
-                    }
-                }))
-                prompt.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
-                vc.present(prompt, animated: true, completion: nil)*/
             }
             if self.paramGroup == 0 {
                 Database.database().reference().child("/events/\(self.getProperty(withName: "eventId") as! String)/").observeSingleEvent(of: .value, with: {snapshot in

@@ -24,7 +24,7 @@ class ACTileView: UIView {
     private var action: ACButtonAction!
     
     @objc public func invokeAction() {
-        action.invoke(viewController: viewController, origin: "tile:\(origin!)")
+        action.invoke(viewController: viewController, origin: "tile:\(origin!)", medium: "invokeAction")
     }
     
     public func initialize(withTitle title: String, height: Int, header: ACImageResource, action: ACButtonAction, viewController vc: UIViewController, origin: String) {

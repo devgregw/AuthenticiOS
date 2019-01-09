@@ -164,7 +164,7 @@ class ACElement {
                 //UIApplication.shared.open(request.url!, options: [:], completionHandler: nil)
                 ACButtonAction(type: "OpenURLAction", paramGroup: 1, params: [
                     "url": request.url!.absoluteString
-                    ]).invoke(viewController: AppDelegate.getTopmostViewController(), origin: "html")
+                    ]).invoke(viewController: AppDelegate.topViewController, origin: "html", medium: "user")
                 return false
             }
             return true
@@ -204,11 +204,11 @@ class ACElement {
     private var images = [String]()
     
     @objc public func invoke(_ sender: UIButton) {
-        action.invoke(viewController: vc, origin: "button:\(origin!)")
+        action.invoke(viewController: vc, origin: "element:\(origin!)", medium: "button")
     }
     
     @objc public func enlargeImage(_ sender: UIImageView) {
-        ACButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": "https://accams.devgregw.com/meta/storage/\(images[sender.tag])"]).invoke(viewController: vc, origin: "enlargableImage:\(origin!)")
+        ACButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": "https://accams.devgregw.com/meta/storage/\(images[sender.tag])"]).invoke(viewController: vc, origin: "element:\(origin!)", medium: "enlargableImage")
     }
     
     func getView(viewController vc: UIViewController, origin: String) -> UIView {

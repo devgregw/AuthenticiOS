@@ -32,7 +32,7 @@ class ACTabViewController: UIViewController {
     public static func present(tab: ACTab, origin: String, medium: String) {
         AnalyticsHelper.activatePage(tab: tab, origin: origin, medium: medium)
         if tab.action != nil {
-            tab.action!.invoke(viewController: AppDelegate.getTopmostViewController(), origin: origin)
+            tab.action!.invoke(viewController: AppDelegate.topViewController, origin: origin, medium: medium)
             return
         }
         AppDelegate.automaticPresent(viewController: ACTabViewController(tab: tab))
@@ -77,8 +77,8 @@ class ACTabViewController: UIViewController {
     
     private var fullExpAction: NSDictionary!
     
-    @objc public func runFullExpAction(origin: String) {
-        ACButtonAction(dict: self.fullExpAction).invoke(viewController: self, origin: origin)
+    @objc public func runFullExpAction() {
+        ACButtonAction(dict: self.fullExpAction).invoke(viewController: self, origin: "fullexp", medium: "controller")
     }
     
     private func initLayout(forSpecialType specialType: String) {

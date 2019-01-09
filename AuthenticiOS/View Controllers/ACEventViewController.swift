@@ -42,19 +42,19 @@ class ACEventViewController: UIViewController {
             "group": 0,
             "type": "AddToCalendarAction",
             "eventId": self.event!.id
-            ])).invoke(viewController: self, origin: "/events/\(self.event!.id)")
+            ])).invoke(viewController: self, origin: "/events/\(self.event!.id)", medium: "addToCalendar")
     }
     
     @objc public func getDirections() {
-        ACButtonAction(type: "GetDirectionsAction", paramGroup: 0, params: ["address": self.event!.address]).invoke(viewController: self, origin: "/events/\(self.event!.id)")
+        ACButtonAction(type: "GetDirectionsAction", paramGroup: 0, params: ["address": self.event!.address]).invoke(viewController: self, origin: "/events/\(self.event!.id)", medium: "getDirections")
     }
     
     @objc public func showOnMap() {
-        ACButtonAction(type: "ShowMapAction", paramGroup: 0, params: ["address": self.event!.location]).invoke(viewController: self, origin: "/events/\(self.event!.id)")
+        ACButtonAction(type: "ShowMapAction", paramGroup: 0, params: ["address": self.event!.location]).invoke(viewController: self, origin: "/events/\(self.event!.id)", medium: "showOnMap")
     }
     
     @objc public func register() {
-        ACButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": self.event!.registrationUrl!]).invoke(viewController: self, origin: "/events/\(self.event!.id)")
+        ACButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": self.event!.registrationUrl!]).invoke(viewController: self, origin: "/events/\(self.event!.id)", medium: "register")
     }
     
     private func initLayout() {

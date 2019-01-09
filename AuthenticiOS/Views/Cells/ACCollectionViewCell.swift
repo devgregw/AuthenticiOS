@@ -39,14 +39,14 @@ class ACCollectionViewCell: UICollectionViewCell {
     @objc public func presentEventPlaceholder() {
         guard let placeholder = event as? ACEventPlaceholder else {return}
         if placeholder.action != nil {
-            placeholder.action!.invoke(viewController: self.viewController, origin: "home:tile:/events/\(self.event.id)")
+            placeholder.action!.invoke(viewController: self.viewController, origin: "home:tile:/events/\(self.event.id)", medium: "user")
         } else if placeholder.elements?.count ?? 0 > 0 {
             self.presentEvent()
         }
     }
     
     @objc public func invokeAction() {
-        action.invoke(viewController: viewController, origin: "home:tile:/tabs/\(self.tab.id)")
+        action.invoke(viewController: viewController, origin: "home:tile:/tabs/\(self.tab.id)", medium: "user")
     }
     
     public func initialize(forUpcomingEvents appearance: ACAppearance.Events, withViewController vc: UIViewController) {

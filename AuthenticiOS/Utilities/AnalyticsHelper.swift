@@ -10,20 +10,30 @@ import Foundation
 import Firebase
 
 class AnalyticsHelper {
+    static func invokeAction(_ action: ACButtonAction, origin: String, medium: String) {
+        CLSNSLogv("%@", getVaList(["Invoking action - type: \(action.type); paramGroup: \(action.paramGroup); count: \(action.propertyCount); source: \(origin); medium: \(medium);"]))
+        Analytics.logEvent("invoke_action", parameters: [
+            AnalyticsParameterContentType: "\(action.type)(\(action.paramGroup))",
+            AnalyticsParameterContent: action.propertyCount,
+            AnalyticsParameterSource: origin,
+            AnalyticsParameterMedium: medium,
+        ])
+    }
+    
     static func activatePage(id: String, title: String, type: String, content: String, origin: String, medium: String) {
-        CLSNSLogv("%@", getVaList(["Activating page: \(id) \(title) \(type) \(content) \(origin) \(medium)"]))
+        CLSNSLogv("%@", getVaList(["Activating page - id: \(id); title: \(title); type: \(type); content: \(content); source: \(origin); medium: \(medium);"]))
         Analytics.logEvent("activate_page", parameters: [
             AnalyticsParameterItemID: id,
             AnalyticsParameterItemName: title,
             AnalyticsParameterContentType: type,
             AnalyticsParameterContent: content,
-            AnalyticsParameterOrigin: origin,
+            AnalyticsParameterSource: origin,
             AnalyticsParameterMedium: medium,
         ])
     }
     
     static func activatePage(tab: ACTab, origin: String, medium: String) {
-        activatePage(id: tab.id, title: tab.title, type: "tab", content: tab.action?.type ?? (tab.specialType ?? "elements"), origin: origin, medium: medium)
+        activatePage(id: tab.id, title: tab.title, type: "tab", content: tab.action?.type ?? (tab.specialType ?? "elements(\(tab.elements.count))"), origin: origin, medium: medium)
     }
     
     static func activatePage(event: ACEvent, origin: String, medium: String) {

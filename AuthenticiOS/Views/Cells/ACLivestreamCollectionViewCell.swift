@@ -29,7 +29,7 @@ class ACLivestreamCollectionViewCell: UICollectionViewCell {
             "videoId": self.videoId,
             "watchUrl": "https://youtube.com/watch?v=\(self.videoId!)",
             "youtubeUri": "youtube://\(self.videoId!)"
-        ]).invoke(viewController: vc, origin: "livestreamTile")
+            ]).invoke(viewController: vc, origin: "livestreamTile", medium: "openStream")
     }
     
     private func displayText(isLive: Bool) {

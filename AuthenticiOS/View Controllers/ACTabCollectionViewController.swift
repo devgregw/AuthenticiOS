@@ -277,6 +277,6 @@ extension ACTabCollectionViewController: UIViewControllerPreviewingDelegate {
             AppDelegate.automaticPresent(viewController: viewControllerToCommit)
             return
         }
-        action.invoke(viewController: self, origin: "pop")
+        action.invoke(viewController: self, origin: "pop", medium: "ACTabCollecionViewController#previewingContext(_:commit:)")
     }
 }
