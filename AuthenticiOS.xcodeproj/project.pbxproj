@@ -90,6 +90,7 @@
 		FC1045041FFEF5560010F8A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC16001A1FFC4BD6001DF3B5 /* ACTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabViewController.swift; sourceTree = "<group>"; };
 		FC16001B1FFC4BD6001DF3B5 /* ACTabViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACTabViewController.xib; sourceTree = "<group>"; };
+		FC21A04C21E92E3B000D3C5D /* upload-symbols.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "upload-symbols.sh"; sourceTree = "<group>"; };
 		FC2765D720E02122002A342A /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		FC333F0E213F6B1000110BAF /* ACTileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACTileView.xib; sourceTree = "<group>"; };
 		FC333F10213F6B6600110BAF /* ACTileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ACTileView.swift; sourceTree = "<group>"; };
@@ -152,6 +153,7 @@
 		2B3630521FF56BD9002469E5 = {
 			isa = PBXGroup;
 			children = (
+				FC21A04C21E92E3B000D3C5D /* upload-symbols.sh */,
 				FC2765D720E02122002A342A /* Settings.bundle */,
 				2B36305D1FF56BD9002469E5 /* AuthenticiOS */,
 				2B36305C1FF56BD9002469E5 /* Products */,
@@ -329,7 +331,6 @@
 				2B3630591FF56BD9002469E5 /* Resources */,
 				8C4A9A9EB35FCD77EB3576B1 /* [CP] Embed Pods Frameworks */,
 				FC746D0B20BDD08200D0ACB3 /* ShellScript */,
-				FCBEC4F920C40AD7008A5050 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -474,19 +475,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\"\n";
-		};
-		FCBEC4F920C40AD7008A5050 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/upload-symbols\" -gsp \"${PROJECT_DIR}/AuthenticiOS/GoogleService-Info.plist\" -p ios \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
