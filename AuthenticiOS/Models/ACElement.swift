@@ -208,7 +208,7 @@ class ACElement {
     }
     
     @objc public func enlargeImage(_ sender: UIImageView) {
-        ACButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": "https://accams.devgregw.com/meta/storage/\(images[sender.tag])"]).invoke(viewController: vc, origin: "element:\(origin!)", medium: "enlargableImage")
+        ACButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": "https://authentic.gregwhatley.dev/meta/storage/\(images[sender.tag])"]).invoke(viewController: vc, origin: "element:\(origin!)", medium: "enlargableImage")
     }
     
     func getView(viewController vc: UIViewController, origin: String) -> UIView {

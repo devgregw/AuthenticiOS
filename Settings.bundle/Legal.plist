@@ -6,7 +6,7 @@
 	<array>
 		<dict>
 			<key>FooterText</key>
-			<string>To view legal documentation (such as the privacy policy) for the Authentic City Church app, visit https://docs.accams.devgregw.com.</string>
+			<string>To view legal documentation (such as the privacy policy) for the Authentic City Church app, visit https://authenticdocs.gregwhatley.dev.</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>
