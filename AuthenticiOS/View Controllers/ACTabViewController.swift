@@ -35,6 +35,14 @@ class ACTabViewController: UIViewController {
             tab.action!.invoke(viewController: AppDelegate.topViewController, origin: origin, medium: medium)
             return
         }
+        if let type = tab.specialType {
+            if type == "wallpapers" {
+                let vc = (UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "wallpapersCollectionViewController") as! ACWallpaperCollectionViewController)
+                vc.initialize(withTab: tab)
+                vc.presentSelf(sender: nil)
+                return
+            }
+        }
         ACTabViewController(tab: tab).presentSelf(sender: nil)
     }
     
@@ -96,7 +104,7 @@ class ACTabViewController: UIViewController {
             view = collectionView
             collectionView.reloadData()
             collectionView.collectionViewLayout.invalidateLayout()
-            collectionView.layoutSubviews()
+            view.setNeedsLayout()
             break
         case "fullexp":
             view.backgroundColor = UIColor.black

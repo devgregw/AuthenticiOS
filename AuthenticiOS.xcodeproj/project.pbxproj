@@ -23,6 +23,7 @@
 		FC1045051FFEF5560010F8A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC1045041FFEF5560010F8A1 /* Assets.xcassets */; };
 		FC16001C1FFC4BD6001DF3B5 /* ACTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC16001A1FFC4BD6001DF3B5 /* ACTabViewController.swift */; };
 		FC16001D1FFC4BD6001DF3B5 /* ACTabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC16001B1FFC4BD6001DF3B5 /* ACTabViewController.xib */; };
+		FC264D0B21ED38A700C2BA4E /* ACWallpaperCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC264D0A21ED38A700C2BA4E /* ACWallpaperCollectionViewController.swift */; };
 		FC2765D820E02122002A342A /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FC2765D720E02122002A342A /* Settings.bundle */; };
 		FC333F0F213F6B1100110BAF /* ACTileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC333F0E213F6B1000110BAF /* ACTileView.xib */; };
 		FC333F11213F6B6600110BAF /* ACTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC333F10213F6B6600110BAF /* ACTileView.swift */; };
@@ -91,6 +92,7 @@
 		FC16001A1FFC4BD6001DF3B5 /* ACTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabViewController.swift; sourceTree = "<group>"; };
 		FC16001B1FFC4BD6001DF3B5 /* ACTabViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACTabViewController.xib; sourceTree = "<group>"; };
 		FC21A04C21E92E3B000D3C5D /* upload-symbols.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "upload-symbols.sh"; sourceTree = "<group>"; };
+		FC264D0A21ED38A700C2BA4E /* ACWallpaperCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACWallpaperCollectionViewController.swift; sourceTree = "<group>"; };
 		FC2765D720E02122002A342A /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		FC333F0E213F6B1000110BAF /* ACTileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ACTileView.xib; sourceTree = "<group>"; };
 		FC333F10213F6B6600110BAF /* ACTileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ACTileView.swift; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 				FC75FB6E210A271000E396A8 /* ACVideoViewController.swift */,
 				FC75FB76210ABE0E00E396A8 /* ACWallpaperPreviewViewController.swift */,
 				FC9E7BF121DBE7D5008D8F34 /* ACPeekImageViewController.swift */,
+				FC264D0A21ED38A700C2BA4E /* ACWallpaperCollectionViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 				FC3A7FE12112793600CAFC90 /* UIView.swift in Sources */,
 				FCAC5ADC215FF7EA0013FD52 /* ACToolbarView.swift in Sources */,
 				FC535C0921CC06F800FC5FAA /* AnalyticsHelper.swift in Sources */,
+				FC264D0B21ED38A700C2BA4E /* ACWallpaperCollectionViewController.swift in Sources */,
 				FC3A7FE7211279D500CAFC90 /* UIViewController.swift in Sources */,
 				FC5F914720D94FB700516095 /* ACEventCollectionViewController.swift in Sources */,
 				FC3A7FDF2112792700CAFC90 /* Date.swift in Sources */,
