@@ -13,6 +13,7 @@ import FirebaseStorage
 class ACCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var tintView: UIView!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var text: String = ""
     private var imageResource = ACImageResource()
@@ -73,7 +74,7 @@ class ACCollectionViewCell: UICollectionViewCell {
     }
     
     public func initialize(forEvent event: ACEvent, withViewController vc: UIViewController) {
-        self.text = event.hideTitle ? "" : event.title
+        self.text = event.title
         self.imageResource = event.header
         self.event = event
         self.viewController = vc
@@ -98,15 +99,25 @@ class ACCollectionViewCell: UICollectionViewCell {
     private func initialize() {
         let rand = CGFloat(drand48())
         self.backgroundColor = UIColor(red: rand, green: rand, blue: rand, alpha: 1)
+        if (self.tint) {
+            self.indicator.alpha = 0
+            self.indicator.isHidden = true
+        }
+        self.indicator.color = UIColor(red: 1 - rand, green: 1 - rand, blue: 1 - rand, alpha: 1)
         image.alpha = 0
         self.subviews.forEach { v in
             if let l = v as? ACInsetLabel {
                 l.removeFromSuperview()
             }
         }
-        imageResource.load(intoImageView: image, fadeIn: true, setSize: false)
+        imageResource.load(intoImageView: image, fadeIn: true, setSize: false, scaleDownLargeImages: true, completion: {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.backgroundColor = UIColor.black
+                self.indicator.alpha = 0
+            }, completion: {_ in self.indicator.stopAnimating()})
+        })
         self.tintView.alpha = self.tint ? 1 : 0
-        let label = (ACElement.createTitle(text: self.text, alignment: "center", border: false, size: 18, color: UIColor.white, bold: true) as! UIStackView).arrangedSubviews[0]
+        let label = (ACElement.createTitle(text: self.tint ? self.text : "", alignment: "center", border: false, size: 18, color: UIColor.white, bold: true) as! UIStackView).arrangedSubviews[0]
         self.addSubview(label)
         self.constraints.forEach({c in self.removeConstraint(c)})
         self.addConstraints([

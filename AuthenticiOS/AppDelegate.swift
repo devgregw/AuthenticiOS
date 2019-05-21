@@ -135,7 +135,7 @@ extension AppDelegate: MessagingDelegate {
 }
 
 extension AppDelegate {
-    func launchWithOptions(_ options: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func launchWithOptions(_ options: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // If the app was launched via a shortcut, handle it
         if let shortcut = options?[.shortcutItem] as? UIApplicationShortcutItem {
             self.launchedItem = shortcut
@@ -207,7 +207,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Configure Firebase and settings
     func configureFirebase() {
         FirebaseApp.configure()
-        AnalyticsConfiguration.shared().setAnalyticsCollectionEnabled(AppDelegate.appMode != AppMode.Debug)
+        Analytics.setAnalyticsCollectionEnabled(AppDelegate.appMode != .Debug)
         Database.database().isPersistenceEnabled = true
     }
     
@@ -218,14 +218,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.synchronize()
     }
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         configureFirebase()
         updateVersion()
         configureNotifications(forApplication: application)
         application.applicationIconBadgeNumber = 0
         
         do {
-            try AVAudioSession.sharedInstance().setCategory("playback")
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category(rawValue: "playback"))
         } catch let error as NSError {
             self.print(error.localizedDescription)
         }

@@ -21,8 +21,8 @@ class MapInterface {
     private static func queryMap(search: Bool, place: String, apple: URL, google: URL) {
         let gmaps = isGoogleMapsAvailable()
         let amaps = isAppleMapsAvailable()
-        let openApple = {UIApplication.shared.open(apple, options: [:], completionHandler: nil)}
-        let openGoogle = {UIApplication.shared.open(google, options: [:], completionHandler: nil)}
+        let openApple = {UIApplication.shared.open(apple, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)}
+        let openGoogle = {UIApplication.shared.open(google, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)}
         if gmaps && amaps {
             let alert = UIAlertController(title: search ? "Search Map" : "Get Directions", message: search ? "Select an app to search for \(place)." : "Select an app to get directions to \(place).", preferredStyle: .actionSheet)
             let topmostView = AppDelegate.topViewController.view!
@@ -49,4 +49,9 @@ class MapInterface {
     static func search(forPlace location: String) {
         queryMap(search: true, place: location, apple: URL(string: "http://maps.apple.com/?q=\(location.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)")!, google: URL(string: "https://www.google.com/maps/search/?api=1&query=\(location.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)")!)
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

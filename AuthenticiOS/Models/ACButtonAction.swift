@@ -115,7 +115,7 @@ class ACButtonAction {
                 AppDelegate.topViewController.present(safari, animated: true, completion: nil)
             } else {
                 if UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
                 } else {
                     let alert = UIAlertController(title: "Error", message: "An app to open the URL \(url) was not found.", preferredStyle: .alert)
                     let action = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
@@ -127,7 +127,7 @@ class ACButtonAction {
         case "OpenYouTubeAction":
             let youtubeUri = URL(string: getProperty(withName: "youtubeUri") as! String)!
             if UIApplication.shared.canOpenURL(URL(string: "youtube://")!) {
-                UIApplication.shared.open(youtubeUri, options: [:], completionHandler: nil)
+                UIApplication.shared.open(youtubeUri, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
             } else {
                 let safari = SFSafariViewController(url: URL(string: getProperty(withName: "watchUrl") as! String)!)
                 safari.preferredBarTintColor = .black
@@ -137,7 +137,7 @@ class ACButtonAction {
         case "OpenSpotifyAction":
             let spotifyUri = URL(string: getProperty(withName: "spotifyUri") as! String)!
             if UIApplication.shared.canOpenURL(spotifyUri) {
-                UIApplication.shared.open(spotifyUri, options: [:], completionHandler: nil)
+                UIApplication.shared.open(spotifyUri, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
             } else {
                 let safari = SFSafariViewController(url: URL(string: getProperty(withName: "spotifyUrl") as! String)!)
                 safari.preferredBarTintColor = .black
@@ -153,7 +153,7 @@ class ACButtonAction {
         case "EmailAction":
             let address = getProperty(withName: "emailAddress")
             if let url = URL(string: "mailto:\(address!)") {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
             } else {
                 presentAlert(title: "Error", message: "This action could not be invoked: '\(address!)' is not a valid email address.", vc: vc)
             }
@@ -229,3 +229,8 @@ class ACButtonAction {
     }
 }
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+}

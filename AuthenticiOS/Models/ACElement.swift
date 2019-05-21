@@ -159,7 +159,7 @@ class ACElement {
             webView.addConstraint(NSLayoutConstraint(item: webView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height))
         }
         
-        func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
             if navigationType == .linkClicked {
                 //UIApplication.shared.open(request.url!, options: [:], completionHandler: nil)
                 ACButtonAction(type: "OpenURLAction", paramGroup: 1, params: [

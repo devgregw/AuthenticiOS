@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,9 +26,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
                         <color key="backgroundColor" red="0.0025906735751295429" green="0.0025906735751295429" blue="0.0025906735751295429" alpha="0.40140845070422537" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <activityIndicatorView opaque="NO" contentMode="center" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="h8l-kF-W74">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="300"/>
+                    </activityIndicatorView>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="h8l-kF-W74" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="0lP-jx-i2r"/>
                 <constraint firstItem="shm-h2-FgO" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="4o4-fr-sJX"/>
                 <constraint firstAttribute="bottom" secondItem="shm-h2-FgO" secondAttribute="bottom" id="5bU-dQ-guV"/>
                 <constraint firstAttribute="bottom" secondItem="nLB-vy-Of3" secondAttribute="bottom" id="62t-pB-TAI"/>
@@ -37,12 +41,16 @@
                 <constraint firstAttribute="trailing" secondItem="nLB-vy-Of3" secondAttribute="trailing" id="Rt7-Uz-8hU"/>
                 <constraint firstItem="nLB-vy-Of3" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="W4X-l5-pTj"/>
                 <constraint firstAttribute="trailing" secondItem="shm-h2-FgO" secondAttribute="trailing" id="Xfy-5D-zsy"/>
+                <constraint firstAttribute="bottom" secondItem="h8l-kF-W74" secondAttribute="bottom" id="x1Q-pr-fLH"/>
+                <constraint firstAttribute="trailing" secondItem="h8l-kF-W74" secondAttribute="trailing" id="ycU-70-4Pd"/>
+                <constraint firstItem="h8l-kF-W74" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="zLo-MV-4K6"/>
             </constraints>
             <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="177" height="487"/>
             <connections>
                 <outlet property="image" destination="shm-h2-FgO" id="Fi8-kj-NFU"/>
+                <outlet property="indicator" destination="h8l-kF-W74" id="vMl-xG-oDn"/>
                 <outlet property="tintView" destination="nLB-vy-Of3" id="UhI-sR-kXP"/>
             </connections>
             <point key="canvasLocation" x="96.5" y="284.5"/>

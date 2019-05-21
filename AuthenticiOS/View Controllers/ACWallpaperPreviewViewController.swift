@@ -11,6 +11,8 @@ import UIKit
 class ACWallpaperPreviewViewController: UIViewController {
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
+    @IBOutlet weak var saveButton: UIButton!
     
     @IBAction func cancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -43,13 +45,30 @@ class ACWallpaperPreviewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        imageResource.load(intoImageView: imageView, fadeIn: false, setSize: false, scaleDownLargeImages: false)
+        self.saveButton.isEnabled = false
+        self.saveButton.alpha = 0.5
+        let rand = CGFloat(drand48())
+        self.view.backgroundColor = UIColor(red: rand, green: rand, blue: rand, alpha: 1)
+        self.indicator.color = UIColor(red: 1 - rand, green: 1 - rand, blue: 1 - rand, alpha: 1)
+        self.indicator.center = CGPoint(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY)
+        self.imageResource.load(intoImageView: self.imageView, fadeIn: true, setSize: false, scaleDownLargeImages: false, completion: {
+            self.saveButton.isEnabled = true
+            UIView.animate(withDuration: 0.3, animations: {
+                self.view.backgroundColor = UIColor.white
+                self.indicator.alpha = 0
+                self.saveButton.alpha = 1
+            }, completion: {_ in
+                self.indicator.stopAnimating()
+            })
+        })
+        self.imageView.clipsToBounds = true
+        
         loadingAlert = UIAlertController(title: nil, message: "Saving image...", preferredStyle: .alert)
-        let indicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        indicator.hidesWhenStopped = true
-        indicator.activityIndicatorViewStyle = .gray
-        indicator.startAnimating()
-        loadingAlert.view.addSubview(indicator)
+        let saveIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        saveIndicator.hidesWhenStopped = true
+        saveIndicator.style = .gray
+        saveIndicator.startAnimating()
+        loadingAlert.view.addSubview(saveIndicator)
     }
 
     init(imageResource: ACImageResource) {

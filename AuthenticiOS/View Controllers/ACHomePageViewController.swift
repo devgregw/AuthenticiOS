@@ -36,7 +36,7 @@ class ACHomePageViewController: UIPageViewController, UIPageViewControllerDataSo
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let index = ACHomePageViewController.controllers.index(of: viewController) else {
+        guard let index = ACHomePageViewController.controllers.firstIndex(of: viewController) else {
             return nil
         }
         let previous = index - 1
@@ -50,7 +50,7 @@ class ACHomePageViewController: UIPageViewController, UIPageViewControllerDataSo
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let index = ACHomePageViewController.controllers.index(of: viewController) else {
+        guard let index = ACHomePageViewController.controllers.firstIndex(of: viewController) else {
             return nil
         }
         let next = index + 1
@@ -100,7 +100,7 @@ class ACHomePageViewController: UIPageViewController, UIPageViewControllerDataSo
         guard previousViewControllers.count > 0 else { return }
         // if the transition completed and the view controller we transitioned from is the first view controller
         DispatchQueue.main.async {
-            if completed && ACHomePageViewController.controllers.index(of: previousViewControllers.first!) == 0 {
+            if completed && ACHomePageViewController.controllers.firstIndex(of: previousViewControllers.first!) == 0 {
                 self.view.subviews.forEach { view in
                     if let scrollView = view as? UIScrollView {
                         // disable scrolling because it messes with the collection view

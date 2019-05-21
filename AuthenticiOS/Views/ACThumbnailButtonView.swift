@@ -14,6 +14,8 @@ class ACThumbnailButtonView: UIView {
     
     @IBOutlet weak var thumbnailImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
+    @IBOutlet weak var thumbnailBackgroundView: UIView!
     
     private var origin: String
     
@@ -28,7 +30,9 @@ class ACThumbnailButtonView: UIView {
         thumbnailImage.sd_setImage(with: URL(string: thumb)!, placeholderImage: nil, options: SDWebImageOptions.scaleDownLargeImages, progress: nil, completed: { _, _, _, _ in
             UIView.animate(withDuration: 0.3, animations: {
                 self.thumbnailImage.alpha = 1
-            })
+                self.indicator.alpha = 0
+                self.thumbnailBackgroundView.backgroundColor = UIColor.white
+            }, completion: {_ in self.indicator.stopAnimating()})
         })
     }
     
@@ -38,7 +42,12 @@ class ACThumbnailButtonView: UIView {
         initialize(action: #selector(self.open))
         self.buttonAction = action
         titleLabel.text = label
-        thumb.load(intoImageView: thumbnailImage, fadeIn: true, setSize: false)
+        thumb.load(intoImageView: thumbnailImage, fadeIn: true, setSize: false, scaleDownLargeImages: true, completion: {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.indicator.alpha = 0
+                self.thumbnailBackgroundView.backgroundColor = UIColor.white
+            }, completion: {_ in self.indicator.stopAnimating()})
+        })
     }
     
     override init(frame: CGRect) {
@@ -69,7 +78,7 @@ class ACThumbnailButtonView: UIView {
     func initialize(action: Selector) {
         let view = loadViewFromNib()
         view.frame = bounds
-        view.autoresizingMask = UIViewAutoresizing(rawValue: UInt(UInt8(UIViewAutoresizing.flexibleWidth.rawValue) | UInt8(UIViewAutoresizing.flexibleHeight.rawValue)))
+        view.autoresizingMask = UIView.AutoresizingMask(rawValue: UInt(UInt8(UIView.AutoresizingMask.flexibleWidth.rawValue) | UInt8(UIView.AutoresizingMask.flexibleHeight.rawValue)))
         view.layoutIfNeeded()
         let top = CALayer()
         top.frame = CGRect(x: 166, y: 0, width: view.frame.size.width + 224, height: 0.5)
@@ -82,7 +91,9 @@ class ACThumbnailButtonView: UIView {
         view.isUserInteractionEnabled = true
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: action))
         let rand = CGFloat(drand48())
-        thumbnailImage.backgroundColor = UIColor(red: rand, green: rand, blue: rand, alpha: 1)
+        thumbnailBackgroundView.backgroundColor = UIColor(red: rand, green: rand, blue: rand, alpha: 1)
+        indicator.color = UIColor(red: 1 - rand, green: 1 - rand, blue: 1 - rand, alpha: 1)
+        indicator.center = CGPoint(x: 79, y: 50)
         addSubview(view)
     }
     

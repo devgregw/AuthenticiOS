@@ -28,7 +28,7 @@ extension UIViewController {
         // there's some additional stuff to do
         if let hp = vc as? ACHomePageViewController {
             // Get the index of the currently displayed page
-            let index = ACHomePageViewController.controllers.index(of: hp.viewControllers!.first!)
+            let index = ACHomePageViewController.controllers.firstIndex(of: hp.viewControllers!.first!)
             // If the index is 0, the home page view controller is displaying the logo and up arrow;
             // this view controller doesn't have a navigation controller
             if index == 0 {

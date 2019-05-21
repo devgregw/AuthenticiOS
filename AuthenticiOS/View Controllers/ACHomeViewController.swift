@@ -55,7 +55,7 @@ class ACHomeViewController: UIViewController {
             if value > Int(buildNumber)! {
                 let alert = UIAlertController(title: "Update Available", message: "An update is available for the Authentic City Church app.  We highly recommend that you update to avoid missing out on new features.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Not Now", style: .default, handler: { _ in self.displayMainUI() }))
-                alert.addAction(UIAlertAction(title: "Update", style: .default, handler: { _ in UIApplication.shared.open(URL(string: "itms-apps://itunes.apple.com/app/id1402645724")!, options: [:], completionHandler: nil)
+                alert.addAction(UIAlertAction(title: "Update", style: .default, handler: { _ in UIApplication.shared.open(URL(string: "itms-apps://itunes.apple.com/app/id1402645724")!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
                     self.displayMainUI()
                 }))
                 self.present(alert, animated: true, completion: nil)
@@ -122,4 +122,9 @@ class ACHomeViewController: UIViewController {
         super.viewDidLoad()
         preInitialize()
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

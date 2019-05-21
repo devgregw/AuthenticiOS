@@ -11,6 +11,7 @@ import Firebase
 
 class ACImageCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var viewController: UIViewController!
     private var imageResource: ACImageResource!
@@ -25,12 +26,20 @@ class ACImageCollectionViewCell: UICollectionViewCell {
     }
     
     public func setImage(_ resource: ACImageResource, viewController: UIViewController) {
-        resource.load(intoImageView: imageView, fadeIn: true, setSize: false)
         let rand = CGFloat(drand48())
         backgroundColor = UIColor(red: rand, green: rand, blue: rand, alpha: 1)
+        indicator.color = UIColor(red: 1 - rand, green: 1 - rand, blue: 1 - rand, alpha: 1)
+        indicator.center = CGPoint(x: UIScreen.main.bounds.midX / 2, y: UIScreen.main.bounds.midX / 2)
+        indicator.startAnimating()
         self.viewController = viewController
         self.imageResource = resource
         gestureRecognizers = []
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.preview)))
+        resource.load(intoImageView: imageView, fadeIn: true, setSize: false, scaleDownLargeImages: true, completion: {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.backgroundColor = UIColor.white
+                self.indicator.alpha = 0
+            }, completion: {_ in self.indicator.stopAnimating()})
+        })
     }
 }

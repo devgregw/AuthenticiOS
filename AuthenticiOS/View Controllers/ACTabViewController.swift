@@ -114,6 +114,14 @@ class ACTabViewController: UIViewController {
             controllerView.isUserInteractionEnabled = true
             controllerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.runFullExpAction)))
             controllerView.clipsToBounds = true
+            
+            let indicator = UIActivityIndicatorView(style: .whiteLarge)
+            indicator.startAnimating()
+            indicator.frame.size = CGSize(width: 50, height: 50)
+            indicator.center = CGPoint(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY)
+            view.addSubview(indicator)
+            view.sendSubviewToBack(indicator)
+            
             self.stackView.addArrangedSubview(controllerView)
             if let scroll = self.stackView.superview as? UIScrollView {
                 scroll.isScrollEnabled = false

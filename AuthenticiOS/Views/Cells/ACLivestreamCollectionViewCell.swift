@@ -26,7 +26,7 @@ class ACLivestreamCollectionViewCell: UICollectionViewCell {
     
     @objc public func openStream() {
         ACButtonAction(type: "OpenYouTubeAction", paramGroup: 0, params: [
-            "videoId": self.videoId,
+            "videoId": self.videoId ?? "",
             "watchUrl": "https://youtube.com/watch?v=\(self.videoId!)",
             "youtubeUri": "youtube://\(self.videoId!)"
             ]).invoke(viewController: vc, origin: "livestreamTile", medium: "openStream")

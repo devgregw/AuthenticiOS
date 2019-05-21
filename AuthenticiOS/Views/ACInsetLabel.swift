@@ -17,7 +17,7 @@ class ACInsetLabel: UILabel {
     private let insets = UIEdgeInsets(top: 2, left: 4, bottom: 2, right: 4)
     
     override func drawText(in rect: CGRect) {
-        super.drawText(in: UIEdgeInsetsInsetRect(rect, insets))
+        super.drawText(in: rect.inset(by: insets))
     }
     
     override var intrinsicContentSize: CGSize {
