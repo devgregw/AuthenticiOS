@@ -51,13 +51,20 @@ class ACImageResource {
         }
     }
     
+    func calculateHeight(fromWidth width: CGFloat) -> CGFloat {
+        return width * CGFloat(self.height) / CGFloat(self.width == 0 ? 1 : self.width)
+    }
+    
+    func calculateHeight(usingFullScreenWidth fullWidth: Bool) -> CGFloat {
+        return calculateHeight(fromWidth: UIScreen.main.bounds.width / (fullWidth ? 1 : 2))
+    }
+    
     func load(intoImageView view: UIImageView, fadeIn fade: Bool, setSize: Bool, scaleDownLargeImages scale: Bool = true, completion: @escaping () -> Void = {}) {
         if fade {
             view.alpha = 0
         }
         if setSize {
-            let newHeight = (CGFloat(self.height) / CGFloat(self.width)) * UIScreen.main.bounds.width
-            view.addConstraint(NSLayoutConstraint(item: view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: newHeight))
+            view.addConstraint(NSLayoutConstraint(item: view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: calculateHeight(usingFullScreenWidth: true)))
         }
         getDownloadURL(completion: { url in
             guard url != nil else {

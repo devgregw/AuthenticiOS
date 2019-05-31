@@ -213,10 +213,8 @@ extension ACTabCollectionViewController : ACCollectionViewLayoutDelegate {
             if fill {
                 return CGSize(width: view.frame.width / 2, height: availableHeight / CGFloat(tabsInColumn))
             }
-            let adjustedWidth = view.frame.width / 2
-            let ratio = CGFloat(app.header.width) / CGFloat(app.header.height == 0 ? 1 : app.header.height)
-            let adjustedHeight = adjustedWidth / ratio
-            return CGSize(width: adjustedWidth, height: adjustedHeight)
+            let adjustedWidth = UIScreen.main.bounds.midX
+            return CGSize(width: adjustedWidth, height: app.header.calculateHeight(usingFullScreenWidth: false))
         }
         guard !self.tabs.isEmpty else {
             return CGSize.zero
@@ -225,10 +223,8 @@ extension ACTabCollectionViewController : ACCollectionViewLayoutDelegate {
         if fill {
             return CGSize(width: view.frame.width / 2, height: availableHeight / CGFloat(tabsInColumn))
         }
-        let adjustedWidth = view.frame.width / 2
-        let ratio = CGFloat(tab.header.width) / CGFloat(tab.header.height == 0 ? 1 : tab.header.height)
-        let adjustedHeight = adjustedWidth / ratio
-        return CGSize(width: adjustedWidth, height: adjustedHeight)
+        let adjustedWidth = UIScreen.main.bounds.midX
+        return CGSize(width: adjustedWidth, height: tab.header.calculateHeight(usingFullScreenWidth: false))
     }
     
     func collectionView(_ collectionView: UICollectionView, columnNumberForCellAtIndexPath indexPath: IndexPath) -> Int {
