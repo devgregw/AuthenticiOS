@@ -27,6 +27,7 @@ class ACImageCollectionViewCell: UICollectionViewCell {
     
     public func setImage(_ resource: ACImageResource, viewController: UIViewController) {
         let rand = CGFloat(drand48())
+        indicator.isHidden = false
         backgroundColor = UIColor(red: rand, green: rand, blue: rand, alpha: 1)
         indicator.color = UIColor(red: 1 - rand, green: 1 - rand, blue: 1 - rand, alpha: 1)
         indicator.center = CGPoint(x: UIScreen.main.bounds.midX / 2, y: UIScreen.main.bounds.midX / 2)
@@ -38,7 +39,7 @@ class ACImageCollectionViewCell: UICollectionViewCell {
         resource.load(intoImageView: imageView, fadeIn: true, setSize: false, scaleDownLargeImages: true, completion: {
             UIView.animate(withDuration: 0.3, animations: {
                 self.backgroundColor = UIColor.white
-                self.indicator.alpha = 0
+                self.indicator.isHidden = true
             }, completion: {_ in self.indicator.stopAnimating()})
         })
     }

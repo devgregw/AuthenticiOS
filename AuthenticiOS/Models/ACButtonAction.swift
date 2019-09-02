@@ -32,6 +32,22 @@ class ACButtonAction {
         return properties[name]
     }
     
+    var accessibilityLabel: String {
+        switch (self.type) {
+        case "OpenEventsPageAction": return "View upcoming events"
+        case "OpenTabAction": return "Open page"
+        case "OpenEventAction": return "View event details"
+        case "OpenURLAction": return "Open webpage"
+        case "OpenYouTubeAction": return "Watch on YouTube"
+        case "OpenSpotifyAction": return "Listen on Spotify"
+        case "ShowMapAction": return "Open maps"
+        case "GetDirectionsAction": return "Get directions"
+        case "EmailAction": return "Send email"
+        case "AddToCalendarAction": return "Add to calendar"
+        default: return "Invalid action"
+        }
+    }
+    
     private func presentAlert(title: String, message: String, vc: UIViewController) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))

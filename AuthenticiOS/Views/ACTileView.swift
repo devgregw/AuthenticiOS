@@ -54,14 +54,19 @@ class ACTileView: UIView {
     private func initialize() {
         frame = CGRect.zero
         autoresizingMask = UIView.AutoresizingMask(rawValue: UInt(UInt8(UIView.AutoresizingMask.flexibleWidth.rawValue) | UInt8(UIView.AutoresizingMask.flexibleHeight.rawValue)))
+        self.isUserInteractionEnabled = true
+        self.accessibilityLabel = self.action.accessibilityLabel
+        self.accessibilityTraits = [.allowsDirectInteraction, .button]
+        self.isAccessibilityElement = true
         let rand = CGFloat(drand48())
         self.backgroundColor = UIColor(red: rand, green: rand, blue: rand, alpha: 1)
         if (!String.isNilOrEmpty(self.text)) {
             self.indicator.alpha = 0
             self.indicator.isHidden = true
+        } else {
+            self.indicator.isHidden = false
+            self.indicator.color = UIColor(red: 1 - rand, green: 1 - rand, blue: 1 - rand, alpha: 1)
         }
-        self.indicator.color = UIColor(red: 1 - rand, green: 1 - rand, blue: 1 - rand, alpha: 1)
-        
         
         image.alpha = 0
         self.subviews.forEach { v in
@@ -73,7 +78,7 @@ class ACTileView: UIView {
         self.indicator.center = CGPoint(x: UIScreen.main.bounds.midX, y: (self.height) / 2)
         imageResource.load(intoImageView: image, fadeIn: true, setSize: false, completion: { UIView.animate(withDuration: 0.3, animations: {
             self.backgroundColor = UIColor.white
-            self.indicator.alpha = 0
+            self.indicator.isHidden = true
         }, completion: {_ in self.indicator.stopAnimating()}) })
         let label = (ACElement.createTitle(text: self.text, alignment: "center", border: false, size: 18, color: UIColor.white, bold: true) as! UIStackView).arrangedSubviews[0]
         self.addSubview(label)

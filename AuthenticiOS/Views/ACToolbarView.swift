@@ -14,6 +14,7 @@ class ACToolbarView: UIView {
     @IBOutlet weak var toolbarImage: UIImageView!
     @IBOutlet weak var leftView: UIView!
     @IBOutlet weak var rightView: UIView!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
     
     private var leftAction: ACButtonAction!
     private var rightAction: ACButtonAction!
@@ -55,9 +56,21 @@ class ACToolbarView: UIView {
     private func initialize() {
         frame = CGRect.zero
         autoresizingMask = UIView.AutoresizingMask(rawValue: UInt(UInt8(UIView.AutoresizingMask.flexibleWidth.rawValue) | UInt8(UIView.AutoresizingMask.flexibleHeight.rawValue)))
+        self.leftView.isUserInteractionEnabled = true
+        self.rightView.isUserInteractionEnabled = true
+        self.leftView.accessibilityLabel = self.leftAction.accessibilityLabel
+        self.rightView.accessibilityLabel = self.rightAction.accessibilityLabel
+        self.leftView.accessibilityTraits = [.allowsDirectInteraction, .button]
+        self.leftView.isAccessibilityElement = true
+        self.rightView.accessibilityTraits = [.allowsDirectInteraction, .button]
+        self.rightView.isAccessibilityElement = true
         let rand = CGFloat(drand48())
         self.backgroundColor = UIColor(red: rand, green: rand, blue: rand, alpha: 1)
+        self.indicator.tintColor = UIColor(red: 1 - rand, green: 1 - rand, blue: 1 - rand, alpha: 1)
         toolbarImage.alpha = 0
+        imageResource.load(intoImageView: toolbarImage, fadeIn: true, setSize: false, scaleDownLargeImages: false, completion: {
+            self.indicator.isHidden = true
+        })
         imageResource.load(intoImageView: toolbarImage, fadeIn: true, setSize: false)
         self.constraints.forEach({c in self.removeConstraint(c)})
         self.addConstraints([

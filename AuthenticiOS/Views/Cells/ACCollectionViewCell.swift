@@ -55,6 +55,7 @@ class ACCollectionViewCell: UICollectionViewCell {
         self.imageResource = appearance.header
         self.eventsAppearance = appearance
         self.viewController = vc
+        self.accessibilityLabel = "View Upcoming Events"
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.presentUpcomingEvents)))
         self.initialize()
     }
@@ -65,8 +66,10 @@ class ACCollectionViewCell: UICollectionViewCell {
         self.tab = tab
         self.viewController = vc
         if tab.action == nil {
+            self.accessibilityLabel = "Open page: \(tab.title)"
             self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.presentTab)))
         } else {
+            self.accessibilityLabel = "\(tab.action!.accessibilityLabel): \(tab.title)"
             self.action = tab.action!
             self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.invokeAction)))
         }
@@ -78,6 +81,7 @@ class ACCollectionViewCell: UICollectionViewCell {
         self.imageResource = event.header
         self.event = event
         self.viewController = vc
+        self.accessibilityLabel = "View event details: \(event.title)"
         self.tint = !event.hideTitle
         if event is ACEventPlaceholder {
             self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.presentEventPlaceholder)))
@@ -92,18 +96,24 @@ class ACCollectionViewCell: UICollectionViewCell {
         self.imageResource = header
         self.viewController = vc
         self.action = action
+        self.accessibilityLabel = "\(action.accessibilityLabel): \(title)"
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.invokeAction)))
         self.initialize()
     }
     
     private func initialize() {
         let rand = CGFloat(drand48())
+        self.isUserInteractionEnabled = true
+        self.accessibilityTraits = [.allowsDirectInteraction, .button]
+        self.isAccessibilityElement = true
         self.backgroundColor = UIColor(red: rand, green: rand, blue: rand, alpha: 1)
         if (self.tint) {
             self.indicator.alpha = 0
             self.indicator.isHidden = true
+        } else {
+            self.indicator.isHidden = false
+            self.indicator.color = UIColor(red: 1 - rand, green: 1 - rand, blue: 1 - rand, alpha: 1)
         }
-        self.indicator.color = UIColor(red: 1 - rand, green: 1 - rand, blue: 1 - rand, alpha: 1)
         image.alpha = 0
         self.subviews.forEach { v in
             if let l = v as? ACInsetLabel {
@@ -113,7 +123,7 @@ class ACCollectionViewCell: UICollectionViewCell {
         imageResource.load(intoImageView: image, fadeIn: true, setSize: false, scaleDownLargeImages: true, completion: {
             UIView.animate(withDuration: 0.3, animations: {
                 self.backgroundColor = UIColor.black
-                self.indicator.alpha = 0
+                self.indicator.isHidden = true
             }, completion: {_ in self.indicator.stopAnimating()})
         })
         self.tintView.alpha = self.tint ? 1 : 0

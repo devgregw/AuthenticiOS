@@ -30,7 +30,7 @@ class ACThumbnailButtonView: UIView {
         thumbnailImage.sd_setImage(with: URL(string: thumb)!, placeholderImage: nil, options: SDWebImageOptions.scaleDownLargeImages, progress: nil, completed: { _, _, _, _ in
             UIView.animate(withDuration: 0.3, animations: {
                 self.thumbnailImage.alpha = 1
-                self.indicator.alpha = 0
+                self.indicator.isHidden = true
                 self.thumbnailBackgroundView.backgroundColor = UIColor.white
             }, completion: {_ in self.indicator.stopAnimating()})
         })
@@ -44,7 +44,7 @@ class ACThumbnailButtonView: UIView {
         titleLabel.text = label
         thumb.load(intoImageView: thumbnailImage, fadeIn: true, setSize: false, scaleDownLargeImages: true, completion: {
             UIView.animate(withDuration: 0.3, animations: {
-                self.indicator.alpha = 0
+                self.indicator.isHidden = true
                 self.thumbnailBackgroundView.backgroundColor = UIColor.white
             }, completion: {_ in self.indicator.stopAnimating()})
         })
