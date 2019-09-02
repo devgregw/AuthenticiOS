@@ -206,7 +206,7 @@ extension ACTabCollectionViewController : ACCollectionViewLayoutDelegate {
         if !isLeftColumn {
             tabsInColumn += 1
         }
-        let fill = (isLeftColumn ? self.appearance!.tabs.fillLeft : self.appearance!.tabs.fillRight) && tabsInColumn <= 4
+        let fill = self.appearance!.tabs.fill && tabsInColumn <= 4
         let availableHeight = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - navigationController!.navigationBar.frame.height - ACLivestreamCollectionViewCell.cellHeight
         if indexPath.item == 1 {
             let app = appearance!.events

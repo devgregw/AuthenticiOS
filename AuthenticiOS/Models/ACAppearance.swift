@@ -28,17 +28,14 @@ class ACAppearance {
     }
     
     class Tabs {
-        let fillLeft: Bool
+        let fill: Bool
         
-        let fillRight: Bool
-        
-        init(left: Bool, right: Bool) {
-            fillLeft = left
-            fillRight = right
+        init(fill: Bool) {
+            self.fill = fill
         }
         
         convenience init(dict: NSDictionary) {
-            self.init(left: dict["fillLeft"] as! Bool, right: dict["fillRight"] as! Bool)
+            self.init(fill: dict["fill"] as? Bool ?? true)
         }
     }
     
