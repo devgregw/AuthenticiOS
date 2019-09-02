@@ -45,8 +45,12 @@ class ACElement {
         return image
     }
     
-    static public func createVideo(provider: String, videoId: String, thumbnail: String, title: String, origin: String) -> ACThumbnailButtonView {
-        return ACThumbnailButtonView(vendor: provider, id: videoId, thumb: thumbnail, title: title, origin: origin)
+    static public func createVideo(provider: String, videoId: String, thumbnail: String, title: String, large: Bool, hideTitle: Bool, origin: String) -> UIView {
+        if large {
+            return ACLargeThumbnailButtonView(vendor: provider, id: videoId, thumb: thumbnail, title: title, hideTitle: hideTitle, origin: origin)
+        } else {
+            return ACThumbnailButtonView(vendor: provider, id: videoId, thumb: thumbnail, title: title, origin: origin)
+        }
     }
     
     static public func createTitle(text: String, alignment: String, border: Bool, size: Int = 24, color: UIColor = UIColor.black, bold: Bool = false) -> UIView {
@@ -124,8 +128,12 @@ class ACElement {
         return stackView
     }
     
-    static public func createThumbnailButton(info: ACButtonInfo, thumbnail: ACImageResource, origin: String) -> UIView {
-        return ACThumbnailButtonView(label: info.label, thumb: thumbnail, action: info.action, origin: origin)
+    static public func createThumbnailButton(info: ACButtonInfo, thumbnail: ACImageResource, large: Bool, hideTitle: Bool, origin: String) -> UIView {
+        if large {
+            return ACLargeThumbnailButtonView(label: info.label, thumb: thumbnail, action: info.action, hideTitle: hideTitle, origin: origin)
+        } else {
+            return ACThumbnailButtonView(label: info.label, thumb: thumbnail, action: info.action, origin: origin)
+        }
     }
     
     public static func createSeparator(visible: Bool) -> UIStackView {
@@ -219,7 +227,7 @@ class ACElement {
             return ACElement.createImage(imageResource: ACImageResource(dict: getProperty("image") as! NSDictionary), enlargable: getProperty("enlargeButton") as! Bool, vc: vc)
         case "video":
             let videoInfo = getProperty("videoInfo") as! NSDictionary
-            return ACElement.createVideo(provider: videoInfo.object(forKey: "provider") as! String, videoId: videoInfo.object(forKey: "id") as! String, thumbnail: videoInfo.object(forKey: "thumbnail") as! String, title: videoInfo.object(forKey: "title") as! String, origin: origin)
+            return ACElement.createVideo(provider: videoInfo.object(forKey: "provider") as! String, videoId: videoInfo.object(forKey: "id") as! String, thumbnail: videoInfo.object(forKey: "thumbnail") as! String, title: videoInfo.object(forKey: "title") as! String, large: NSString(string: getProperty("large") as? String ?? "false").boolValue, hideTitle: NSString(string: getProperty("hideTitle") as? String ?? "false").boolValue, origin: origin)
         case "title":
             return ACElement.createTitle(text: (getProperty("title") as! String), alignment: getProperty("alignment") as! String, border: true)
         case "text":
@@ -228,7 +236,7 @@ class ACElement {
             self.action = ACButtonInfo(dict: getProperty("_buttonInfo") as! NSDictionary).action
             return ACElement.createButton(info: ACButtonInfo(dict: getProperty("_buttonInfo") as! NSDictionary), viewController: vc, target: self, selector: #selector(self.invoke(_:)))
         case "thumbnailButton":
-            return ACElement.createThumbnailButton(info: ACButtonInfo(dict: getProperty("_buttonInfo") as! NSDictionary), thumbnail: ACImageResource(dict: getProperty("thumbnail") as! NSDictionary), origin: origin)
+            return ACElement.createThumbnailButton(info: ACButtonInfo(dict: getProperty("_buttonInfo") as! NSDictionary), thumbnail: ACImageResource(dict: getProperty("thumbnail") as! NSDictionary), large: NSString(string: getProperty("large") as? String ?? "false").boolValue, hideTitle: NSString(string: getProperty("hideTitle") as? String ?? "false").boolValue, origin: origin)
         case "separator":
             return ACElement.createSeparator(visible: getProperty("visible") as! Bool)
         case "tile":
