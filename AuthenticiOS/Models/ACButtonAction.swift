@@ -96,7 +96,7 @@ class ACButtonAction {
         case "OpenEventsPageAction":
             return ACEventCollectionViewController.present(withTitle: "UPCOMING EVENTS")
         case "OpenTabAction":
-            Database.database().reference().child("/tabs/\(self.getProperty(withName: "tabId") as! String)/").observeSingleEvent(of: .value, with: {snapshot in
+            Database.database().reference().child(AppDelegate.useDevelopmentDatabase ? "/dev/" : "/").child("/tabs/\(self.getProperty(withName: "tabId") as! String)/").observeSingleEvent(of: .value, with: {snapshot in
                 guard let val = snapshot.value as? NSDictionary else {
                     self.presentAlert(title: "Error", message: "We were unable to open the page because it does not exist.", vc: vc)
                     return
