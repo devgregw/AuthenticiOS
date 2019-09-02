@@ -124,7 +124,7 @@ class ACButtonAction {
         case "OpenURLAction":
             let urlString = getProperty(withName: "url") as! String
             let url = URL(string: urlString)!
-            if !urlString.contains("authentic.church/give") && (urlString.contains("http://") || urlString.contains("https://")) {
+            if !urlString.contains("authentic.church/give") && !urlString.contains("authenticcity.church/give") && (urlString.contains("http://") || urlString.contains("https://")) {
                 let safari = SFSafariViewController(url: url)
                 safari.preferredBarTintColor = .black
                 safari.preferredControlTintColor = .white
