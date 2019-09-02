@@ -91,21 +91,6 @@ class ACTabViewController: UIViewController {
     
     private func initLayout(forSpecialType specialType: String) {
         switch (specialType) {
-        case "wallpapers":
-            view.subviews.forEach { v in
-                v.removeFromSuperview()
-            }
-            let collectionView = UICollectionView(frame: view.frame, collectionViewLayout: UICollectionViewFlowLayout())
-            collectionView.backgroundColor = UIColor.white
-            collectionView.register(UINib(nibName: "ACImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "wallpaper")
-            wallpaperManager = ACWallpaperCollectionViewManager(self.tab!.elements, tab!)
-            collectionView.dataSource = wallpaperManager
-            collectionView.delegate = wallpaperManager
-            view = collectionView
-            collectionView.reloadData()
-            collectionView.collectionViewLayout.invalidateLayout()
-            view.setNeedsLayout()
-            break
         case "fullexp":
             view.backgroundColor = UIColor.black
             let controllerElement = self.tab!.elements[0]
@@ -131,7 +116,53 @@ class ACTabViewController: UIViewController {
                 NSLayoutConstraint(item: controllerView, attribute: .width, relatedBy: .equal, toItem: self.view, attribute: .width, multiplier: 1, constant: 0)
             ])
             break
-        default: return
+        case "watchPlaylist":
+            guard self.tab!.elements.count > 0 else {return}
+            var elements = self.tab!.elements
+            let first = elements.first!
+            let videoInfo = first.getProperty("videoInfo") as! NSDictionary
+            self.stackView.addArrangedSubview(ACElement.createVideo(provider: videoInfo.object(forKey: "provider") as! String, videoId: videoInfo.object(forKey: "id") as! String, thumbnail: videoInfo.object(forKey: "thumbnail") as! String, title: videoInfo.object(forKey: "title") as! String, large: true, hideTitle: true, origin: "/tabs/\(self.tab!.id)"))
+            elements.removeFirst()
+            guard elements.count > 0 else {return}
+            var skip = false
+            for i in 0...(elements.count - 1) {
+                if skip {
+                    skip = false
+                    continue
+                }
+                skip = true
+                let horizontal = UIStackView(arrangedSubviews: [])
+                horizontal.distribution = .fillEqually
+                horizontal.translatesAutoresizingMaskIntoConstraints = false
+                horizontal.axis = .horizontal
+                horizontal.spacing = 0
+                let fVideoInfo = elements[i].getProperty("videoInfo") as! NSDictionary
+                horizontal.addArrangedSubview(ACHalfThumbnailButtonView(vendor: fVideoInfo.object(forKey: "provider") as! String, id: fVideoInfo.object(forKey: "id") as! String, thumb: fVideoInfo.object(forKey: "thumbnail") as! String, title: fVideoInfo.object(forKey: "title") as! String, hideTitle: true, origin: "/tabs/\(self.tab!.id)"))
+                //horizontal.addConstraint(NSLayoutConstraint(item: horizontal.arrangedSubviews[0], attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: UIScreen.main.bounds.width / 2))
+                if i + 1 != elements.count {
+                    let sVideoInfo = elements[i + 1].getProperty("videoInfo") as! NSDictionary
+                    let nView = ACHalfThumbnailButtonView(vendor: sVideoInfo.object(forKey: "provider") as! String, id: sVideoInfo.object(forKey: "id") as! String, thumb: sVideoInfo.object(forKey: "thumbnail") as! String, title: sVideoInfo.object(forKey: "title") as! String, hideTitle: true, origin: "/tabs/\(self.tab!.id)")
+                    horizontal.addArrangedSubview(nView)
+                    //horizontal.addConstraint(NSLayoutConstraint(item: view, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: UIScreen.main.bounds.width / 2))
+                    horizontal.addConstraint(NSLayoutConstraint(item: nView, attribute: .leading, relatedBy: .equal, toItem: horizontal.arrangedSubviews[0], attribute: .trailing, multiplier: 1, constant: 0))
+                } else {
+                    horizontal.addConstraint(NSLayoutConstraint(item: horizontal.arrangedSubviews[0], attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: UIScreen.main.bounds.width / 2))
+                    horizontal.addConstraint(NSLayoutConstraint(item: horizontal.arrangedSubviews[0], attribute: .leading, relatedBy: .equal, toItem: horizontal, attribute: .leading, multiplier: 1, constant: 0))
+                }
+                self.stackView.addArrangedSubview(horizontal)
+            }
+            break
+        default:
+            let alert = UIAlertController(title: "Content Unavailable", message: "Sorry, this content requires an updated version of the Authentic app.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Back", style: .cancel, handler: {_ in
+                self.navigationController?.popViewController(animated: true)
+            }))
+            alert.addAction(UIAlertAction(title: "Open App Store", style: .default, handler: {_ in
+                ACButtonAction(type: "OpenURLAction", paramGroup: 0, params: ["url": "itms-apps://itunes.apple.com/app/id1402645724"]).invoke(viewController: self, origin: "/tabs/\(self.tab!.id)", medium: "contentUnavailable")
+                self.navigationController?.popViewController(animated: false)
+            }))
+            present(alert, animated: true, completion: nil)
+            return
         }
     }
     
@@ -139,9 +170,9 @@ class ACTabViewController: UIViewController {
         guard !self.alreadyInitialized else {return}
         self.alreadyInitialized = true
         self.clearViews()
-        if (self.tab!.specialType != nil) {
-            initLayout(forSpecialType: self.tab!.specialType!)
-        } else if (self.tab!.elements.count == 0) {
+        if let specialType = self.tab!.specialType {
+            initLayout(forSpecialType: specialType)
+        } else if self.tab!.elements.count == 0 {
             let label = UILabel()
             label.textColor = UIColor.black
             label.text = "No content"
