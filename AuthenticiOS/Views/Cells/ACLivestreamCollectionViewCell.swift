@@ -62,15 +62,20 @@ class ACLivestreamCollectionViewCell: UICollectionViewCell {
         applyFontStyle(to: watchLabel, withFontSize: CGFloat(22))
         applyFontStyle(to: sundaysLabel, withFontSize: CGFloat(22))
         applyFontStyle(to: servicesLabel, withFontSize: CGFloat(18))
-        let url = URL(string: "https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCxrYck_z50n5It7ifj1LCjA&type=video&eventType=live&key=AIzaSyB4w3GIY9AUi6cApXAkB76vlG6K6J4d8XE")!
+        self.backgroundColor = UIColor.white
+        self.setNeedsLayout()
+        guard Date().format(dateStyle: .full, timeStyle: .none).contains("Sunday") else {
+            print("Skipping livestream check - it's not Sunday")
+            displayText(isLive: false)
+            return
+        }
         let trace = Performance.startTrace(name: "check livestream")
-        
+        let url = URL(string: "https://us-central1-authentic-city-church.cloudfunctions.net/videos")!
         var request = URLRequest(url: url, cachePolicy: .reloadIgnoringCacheData, timeoutInterval: 10)
         request.httpMethod = "GET"
-        
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             trace?.stop()
-            if error != nil {
+            guard error == nil else {
                 print("YouTube error: \(error!.localizedDescription)")
                 self.displayText(isLive: false)
                 return
@@ -83,24 +88,17 @@ class ACLivestreamCollectionViewCell: UICollectionViewCell {
             do {
                 URLCache.shared.removeAllCachedResponses()
                 let dictionary = try JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) as! NSDictionary
-                let items = dictionary.value(forKey: "items") as! NSArray
-                if items.count == 0 {
+                guard dictionary.count > 0 else {
+                    print("Livestream: no data")
                     self.displayText(isLive: false)
                     return
                 }
-                let result = items[0] as! NSDictionary
-                let videoId = (result.value(forKey: "id") as! NSDictionary).value(forKey: "videoId") as! String
-                let thumbnail = (((result.value(forKey: "snippet") as! NSDictionary).value(forKey: "thumbnails") as! NSDictionary).value(forKey: "high") as! NSDictionary).value(forKey: "url") as! String
-                /*do {
-                    let data = try Data(contentsOf: URL(string: thumbnail)!)
-                    DispatchQueue.main.async {
-                        self.imageView.image = UIImage(data: data)
-                    }
-                } catch {
-                    print("Unable to load thumbnail")
-                }*/
-                print("id: \(videoId), thumbnail: \(thumbnail)")
-                self.videoId = videoId
+                guard (dictionary.allValues[0] as! String).lowercased().contains("stream") else {
+                    print("Livestream: not live")
+                    self.displayText(isLive: false)
+                    return
+                }
+                self.videoId = dictionary.allKeys[0] as? String
                 self.displayText(isLive: true)
             } catch let parseError {
                 print("Parse error: \(parseError.localizedDescription)")
@@ -108,7 +106,5 @@ class ACLivestreamCollectionViewCell: UICollectionViewCell {
             }
         }
         task.resume()
-        self.backgroundColor = UIColor.white
-        self.setNeedsLayout()
     }
 }
