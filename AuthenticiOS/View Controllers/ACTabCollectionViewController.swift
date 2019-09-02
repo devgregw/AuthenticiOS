@@ -19,6 +19,8 @@ extension UICollectionView {
 }
 
 class ACTabCollectionViewController: UICollectionViewController {
+    @IBOutlet weak var imageWidthConstraint: NSLayoutConstraint!
+    
     @IBAction func didRequestClose(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
         ACHomePageViewController.returnToFirstViewController()
@@ -69,6 +71,7 @@ class ACTabCollectionViewController: UICollectionViewController {
         if AppDelegate.appMode == AppMode.Production {
             self.navigationItem.rightBarButtonItem = nil
         }
+        imageWidthConstraint.constant = UIScreen.main.bounds.width - 120
         applyDefaultAppearance()
         configureCollectionView()
         self.loadData(wasRefreshed: false)
