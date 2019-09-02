@@ -19,7 +19,6 @@
 		FC03C28520B8770900D15490 /* ACTabCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC03C28420B8770900D15490 /* ACTabCollectionViewController.swift */; };
 		FC03C28820B8778600D15490 /* ACCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC03C28620B8778600D15490 /* ACCollectionViewCell.swift */; };
 		FC03C28920B8778600D15490 /* ACCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC03C28720B8778600D15490 /* ACCollectionViewCell.xib */; };
-		FC09989A1FFEA74E00BCAD3A /* full.png in Resources */ = {isa = PBXBuildFile; fileRef = FC0998991FFEA74D00BCAD3A /* full.png */; };
 		FC1045051FFEF5560010F8A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC1045041FFEF5560010F8A1 /* Assets.xcassets */; };
 		FC16001C1FFC4BD6001DF3B5 /* ACTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC16001A1FFC4BD6001DF3B5 /* ACTabViewController.swift */; };
 		FC16001D1FFC4BD6001DF3B5 /* ACTabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC16001B1FFC4BD6001DF3B5 /* ACTabViewController.xib */; };
@@ -42,6 +41,8 @@
 		FC490DD2202BA1F4007F270A /* ACElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC490DD1202BA1F4007F270A /* ACElement.swift */; };
 		FC4CD2A120FE8FA70096ED0D /* ACTextCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC4CD2A020FE8FA60096ED0D /* ACTextCollectionViewCell.xib */; };
 		FC4CD2A320FE94430096ED0D /* ACTextCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4CD2A220FE94430096ED0D /* ACTextCollectionViewCell.swift */; };
+		FC524C12231759990092E54E /* full3.png in Resources */ = {isa = PBXBuildFile; fileRef = FC524C11231759980092E54E /* full3.png */; };
+		FC524C1C23176AA80092E54E /* title.png in Resources */ = {isa = PBXBuildFile; fileRef = FC524C1B23176AA80092E54E /* title.png */; };
 		FC535C0921CC06F800FC5FAA /* AnalyticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC535C0821CC06F800FC5FAA /* AnalyticsHelper.swift */; };
 		FC565D102001395B00DE7C9A /* ACTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC565D0F2001395B00DE7C9A /* ACTab.swift */; };
 		FC565D1420013AB600DE7C9A /* ACButtonInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC565D1320013AB600DE7C9A /* ACButtonInfo.swift */; };
@@ -58,6 +59,10 @@
 		FC75FB75210A7A3600E396A8 /* ACImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC75FB73210A7A3500E396A8 /* ACImageCollectionViewCell.xib */; };
 		FC75FB78210ABE0F00E396A8 /* ACWallpaperPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75FB76210ABE0E00E396A8 /* ACWallpaperPreviewViewController.swift */; };
 		FC75FB79210ABE0F00E396A8 /* ACWallpaperPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC75FB77210ABE0E00E396A8 /* ACWallpaperPreviewViewController.xib */; };
+		FC8F2A8F230CAE640090D3FC /* ACLargeThumbnailButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8F2A8E230CAE640090D3FC /* ACLargeThumbnailButtonView.xib */; };
+		FC8F2A93230CD7560090D3FC /* ACLargeThumbnailButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8F2A92230CD7560090D3FC /* ACLargeThumbnailButtonView.swift */; };
+		FC8F2A95230E26710090D3FC /* ACHalfThumbnailButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8F2A94230E26710090D3FC /* ACHalfThumbnailButtonView.xib */; };
+		FC8F2A97230E26970090D3FC /* ACHalfThumbnailButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8F2A96230E26970090D3FC /* ACHalfThumbnailButtonView.swift */; };
 		FC9E7BF221DBE7D5008D8F34 /* ACPeekImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9E7BF121DBE7D5008D8F34 /* ACPeekImageViewController.swift */; };
 		FCAC5ADA215FF4000013FD52 /* ACToolbarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAC5AD9215FF4000013FD52 /* ACToolbarView.xib */; };
 		FCAC5ADC215FF7EA0013FD52 /* ACToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAC5ADB215FF7EA0013FD52 /* ACToolbarView.swift */; };
@@ -87,7 +92,6 @@
 		FC03C28420B8770900D15490 /* ACTabCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabCollectionViewController.swift; sourceTree = "<group>"; };
 		FC03C28620B8778600D15490 /* ACCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACCollectionViewCell.swift; sourceTree = "<group>"; };
 		FC03C28720B8778600D15490 /* ACCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACCollectionViewCell.xib; sourceTree = "<group>"; };
-		FC0998991FFEA74D00BCAD3A /* full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = full.png; sourceTree = "<group>"; };
 		FC1045041FFEF5560010F8A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC16001A1FFC4BD6001DF3B5 /* ACTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabViewController.swift; sourceTree = "<group>"; };
 		FC16001B1FFC4BD6001DF3B5 /* ACTabViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACTabViewController.xib; sourceTree = "<group>"; };
@@ -111,6 +115,8 @@
 		FC490DD1202BA1F4007F270A /* ACElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACElement.swift; sourceTree = "<group>"; };
 		FC4CD2A020FE8FA60096ED0D /* ACTextCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACTextCollectionViewCell.xib; sourceTree = "<group>"; };
 		FC4CD2A220FE94430096ED0D /* ACTextCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTextCollectionViewCell.swift; sourceTree = "<group>"; };
+		FC524C11231759980092E54E /* full3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = full3.png; sourceTree = "<group>"; };
+		FC524C1B23176AA80092E54E /* title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title.png; sourceTree = "<group>"; };
 		FC535C0821CC06F800FC5FAA /* AnalyticsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsHelper.swift; sourceTree = "<group>"; };
 		FC565D0A200118A400DE7C9A /* AuthenticiOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AuthenticiOS.entitlements; sourceTree = "<group>"; };
 		FC565D0F2001395B00DE7C9A /* ACTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTab.swift; sourceTree = "<group>"; };
@@ -128,6 +134,10 @@
 		FC75FB73210A7A3500E396A8 /* ACImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		FC75FB76210ABE0E00E396A8 /* ACWallpaperPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACWallpaperPreviewViewController.swift; sourceTree = "<group>"; };
 		FC75FB77210ABE0E00E396A8 /* ACWallpaperPreviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACWallpaperPreviewViewController.xib; sourceTree = "<group>"; };
+		FC8F2A8E230CAE640090D3FC /* ACLargeThumbnailButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACLargeThumbnailButtonView.xib; sourceTree = "<group>"; };
+		FC8F2A92230CD7560090D3FC /* ACLargeThumbnailButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLargeThumbnailButtonView.swift; sourceTree = "<group>"; };
+		FC8F2A94230E26710090D3FC /* ACHalfThumbnailButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACHalfThumbnailButtonView.xib; sourceTree = "<group>"; };
+		FC8F2A96230E26970090D3FC /* ACHalfThumbnailButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACHalfThumbnailButtonView.swift; sourceTree = "<group>"; };
 		FC9E7BF121DBE7D5008D8F34 /* ACPeekImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACPeekImageViewController.swift; sourceTree = "<group>"; };
 		FCAC5AD9215FF4000013FD52 /* ACToolbarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACToolbarView.xib; sourceTree = "<group>"; };
 		FCAC5ADB215FF7EA0013FD52 /* ACToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACToolbarView.swift; sourceTree = "<group>"; };
@@ -175,6 +185,8 @@
 		2B36305D1FF56BD9002469E5 /* AuthenticiOS */ = {
 			isa = PBXGroup;
 			children = (
+				FC524C1B23176AA80092E54E /* title.png */,
+				FC524C11231759980092E54E /* full3.png */,
 				FC3A7FF221127CD900CAFC90 /* Views */,
 				FC3A7FDA2112768100CAFC90 /* Utilities */,
 				FCFE5CAC20FD24A3009B95F3 /* EffraBold.ttf */,
@@ -187,7 +199,6 @@
 				2B36305E1FF56BD9002469E5 /* AppDelegate.swift */,
 				FC1045041FFEF5560010F8A1 /* Assets.xcassets */,
 				FC565D0A200118A400DE7C9A /* AuthenticiOS.entitlements */,
-				FC0998991FFEA74D00BCAD3A /* full.png */,
 				2BEFD14E1FF5820E0094572A /* GoogleService-Info.plist */,
 				2B36306A1FF56BD9002469E5 /* Info.plist */,
 			);
@@ -245,6 +256,8 @@
 				FC3A7FEC21127B4400CAFC90 /* ACInsetLabel.swift */,
 				FCBD36F520BC8BF40066ED19 /* Cells */,
 				FCAC5ADB215FF7EA0013FD52 /* ACToolbarView.swift */,
+				FC8F2A92230CD7560090D3FC /* ACLargeThumbnailButtonView.swift */,
+				FC8F2A96230E26970090D3FC /* ACHalfThumbnailButtonView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -317,6 +330,8 @@
 				FC75FB73210A7A3500E396A8 /* ACImageCollectionViewCell.xib */,
 				FC75FB77210ABE0E00E396A8 /* ACWallpaperPreviewViewController.xib */,
 				FCAC5AD9215FF4000013FD52 /* ACToolbarView.xib */,
+				FC8F2A8E230CAE640090D3FC /* ACLargeThumbnailButtonView.xib */,
+				FC8F2A94230E26710090D3FC /* ACHalfThumbnailButtonView.xib */,
 			);
 			path = "User Interfaces";
 			sourceTree = "<group>";
@@ -392,15 +407,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC524C1C23176AA80092E54E /* title.png in Resources */,
 				FC03C28920B8778600D15490 /* ACCollectionViewCell.xib in Resources */,
 				FC5BF9BD208D18A7002982F1 /* ACEventViewController.xib in Resources */,
+				FC524C12231759990092E54E /* full3.png in Resources */,
 				FC75FB79210ABE0F00E396A8 /* ACWallpaperPreviewViewController.xib in Resources */,
 				FC2765D820E02122002A342A /* Settings.bundle in Resources */,
 				FC03C28120B76BD300D15490 /* EffraRegular.ttf in Resources */,
 				2B878E09203356CB0010B549 /* ProximaNova.ttf in Resources */,
 				2B3630691FF56BD9002469E5 /* LaunchScreen.storyboard in Resources */,
 				FCBD36FB20BC93160066ED19 /* ACLivestreamCollectionViewCell.xib in Resources */,
-				FC09989A1FFEA74E00BCAD3A /* full.png in Resources */,
 				FCF184102102123700C9E37A /* ACThumbnailButtonView.xib in Resources */,
 				FC16001D1FFC4BD6001DF3B5 /* ACTabViewController.xib in Resources */,
 				FCAC5ADA215FF4000013FD52 /* ACToolbarView.xib in Resources */,
@@ -412,6 +428,8 @@
 				FCFE5CAD20FD24A5009B95F3 /* EffraBold.ttf in Resources */,
 				FC75FB71210A271000E396A8 /* ACVideoViewController.xib in Resources */,
 				2B3630641FF56BD9002469E5 /* Main.storyboard in Resources */,
+				FC8F2A95230E26710090D3FC /* ACHalfThumbnailButtonView.xib in Resources */,
+				FC8F2A8F230CAE640090D3FC /* ACLargeThumbnailButtonView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,6 +516,7 @@
 				FCBD36FA20BC93160066ED19 /* ACLivestreamCollectionViewCell.swift in Sources */,
 				FC3A7FE5211279B800CAFC90 /* NSDictionary.swift in Sources */,
 				FC565D102001395B00DE7C9A /* ACTab.swift in Sources */,
+				FC8F2A93230CD7560090D3FC /* ACLargeThumbnailButtonView.swift in Sources */,
 				FC333F11213F6B6600110BAF /* ACTileView.swift in Sources */,
 				FC565D1420013AB600DE7C9A /* ACButtonInfo.swift in Sources */,
 				FC3A7FED21127B4400CAFC90 /* ACInsetLabel.swift in Sources */,
@@ -505,6 +524,7 @@
 				FC5D1436208B7C3B00B0E63E /* ACAppearance.swift in Sources */,
 				FCF18412210216EF00C9E37A /* ACThumbnailButtonView.swift in Sources */,
 				FC4CD2A320FE94430096ED0D /* ACTextCollectionViewCell.swift in Sources */,
+				FC8F2A97230E26970090D3FC /* ACHalfThumbnailButtonView.swift in Sources */,
 				FC9E7BF221DBE7D5008D8F34 /* ACPeekImageViewController.swift in Sources */,
 				FC03C28520B8770900D15490 /* ACTabCollectionViewController.swift in Sources */,
 				2B3630611FF56BD9002469E5 /* ACHomeViewController.swift in Sources */,
