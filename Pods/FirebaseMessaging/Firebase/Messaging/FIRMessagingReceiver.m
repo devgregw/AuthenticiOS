@@ -14,23 +14,18 @@
  * limitations under the License.
  */
 
-#import "FIRMessagingReceiver.h"
+#import "Firebase/Messaging/FIRMessagingReceiver.h"
 
-#import <UIKit/UIKit.h>
+#import <FirebaseMessaging/FIRMessaging.h>
 
-#import "FIRMessaging.h"
-#import "FIRMessagingLogger.h"
-#import "FIRMessagingUtilities.h"
-#import "FIRMessaging_Private.h"
+#import "Firebase/Messaging/FIRMessagingLogger.h"
+#import "Firebase/Messaging/FIRMessagingUtilities.h"
+#import "Firebase/Messaging/FIRMessaging_Private.h"
 
 static NSString *const kUpstreamMessageIDUserInfoKey = @"messageID";
 static NSString *const kUpstreamErrorUserInfoKey = @"error";
 
 static int downstreamMessageID = 0;
-
-@interface FIRMessagingReceiver ()
-@property(nonatomic, strong) GULUserDefaults *defaults;
-@end
 
 @implementation FIRMessagingReceiver
 
