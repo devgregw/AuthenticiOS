@@ -18,6 +18,7 @@ class ACWallpaperCollectionViewController: UICollectionViewController, UICollect
         self.tab = tab
         self.elements = self.tab.elements.filter({element in element.type == "image"})
         self.title = tab.title
+        self.tabBarItem.title = "Wallpapers"
         applyDefaultAppearance()
     }
     
