@@ -41,6 +41,8 @@
 		FC490DD2202BA1F4007F270A /* ACElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC490DD1202BA1F4007F270A /* ACElement.swift */; };
 		FC4CD2A120FE8FA70096ED0D /* ACTextCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC4CD2A020FE8FA60096ED0D /* ACTextCollectionViewCell.xib */; };
 		FC4CD2A320FE94430096ED0D /* ACTextCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4CD2A220FE94430096ED0D /* ACTextCollectionViewCell.swift */; };
+		FC4D15432324517A008786B7 /* ACTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4D15422324517A008786B7 /* ACTabBarViewController.swift */; };
+		FC4D154523255FFB008786B7 /* ACWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4D154423255FFB008786B7 /* ACWebViewController.swift */; };
 		FC524C12231759990092E54E /* full3.png in Resources */ = {isa = PBXBuildFile; fileRef = FC524C11231759980092E54E /* full3.png */; };
 		FC524C1C23176AA80092E54E /* title.png in Resources */ = {isa = PBXBuildFile; fileRef = FC524C1B23176AA80092E54E /* title.png */; };
 		FC535C0921CC06F800FC5FAA /* AnalyticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC535C0821CC06F800FC5FAA /* AnalyticsHelper.swift */; };
@@ -70,6 +72,7 @@
 		FCAD5C14208628FF0010B5C9 /* ACRecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD5C13208628FF0010B5C9 /* ACRecurrenceRule.swift */; };
 		FCBD36FA20BC93160066ED19 /* ACLivestreamCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD36F820BC93160066ED19 /* ACLivestreamCollectionViewCell.swift */; };
 		FCBD36FB20BC93160066ED19 /* ACLivestreamCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBD36F920BC93160066ED19 /* ACLivestreamCollectionViewCell.xib */; };
+		FCEB947C2327381700BFC5E2 /* ACTestAnimViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEB947B2327381700BFC5E2 /* ACTestAnimViewController.swift */; };
 		FCF184102102123700C9E37A /* ACThumbnailButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCF1840F2102123700C9E37A /* ACThumbnailButtonView.xib */; };
 		FCF18412210216EF00C9E37A /* ACThumbnailButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF18411210216EF00C9E37A /* ACThumbnailButtonView.swift */; };
 		FCFE5CAD20FD24A5009B95F3 /* EffraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCFE5CAC20FD24A3009B95F3 /* EffraBold.ttf */; };
@@ -115,6 +118,8 @@
 		FC490DD1202BA1F4007F270A /* ACElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACElement.swift; sourceTree = "<group>"; };
 		FC4CD2A020FE8FA60096ED0D /* ACTextCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACTextCollectionViewCell.xib; sourceTree = "<group>"; };
 		FC4CD2A220FE94430096ED0D /* ACTextCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTextCollectionViewCell.swift; sourceTree = "<group>"; };
+		FC4D15422324517A008786B7 /* ACTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabBarViewController.swift; sourceTree = "<group>"; };
+		FC4D154423255FFB008786B7 /* ACWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACWebViewController.swift; sourceTree = "<group>"; };
 		FC524C11231759980092E54E /* full3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = full3.png; sourceTree = "<group>"; };
 		FC524C1B23176AA80092E54E /* title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title.png; sourceTree = "<group>"; };
 		FC535C0821CC06F800FC5FAA /* AnalyticsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsHelper.swift; sourceTree = "<group>"; };
@@ -145,6 +150,7 @@
 		FCAD5C13208628FF0010B5C9 /* ACRecurrenceRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACRecurrenceRule.swift; sourceTree = "<group>"; };
 		FCBD36F820BC93160066ED19 /* ACLivestreamCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLivestreamCollectionViewCell.swift; sourceTree = "<group>"; };
 		FCBD36F920BC93160066ED19 /* ACLivestreamCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACLivestreamCollectionViewCell.xib; sourceTree = "<group>"; };
+		FCEB947B2327381700BFC5E2 /* ACTestAnimViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTestAnimViewController.swift; sourceTree = "<group>"; };
 		FCF1840F2102123700C9E37A /* ACThumbnailButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACThumbnailButtonView.xib; sourceTree = "<group>"; };
 		FCF18411210216EF00C9E37A /* ACThumbnailButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACThumbnailButtonView.swift; sourceTree = "<group>"; };
 		FCFE5CAC20FD24A3009B95F3 /* EffraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EffraBold.ttf; sourceTree = "<group>"; };
@@ -310,6 +316,9 @@
 				FC75FB76210ABE0E00E396A8 /* ACWallpaperPreviewViewController.swift */,
 				FC9E7BF121DBE7D5008D8F34 /* ACPeekImageViewController.swift */,
 				FC264D0A21ED38A700C2BA4E /* ACWallpaperCollectionViewController.swift */,
+				FC4D15422324517A008786B7 /* ACTabBarViewController.swift */,
+				FC4D154423255FFB008786B7 /* ACWebViewController.swift */,
+				FCEB947B2327381700BFC5E2 /* ACTestAnimViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -511,7 +520,9 @@
 				FC5F914320D1731000516095 /* ACCollectionViewLayout.swift in Sources */,
 				FC75FB78210ABE0F00E396A8 /* ACWallpaperPreviewViewController.swift in Sources */,
 				FCAD5C14208628FF0010B5C9 /* ACRecurrenceRule.swift in Sources */,
+				FC4D15432324517A008786B7 /* ACTabBarViewController.swift in Sources */,
 				FC03C28320B79FA800D15490 /* ACHomePageViewController.swift in Sources */,
+				FC4D154523255FFB008786B7 /* ACWebViewController.swift in Sources */,
 				FC5F914520D7FB9800516095 /* ACImageResource.swift in Sources */,
 				FCBD36FA20BC93160066ED19 /* ACLivestreamCollectionViewCell.swift in Sources */,
 				FC3A7FE5211279B800CAFC90 /* NSDictionary.swift in Sources */,
@@ -527,6 +538,7 @@
 				FC8F2A97230E26970090D3FC /* ACHalfThumbnailButtonView.swift in Sources */,
 				FC9E7BF221DBE7D5008D8F34 /* ACPeekImageViewController.swift in Sources */,
 				FC03C28520B8770900D15490 /* ACTabCollectionViewController.swift in Sources */,
+				FCEB947C2327381700BFC5E2 /* ACTestAnimViewController.swift in Sources */,
 				2B3630611FF56BD9002469E5 /* ACHomeViewController.swift in Sources */,
 				2B36305F1FF56BD9002469E5 /* AppDelegate.swift in Sources */,
 				FC333F1321401D0300110BAF /* ACEventPlaceholder.swift in Sources */,

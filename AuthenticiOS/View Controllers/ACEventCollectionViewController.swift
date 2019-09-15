@@ -65,7 +65,8 @@ class ACEventCollectionViewController: UICollectionViewController {
     private var actionToPop: ACButtonAction?
     
     @objc public func refreshData() {
-        loadData(wasRefreshed: true)
+        (tabBarController as? ACTabBarViewController)?.loadData()
+        //loadData(wasRefreshed: true)
     }
     
     private func listenForEventChange() {
