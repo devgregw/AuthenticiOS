@@ -25,7 +25,7 @@ class ACTabBarViewController: UITabBarController {
         alert.popoverPresentationController?.barButtonItem = sender
         alert.addAction(UIAlertAction(title: "Switch to \(AppDelegate.useDevelopmentDatabase ? "Production" : "Development") Database", style: .destructive, handler: {_ in
             AppDelegate.useDevelopmentDatabase = !AppDelegate.useDevelopmentDatabase
-            self.loadData()
+            self.loadData(first: true)
         }))
         alert.addAction(UIAlertAction(title: "Share FCM Registration Token", style: .default, handler: {_ in
             let activityController = UIActivityViewController(activityItems: [(Messaging.messaging().fcmToken ?? "<unavailable>") as NSString], applicationActivities: nil)
@@ -117,33 +117,54 @@ class ACTabBarViewController: UITabBarController {
             buildText = "TestFlight Beta Release\nVersion \(Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String) Build \(Bundle.main.infoDictionary!["CFBundleVersion"] as! String)"
             break
         default:
+            navigationItem.rightBarButtonItem = nil
             UserDefaults.standard.set("Production", forKey: "sbMode")
             buildText = ""
             break
         }
         UserDefaults.standard.synchronize()
-        backgroundView = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "loadingview").view!
+        backgroundView = UIStoryboard(name: "LaunchScreen", bundle: Bundle.main).instantiateInitialViewController()!.view//UIVisualEffectView(effect: UIBlurEffect(style: .dark))//UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "loadingview").view!
+        backgroundView.frame = navigationController!.view.bounds
+        backgroundView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        backgroundView.alpha = 1
+        navigationController?.view.addSubview(backgroundView)
+        navigationController?.view.bringSubviewToFront(backgroundView)
+        backgroundView.subviews[0].center = navigationController!.view.center
+        backgroundView.setNeedsLayout()
+        backgroundView.layoutIfNeeded()
         self.delegate = self
         imageWidthConstraint.constant = UIScreen.main.bounds.width - 120
         applyDefaultAppearance()
-        loadData()
+        loadData(first: true)
         self.view.setNeedsLayout()
+        
         self.view.layoutIfNeeded()
     }
+    
+    private var isLoaderVisible = true
 }
 
 extension ACTabBarViewController {
-    private func showLoader(completion: @escaping () -> Void) {
-        backgroundView.alpha = 0
-        view.addSubview(backgroundView)
-        view.bringSubviewToFront(backgroundView)
-        UIView.animate(withDuration: 0.1, animations: {self.backgroundView.alpha = 1}, completion: {_ in completion()})
+    private func showLoader(_ first: Bool, completion: @escaping () -> Void) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        guard !isLoaderVisible && first else {
+            completion()
+            return
+        }
+        isLoaderVisible = true
+        self.navigationController?.view.bringSubviewToFront(backgroundView)
+        UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseInOut, animations: {
+            self.backgroundView.alpha = 1
+        }, completion: {_ in completion()})
     }
 
     private func hideLoader() {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
-        UIView.animate(withDuration: 0.1, delay: 1, options: .curveLinear, animations: {self.backgroundView.alpha = 0}, completion: {_ in self.backgroundView.removeFromSuperview()})
+        guard isLoaderVisible else {return}
+        isLoaderVisible = false
+        UIView.animate(withDuration: 0.3, delay: 1, options: .curveEaseInOut, animations: {
+            self.backgroundView.alpha = 0
+        }, completion: {_ in self.navigationController?.view.sendSubviewToBack(self.backgroundView)})
     }
 }
 
@@ -172,8 +193,8 @@ extension ACTabBarViewController {
         })
     }
     
-    public func loadData() {
-        self.showLoader {
+    public func loadData(first: Bool) {
+        self.showLoader(first) {
             self.checkForUpdate {
                 var ref = Database.database().reference()
                 if AppDelegate.useDevelopmentDatabase {
