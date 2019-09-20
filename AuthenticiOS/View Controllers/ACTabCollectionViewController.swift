@@ -53,13 +53,13 @@ class ACTabCollectionViewController: UICollectionViewController {
         collectionView?.collectionViewLayout = ACCollectionViewLayout(columns: 2, delegate: self)
         self.navigationController?.navigationBar.titleTextAttributes = [
             .kern: 3.5,
-            .font: UIFont(name: "Effra", size: 21)!,
+            .font: UIFont(name: "Alpenglow-ExpandedRegular", size: 19)!,
             .foregroundColor: UIColor.white
         ]
         self.collectionView?.refreshControl = UIRefreshControl()
         self.collectionView?.refreshControl?.attributedTitle = NSAttributedString(string: "PULL TO REFRESH", attributes: [
             .kern: 2.5,
-            .font: UIFont(name: "Effra", size: 14)!,
+            .font: UIFont(name: "Alpenglow-ExpandedRegular", size: 12)!,
             .foregroundColor: UIColor.black
             ])
         self.collectionView?.refreshControl?.tintColor = UIColor.black

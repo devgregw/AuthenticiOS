@@ -51,7 +51,7 @@ class ACLivestreamCollectionViewCell: UICollectionViewCell {
         label.attributedText = NSAttributedString(string: label.text!, attributes: [
             .kern: 2.5,
             .foregroundColor: UIColor.black,
-            .font: UIFont(name: "Effra", size: fontSize)!
+            .font: UIFont(name: "Alpenglow-ExpandedRegular", size: fontSize)!
             ])
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping

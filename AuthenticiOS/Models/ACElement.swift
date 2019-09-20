@@ -58,7 +58,7 @@ class ACElement {
         label.attributedText = NSAttributedString(string: text, attributes: [
             .kern: 2.5,
             .foregroundColor: color,
-            .font: UIFont(name: "Effra" + (bold ? "-Bold" : ""), size: CGFloat(size))!
+            .font: UIFont(name: "Alpenglow-ExpandedRegular", size: CGFloat(size - 2))!
         ])
         
         if border {
@@ -94,7 +94,7 @@ class ACElement {
         label.textContainer.lineBreakMode = .byWordWrapping
         label.text = text
         label.textColor = color
-        label.font = UIFont(name: "Proxima Nova", size: CGFloat(size))
+        label.font = UIFont(name: "Alpenglow-ExpandedRegular", size: CGFloat(size - 2))
         switch (alignment) {
         case "center":
             label.textAlignment = .center
@@ -116,7 +116,7 @@ class ACElement {
         let button = UIButton(type: .system)
         button.backgroundColor = UIColor(red: 0.15, green: 0.15, blue: 0.15, alpha: 1)
         button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = UIFont(name: "Proxima Nova", size: 18)!
+        button.titleLabel?.font = UIFont(name: "Alpenglow-ExpandedRegular", size: 16)!
         button.layer.cornerRadius = 8
         button.contentEdgeInsets = UIEdgeInsets.init(top: 15, left: 5, bottom: 15, right: 5)
         button.setTitle(info.label, for: .normal)

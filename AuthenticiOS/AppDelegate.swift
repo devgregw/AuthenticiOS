@@ -230,7 +230,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.print(error.localizedDescription)
         }
         
-        UIBarButtonItem.appearance().setTitleTextAttributes([.font : UIFont(name: "Proxima Nova", size: 18) ?? UIFont.systemFont(ofSize: 18)], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([.font : UIFont(name: "Alpenglow-ExpandedRegular", size: UIFont.smallSystemFontSize - 2) ?? UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([.font : UIFont(name: "Alpenglow-ExpandedRegular", size: 16) ?? UIFont.systemFont(ofSize: 18)], for: .normal)
         // Launch the shortcut if there was one
         return launchWithOptions(launchOptions)
     }

@@ -84,6 +84,7 @@ class ACTabBarViewController: UITabBarController {
             cell.selectionStyle = .none
             let vc = ACTabViewController(tab: t)
             vc.setTabBarItem(forId: t.id)
+            cell.textLabel?.font = UIFont(name: "Alpenglow-ExpandedRegular", size: UIFont.labelFontSize - 2)!
             cell.imageView?.image = vc.tabBarItem.image
             cell.imageView?.tintColor = UIColor(red: 36/255, green: 137/255, blue: 248/255, alpha: 1)
             cell.textLabel?.text = self.tabs[indexPath.item].title.capitalized
