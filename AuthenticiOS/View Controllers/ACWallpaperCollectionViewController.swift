@@ -24,6 +24,7 @@ class ACWallpaperCollectionViewController: UICollectionViewController, UICollect
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView?.indicatorStyle = .black
         collectionView?.backgroundColor = UIColor.white
         collectionView?.register(UINib(nibName: "ACImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "wallpaper")
         collectionView?.dataSource = self

@@ -30,6 +30,7 @@ class ACEventCollectionViewController: UICollectionViewController {
     }
     
     private func configureCollectionView() {
+        collectionView?.indicatorStyle = .black
         collectionView?.register(UINib(nibName: "ACCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         collectionView?.register(UINib(nibName: "ACTextCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "none")
         self.collectionView?.refreshControl = UIRefreshControl()
