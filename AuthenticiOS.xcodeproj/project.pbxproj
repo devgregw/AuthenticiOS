@@ -8,13 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2B36305F1FF56BD9002469E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B36305E1FF56BD9002469E5 /* AppDelegate.swift */; };
-		2B3630611FF56BD9002469E5 /* ACHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3630601FF56BD9002469E5 /* ACHomeViewController.swift */; };
 		2B3630641FF56BD9002469E5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B3630621FF56BD9002469E5 /* Main.storyboard */; };
 		2B3630691FF56BD9002469E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B3630671FF56BD9002469E5 /* LaunchScreen.storyboard */; };
 		2BEFD14F1FF5820E0094572A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2BEFD14E1FF5820E0094572A /* GoogleService-Info.plist */; };
 		718D7CFE064244CE70BEECAF /* Pods_AuthenticiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB7EE5EFB0782B2DC076E74F /* Pods_AuthenticiOS.framework */; };
-		FC03C28320B79FA800D15490 /* ACHomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC03C28220B79FA800D15490 /* ACHomePageViewController.swift */; };
-		FC03C28520B8770900D15490 /* ACTabCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC03C28420B8770900D15490 /* ACTabCollectionViewController.swift */; };
 		FC03C28820B8778600D15490 /* ACCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC03C28620B8778600D15490 /* ACCollectionViewCell.swift */; };
 		FC03C28920B8778600D15490 /* ACCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC03C28720B8778600D15490 /* ACCollectionViewCell.xib */; };
 		FC1045051FFEF5560010F8A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC1045041FFEF5560010F8A1 /* Assets.xcassets */; };
@@ -40,7 +37,6 @@
 		FC4CD2A120FE8FA70096ED0D /* ACTextCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC4CD2A020FE8FA60096ED0D /* ACTextCollectionViewCell.xib */; };
 		FC4CD2A320FE94430096ED0D /* ACTextCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4CD2A220FE94430096ED0D /* ACTextCollectionViewCell.swift */; };
 		FC4D15432324517A008786B7 /* ACTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4D15422324517A008786B7 /* ACTabBarViewController.swift */; };
-		FC4D154523255FFB008786B7 /* ACWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4D154423255FFB008786B7 /* ACWebViewController.swift */; };
 		FC524C12231759990092E54E /* full3.png in Resources */ = {isa = PBXBuildFile; fileRef = FC524C11231759980092E54E /* full3.png */; };
 		FC524C1C23176AA80092E54E /* title.png in Resources */ = {isa = PBXBuildFile; fileRef = FC524C1B23176AA80092E54E /* title.png */; };
 		FC535C0921CC06F800FC5FAA /* AnalyticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC535C0821CC06F800FC5FAA /* AnalyticsHelper.swift */; };
@@ -71,7 +67,6 @@
 		FCBD36FA20BC93160066ED19 /* ACLivestreamCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD36F820BC93160066ED19 /* ACLivestreamCollectionViewCell.swift */; };
 		FCBD36FB20BC93160066ED19 /* ACLivestreamCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBD36F920BC93160066ED19 /* ACLivestreamCollectionViewCell.xib */; };
 		FCDA0CD623354259006EB4FD /* AlpenglowExpanded.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCDA0CD523354259006EB4FD /* AlpenglowExpanded.ttf */; };
-		FCEB947C2327381700BFC5E2 /* ACTestAnimViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEB947B2327381700BFC5E2 /* ACTestAnimViewController.swift */; };
 		FCF184102102123700C9E37A /* ACThumbnailButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCF1840F2102123700C9E37A /* ACThumbnailButtonView.xib */; };
 		FCF18412210216EF00C9E37A /* ACThumbnailButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF18411210216EF00C9E37A /* ACThumbnailButtonView.swift */; };
 /* End PBXBuildFile section */
@@ -81,14 +76,11 @@
 		11F6289D97D1BDCAD109DD5C /* Pods-AuthenticiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AuthenticiOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-AuthenticiOS/Pods-AuthenticiOS.release.xcconfig"; sourceTree = "<group>"; };
 		2B36305B1FF56BD9002469E5 /* AuthenticiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AuthenticiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B36305E1FF56BD9002469E5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2B3630601FF56BD9002469E5 /* ACHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACHomeViewController.swift; sourceTree = "<group>"; };
 		2B3630631FF56BD9002469E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2B3630681FF56BD9002469E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2B36306A1FF56BD9002469E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2BEFD14E1FF5820E0094572A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AB7EE5EFB0782B2DC076E74F /* Pods_AuthenticiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AuthenticiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC03C28220B79FA800D15490 /* ACHomePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACHomePageViewController.swift; sourceTree = "<group>"; };
-		FC03C28420B8770900D15490 /* ACTabCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabCollectionViewController.swift; sourceTree = "<group>"; };
 		FC03C28620B8778600D15490 /* ACCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACCollectionViewCell.swift; sourceTree = "<group>"; };
 		FC03C28720B8778600D15490 /* ACCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACCollectionViewCell.xib; sourceTree = "<group>"; };
 		FC1045041FFEF5560010F8A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -115,7 +107,6 @@
 		FC4CD2A020FE8FA60096ED0D /* ACTextCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACTextCollectionViewCell.xib; sourceTree = "<group>"; };
 		FC4CD2A220FE94430096ED0D /* ACTextCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTextCollectionViewCell.swift; sourceTree = "<group>"; };
 		FC4D15422324517A008786B7 /* ACTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabBarViewController.swift; sourceTree = "<group>"; };
-		FC4D154423255FFB008786B7 /* ACWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACWebViewController.swift; sourceTree = "<group>"; };
 		FC524C11231759980092E54E /* full3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = full3.png; sourceTree = "<group>"; };
 		FC524C1B23176AA80092E54E /* title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title.png; sourceTree = "<group>"; };
 		FC535C0821CC06F800FC5FAA /* AnalyticsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsHelper.swift; sourceTree = "<group>"; };
@@ -147,7 +138,6 @@
 		FCBD36F820BC93160066ED19 /* ACLivestreamCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLivestreamCollectionViewCell.swift; sourceTree = "<group>"; };
 		FCBD36F920BC93160066ED19 /* ACLivestreamCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACLivestreamCollectionViewCell.xib; sourceTree = "<group>"; };
 		FCDA0CD523354259006EB4FD /* AlpenglowExpanded.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AlpenglowExpanded.ttf; sourceTree = "<group>"; };
-		FCEB947B2327381700BFC5E2 /* ACTestAnimViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTestAnimViewController.swift; sourceTree = "<group>"; };
 		FCF1840F2102123700C9E37A /* ACThumbnailButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACThumbnailButtonView.xib; sourceTree = "<group>"; };
 		FCF18411210216EF00C9E37A /* ACThumbnailButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACThumbnailButtonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -300,9 +290,6 @@
 		FCBD36F620BC8C280066ED19 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FC03C28420B8770900D15490 /* ACTabCollectionViewController.swift */,
-				FC03C28220B79FA800D15490 /* ACHomePageViewController.swift */,
-				2B3630601FF56BD9002469E5 /* ACHomeViewController.swift */,
 				FC16001A1FFC4BD6001DF3B5 /* ACTabViewController.swift */,
 				FC5BF9BA208D18A7002982F1 /* ACEventViewController.swift */,
 				FC5F914620D94FB700516095 /* ACEventCollectionViewController.swift */,
@@ -311,8 +298,6 @@
 				FC9E7BF121DBE7D5008D8F34 /* ACPeekImageViewController.swift */,
 				FC264D0A21ED38A700C2BA4E /* ACWallpaperCollectionViewController.swift */,
 				FC4D15422324517A008786B7 /* ACTabBarViewController.swift */,
-				FC4D154423255FFB008786B7 /* ACWebViewController.swift */,
-				FCEB947B2327381700BFC5E2 /* ACTestAnimViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -521,8 +506,6 @@
 				FC75FB78210ABE0F00E396A8 /* ACWallpaperPreviewViewController.swift in Sources */,
 				FCAD5C14208628FF0010B5C9 /* ACRecurrenceRule.swift in Sources */,
 				FC4D15432324517A008786B7 /* ACTabBarViewController.swift in Sources */,
-				FC03C28320B79FA800D15490 /* ACHomePageViewController.swift in Sources */,
-				FC4D154523255FFB008786B7 /* ACWebViewController.swift in Sources */,
 				FC5F914520D7FB9800516095 /* ACImageResource.swift in Sources */,
 				FCBD36FA20BC93160066ED19 /* ACLivestreamCollectionViewCell.swift in Sources */,
 				FC3A7FE5211279B800CAFC90 /* NSDictionary.swift in Sources */,
@@ -537,9 +520,6 @@
 				FC4CD2A320FE94430096ED0D /* ACTextCollectionViewCell.swift in Sources */,
 				FC8F2A97230E26970090D3FC /* ACHalfThumbnailButtonView.swift in Sources */,
 				FC9E7BF221DBE7D5008D8F34 /* ACPeekImageViewController.swift in Sources */,
-				FC03C28520B8770900D15490 /* ACTabCollectionViewController.swift in Sources */,
-				FCEB947C2327381700BFC5E2 /* ACTestAnimViewController.swift in Sources */,
-				2B3630611FF56BD9002469E5 /* ACHomeViewController.swift in Sources */,
 				2B36305F1FF56BD9002469E5 /* AppDelegate.swift in Sources */,
 				FC333F1321401D0300110BAF /* ACEventPlaceholder.swift in Sources */,
 				FC5BF9BC208D18A7002982F1 /* ACEventViewController.swift in Sources */,
