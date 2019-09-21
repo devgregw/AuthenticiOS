@@ -146,7 +146,10 @@ class ACTabBarViewController: UITabBarController {
 
 extension ACTabBarViewController {
     private func showLoader(_ first: Bool, completion: @escaping () -> Void) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        if #available(iOS 13.0, *) {
+        } else {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        }
         guard !isLoaderVisible && first else {
             completion()
             return
@@ -159,7 +162,10 @@ extension ACTabBarViewController {
     }
 
     private func hideLoader() {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        if #available(iOS 13.0, *) {
+        } else {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        }
         guard isLoaderVisible else {return}
         isLoaderVisible = false
         UIView.animate(withDuration: 0.3, delay: 1, options: .curveEaseInOut, animations: {

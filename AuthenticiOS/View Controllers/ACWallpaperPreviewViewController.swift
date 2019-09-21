@@ -66,7 +66,11 @@ class ACWallpaperPreviewViewController: UIViewController {
         loadingAlert = UIAlertController(title: nil, message: "Saving image...", preferredStyle: .alert)
         let saveIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
         saveIndicator.hidesWhenStopped = true
-        saveIndicator.style = .gray
+        if #available(iOS 13.0, *) {
+            saveIndicator.style = .medium
+        } else {
+            saveIndicator.style = .gray
+        }
         saveIndicator.startAnimating()
         loadingAlert.view.addSubview(saveIndicator)
     }

@@ -114,7 +114,12 @@ class ACTabViewController: UIViewController {
             controllerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.runFullExpAction)))
             controllerView.clipsToBounds = true
             
-            let indicator = UIActivityIndicatorView(style: .whiteLarge)
+            var indicator: UIActivityIndicatorView
+            if #available(iOS 13.0, *) {
+                indicator = UIActivityIndicatorView(style: .large)
+            } else {
+                indicator = UIActivityIndicatorView(style: .whiteLarge)
+            }
             indicator.startAnimating()
             indicator.frame.size = CGSize(width: 50, height: 50)
             indicator.center = CGPoint(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY)

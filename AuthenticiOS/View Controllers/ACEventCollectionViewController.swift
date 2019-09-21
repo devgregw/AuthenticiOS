@@ -30,9 +30,6 @@ class ACEventCollectionViewController: UICollectionViewController {
     }
     
     private func configureCollectionView() {
-        if traitCollection.forceTouchCapability == .available {
-            registerForPreviewing(with: self, sourceView: collectionView!)
-        }
         collectionView?.register(UINib(nibName: "ACCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         collectionView?.register(UINib(nibName: "ACTextCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "none")
         self.collectionView?.refreshControl = UIRefreshControl()
@@ -181,40 +178,5 @@ extension ACEventCollectionViewController : UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 1
-    }
-}
-
-extension ACEventCollectionViewController: UIViewControllerPreviewingDelegate {
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        actionToPop = nil
-        guard let indexPath = collectionView?.indexPathForItem(at: location) else {return nil}
-        guard let cell = collectionView?.cellForItem(at: indexPath) as? ACCollectionViewCell else {return nil}
-        let event = self.events[indexPath.item]
-        previewingContext.sourceRect = cell.convert(cell.bounds, to: collectionView!)
-        if let placeholder = event as? ACEventPlaceholder {
-            guard let action = placeholder.action else {
-                return ACEventViewController(event: placeholder)
-            }
-            guard let resultViewController = action.resultViewController else {
-                guard let image = cell.image.image else {return nil}
-                actionToPop = action
-                ACPeekImageViewController.image = image
-                ACPeekImageViewController.title = placeholder.title
-                let imageVc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "peek") as! ACPeekImageViewController
-                imageVc.preferredContentSize = cell.frame.size
-                return imageVc
-            }
-            return resultViewController
-        } else {
-            return ACEventViewController(event: event)
-        }
-    }
-    
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        guard let action = actionToPop else {
-            viewControllerToCommit.presentSelf(sender: nil)
-            return
-        }
-        action.invoke(viewController: self, origin: "pop", medium: "ACEventCollectionViewController#previewingContext(_:commit:)")
     }
 }

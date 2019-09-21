@@ -20,7 +20,11 @@ class ACSavableImageView: UIImageView {
         loadingAlert = UIAlertController(title: nil, message: "Saving image...", preferredStyle: .alert)
         let indicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
         indicator.hidesWhenStopped = true
-        indicator.style = .gray
+        if #available(iOS 13.0, *) {
+            indicator.style = .medium
+        } else {
+            indicator.style = .gray
+        }
         indicator.startAnimating()
         loadingAlert.view.addSubview(indicator)
         super.init(image: nil)

@@ -159,23 +159,36 @@ class ACElement {
         return toolbar
     }
     
-    class ACHTMLWebViewDelegate: NSObject, UIWebViewDelegate {
-        func webViewDidFinishLoad(_ webView: UIWebView) {
-            var js = webView.stringByEvaluatingJavaScript(from: "document.getElementById(\"root\").offsetHeight;")!
-            if js == "" { js = "0" }
-            let height = Double(js).map { CGFloat($0) }!
-            webView.addConstraint(NSLayoutConstraint(item: webView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height))
+    class ACHTMLWebViewDelegate: NSObject, WKNavigationDelegate {
+        private var loaded = false
+        
+        func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            loaded = true
+            webView.evaluateJavaScript("document.getElementById(\"root\").offsetHeight;", completionHandler: {r, e in
+                if r != nil {
+                    let height = Double(r as? String ?? "0").map { CGFloat($0) }!
+                    webView.addConstraint(NSLayoutConstraint(item: webView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height))
+                }
+            })
         }
         
-        func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebView.NavigationType) -> Bool {
-            if navigationType == .linkClicked {
-                //UIApplication.shared.open(request.url!, options: [:], completionHandler: nil)
-                ACButtonAction(type: "OpenURLAction", paramGroup: 1, params: [
-                    "url": request.url!.absoluteString
-                    ]).invoke(viewController: AppDelegate.topViewController, origin: "html", medium: "user")
-                return false
+        func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+            
+        }
+        
+        func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+            guard !loaded else {
+                decisionHandler(.allow)
+                return
             }
-            return true
+            guard let url = navigationResponse.response.url else {
+                decisionHandler(.allow)
+                return
+            }
+            ACButtonAction(type: "OpenURLAction", paramGroup: 1, params: [
+            "url": url.absoluteString
+            ]).invoke(viewController: AppDelegate.topViewController, origin: "html", medium: "user")
+            decisionHandler(.cancel)
         }
     }
     
@@ -189,19 +202,12 @@ class ACElement {
     static let noZoomDelegate = ACNoZoomScrollViewDelegate()
     
     public static func createHTMLReader(code: String) -> UIView {
-        let webView = UIWebView()
-        webView.delegate = htmlDelegate
+        let webView = WKWebView()
+        webView.navigationDelegate = htmlDelegate
         webView.loadHTMLString("<!DOCTYPE html><html><head><style type=\"text/css\">* { font-family: \"Proxima Nova\"; } p {padding-left: 4px; padding-right: 4px; padding-bottom: 1rem;}</style></head><body><div id=\"root\">\(code)<br></div></body></html>", baseURL: URL(fileURLWithPath: Bundle.main.bundlePath))
         webView.scrollView.delegate = noZoomDelegate
         webView.scrollView.isScrollEnabled = false
         return webView
-        /*let label = UILabel()
-        label.lineBreakMode = .byWordWrapping
-        label.numberOfLines = 0
-        let html = "<div id=\"root\" style=\"padding: 8px;\">\(code)</div>"
-        label.attributedText = try! NSAttributedString(data: html.data(using: String.Encoding.unicode, allowLossyConversion: true)!, options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil)
-        label.font = UIFont(name: "Proxima Nova", size: 18)!
-        return label*/
     }
     
     private var action: ACButtonAction!

@@ -60,7 +60,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         self.application(UIApplication.shared, didReceiveRemoteNotification: response.notification.request.content.userInfo)
         // The application(_:didReceiveRemoteNotification:) method populates AppDelegate.notificationAction
         // The AppDelegate.invokeNotificationAction(withViewController:) method will invoke the action (it contains a nil check)
-        AppDelegate.invokeNotificationAction(withViewController: UIApplication.shared.keyWindow!.rootViewController!)
+        AppDelegate.invokeNotificationAction(withViewController: UIApplication.shared.windows[0].rootViewController!)
         // Notify the system that the notification was handled
         completionHandler()
     }
@@ -239,7 +239,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Gets the most recently presented view controller (even modals)
     public static var topViewController: UIViewController {
         // Start at the root controller
-        var vc = UIApplication.shared.keyWindow!.rootViewController!
+        var vc = UIApplication.shared.windows[0].rootViewController!
         // Travel down the stack of presented view controllers until the end is found
         while (vc.presentedViewController != nil) {
             vc = vc.presentedViewController!
