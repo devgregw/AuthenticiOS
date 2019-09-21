@@ -131,6 +131,8 @@ class ACCollectionViewCell: UICollectionViewCell {
         self.addSubview(label)
         self.constraints.forEach({c in self.removeConstraint(c)})
         self.addConstraints([
+            NSLayoutConstraint(item: image!, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: image!, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: label, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: label, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: label, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0),
