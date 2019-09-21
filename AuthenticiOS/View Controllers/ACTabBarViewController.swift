@@ -225,8 +225,15 @@ extension ACTabBarViewController {
                             tabVcs.append(vc)
                         }
                     })
+                    
+                    if !AppDelegate.useDevelopmentDatabase {
+                        var shortcuts = [UIApplicationShortcutItem(type: "upcoming_events", localizedTitle: "Upcoming Events", localizedSubtitle: nil, icon: .init(type: .date), userInfo: nil)]
+                        self.tabs.prefix(3).forEach({tab in
+                            shortcuts.append(UIApplicationShortcutItem(type: "tab", localizedTitle: tab.title.uppercased(), localizedSubtitle: nil, icon: nil, userInfo: ["id": tab.id as NSSecureCoding]))
+                        })
+                    }
+                    
                     self.moreTableViewDelegate = MoreTableViewDelegate(self.navigationController!, Array(self.tabs.suffix(from: 3)))
-                    //}
                     
                     self.moreNavigationController.delegate = self.moreDelegate
                     (self.moreNavigationController.topViewController!.view as! UITableView).dataSource = self.moreTableViewDelegate
