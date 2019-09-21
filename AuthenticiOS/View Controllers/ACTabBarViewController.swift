@@ -13,10 +13,6 @@ class ACTabBarViewController: UITabBarController {
 
     @IBOutlet weak var imageWidthConstraint: NSLayoutConstraint!
     private var backgroundView: UIView!
-    /*@IBAction func didRequestClose(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-        ACHomePageViewController.returnToFirstViewController()
-    }*/
     
     private var buildText: String!
     
@@ -123,7 +119,7 @@ class ACTabBarViewController: UITabBarController {
             break
         }
         UserDefaults.standard.synchronize()
-        backgroundView = UIStoryboard(name: "LaunchScreen", bundle: Bundle.main).instantiateInitialViewController()!.view//UIVisualEffectView(effect: UIBlurEffect(style: .dark))//UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "loadingview").view!
+        backgroundView = UIStoryboard(name: "LaunchScreen", bundle: Bundle.main).instantiateInitialViewController()!.view
         backgroundView.frame = navigationController!.view.bounds
         backgroundView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         backgroundView.alpha = 1
@@ -132,7 +128,6 @@ class ACTabBarViewController: UITabBarController {
         backgroundView.subviews[0].center = navigationController!.view.center
         backgroundView.setNeedsLayout()
         backgroundView.layoutIfNeeded()
-        self.delegate = self
         imageWidthConstraint.constant = UIScreen.main.bounds.width - 120
         applyDefaultAppearance()
         loadData(first: true)
@@ -223,17 +218,6 @@ extension ACTabBarViewController {
                     wallpaperVc.initialize(withTab: self.tabs.first(where: {tab in tab.id == "ME6HV83IM0"})!)
                     let eventsVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "evroot") as! ACEventCollectionViewController
                     var tabVcs: [UIViewController] = [eventsVc, wallpaperVc]
-                    /*if self.tabs.count > 4 {
-                     tabVcs.append(contentsOf: self.tabs.suffix(from: 1).prefix(2).map({tab in
-                     let vc = ACTabViewController.instantiateViewController(for: tab) as! ACTabViewController
-                     vc.setTabBarItem(forId: tab.id)
-                     return vc
-                     }))
-                     let moreVc = UIViewController(nibName: nil, bundle: nil)
-                     moreVc.title = "__MORE__"
-                     moreVc.tabBarItem = UITabBarItem(title: "More", image: UIImage(named: "outline_more_horiz_white_24pt"), selectedImage: nil)
-                     tabVcs.append(moreVc)
-                     } else {*/
                     self.tabs.forEach({tab in
                         if tab.id != "ME6HV83IM0" {
                             let vc = ACTabViewController.instantiateViewController(for: tab) as! ACTabViewController
@@ -254,19 +238,5 @@ extension ACTabBarViewController {
                 })
             }
         }
-    }
-}
-
-extension ACTabBarViewController: UITabBarControllerDelegate {
-    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        /*guard viewController.title == "__MORE__" else { return true }
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let moreTabs = self.tabs.suffix(from: 3)
-        moreTabs.forEach({tab in
-            alert.addAction(UIAlertAction(title: tab.title, style: .default, handler: {_ in ACTabViewController.instantiateViewController(for: tab).presentSelf(sender: nil)}))
-        })
-        present(alert, animated: true, completion: nil)
-        return false*/
-        return true
     }
 }

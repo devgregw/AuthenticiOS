@@ -39,9 +39,9 @@ class ACImageResource {
             completion(URL(string: url)!)
         } else {
             var ref = Storage.storage().reference()
-            /*if (AppDelegate.useDevelopmentDatabase) {
+            if (AppDelegate.useDevelopmentDatabase) {
                 ref = ref.child("dev")
-            }*/
+            }
             ref.child(imageName).downloadURL(completion: {url, _ in
                 if url != nil {
                     ACImageResource.urlCache[self.imageName] = url!.absoluteString
