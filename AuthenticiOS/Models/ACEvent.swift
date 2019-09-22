@@ -35,10 +35,6 @@ class ACEvent {
     
     public let price: Float?
     
-    public func isRegistrationRequired() -> Bool {
-        return self.registrationUrl != nil && self.price != nil
-    }
-    
     public func isVisible() -> Bool {
         return !getShouldBeHidden()
     }

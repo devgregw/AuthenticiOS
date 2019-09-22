@@ -18,8 +18,6 @@ class ACTabViewController: UIViewController {
     
     private var alreadyInitialized = false
     
-    private var wallpaperManager: ACWallpaperCollectionViewManager!
-    
     private func clearViews() {
         guard self.stackView != nil else {
             return
@@ -58,43 +56,6 @@ class ACTabViewController: UIViewController {
             }
         }
         ACTabViewController(tab: tab).presentSelf(sender: nil)
-    }
-    
-    class ACWallpaperCollectionViewManager : NSObject, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-        private let elements: [ACElement]
-        private let t: ACTab
-        
-        init(_ elements: [ACElement], _ t: ACTab) {
-            self.elements = elements
-            self.t = t
-        }
-        
-        func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            return elements.count
-        }
-        
-        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "wallpaper", for: indexPath) as! ACImageCollectionViewCell
-            cell.setImage(ACImageResource(dict: elements[indexPath.item].getProperty("image") as! NSDictionary), viewController: AppDelegate.topViewController)
-            return cell
-        }
-        
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            let size = collectionView.bounds.width / 2
-            return CGSize(width: size, height: size)
-        }
-        
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-            return UIEdgeInsets.zero
-        }
-        
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-            return 0
-        }
-        
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-            return 0
-        }
     }
     
     private var fullExpAction: NSDictionary!
@@ -220,9 +181,6 @@ class ACTabViewController: UIViewController {
             self.tab!.elements.forEach({ element in
                 self.stackView.addArrangedSubview(element.getView(viewController: self, origin: "/tabs/\(self.tab!.id)"))
             })
-            if !UIDevice.current.isiPhoneX {
-                self.stackView.addArrangedSubview(ACElement.createSeparator(visible: false))
-            }
         }
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()

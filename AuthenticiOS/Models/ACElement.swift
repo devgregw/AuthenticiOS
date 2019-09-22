@@ -16,8 +16,6 @@ class ACElement {
     let parent: String
     let type: String
     let properties: NSDictionary
-    private var buttonAction: ACButtonAction? = nil
-    private var buttonViewController: UIViewController? = nil
     
     init(dict: NSDictionary) {
         self.id = dict["id"] as! String
@@ -214,7 +212,6 @@ class ACElement {
     private var vc: UIViewController!
     private var origin: String!
     
-    private var imageIndex = 0
     private var images = [String]()
     
     @objc public func invoke(_ sender: UIButton) {

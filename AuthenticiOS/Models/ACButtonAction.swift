@@ -54,42 +54,6 @@ class ACButtonAction {
         vc.present(alert, animated: true)
     }
     
-    var resultViewController: UIViewController? {
-        switch (self.type) {
-        case "OpenEventsPageAction":
-            ACEventCollectionViewController.title = "UPCOMING EVENTS"
-            return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "evroot") as! ACEventCollectionViewController
-        case "OpenURLAction":
-            let urlString = getProperty(withName: "url") as! String
-            let url = URL(string: urlString)!
-            if !urlString.contains("authentic") && (urlString.contains("http://") || urlString.contains("https://")) {
-            let safari = SFSafariViewController(url: url)
-            safari.preferredBarTintColor = .black
-            safari.preferredControlTintColor = .white
-            return safari
-            }
-            return nil
-        case "OpenYouTubeAction":
-            if !UIApplication.shared.canOpenURL(URL(string: "youtube://")!) {
-                let safari = SFSafariViewController(url: URL(string: getProperty(withName: "watchUrl") as! String)!)
-                safari.preferredBarTintColor = .black
-                safari.preferredControlTintColor = .white
-                return safari
-            }
-            return nil
-        case "OpenSpotifyAction":
-            let spotifyUri = URL(string: getProperty(withName: "spotifyUri") as! String)!
-            if !UIApplication.shared.canOpenURL(spotifyUri) {
-                let safari = SFSafariViewController(url: URL(string: getProperty(withName: "spotifyUrl") as! String)!)
-                safari.preferredBarTintColor = .black
-                safari.preferredControlTintColor = .white
-                return safari
-            }
-            return nil
-        default: return nil
-        }
-    }
-    
     public func invoke(viewController vc: UIViewController, origin: String, medium: String) {
         AnalyticsHelper.invokeAction(self, origin: origin, medium: medium)
         switch (self.type) {
@@ -128,7 +92,10 @@ class ACButtonAction {
                 let safari = SFSafariViewController(url: url)
                 safari.preferredBarTintColor = .black
                 safari.preferredControlTintColor = .white
-                AppDelegate.topViewController.present(safari, animated: true, completion: nil)
+                if #available(iOS 13.0, *) {
+                    safari.modalPresentationStyle = .pageSheet
+                }
+                vc.present(safari, animated: true, completion: nil)
             } else {
                 if UIApplication.shared.canOpenURL(url) {
                     UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)

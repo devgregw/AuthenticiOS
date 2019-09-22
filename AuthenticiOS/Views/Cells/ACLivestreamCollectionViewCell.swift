@@ -11,8 +11,6 @@ import Foundation
 import Firebase
 
 class ACLivestreamCollectionViewCell: UICollectionViewCell {
-    static let cellHeight = CGFloat(80)
-    
     @IBOutlet weak var watchLabel: UILabel!
     @IBOutlet weak var sundaysLabel: UILabel!
     @IBOutlet weak var servicesLabel: UILabel!

@@ -60,7 +60,6 @@ class ACEventCollectionViewController: UICollectionViewController {
     private var complete = false
     private var events: [ACEvent] = []
     private var trace: Trace!
-    private var actionToPop: ACButtonAction?
     
     @objc public func refreshData() {
         //(tabBarController as? ACTabBarViewController)?.loadData(first: false)

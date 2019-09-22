@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+private let reuseIdentifier = "wallpaper"
 
 class ACWallpaperCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     private var elements: [ACElement]!
@@ -26,7 +26,7 @@ class ACWallpaperCollectionViewController: UICollectionViewController, UICollect
         super.viewDidLoad()
         collectionView?.indicatorStyle = .black
         collectionView?.backgroundColor = UIColor.white
-        collectionView?.register(UINib(nibName: "ACImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "wallpaper")
+        collectionView?.register(UINib(nibName: "ACImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         collectionView?.dataSource = self
         collectionView?.delegate = self
         collectionView?.reloadData()
@@ -38,7 +38,7 @@ class ACWallpaperCollectionViewController: UICollectionViewController, UICollect
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "wallpaper", for: indexPath) as! ACImageCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ACImageCollectionViewCell
         cell.setImage(ACImageResource(dict: elements[indexPath.item].getProperty("image") as! NSDictionary), viewController: AppDelegate.topViewController)
         return cell
     }
