@@ -2,15 +2,10 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gsT-wq-vga">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="AlpenglowExpanded.ttf">
-            <string>Alpenglow-ExpandedRegular</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Peek Image-->
         <scene sceneID="HdO-FH-EC4">
@@ -154,7 +149,6 @@
         <!--Tab Bar View Controller-->
         <scene sceneID="eF9-Fy-OPx">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hIb-FL-XxI" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController id="tem-m9-34Z" customClass="ACTabBarViewController" customModule="AuthenticiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="uhT-xO-lZK">
                         <nil key="title"/>
@@ -195,6 +189,7 @@
                         <outlet property="imageWidthConstraint" destination="2jY-KI-P1Q" id="D7d-L1-nOm"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hIb-FL-XxI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4012" y="44"/>
         </scene>
