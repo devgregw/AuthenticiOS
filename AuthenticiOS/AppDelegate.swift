@@ -192,6 +192,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var launchedItem: UIApplicationShortcutItem?
     private static var notificationAction: ACButtonAction? = nil
     public static var useDevelopmentDatabase = false
+    var window: UIWindow?
     
     // Utility method to print and log to Firebase Analytics
     static func print(_ string: String) {
