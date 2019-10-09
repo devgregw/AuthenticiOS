@@ -35,7 +35,7 @@ class ACEventCollectionViewController: UICollectionViewController {
         collectionView?.register(UINib(nibName: "ACTextCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "none")
         self.collectionView?.refreshControl = UIRefreshControl()
         self.collectionView?.refreshControl?.attributedTitle = NSAttributedString(string: "PULL TO REFRESH", attributes: [
-            .kern: 2.5,
+            //.kern: 2.5,
             .font: UIFont(name: "Alpenglow-ExpandedRegular", size: 12)!,
             .foregroundColor: UIColor.black
             ])
@@ -49,7 +49,7 @@ class ACEventCollectionViewController: UICollectionViewController {
         applyDefaultAppearance()
         self.navigationItem.title = ACEventCollectionViewController.title
         self.navigationController?.navigationBar.titleTextAttributes = [
-            .kern: 3.5,
+            //.kern: 3.5,
             .font: UIFont(name: "Alpenglow-ExpandedRegular", size: 19)!,
             .foregroundColor: UIColor.white
         ]

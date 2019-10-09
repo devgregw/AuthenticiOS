@@ -47,7 +47,7 @@ class ACLivestreamCollectionViewCell: UICollectionViewCell {
     
     private func applyFontStyle(to label: UILabel, withFontSize fontSize: CGFloat) {
         label.attributedText = NSAttributedString(string: label.text!, attributes: [
-            .kern: 2.5,
+            //.kern: 2.5,
             .foregroundColor: UIColor.black,
             .font: UIFont(name: "Alpenglow-ExpandedRegular", size: fontSize)!
             ])

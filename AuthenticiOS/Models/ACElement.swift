@@ -54,7 +54,7 @@ class ACElement {
     static public func createTitle(text: String, alignment: String, border: Bool, size: Int = 24, color: UIColor = UIColor.black, bold: Bool = false) -> UIView {
         let label = ACInsetLabel()
         label.attributedText = NSAttributedString(string: text, attributes: [
-            .kern: 2.5,
+            //.kern: 2.5,
             .foregroundColor: color,
             .font: UIFont(name: "Alpenglow-ExpandedRegular", size: CGFloat(size - 2))!
         ])
