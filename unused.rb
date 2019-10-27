@@ -180,7 +180,7 @@ class Unused
 
   def filter_items(items)
     items.select { |f| 
-    !f.name.start_with?("images") && !f.name.start_with?("applicationDidBecomeActive") && !f.name.start_with?("eventEditViewController") && !f.name.start_with?("viewForZooming") && !f.name.start_with?("queryMap") && !f.name.start_with?("convertToUIApplicationOpenExternalURLOptionsKeyDictionary") && !f.name.start_with?("test") && !f.modifiers.include?("@IBAction") && !f.modifiers.include?("override") && !f.modifiers.include?("@objc") && !f.modifiers.include?("@IBInspectable")
+    !f.name.start_with?("window") && !f.name.start_with?("images") && !f.name.start_with?("applicationDidBecomeActive") && !f.name.start_with?("eventEditViewController") && !f.name.start_with?("viewForZooming") && !f.name.start_with?("queryMap") && !f.name.start_with?("convertToUIApplicationOpenExternalURLOptionsKeyDictionary") && !f.name.start_with?("test") && !f.modifiers.include?("@IBAction") && !f.modifiers.include?("override") && !f.modifiers.include?("@objc") && !f.modifiers.include?("@IBInspectable")
     }
   end
 
