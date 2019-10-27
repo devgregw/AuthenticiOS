@@ -12,6 +12,8 @@
 		2B3630691FF56BD9002469E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B3630671FF56BD9002469E5 /* LaunchScreen.storyboard */; };
 		2BEFD14F1FF5820E0094572A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2BEFD14E1FF5820E0094572A /* GoogleService-Info.plist */; };
 		718D7CFE064244CE70BEECAF /* Pods_AuthenticiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB7EE5EFB0782B2DC076E74F /* Pods_AuthenticiOS.framework */; };
+		FC023D6523493FA200F561FC /* ACTileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC023D6323493FA200F561FC /* ACTileCollectionViewCell.swift */; };
+		FC023D6623493FA200F561FC /* ACTileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC023D6423493FA200F561FC /* ACTileCollectionViewCell.xib */; };
 		FC03C28820B8778600D15490 /* ACCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC03C28620B8778600D15490 /* ACCollectionViewCell.swift */; };
 		FC03C28920B8778600D15490 /* ACCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC03C28720B8778600D15490 /* ACCollectionViewCell.xib */; };
 		FC1045051FFEF5560010F8A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC1045041FFEF5560010F8A1 /* Assets.xcassets */; };
@@ -52,6 +54,7 @@
 		FC75FB75210A7A3600E396A8 /* ACImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC75FB73210A7A3500E396A8 /* ACImageCollectionViewCell.xib */; };
 		FC75FB78210ABE0F00E396A8 /* ACWallpaperPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75FB76210ABE0E00E396A8 /* ACWallpaperPreviewViewController.swift */; };
 		FC75FB79210ABE0F00E396A8 /* ACWallpaperPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC75FB77210ABE0E00E396A8 /* ACWallpaperPreviewViewController.xib */; };
+		FC84F2052364DA6F00524198 /* ACLivestreamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC84F2042364DA6F00524198 /* ACLivestreamViewController.swift */; };
 		FC8F2A8F230CAE640090D3FC /* ACLargeThumbnailButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8F2A8E230CAE640090D3FC /* ACLargeThumbnailButtonView.xib */; };
 		FC8F2A93230CD7560090D3FC /* ACLargeThumbnailButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8F2A92230CD7560090D3FC /* ACLargeThumbnailButtonView.swift */; };
 		FC8F2A95230E26710090D3FC /* ACHalfThumbnailButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8F2A94230E26710090D3FC /* ACHalfThumbnailButtonView.xib */; };
@@ -63,6 +66,8 @@
 		FCAD5C14208628FF0010B5C9 /* ACRecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD5C13208628FF0010B5C9 /* ACRecurrenceRule.swift */; };
 		FCBD36FA20BC93160066ED19 /* ACLivestreamCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBD36F820BC93160066ED19 /* ACLivestreamCollectionViewCell.swift */; };
 		FCBD36FB20BC93160066ED19 /* ACLivestreamCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBD36F920BC93160066ED19 /* ACLivestreamCollectionViewCell.xib */; };
+		FCC928F82348DAB70051C496 /* ACVideosCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC928F72348DAB70051C496 /* ACVideosCollectionViewController.swift */; };
+		FCC928FA2348DB140051C496 /* ACWatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC928F92348DB140051C496 /* ACWatchViewController.swift */; };
 		FCDA0CD623354259006EB4FD /* AlpenglowExpanded.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FCDA0CD523354259006EB4FD /* AlpenglowExpanded.ttf */; };
 		FCF184102102123700C9E37A /* ACThumbnailButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCF1840F2102123700C9E37A /* ACThumbnailButtonView.xib */; };
 		FCF18412210216EF00C9E37A /* ACThumbnailButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF18411210216EF00C9E37A /* ACThumbnailButtonView.swift */; };
@@ -78,6 +83,8 @@
 		2B36306A1FF56BD9002469E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2BEFD14E1FF5820E0094572A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AB7EE5EFB0782B2DC076E74F /* Pods_AuthenticiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AuthenticiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC023D6323493FA200F561FC /* ACTileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTileCollectionViewCell.swift; sourceTree = "<group>"; };
+		FC023D6423493FA200F561FC /* ACTileCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACTileCollectionViewCell.xib; sourceTree = "<group>"; };
 		FC03C28620B8778600D15490 /* ACCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACCollectionViewCell.swift; sourceTree = "<group>"; };
 		FC03C28720B8778600D15490 /* ACCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACCollectionViewCell.xib; sourceTree = "<group>"; };
 		FC1045041FFEF5560010F8A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -120,6 +127,7 @@
 		FC75FB73210A7A3500E396A8 /* ACImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		FC75FB76210ABE0E00E396A8 /* ACWallpaperPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACWallpaperPreviewViewController.swift; sourceTree = "<group>"; };
 		FC75FB77210ABE0E00E396A8 /* ACWallpaperPreviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACWallpaperPreviewViewController.xib; sourceTree = "<group>"; };
+		FC84F2042364DA6F00524198 /* ACLivestreamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLivestreamViewController.swift; sourceTree = "<group>"; };
 		FC8F2A8E230CAE640090D3FC /* ACLargeThumbnailButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACLargeThumbnailButtonView.xib; sourceTree = "<group>"; };
 		FC8F2A92230CD7560090D3FC /* ACLargeThumbnailButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLargeThumbnailButtonView.swift; sourceTree = "<group>"; };
 		FC8F2A94230E26710090D3FC /* ACHalfThumbnailButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACHalfThumbnailButtonView.xib; sourceTree = "<group>"; };
@@ -131,6 +139,8 @@
 		FCAD5C13208628FF0010B5C9 /* ACRecurrenceRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACRecurrenceRule.swift; sourceTree = "<group>"; };
 		FCBD36F820BC93160066ED19 /* ACLivestreamCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLivestreamCollectionViewCell.swift; sourceTree = "<group>"; };
 		FCBD36F920BC93160066ED19 /* ACLivestreamCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACLivestreamCollectionViewCell.xib; sourceTree = "<group>"; };
+		FCC928F72348DAB70051C496 /* ACVideosCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACVideosCollectionViewController.swift; sourceTree = "<group>"; };
+		FCC928F92348DB140051C496 /* ACWatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACWatchViewController.swift; sourceTree = "<group>"; };
 		FCDA0CD523354259006EB4FD /* AlpenglowExpanded.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AlpenglowExpanded.ttf; sourceTree = "<group>"; };
 		FCF1840F2102123700C9E37A /* ACThumbnailButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACThumbnailButtonView.xib; sourceTree = "<group>"; };
 		FCF18411210216EF00C9E37A /* ACThumbnailButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACThumbnailButtonView.swift; sourceTree = "<group>"; };
@@ -262,6 +272,7 @@
 		FCBD36F520BC8BF40066ED19 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				FC023D6323493FA200F561FC /* ACTileCollectionViewCell.swift */,
 				FCBD36F820BC93160066ED19 /* ACLivestreamCollectionViewCell.swift */,
 				FC03C28620B8778600D15490 /* ACCollectionViewCell.swift */,
 				FC4CD2A220FE94430096ED0D /* ACTextCollectionViewCell.swift */,
@@ -281,6 +292,9 @@
 				FC9E7BF121DBE7D5008D8F34 /* ACPeekImageViewController.swift */,
 				FC264D0A21ED38A700C2BA4E /* ACWallpaperCollectionViewController.swift */,
 				FC4D15422324517A008786B7 /* ACTabBarViewController.swift */,
+				FCC928F72348DAB70051C496 /* ACVideosCollectionViewController.swift */,
+				FCC928F92348DB140051C496 /* ACWatchViewController.swift */,
+				FC84F2042364DA6F00524198 /* ACLivestreamViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -303,6 +317,7 @@
 				FCAC5AD9215FF4000013FD52 /* ACToolbarView.xib */,
 				FC8F2A8E230CAE640090D3FC /* ACLargeThumbnailButtonView.xib */,
 				FC8F2A94230E26710090D3FC /* ACHalfThumbnailButtonView.xib */,
+				FC023D6423493FA200F561FC /* ACTileCollectionViewCell.xib */,
 			);
 			path = "User Interfaces";
 			sourceTree = "<group>";
@@ -391,6 +406,7 @@
 				FC03C28920B8778600D15490 /* ACCollectionViewCell.xib in Resources */,
 				FC5BF9BD208D18A7002982F1 /* ACEventViewController.xib in Resources */,
 				FC524C12231759990092E54E /* full3.png in Resources */,
+				FC023D6623493FA200F561FC /* ACTileCollectionViewCell.xib in Resources */,
 				FC75FB79210ABE0F00E396A8 /* ACWallpaperPreviewViewController.xib in Resources */,
 				FC2765D820E02122002A342A /* Settings.bundle in Resources */,
 				2B3630691FF56BD9002469E5 /* LaunchScreen.storyboard in Resources */,
@@ -420,11 +436,11 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-AuthenticiOS/Pods-AuthenticiOS-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-AuthenticiOS/Pods-AuthenticiOS-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -434,14 +450,14 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AuthenticiOS/Pods-AuthenticiOS-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AuthenticiOS/Pods-AuthenticiOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B2FF5E8F1C0C4FFA7869C496 /* [CP] Check Pods Manifest.lock */ = {
@@ -467,13 +483,9 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 			);
 			name = unused.rb;
-			outputFileListPaths = (
-			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -503,6 +515,8 @@
 			files = (
 				FC3A7FEB21127B3800CAFC90 /* ACSavableImageView.swift in Sources */,
 				FC3A7FE32112798E00CAFC90 /* String.swift in Sources */,
+				FC023D6523493FA200F561FC /* ACTileCollectionViewCell.swift in Sources */,
+				FCC928FA2348DB140051C496 /* ACWatchViewController.swift in Sources */,
 				FC3A7FEF21127B5200CAFC90 /* MapInterface.swift in Sources */,
 				FC75FB74210A7A3600E396A8 /* ACImageCollectionViewCell.swift in Sources */,
 				FC75FB78210ABE0F00E396A8 /* ACWallpaperPreviewViewController.swift in Sources */,
@@ -537,6 +551,8 @@
 				FC3A7FE7211279D500CAFC90 /* UIViewController.swift in Sources */,
 				FC5F914720D94FB700516095 /* ACEventCollectionViewController.swift in Sources */,
 				FC3A7FDF2112792700CAFC90 /* Date.swift in Sources */,
+				FCC928F82348DAB70051C496 /* ACVideosCollectionViewController.swift in Sources */,
+				FC84F2052364DA6F00524198 /* ACLivestreamViewController.swift in Sources */,
 				FCAD5C12208624CC0010B5C9 /* ACEvent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
