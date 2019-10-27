@@ -146,29 +146,10 @@ class ACTabViewController: UIViewController {
         }
     }
     
-    public func setTabBarItem(forId id: String) {
-        switch id {
-        case "OPQ26R4SRP":
-            self.tabBarItem.title = "Watch"
-            self.tabBarItem.image = UIImage(named: "outline_ondemand_video_white_24pt")
-        case "H8K8FUFP0S":
-            self.tabBarItem.title = "The Future"
-            self.tabBarItem.image = UIImage(named: "outline_child_care_white_24pt")
-        case "R5VKFVB39A":
-            self.tabBarItem.title = "Give"
-            self.tabBarItem.image = UIImage(named: "outline_attach_money_white_24pt")
-        case "OSCFL7LLNB":
-            self.tabBarItem.title = "Faith Flow"
-            self.tabBarItem.image = UIImage(named: "outline_speaker_notes_white_24pt")
-        default: return
-        }
-    }
-    
     private func initLayout() {
         guard !self.alreadyInitialized else {return}
         self.alreadyInitialized = true
         self.clearViews()
-        self.setTabBarItem(forId: self.tab!.id)
         if let specialType = self.tab!.specialType {
             initLayout(forSpecialType: specialType)
         } else if self.tab!.elements.count == 0 {
