@@ -66,6 +66,17 @@ class ACImageResource {
         if setSize {
             view.addConstraint(NSLayoutConstraint(item: view, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: calculateHeight(usingFullScreenWidth: true)))
         }
+        if imageName.starts(with: "http") {
+            view.sd_setImage(with: URL(string: imageName)!, placeholderImage: nil, options: scale ? SDWebImageOptions.scaleDownLargeImages : SDWebImageOptions(), progress: nil, completed: { _, _, _, _ in
+               completion()
+               if fade {
+                   UIView.animate(withDuration: 0.3, animations: {
+                       view.alpha = 1
+                   })
+               }
+            })
+            return
+        }
         getDownloadURL(completion: { url in
             guard url != nil else {
                 view.image = UIImage(named: "unknown")
