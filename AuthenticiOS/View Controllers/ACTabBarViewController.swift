@@ -79,7 +79,7 @@ class ACTabBarViewController: UITabBarController {
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
             cell.selectionStyle = .none
             let vc = ACTabViewController(tab: t)
-            vc.setTabBarItem(forId: t.id)
+            vc.tabBarItem.title = t.title.capitalized
             cell.textLabel?.font = UIFont(name: "Alpenglow-ExpandedRegular", size: UIFont.labelFontSize - 2)!
             cell.imageView?.image = vc.tabBarItem.image
             cell.imageView?.tintColor = UIColor(red: 36/255, green: 137/255, blue: 248/255, alpha: 1)
@@ -103,6 +103,7 @@ class ACTabBarViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.clipsToBounds = true
         switch (AppDelegate.appMode) {
         case .Debug:
             UserDefaults.standard.set("Development", forKey: "sbMode")
@@ -204,9 +205,13 @@ extension ACTabBarViewController {
                 ref.keepSynced(true)
                 ref.child("tabs").observeSingleEvent(of: .value, with: {snap in
                     let val = snap.value as? NSDictionary
+                    var playlists: [ACTab] = []
                     self.tabs.removeAll()
                     val?.forEach({(key, value) in
                         let tab = ACTab(dict: value as! NSDictionary)
+                        if tab.specialType == "watchPlaylist" {
+                            playlists.append(tab)
+                        }
                         if (tab.isVisible()) {
                             self.tabs.append(tab)
                         }
@@ -219,9 +224,15 @@ extension ACTabBarViewController {
                     let eventsVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "evroot") as! ACEventCollectionViewController
                     var tabVcs: [UIViewController] = [eventsVc, wallpaperVc]
                     self.tabs.forEach({tab in
-                        if tab.id != "ME6HV83IM0" {
+                        if tab.title == "WATCH" {
+                            let vc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "watch") as! UINavigationController
+                            (vc.topViewController as! ACWatchViewController).initialize(main: tab, playlists: playlists)
+                            vc.tabBarItem.title = "Watch"
+                            tabVcs.append(vc)
+                        }
+                        else if tab.id != "ME6HV83IM0" {
                             let vc = ACTabViewController.instantiateViewController(for: tab) as! ACTabViewController
-                            vc.setTabBarItem(forId: tab.id)
+                            vc.tabBarItem.title = tab.title.capitalized
                             tabVcs.append(vc)
                         }
                     })
@@ -241,6 +252,10 @@ extension ACTabBarViewController {
                     (self.moreNavigationController.topViewController!.view as! UITableView).delegate = self.moreTableViewDelegate
                     
                     self.setViewControllers(tabVcs, animated: false)
+                    self.tabBar.items?.forEach({i in
+                        i.image = nil
+                        i.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -16)
+                    })
                     self.customizableViewControllers = nil
                     self.hideLoader()
                 })
