@@ -78,7 +78,7 @@ class ACTabBarViewController: UITabBarController {
             let t = self.tabs[indexPath.item]
             let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
             cell.selectionStyle = .none
-            let vc = ACTabViewController(tab: t)
+            let vc = StoryboardHelper.instantiateTabViewController(with: t)
             vc.tabBarItem.title = t.title.capitalized
             cell.textLabel?.font = UIFont(name: "Alpenglow-ExpandedRegular", size: UIFont.labelFontSize - 2)!
             cell.imageView?.image = vc.tabBarItem.image
@@ -219,16 +219,13 @@ extension ACTabBarViewController {
                     self.tabs.sort(by: { (a, b) in a.index < b.index })
                     self.tabBar.tintColor = UIColor.white
                     self.tabBar.unselectedItemTintColor = UIColor.lightText
-                    let wallpaperVc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "wallpapersCollectionViewController") as! ACWallpaperCollectionViewController
+                    let wallpaperVc = StoryboardHelper.instantiateWallpaperCollectionViewController()
                     wallpaperVc.initialize(withTab: self.tabs.first(where: {tab in tab.id == "ME6HV83IM0"})!)
-                    let eventsVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "evroot") as! ACEventCollectionViewController
+                    let eventsVc = StoryboardHelper.instantiateEventCollectionViewController()
                     var tabVcs: [UIViewController] = [eventsVc, wallpaperVc]
                     self.tabs.forEach({tab in
                         if tab.title == "WATCH" {
-                            let vc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "watch") as! UINavigationController
-                            (vc.topViewController as! ACWatchViewController).initialize(main: tab, playlists: playlists)
-                            vc.tabBarItem.title = "Watch"
-                            tabVcs.append(vc)
+                            tabVcs.append(StoryboardHelper.instantiateWatchViewController(with: tab, playlists: playlists))
                         }
                         else if tab.id != "ME6HV83IM0" {
                             let vc = ACTabViewController.instantiateViewController(for: tab) as! ACTabViewController

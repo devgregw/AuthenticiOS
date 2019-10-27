@@ -31,10 +31,8 @@ class ACWatchViewController: UIPageViewController {
     public func initialize(main: ACTab, playlists: [ACTab]) {
         self.mainTab = main
         self.playlistTabs = playlists
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        videosViewController = storyboard.instantiateViewController(withIdentifier: "watchVideos") as? ACVideosCollectionViewController
-        videosViewController.initialize(main: main, playlists: playlists)
-        liveViewController = storyboard.instantiateViewController(withIdentifier: "watchLive") as? ACLivestreamViewController
+        videosViewController = StoryboardHelper.instantiateVideosCollectionViewController(with: main, playlists: playlists)
+        liveViewController = StoryboardHelper.instantiateLivestreamViewController()
     }
     
     override func viewDidLoad() {

@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="AlpenglowExpanded.ttf">
+            <string>Alpenglow-ExpandedRegular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Watch View Controller-->
+        <scene sceneID="C8e-X5-OFI">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="0Sj-B8-K04" customClass="ACWatchViewController" customModule="AuthenticiOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="zj3-bA-GJa">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Sug-N7-lsA">
+                            <rect key="frame" x="123.5" y="5.5" width="167" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="VIDEOS"/>
+                                <segment title="LIVE"/>
+                            </segments>
+                            <connections>
+                                <action selector="selectionChanged:" destination="0Sj-B8-K04" eventType="valueChanged" id="pIS-eQ-dOT"/>
+                            </connections>
+                        </segmentedControl>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="segmentedControl" destination="Sug-N7-lsA" id="Ieb-7f-w6U"/>
+                    </connections>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4jm-Pl-EOl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4087" y="725"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Ayc-O5-rmF">
+            <objects>
+                <navigationController storyboardIdentifier="watch" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gUh-QH-1f6" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="e7T-Fc-Dxc">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="0Sj-B8-K04" kind="relationship" relationship="rootViewController" id="8Eu-on-xmI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="D6o-4T-dpp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3353" y="725"/>
+        </scene>
+        <!--Videos Collection View Controller-->
+        <scene sceneID="1dK-4F-xcS">
+            <objects>
+                <collectionViewController storyboardIdentifier="watchVideos" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BZb-uA-7UD" customClass="ACVideosCollectionViewController" customModule="AuthenticiOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="black" dataMode="prototypes" id="787-Vm-Wb3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gD0-ty-FVC">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells/>
+                        <connections>
+                            <outlet property="dataSource" destination="BZb-uA-7UD" id="czm-xL-3Sc"/>
+                            <outlet property="delegate" destination="BZb-uA-7UD" id="OCF-aG-Xy9"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Nb-AX-7m1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4814" y="725"/>
+        </scene>
+        <!--Livestream View Controller-->
+        <scene sceneID="c6B-Te-eZR">
+            <objects>
+                <viewController storyboardIdentifier="watchLive" useStoryboardIdentifierAsRestorationIdentifier="YES" id="B79-0j-i4Q" customClass="ACLivestreamViewController" customModule="AuthenticiOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sIF-2H-OH7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView hidden="YES" contentMode="scaleToFill" allowsBackForwardNavigationGestures="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j1R-dz-2Kv">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration" allowsInlineMediaPlayback="YES" applicationNameForUserAgent="Authentic">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" video="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KGm-Lj-Djp">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unknown" translatesAutoresizingMaskIntoConstraints="NO" id="oi5-uC-n5C">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                    </imageView>
+                                    <visualEffectView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yg6-ZF-1tc">
+                                        <rect key="frame" x="132" y="373" width="150" height="150"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="dV5-xL-09o">
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ixi-hI-Z3X">
+                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="hcU-eA-R0W">
+                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="22"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    </view>
+                                                    <vibrancyEffect>
+                                                        <blurEffect style="regular"/>
+                                                    </vibrancyEffect>
+                                                </visualEffectView>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="j1p-gY-3qB">
+                                                    <rect key="frame" x="56.5" y="56.5" width="37" height="37"/>
+                                                    <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </activityIndicatorView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOADING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HwN-a5-EQs">
+                                                    <rect key="frame" x="0.0" y="109.5" width="150" height="11.5"/>
+                                                    <fontDescription key="fontDescription" name="Alpenglow-ExpandedRegular" family="Alpenglow" pointSize="12"/>
+                                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="j1p-gY-3qB" firstAttribute="centerX" secondItem="dV5-xL-09o" secondAttribute="centerX" id="Tvv-N2-Dgp"/>
+                                                <constraint firstItem="j1p-gY-3qB" firstAttribute="centerY" secondItem="dV5-xL-09o" secondAttribute="centerY" id="Xg1-l1-rSF"/>
+                                                <constraint firstItem="HwN-a5-EQs" firstAttribute="leading" secondItem="dV5-xL-09o" secondAttribute="leading" id="cGC-r2-gaL"/>
+                                                <constraint firstItem="HwN-a5-EQs" firstAttribute="top" secondItem="j1p-gY-3qB" secondAttribute="bottom" constant="16" id="egM-NP-xrd"/>
+                                                <constraint firstAttribute="trailing" secondItem="HwN-a5-EQs" secondAttribute="trailing" id="mgi-cE-4Hq"/>
+                                            </constraints>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="jRk-Jw-yez"/>
+                                            <constraint firstAttribute="height" constant="150" id="qyc-aF-9xF"/>
+                                        </constraints>
+                                        <blurEffect style="dark"/>
+                                    </visualEffectView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Yg6-ZF-1tc" firstAttribute="centerY" secondItem="KGm-Lj-Djp" secondAttribute="centerY" id="0gd-EE-mVH"/>
+                                    <constraint firstAttribute="bottom" secondItem="oi5-uC-n5C" secondAttribute="bottom" id="8is-Ip-Eq5"/>
+                                    <constraint firstItem="Yg6-ZF-1tc" firstAttribute="centerX" secondItem="KGm-Lj-Djp" secondAttribute="centerX" id="Piw-Dc-9f4"/>
+                                    <constraint firstAttribute="trailing" secondItem="oi5-uC-n5C" secondAttribute="trailing" id="kwR-Mh-4Yi"/>
+                                    <constraint firstItem="oi5-uC-n5C" firstAttribute="top" secondItem="KGm-Lj-Djp" secondAttribute="top" id="tHQ-P2-0AZ"/>
+                                    <constraint firstItem="oi5-uC-n5C" firstAttribute="leading" secondItem="KGm-Lj-Djp" secondAttribute="leading" id="yGc-lr-OCN"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="KGm-Lj-Djp" secondAttribute="bottom" id="3KF-II-yhI"/>
+                            <constraint firstItem="KGm-Lj-Djp" firstAttribute="leading" secondItem="sIF-2H-OH7" secondAttribute="leading" id="Ogx-Qg-IKG"/>
+                            <constraint firstItem="j1R-dz-2Kv" firstAttribute="leading" secondItem="Wxm-FH-kBx" secondAttribute="leading" id="aKG-HT-3Ma"/>
+                            <constraint firstItem="Wxm-FH-kBx" firstAttribute="bottom" secondItem="j1R-dz-2Kv" secondAttribute="bottom" id="an2-gZ-sab"/>
+                            <constraint firstItem="j1R-dz-2Kv" firstAttribute="trailing" secondItem="Wxm-FH-kBx" secondAttribute="trailing" id="gO8-Jc-l7p"/>
+                            <constraint firstAttribute="trailing" secondItem="KGm-Lj-Djp" secondAttribute="trailing" id="mkO-yE-XTv"/>
+                            <constraint firstItem="KGm-Lj-Djp" firstAttribute="top" secondItem="sIF-2H-OH7" secondAttribute="top" id="uF8-Fn-sWo"/>
+                            <constraint firstItem="j1R-dz-2Kv" firstAttribute="top" secondItem="Wxm-FH-kBx" secondAttribute="top" id="xEW-ar-c0m"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Wxm-FH-kBx"/>
+                    </view>
+                    <connections>
+                        <outlet property="loadingView" destination="Yg6-ZF-1tc" id="PpX-yA-moX"/>
+                        <outlet property="placeholderImageView" destination="oi5-uC-n5C" id="ZHH-g0-ANJ"/>
+                        <outlet property="placeholderView" destination="KGm-Lj-Djp" id="i4h-Tk-yio"/>
+                        <outlet property="webView" destination="j1R-dz-2Kv" id="788-bO-75S"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ASS-Xi-eJZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5533" y="725"/>
+        </scene>
+        <!--VIDEO-->
+        <scene sceneID="4jC-l2-J2S">
+            <objects>
+                <viewController storyboardIdentifier="video" useStoryboardIdentifierAsRestorationIdentifier="YES" id="MAv-Dr-gid" customClass="ACVideoViewController" customModule="AuthenticiOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="R4j-8d-hSi">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="aIS-z2-BCV">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                            </activityIndicatorView>
+                            <wkWebView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZD0-Is-B9q">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <wkWebViewConfiguration key="configuration" allowsPictureInPictureMediaPlayback="NO">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n2s-Vy-AkR">
+                                <rect key="frame" x="0.0" y="774" width="414" height="34"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Fiq-Db-6YK" firstAttribute="trailing" secondItem="ZD0-Is-B9q" secondAttribute="trailing" id="2aQ-g1-OyA"/>
+                            <constraint firstItem="Fiq-Db-6YK" firstAttribute="bottom" secondItem="aIS-z2-BCV" secondAttribute="bottom" id="AYF-l8-Cwt"/>
+                            <constraint firstItem="Fiq-Db-6YK" firstAttribute="bottom" secondItem="ZD0-Is-B9q" secondAttribute="bottom" id="I3K-71-bYL"/>
+                            <constraint firstItem="n2s-Vy-AkR" firstAttribute="top" secondItem="Fiq-Db-6YK" secondAttribute="bottom" id="J5T-us-mpo"/>
+                            <constraint firstAttribute="bottom" secondItem="n2s-Vy-AkR" secondAttribute="bottom" id="a1n-V3-kOe"/>
+                            <constraint firstItem="ZD0-Is-B9q" firstAttribute="top" secondItem="Fiq-Db-6YK" secondAttribute="top" id="bix-F4-vfh"/>
+                            <constraint firstItem="ZD0-Is-B9q" firstAttribute="leading" secondItem="Fiq-Db-6YK" secondAttribute="leading" id="cHC-mu-HgP"/>
+                            <constraint firstItem="Fiq-Db-6YK" firstAttribute="trailing" secondItem="n2s-Vy-AkR" secondAttribute="trailing" id="dba-6M-TL6"/>
+                            <constraint firstItem="Fiq-Db-6YK" firstAttribute="trailing" secondItem="aIS-z2-BCV" secondAttribute="trailing" id="hLb-hb-z0C"/>
+                            <constraint firstItem="aIS-z2-BCV" firstAttribute="leading" secondItem="Fiq-Db-6YK" secondAttribute="leading" id="mtq-Ic-cEq"/>
+                            <constraint firstItem="n2s-Vy-AkR" firstAttribute="leading" secondItem="Fiq-Db-6YK" secondAttribute="leading" id="syF-pA-BcD"/>
+                            <constraint firstItem="aIS-z2-BCV" firstAttribute="top" secondItem="Fiq-Db-6YK" secondAttribute="top" id="ud0-Ty-BQH"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Fiq-Db-6YK"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="VIDEO" id="P5y-N4-fhx">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="AjM-Vx-RfY">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="share" destination="MAv-Dr-gid" id="vAu-77-d2M"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="indicator" destination="aIS-z2-BCV" id="Yzf-aV-cE8"/>
+                        <outlet property="webView" destination="ZD0-Is-B9q" id="ORS-37-aRx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hP5-hd-isg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7017" y="725"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="XGS-mD-Ojb">
+            <objects>
+                <navigationController storyboardIdentifier="_video" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3h9-iA-9ux" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="WfL-A2-O74">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Alpenglow-ExpandedRegular" family="Alpenglow" pointSize="17"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="MAv-Dr-gid" kind="relationship" relationship="rootViewController" id="UPD-SG-bWO"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q5w-uT-CJD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6284" y="725"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="unknown" width="720" height="1080"/>
+    </resources>
+</document>

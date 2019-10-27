@@ -14,7 +14,7 @@ class ACTabViewController: UIViewController {
     
     @IBOutlet weak var stackView: UIStackView!
     
-    private let tab: ACTab?
+    public var tab: ACTab!
     
     private var alreadyInitialized = false
     
@@ -31,13 +31,13 @@ class ACTabViewController: UIViewController {
         if let specialType = tab.specialType {
             switch specialType {
             case "wallpapers":
-                let vc = (UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "wallpapersCollectionViewController") as! ACWallpaperCollectionViewController)
+                let vc = StoryboardHelper.instantiateWallpaperCollectionViewController()
                 vc.initialize(withTab: tab)
                 return vc
-            default: return ACTabViewController(tab: tab)
+            default: return StoryboardHelper.instantiateTabViewController(with: tab)
             }
         } else {
-            return ACTabViewController(tab: tab)
+            return StoryboardHelper.instantiateTabViewController(with: tab)
         }
     }
     
@@ -49,13 +49,13 @@ class ACTabViewController: UIViewController {
         }
         if let type = tab.specialType {
             if type == "wallpapers" {
-                let vc = (UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "wallpapersCollectionViewController") as! ACWallpaperCollectionViewController)
+                let vc = StoryboardHelper.instantiateWallpaperCollectionViewController()
                 vc.initialize(withTab: tab)
                 vc.presentSelf(sender: nil)
                 return
             }
         }
-        ACTabViewController(tab: tab).presentSelf(sender: nil)
+        StoryboardHelper.instantiateTabViewController(with: tab).presentSelf(sender: nil)
     }
     
     private var fullExpAction: NSDictionary!
@@ -172,18 +172,6 @@ class ACTabViewController: UIViewController {
         initLayout()
     }
     
-    init(tab: ACTab) {
-        self.tab = tab
-        super.init(nibName: "ACTabViewController", bundle: Bundle.main)
-        self.title = tab.title
-        
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        self.tab = nil
-        super.init(coder: aDecoder)
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         self.view.setNeedsLayout()
         self.view.layoutIfNeeded()
@@ -191,6 +179,7 @@ class ACTabViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = self.tab!.title
         if let action = self.tab!.action {
             action.invoke(viewController: navigationController!, origin: "/tabs/\(self.tab!.id)", medium: "action")
             navigationController!.popViewController(animated: false)

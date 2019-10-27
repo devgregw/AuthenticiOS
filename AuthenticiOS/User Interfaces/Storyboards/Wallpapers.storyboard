@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="AlpenglowExpanded.ttf">
+            <string>Alpenglow-ExpandedRegular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Wallpapers-->
+        <scene sceneID="q1X-D8-jyE">
+            <objects>
+                <collectionViewController storyboardIdentifier="wallpapersCollectionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="UBN-rF-6iM" customClass="ACWallpaperCollectionViewController" customModule="AuthenticiOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Sno-CL-Kxk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NZc-Yc-zBc">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="__w1" id="KKR-Ep-w8j">
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </view>
+                                <size key="customSize" width="0.0" height="0.0"/>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="UBN-rF-6iM" id="T3y-GC-wNP"/>
+                            <outlet property="delegate" destination="UBN-rF-6iM" id="ObK-RW-mFJ"/>
+                        </connections>
+                    </collectionView>
+                    <tabBarItem key="tabBarItem" title="Wallpapers" image="outline_wallpaper_white_24pt" id="GtI-ok-eD7"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ces-6j-9JR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2553" y="725"/>
+        </scene>
+        <!--Wallpaper Preview View Controller-->
+        <scene sceneID="HR6-7q-wxG">
+            <objects>
+                <viewController storyboardIdentifier="wallpaperPreview" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Uhz-8T-7Nh" customClass="ACWallpaperPreviewViewController" customModule="AuthenticiOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="hhE-0n-QkH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WqG-rE-6lp">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallpaper Preview" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tjR-Ce-4gN">
+                                <rect key="frame" x="16" y="52" width="382" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="2hy-wS-QC7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Alpenglow-ExpandedRegular" family="Alpenglow" pointSize="13"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <size key="shadowOffset" width="1" height="1"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="X1p-s8-bEm">
+                                <rect key="frame" x="188.5" y="434.5" width="37" height="37"/>
+                            </activityIndicatorView>
+                            <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m9y-xc-FAw">
+                                <rect key="frame" x="0.0" y="802" width="414" height="94"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ay6-SP-nYh">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="94"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BzY-HL-Yhe">
+                                            <rect key="frame" x="-1" y="-1" width="413" height="94"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="fue-yx-iSs">
+                                                <rect key="frame" x="0.0" y="0.0" width="413" height="94"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            </view>
+                                            <vibrancyEffect>
+                                                <blurEffect style="dark"/>
+                                            </vibrancyEffect>
+                                        </visualEffectView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KM2-zi-wa3">
+                                            <rect key="frame" x="8" y="8" width="100" height="48"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="48" id="Fls-ph-5hS"/>
+                                                <constraint firstAttribute="width" constant="100" id="llf-Hd-cDh"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Alpenglow-ExpandedRegular" family="Alpenglow" pointSize="15"/>
+                                            <state key="normal" title="Cancel">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="cancel:" destination="Uhz-8T-7Nh" eventType="touchUpInside" id="VZP-6J-525"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0T3-k8-NPh">
+                                            <rect key="frame" x="306" y="8" width="100" height="48"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="48" id="5B9-uk-yoD"/>
+                                                <constraint firstAttribute="width" constant="100" id="T5f-Jv-oh7"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Alpenglow-ExpandedRegular" family="Alpenglow" pointSize="15"/>
+                                            <state key="normal" title="Save">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="save:" destination="Uhz-8T-7Nh" eventType="touchUpInside" id="4lH-GU-HlK"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="0T3-k8-NPh" firstAttribute="top" secondItem="ay6-SP-nYh" secondAttribute="top" constant="8" id="9cp-FE-ydx"/>
+                                        <constraint firstItem="KM2-zi-wa3" firstAttribute="leading" secondItem="ay6-SP-nYh" secondAttribute="leading" constant="8" id="9dG-cJ-YAH"/>
+                                        <constraint firstAttribute="trailing" secondItem="0T3-k8-NPh" secondAttribute="trailing" constant="8" id="RSf-vO-mye"/>
+                                        <constraint firstItem="KM2-zi-wa3" firstAttribute="top" secondItem="ay6-SP-nYh" secondAttribute="top" constant="8" id="sCF-KT-cPK"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="dark"/>
+                            </visualEffectView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="tjR-Ce-4gN" firstAttribute="leading" secondItem="0jA-5e-6X3" secondAttribute="leading" constant="16" id="4GP-fF-0XA"/>
+                            <constraint firstItem="m9y-xc-FAw" firstAttribute="leading" secondItem="0jA-5e-6X3" secondAttribute="leading" id="4Rm-ZA-fRY"/>
+                            <constraint firstItem="m9y-xc-FAw" firstAttribute="top" secondItem="0jA-5e-6X3" secondAttribute="bottom" constant="-60" id="5N8-9Q-a0d"/>
+                            <constraint firstItem="X1p-s8-bEm" firstAttribute="centerX" secondItem="0jA-5e-6X3" secondAttribute="centerX" id="IKI-dF-og8"/>
+                            <constraint firstItem="0jA-5e-6X3" firstAttribute="trailing" secondItem="m9y-xc-FAw" secondAttribute="trailing" id="KAB-GE-gjY"/>
+                            <constraint firstItem="WqG-rE-6lp" firstAttribute="leading" secondItem="hhE-0n-QkH" secondAttribute="leading" id="ZF7-rp-TrC"/>
+                            <constraint firstItem="WqG-rE-6lp" firstAttribute="top" secondItem="hhE-0n-QkH" secondAttribute="top" id="aNd-Ha-qtp"/>
+                            <constraint firstAttribute="trailing" secondItem="WqG-rE-6lp" secondAttribute="trailing" id="auD-nY-G2N"/>
+                            <constraint firstItem="X1p-s8-bEm" firstAttribute="centerY" secondItem="0jA-5e-6X3" secondAttribute="centerY" id="fyq-Sj-Xef"/>
+                            <constraint firstItem="0jA-5e-6X3" firstAttribute="trailing" secondItem="tjR-Ce-4gN" secondAttribute="trailing" constant="16" id="iBe-5P-IkN"/>
+                            <constraint firstAttribute="bottom" secondItem="WqG-rE-6lp" secondAttribute="bottom" id="l7c-Eu-HFX"/>
+                            <constraint firstItem="tjR-Ce-4gN" firstAttribute="top" secondItem="0jA-5e-6X3" secondAttribute="top" constant="8" id="lzu-Sa-Kar"/>
+                            <constraint firstAttribute="bottom" secondItem="m9y-xc-FAw" secondAttribute="bottom" id="s8x-bq-Mhl"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="0jA-5e-6X3"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="WqG-rE-6lp" id="dfD-Qo-Gea"/>
+                        <outlet property="indicator" destination="X1p-s8-bEm" id="s5S-fr-kZo"/>
+                        <outlet property="saveButton" destination="0T3-k8-NPh" id="EJi-BM-Cjk"/>
+                        <outlet property="visualEffectView" destination="m9y-xc-FAw" id="lPA-b5-dnY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MPc-SF-KiF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3323" y="725"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="outline_wallpaper_white_24pt" width="24" height="24"/>
+    </resources>
+</document>

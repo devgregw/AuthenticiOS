@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--UPCOMING EVENTS-->
+        <scene sceneID="KQ2-1y-9Ha">
+            <objects>
+                <collectionViewController storyboardIdentifier="evroot" useStoryboardIdentifierAsRestorationIdentifier="YES" id="GCx-Os-aRU" customClass="ACEventCollectionViewController" customModule="AuthenticiOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" dataMode="prototypes" id="5cg-M1-aco">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="lL3-DR-7ys">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="accvcell" id="OkI-Qd-iwg">
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </view>
+                                <size key="customSize" width="0.0" height="0.0"/>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="GCx-Os-aRU" id="PT4-n7-Xum"/>
+                            <outlet property="delegate" destination="GCx-Os-aRU" id="y2F-ae-hgq"/>
+                        </connections>
+                    </collectionView>
+                    <tabBarItem key="tabBarItem" title="Events" image="outline_event_white_24pt" id="Slu-ht-jmO"/>
+                    <navigationItem key="navigationItem" title="UPCOMING EVENTS" largeTitleDisplayMode="never" id="xOT-h7-O6J"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hpv-ob-Y26" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1740" y="725"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="5AY-pn-O6b">
+            <objects>
+                <navigationController storyboardIdentifier="_evroot" useStoryboardIdentifierAsRestorationIdentifier="YES" id="THw-eC-UET" sceneMemberID="viewController">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="I8j-S8-Uj6">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Alpenglow-ExpandedRegular" family="Alpenglow" pointSize="17"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <fontDescription key="fontDescription" name="Alpenglow-ExpandedRegular" family="Alpenglow" pointSize="33"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Lac-5J-eaL">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="GCx-Os-aRU" kind="relationship" relationship="rootViewController" id="LzA-AI-Lhw"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iDB-4J-MpI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="982" y="725"/>
+        </scene>
+        <!--LOADING-->
+        <scene sceneID="7hK-t7-Gf2">
+            <objects>
+                <viewController storyboardIdentifier="event" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0nz-8i-VU4" customClass="ACEventViewController" customModule="AuthenticiOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Cah-pt-5Xr">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gLJ-aj-q7w">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <subviews>
+                                    <stackView contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="TpH-Jm-Vbr">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
+                                        <subviews>
+                                            <view tag="99" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VAP-R0-Eso">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" id="xio-oi-XRR"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="TpH-Jm-Vbr" firstAttribute="top" secondItem="gLJ-aj-q7w" secondAttribute="top" id="U9z-Ns-UOy"/>
+                                    <constraint firstItem="TpH-Jm-Vbr" firstAttribute="leading" secondItem="gLJ-aj-q7w" secondAttribute="leading" id="bLO-6w-7Ym"/>
+                                    <constraint firstAttribute="trailing" secondItem="TpH-Jm-Vbr" secondAttribute="trailing" id="fLL-tn-9j4"/>
+                                    <constraint firstItem="TpH-Jm-Vbr" firstAttribute="width" secondItem="gLJ-aj-q7w" secondAttribute="width" id="mqF-xm-Kop"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="TpH-Jm-Vbr" secondAttribute="bottomMargin" id="uNJ-Uy-XGA"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="gLJ-aj-q7w" firstAttribute="trailing" secondItem="DiT-0f-AMD" secondAttribute="trailing" id="WVO-6K-U8v"/>
+                            <constraint firstItem="gLJ-aj-q7w" firstAttribute="bottom" secondItem="Cah-pt-5Xr" secondAttribute="bottom" id="alv-Oq-ACc"/>
+                            <constraint firstItem="gLJ-aj-q7w" firstAttribute="top" secondItem="Cah-pt-5Xr" secondAttribute="top" id="gk2-FP-XZ5"/>
+                            <constraint firstItem="gLJ-aj-q7w" firstAttribute="leading" secondItem="DiT-0f-AMD" secondAttribute="leading" id="vvB-hY-Q8z"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="DiT-0f-AMD"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="LOADING" id="lwm-GY-Q7w"/>
+                    <connections>
+                        <outlet property="stackView" destination="TpH-Jm-Vbr" id="D0H-Oj-0Mm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OGE-Kx-FwL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3212" y="725"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="vXe-gL-9na">
+            <objects>
+                <navigationController storyboardIdentifier="_event" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3uk-nc-qAj" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="Ng8-Ku-MtP">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Alpenglow-ExpandedRegular" family="Alpenglow" pointSize="17"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="0nz-8i-VU4" kind="relationship" relationship="rootViewController" id="Seg-5c-l47"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X3t-dY-g9s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2487" y="725"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="outline_event_white_24pt" width="24" height="24"/>
+    </resources>
+</document>

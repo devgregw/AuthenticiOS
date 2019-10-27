@@ -14,7 +14,7 @@ class ACEventViewController: UIViewController {
     
     @IBOutlet weak var stackView: UIStackView!
     
-    private let event: ACEvent?
+    public var event: ACEvent!
     
     private var alreadyInitialized = false
     
@@ -30,7 +30,7 @@ class ACEventViewController: UIViewController {
         } else {
             AnalyticsHelper.activatePage(event: event, origin: origin, medium: medium)
         }
-        ACEventViewController(event: event).presentSelf(sender: nil)
+        StoryboardHelper.instantiateEventViewController(with: event).presentSelf(sender: nil)
     }
     
     private func addView(_ view: UIView) {
@@ -107,20 +107,9 @@ class ACEventViewController: UIViewController {
         initLayout()
     }
     
-    init(event: ACEvent) {
-        self.event = event
-        super.init(nibName: "ACEventViewController", bundle: Bundle.main)
-        self.title = event.title
-        
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        self.event = nil
-        super.init(coder: aDecoder)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         applyDefaultAppearance()
+        self.title = self.event!.title
     }
 }

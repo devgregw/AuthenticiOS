@@ -24,7 +24,7 @@ class ACWallpaperPreviewViewController: UIViewController {
         })
     }
     
-    private let imageResource: ACImageResource
+    public var imageResource: ACImageResource!
     private var loadingAlert: UIAlertController!
     
     override var prefersStatusBarHidden: Bool {
@@ -73,16 +73,5 @@ class ACWallpaperPreviewViewController: UIViewController {
         }
         saveIndicator.startAnimating()
         loadingAlert.view.addSubview(saveIndicator)
-    }
-
-    init(imageResource: ACImageResource) {
-        self.imageResource = imageResource
-        super.init(nibName: "ACWallpaperPreviewViewController", bundle: Bundle.main)
-        
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        self.imageResource = ACImageResource()
-        super.init(coder: aDecoder)
     }
 }

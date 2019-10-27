@@ -70,7 +70,7 @@ class ACVideoViewController: UIViewController {
         player = new YT.Player('player', {
         height: '\(webView.frame.height)',
         width: '\(webView.frame.width)',
-        videoId: '\(self.id)',
+            videoId: '\(self.id ?? "")',
         events: {
         'onReady': onPlayerReady
         }
@@ -88,7 +88,7 @@ class ACVideoViewController: UIViewController {
         else {
             didLoad = true
             indicator.stopAnimating()
-            webView.load(URLRequest(url: URL(string: "https://player.vimeo.com/video/\(self.id)?autoplay=1")!))
+            webView.load(URLRequest(url: URL(string: "https://player.vimeo.com/video/\(self.id ?? "")?autoplay=1")!))
             
         }
     }
@@ -114,25 +114,11 @@ class ACVideoViewController: UIViewController {
         initLayout()
     }
     
-    private let provider: String
-    private let id: String
+    public var provider: String!
+    public var id: String!
     
-    init(provider: String, id: String) {
-        self.provider = provider
-        self.id = id
-        super.init(nibName: "ACVideoViewController", bundle: Bundle.main)
-        self.title = "VIDEO"
-        
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        self.provider = ""
-        self.id = ""
-        super.init(coder: aDecoder)
-    }
-    
-    @objc public func share() {
-        var components = URLComponents(string: self.provider == "YouTube" ? "https://youtube.com/watch" : "https://vimeo.com/\(self.id)")!
+    @IBAction func share() {
+        var components = URLComponents(string: self.provider == "YouTube" ? "https://youtube.com/watch" : "https://vimeo.com/\(self.id ?? "")")!
         if (self.provider == "YouTube") {
             components.queryItems = [URLQueryItem(name: "v", value: self.id)]
         }
@@ -142,8 +128,5 @@ class ACVideoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         applyDefaultAppearance()
-        let shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(self.share))
-        shareButton.tintColor = UIColor.white
-        navigationItem.setRightBarButton(shareButton, animated: true)
     }
 }

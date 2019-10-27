@@ -63,7 +63,7 @@ class ACVideosCollectionViewController: UICollectionViewController {
         if indexPath.item == 0 {
             cell.initialize(imageResource: latestImage, width: collectionView.frame.width, action: {
                 let split = self.latestVideo.split(separator: "\\")
-                ACVideoViewController(provider: String(split[0]), id: String(split[1])).presentSelf(sender: nil)
+                StoryboardHelper.instantiateVideoViewController(with: String(split[0]), id: String(split[1])).presentSelf(sender: nil)
             })
         } else {
             let index = indexPath.item - 1

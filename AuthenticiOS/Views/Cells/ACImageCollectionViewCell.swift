@@ -22,7 +22,7 @@ class ACImageCollectionViewCell: UICollectionViewCell {
     }
 
     @objc public func preview() {
-        viewController.present(ACWallpaperPreviewViewController(imageResource: imageResource), animated: true, completion: nil)
+        viewController.present(StoryboardHelper.instantiateWallpaperPreviewViewController(with: imageResource), animated: true, completion: nil)
     }
     
     public func setImage(_ resource: ACImageResource, viewController: UIViewController) {

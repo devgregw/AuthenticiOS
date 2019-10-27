@@ -12,17 +12,13 @@ import Firebase
 private let reuseIdentifier = "accvcell"
 
 class ACEventCollectionViewController: UICollectionViewController {
-    @IBAction public func close(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     static public var title = ""
     
     private var eventsRef: DatabaseReference!
     
     static func present(withTitle: String) {
         title = withTitle
-        UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "evroot").presentSelf(sender: nil)
+        StoryboardHelper.instantiateEventCollectionViewController().presentSelf(sender: nil)
     }
     
     static func present(withAppearance app: ACAppearance.Events) {

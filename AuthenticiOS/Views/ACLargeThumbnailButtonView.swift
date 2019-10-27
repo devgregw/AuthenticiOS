@@ -78,7 +78,7 @@ class ACLargeThumbnailButtonView: UIView {
     }
     
     @objc func watch() {
-        ACVideoViewController(provider: vendor, id: id).presentSelf(sender: nil)
+        StoryboardHelper.instantiateVideoViewController(with: vendor, id: id).presentSelf(sender: nil)
     }
     
     func initialize(action: Selector, resource: ACImageResource, title: String) {
