@@ -64,7 +64,7 @@ class ACTabBarViewController: UITabBarController {
             break
         }
         UserDefaults.standard.synchronize()
-        backgroundView = UIStoryboard(name: "LaunchScreen", bundle: Bundle.main).instantiateInitialViewController()!.view
+        backgroundView = StoryboardHelper.instantiateLaunchScreen().view
         backgroundView.frame = navigationController!.view.bounds
         backgroundView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         backgroundView.alpha = 1
@@ -163,15 +163,14 @@ extension ACTabBarViewController {
                     self.tabs.sort(by: { (a, b) in a.index < b.index })
                     self.tabBar.tintColor = UIColor.white
                     self.tabBar.unselectedItemTintColor = UIColor.lightText
-                    let wallpaperVc = StoryboardHelper.instantiateWallpaperCollectionViewController()
-                    wallpaperVc.initialize(withTab: self.tabs.first(where: {tab in tab.id == "ME6HV83IM0"})!)
                     let eventsVc = StoryboardHelper.instantiateEventCollectionViewController()
-                    var tabVcs: [UIViewController] = [eventsVc, wallpaperVc]
+                    var tabVcs: [UIViewController] = [eventsVc]
                     self.tabs.forEach({tab in
                         if tab.title == "WATCH" {
                             tabVcs.append(StoryboardHelper.instantiateWatchViewController(with: tab, playlists: playlists))
-                        }
-                        else if tab.id != "ME6HV83IM0" {
+                        } else if tab.title == "WALLPAPERS" {
+                            tabVcs.append(StoryboardHelper.instantiateWallpaperCollectionViewController(with: tab))
+                        } else if tab.id != "ME6HV83IM0" {
                             let vc = ACTabViewController.instantiateViewController(for: tab) as! ACTabViewController
                             vc.tabBarItem.title = tab.title.capitalized
                             tabVcs.append(vc)
