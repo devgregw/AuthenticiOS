@@ -38,6 +38,7 @@ class ACVideosCollectionViewController: UICollectionViewController {
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         // Register cell classes
+        self.collectionView!.indicatorStyle = .default
         self.collectionView!.register(UINib(nibName: "ACTileCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: reuseIdentifier)
         let layout = UICollectionViewFlowLayout()
         layout.estimatedItemSize = CGSize(width: 1, height: 1)

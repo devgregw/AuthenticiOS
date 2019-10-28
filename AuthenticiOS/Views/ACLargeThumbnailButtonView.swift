@@ -95,9 +95,9 @@ class ACLargeThumbnailButtonView: UIView {
         
         thumbnailBackgroundView.layer.cornerRadius = 8
         thumbnailBackgroundView.clipsToBounds = true
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowRadius = 8
-        view.layer.shadowOpacity = 0.75
+        view.layer.shadowColor = UIColor.darkGray.cgColor
+        view.layer.shadowRadius = 4
+        view.layer.shadowOpacity = 0.625
         view.layer.shadowOffset = CGSize(width: 0, height: -1)
         view.layer.shouldRasterize = true
         view.layer.rasterizationScale = UIScreen.main.scale

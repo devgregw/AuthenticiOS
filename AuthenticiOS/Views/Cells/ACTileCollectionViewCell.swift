@@ -29,7 +29,7 @@ class ACTileCollectionViewCell: UICollectionViewCell {
         imageHeightConstraint.constant = ACImageResource(imageName: "", width: 1920, height: 1080).calculateHeight(fromWidth: width - 16)
         rootView.layer.cornerRadius = 8
         rootView.clipsToBounds = true
-        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowColor = UIColor.darkGray.cgColor
         layer.shadowRadius = 4
         layer.shadowOpacity = 0.625
         layer.shadowOffset = CGSize(width: 0, height: -1)

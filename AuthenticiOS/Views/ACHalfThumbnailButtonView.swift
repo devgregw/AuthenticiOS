@@ -98,9 +98,9 @@ class ACHalfThumbnailButtonView: UIView {
         view.layer.masksToBounds = false
         rootView.layer.cornerRadius = 8
         rootView.clipsToBounds = true
-        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowColor = UIColor.darkGray.cgColor
         view.layer.shadowRadius = 4
-        view.layer.shadowOpacity = 0.75
+        view.layer.shadowOpacity = 0.625
         view.layer.shadowOffset = CGSize(width: 0, height: -1)
         view.layer.shouldRasterize = true
         view.layer.rasterizationScale = UIScreen.main.scale

@@ -98,9 +98,13 @@ class ACTabViewController: UIViewController {
             break
         case "watchPlaylist":
             guard self.tab!.elements.count > 0 else {return}
+            if #available(iOS 13, *) {
+                self.view.backgroundColor = UIColor.systemBackground
+            }
             var elements = self.tab!.elements
             let first = elements.first!
             let videoInfo = first.getProperty("videoInfo") as! NSDictionary
+            (self.stackView.superview as! UIScrollView).indicatorStyle = .default
             self.stackView.addArrangedSubview(ACElement.createVideo(provider: videoInfo.object(forKey: "provider") as! String, videoId: videoInfo.object(forKey: "id") as! String, thumbnail: videoInfo.object(forKey: "thumbnail") as! String, title: videoInfo.object(forKey: "title") as! String, large: true, hideTitle: true, origin: "/tabs/\(self.tab!.id)"))
             elements.removeFirst()
             guard elements.count > 0 else {return}
