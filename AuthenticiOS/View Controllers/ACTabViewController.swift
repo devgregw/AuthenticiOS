@@ -31,7 +31,7 @@ class ACTabViewController: UIViewController {
         if let specialType = tab.specialType {
             switch specialType {
             case "wallpapers":
-                let vc = StoryboardHelper.instantiateWallpaperCollectionViewController()
+                let vc = StoryboardHelper.instantiateWallpaperCollectionViewController(with: tab)
                 vc.initialize(withTab: tab)
                 return vc
             default: return StoryboardHelper.instantiateTabViewController(with: tab)
@@ -49,7 +49,7 @@ class ACTabViewController: UIViewController {
         }
         if let type = tab.specialType {
             if type == "wallpapers" {
-                let vc = StoryboardHelper.instantiateWallpaperCollectionViewController()
+                let vc = StoryboardHelper.instantiateWallpaperCollectionViewController(with: tab)
                 vc.initialize(withTab: tab)
                 vc.presentSelf(sender: nil)
                 return
@@ -184,6 +184,7 @@ class ACTabViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = self.tab!.title
+        self.tabBarItem.title = self.tab!.title.capitalized
         if let action = self.tab!.action {
             action.invoke(viewController: navigationController!, origin: "/tabs/\(self.tab!.id)", medium: "action")
             navigationController!.popViewController(animated: false)
