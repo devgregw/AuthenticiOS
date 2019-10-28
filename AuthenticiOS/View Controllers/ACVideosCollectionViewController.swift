@@ -76,17 +76,3 @@ class ACVideosCollectionViewController: UICollectionViewController {
     }
 
 }
-
-extension ACVideosCollectionViewController: UICollectionViewDelegateFlowLayout {
-    /*func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let template = ACImageResource(imageName: "", width: 1920, height: 1080)
-        if indexPath.item == 0 {
-            print("latest video tile \(indexPath.item) \(collectionView.frame.width) \(template.calculateHeight(fromWidth: collectionView.frame.width - 20) + 20)")
-            return CGSize(width: collectionView.frame.width, height: template.calculateHeight(fromWidth: collectionView.frame.width - 20) + 20)
-        } else {
-            let width = (collectionView.frame.width / 2) - 5
-            print("playlist tile \(indexPath.item) \(width) \(template.calculateHeight(fromWidth: width - 20) + 20)")
-            return CGSize(width: width, height: template.calculateHeight(fromWidth: width - 20) + 20)
-        }
-    }*/
-}
