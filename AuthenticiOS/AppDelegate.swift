@@ -167,18 +167,20 @@ extension AppDelegate {
             switch (item.type) {
             case "upcoming_events":
                 // Load the events appearance and present the event collection view controller
-                Database.database().reference().child("appearance").observeSingleEvent(of: .value, with: { appearanceSnapshot in
+                /*Database.database().reference().child("appearance").observeSingleEvent(of: .value, with: { appearanceSnapshot in
                     let appearance = ACAppearance(dict: appearanceSnapshot.value as! NSDictionary)
                     ACEventCollectionViewController.present(withAppearance: appearance.events)
-                })
+                })*/
+                ACTabBarViewController.shortcutTabId = nil
             case "tab":
                 // Get the tab id from the shortcut info
-                let tabId = item.userInfo!["id"] as! String
+                let tabId = item.userInfo!["id"] as? String
                 // Load the tab and present the view controller
-                Database.database().reference().child("tabs/\(tabId)").observeSingleEvent(of: .value, with: {snapshot in
+                /*Database.database().reference().child("tabs/\(tabId)").observeSingleEvent(of: .value, with: {snapshot in
                     let val = snapshot.value as! NSDictionary
                     ACTabViewController.present(tab: ACTab(dict: val), origin: "shortcut", medium: "shortcut")
-                }) { error in AppDelegate.topViewController.present(UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert), animated: true) }
+                }) { error in AppDelegate.topViewController.present(UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert), animated: true) }*/
+                ACTabBarViewController.shortcutTabId = tabId
             default:
                 handled = false
             }

@@ -15,6 +15,7 @@ class ACTabBarViewController: UITabBarController {
     private var backgroundView: UIView!
     
     private var buildText: String!
+    static public var shortcutTabId: String?
     
     @IBAction func showMoreOptions(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: buildText, message: "This menu will not be visible to users.", preferredStyle: .actionSheet)
