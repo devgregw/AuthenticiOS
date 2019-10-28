@@ -25,8 +25,14 @@ class StoryboardHelper {
         return storyboard.instantiateInitialViewController()!
     }
     
-    static public func instantiateWallpaperCollectionViewController() -> ACWallpaperCollectionViewController {
-        return instantiateViewController(named: "wallpapersCollectionViewController", from: wallpapers) as! ACWallpaperCollectionViewController
+    static public func instantiateLaunchScreen() -> UIViewController {
+        return instantiateMainViewController(from: launchScreen)
+    }
+    
+    static public func instantiateWallpaperCollectionViewController(with tab: ACTab) -> ACWallpaperCollectionViewController {
+        let vc = instantiateViewController(named: "wallpapersCollectionViewController", from: wallpapers) as! ACWallpaperCollectionViewController
+        vc.initialize(withTab: tab)
+        return vc
     }
     
     static public func instantiateEventCollectionViewController() -> ACEventCollectionViewController {
@@ -72,6 +78,14 @@ class StoryboardHelper {
     static public func instantiateWallpaperPreviewViewController(with resource: ACImageResource) -> ACWallpaperPreviewViewController {
         let vc = instantiateViewController(named: "wallpaperPreview", from: wallpapers) as! ACWallpaperPreviewViewController
         vc.imageResource = resource
+        return vc
+    }
+    
+    static public func instantiateMoreTableViewController(with tabs: [ACTab], navigationController: UINavigationController) -> ACMoreTableViewController {
+        let vc = instantiateViewController(named: "more", from: more) as! ACMoreTableViewController
+        vc.tabs = tabs
+        vc.nav = navigationController
+        vc.tabBarItem.title = "More"
         return vc
     }
 }
