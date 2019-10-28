@@ -42,7 +42,7 @@ class ACLivestreamViewController: UIViewController {
     
     public func update() {
         let components = Calendar.current.dateComponents(in: TimeZone(abbreviation: "CST")!, from: Date())
-        if (components.weekday ?? 0) == 1 && (components.hour ?? 0) >= 17 && (components.hour ?? 0) <= 21 {
+        if AppDelegate.appMode == .Debug || ((components.weekday ?? 0) == 1 && (components.hour ?? 0) >= 17 && (components.hour ?? 0) <= 21) {
             showLoader {
                 let url = URL(string: "https://us-central1-authentic-city-church.cloudfunctions.net/videos")!
                 var request = URLRequest(url: url, cachePolicy: .reloadIgnoringCacheData, timeoutInterval: 10)
@@ -66,22 +66,24 @@ class ACLivestreamViewController: UIViewController {
                             self.hideLoader()
                             return
                         }
-                        guard (dictionary.allValues[0] as! String).lowercased().contains("stream") else {
+                        guard let livestreamId = dictionary.value(forKey: "livestream") as? String else {
                             print("Livestream: not live")
                             self.hideLoader()
                             return
                         }
+                        print("Livestream: \(livestreamId)")
                         self.hideLoader {
-                            self.show(id: dictionary.allKeys[0] as! String)
+                            self.show(id: livestreamId)
                         }
                     } catch let parseError {
-                        print("Parse error: \(parseError.localizedDescription)")
+                        print("Livestream: Parse error: \(parseError.localizedDescription)")
                         self.hideLoader()
                     }
                 }
                 task.resume()
             }
         } else {
+            print("Livestream: skipping check")
             hide()
         }
     }
