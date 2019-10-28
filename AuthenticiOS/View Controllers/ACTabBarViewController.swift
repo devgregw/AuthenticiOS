@@ -37,64 +37,7 @@ class ACTabBarViewController: UITabBarController {
         present(alert, animated: true, completion: nil)
     }
     
-    class MoreNavigationDelegate: NSObject, UINavigationControllerDelegate {
-        private let nav: UINavigationController
-        
-        init(_ nav: UINavigationController) {
-            self.nav = nav
-        }
-        
-        func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-            guard String(describing: type(of: viewController)) != "UIMoreListController" else {
-                viewController.navigationController?.setNavigationBarHidden(true, animated: false)
-                return
-            }
-        }
-    }
-    
-    class MoreTableViewDelegate: NSObject, UITableViewDelegate, UITableViewDataSource {
-        private let nav: UINavigationController
-        private let tabs: [ACTab]
-        
-        init(_ nav: UINavigationController, _ tabs: [ACTab]) {
-            self.nav = nav
-            self.tabs = tabs
-        }
-        
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            let t = self.tabs[indexPath.item]
-            if let action = t.action {
-                action.invoke(viewController: nav, origin: "/tabs/\(t.id)", medium: "more")
-                return
-            }
-            nav.show(ACTabViewController.instantiateViewController(for: t), sender: nil)
-        }
-        
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return section == 0 ? tabs.count : 0
-        }
-        
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let t = self.tabs[indexPath.item]
-            let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-            cell.selectionStyle = .none
-            let vc = StoryboardHelper.instantiateTabViewController(with: t)
-            vc.tabBarItem.title = t.title.capitalized
-            cell.textLabel?.font = UIFont(name: "Alpenglow-ExpandedRegular", size: UIFont.labelFontSize - 2)!
-            cell.imageView?.image = vc.tabBarItem.image
-            cell.imageView?.tintColor = UIColor(red: 36/255, green: 137/255, blue: 248/255, alpha: 1)
-            cell.textLabel?.text = self.tabs[indexPath.item].title.capitalized
-            cell.accessoryType = .disclosureIndicator
-            return cell
-        }
-    }
-    
     private var tabs: [ACTab] = []
-    lazy var moreDelegate: MoreNavigationDelegate = {
-        return MoreNavigationDelegate(self.navigationController!)
-    }()
-    
-    private var moreTableViewDelegate: MoreTableViewDelegate!
     
     override func viewDidAppear(_ animated: Bool) {
         self.view.setNeedsLayout()
@@ -242,13 +185,18 @@ extension ACTabBarViewController {
                         UIApplication.shared.shortcutItems = shortcuts
                     }
                     
-                    self.moreTableViewDelegate = MoreTableViewDelegate(self.navigationController!, Array(self.tabs.suffix(from: 3)))
-                    
-                    self.moreNavigationController.delegate = self.moreDelegate
-                    (self.moreNavigationController.topViewController!.view as! UITableView).dataSource = self.moreTableViewDelegate
-                    (self.moreNavigationController.topViewController!.view as! UITableView).delegate = self.moreTableViewDelegate
-                    
-                    self.setViewControllers(tabVcs, animated: false)
+                    var tabBarVcs: [UIViewController] = []
+                    if tabVcs.count > 5 {
+                        tabBarVcs.append(contentsOf: tabVcs.prefix(4))
+                        tabBarVcs.append(StoryboardHelper.instantiateMoreTableViewController(with: Array(self.tabs.suffix(from: 3)), navigationController: self.navigationController!))
+                    } else {
+                        tabBarVcs = tabVcs
+                    }
+                    self.setViewControllers(tabBarVcs, animated: false)
+                    if let tabIndex = self.tabs.map({t in t.id}).firstIndex(of: ACTabBarViewController.shortcutTabId ?? "") {
+                        self.selectedIndex = tabIndex
+                        ACTabBarViewController.shortcutTabId = nil
+                    }
                     self.tabBar.items?.forEach({i in
                         i.image = nil
                         i.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -16)
