@@ -10,7 +10,7 @@
         <!--MORE-->
         <scene sceneID="Y1J-Su-4k6">
             <objects>
-                <tableViewController restorationIdentifier="more" storyboardIdentifier="more" id="brr-55-G4T" sceneMemberID="viewController">
+                <tableViewController restorationIdentifier="more" storyboardIdentifier="more" id="brr-55-G4T" customClass="ACMoreTableViewController" customModule="AuthenticiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="0FW-Id-utM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
