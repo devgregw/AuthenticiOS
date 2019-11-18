@@ -30,6 +30,16 @@ class ACElement {
         return self.properties[name]
     }
     
+    public func getBool(_ name: String, defaultValue: Bool) -> Bool {
+        if let boolValue = getProperty(name) as? Bool {
+            return boolValue
+        }
+        if let stringValue = getProperty(name) as? String {
+            return NSString(string: stringValue).boolValue
+        }
+        return defaultValue
+    }
+    
     static public func createImage(imageResource: ACImageResource, enlargable: Bool, vc: UIViewController?) -> UIView {
         if enlargable {
             let view = ACSavableImageView(imageResource: imageResource, viewController: vc!)
@@ -227,10 +237,10 @@ class ACElement {
         self.origin = origin
         switch (type) {
         case "image":
-            return ACElement.createImage(imageResource: ACImageResource(dict: getProperty("image") as! NSDictionary), enlargable: getProperty("enlargeButton") as! Bool, vc: vc)
+            return ACElement.createImage(imageResource: ACImageResource(dict: getProperty("image") as! NSDictionary), enlargable: getBool("enlargeButton", defaultValue: false), vc: vc)
         case "video":
             let videoInfo = getProperty("videoInfo") as! NSDictionary
-            return ACElement.createVideo(provider: videoInfo.object(forKey: "provider") as! String, videoId: videoInfo.object(forKey: "id") as! String, thumbnail: videoInfo.object(forKey: "thumbnail") as! String, title: videoInfo.object(forKey: "title") as! String, large: NSString(string: getProperty("large") as? String ?? "false").boolValue, hideTitle: NSString(string: getProperty("hideTitle") as? String ?? "false").boolValue, origin: origin)
+            return ACElement.createVideo(provider: videoInfo.object(forKey: "provider") as! String, videoId: videoInfo.object(forKey: "id") as! String, thumbnail: videoInfo.object(forKey: "thumbnail") as! String, title: videoInfo.object(forKey: "title") as! String, large: getBool("large", defaultValue: false), hideTitle: getBool("hideTitle", defaultValue: false), origin: origin)
         case "title":
             return ACElement.createTitle(text: (getProperty("title") as! String), alignment: getProperty("alignment") as! String, border: true)
         case "text":
@@ -239,9 +249,9 @@ class ACElement {
             self.action = ACButtonInfo(dict: getProperty("_buttonInfo") as! NSDictionary).action
             return ACElement.createButton(info: ACButtonInfo(dict: getProperty("_buttonInfo") as! NSDictionary), viewController: vc, target: self, selector: #selector(self.invoke(_:)))
         case "thumbnailButton":
-            return ACElement.createThumbnailButton(info: ACButtonInfo(dict: getProperty("_buttonInfo") as! NSDictionary), thumbnail: ACImageResource(dict: getProperty("thumbnail") as! NSDictionary), large: NSString(string: getProperty("large") as? String ?? "false").boolValue, hideTitle: NSString(string: getProperty("hideTitle") as? String ?? "false").boolValue, origin: origin)
+            return ACElement.createThumbnailButton(info: ACButtonInfo(dict: getProperty("_buttonInfo") as! NSDictionary), thumbnail: ACImageResource(dict: getProperty("thumbnail") as! NSDictionary), large: getBool("large", defaultValue: false), hideTitle: getBool("hideTitle", defaultValue: false), origin: origin)
         case "separator":
-            return ACElement.createSeparator(visible: getProperty("visible") as! Bool)
+            return ACElement.createSeparator(visible: getBool("visible", defaultValue: true))
         case "tile":
             return ACElement.createTile(title: getProperty("title") as! String, height: getProperty("height") as? Int ?? 200, header: ACImageResource(dict: getProperty("header") as! NSDictionary), action: ACButtonAction(dict: getProperty("action") as! NSDictionary), viewController: vc, origin: origin)
         case "toolbar":
