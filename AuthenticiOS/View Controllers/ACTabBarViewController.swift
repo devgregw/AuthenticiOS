@@ -172,7 +172,7 @@ extension ACTabBarViewController {
                             tabVcs.append(StoryboardHelper.instantiateWallpaperCollectionViewController(with: tab))
                         } else if tab.id != "ME6HV83IM0" {
                             let vc = ACTabViewController.instantiateViewController(for: tab) as! ACTabViewController
-                            vc.tabBarItem.title = tab.title.capitalized
+                            vc.tabBarItem.title = tab.title
                             tabVcs.append(vc)
                         }
                     })

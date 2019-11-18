@@ -39,9 +39,9 @@ class ACMoreTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "moreCell")!
         cell.selectionStyle = .none
         let vc = StoryboardHelper.instantiateTabViewController(with: t)
-        vc.tabBarItem.title = t.title.capitalized
+        vc.tabBarItem.title = t.title
         cell.textLabel?.font = UIFont(name: "Alpenglow-ExpandedRegular", size: UIFont.labelFontSize - 2)!
-        cell.textLabel?.text = self.tabs[indexPath.item].title.capitalized
+        cell.textLabel?.text = self.tabs[indexPath.item].title
         cell.accessoryType = .disclosureIndicator
         return cell
     }

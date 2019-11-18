@@ -184,7 +184,7 @@ class ACTabViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = self.tab!.title
-        self.tabBarItem.title = self.tab!.title.capitalized
+        self.tabBarItem.title = self.tab!.title
         if let action = self.tab!.action {
             action.invoke(viewController: navigationController!, origin: "/tabs/\(self.tab!.id)", medium: "action")
             navigationController!.popViewController(animated: false)

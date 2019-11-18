@@ -32,16 +32,19 @@ class StoryboardHelper {
     static public func instantiateWallpaperCollectionViewController(with tab: ACTab) -> ACWallpaperCollectionViewController {
         let vc = instantiateViewController(named: "wallpapersCollectionViewController", from: wallpapers) as! ACWallpaperCollectionViewController
         vc.initialize(withTab: tab)
+        vc.tabBarItem.title = "WALLPAPERS"
         return vc
     }
     
     static public func instantiateEventCollectionViewController() -> ACEventCollectionViewController {
-        return instantiateViewController(named: "evroot", from: events) as! ACEventCollectionViewController
+        let vc = instantiateViewController(named: "evroot", from: events) as! ACEventCollectionViewController
+        vc.tabBarItem.title = "EVENTS"
+        return vc
     }
     
     static public func instantiateWatchViewController(with main: ACTab, playlists: [ACTab]) -> UINavigationController {
         let nav = instantiateViewController(named: "watch", from: watch) as! UINavigationController
-        nav.tabBarItem.title = "Watch"
+        nav.tabBarItem.title = "WATCH"
         (nav.topViewController as! ACWatchViewController).initialize(main: main, playlists: playlists)
         return nav
     }
@@ -59,6 +62,7 @@ class StoryboardHelper {
     static public func instantiateTabViewController(with tab: ACTab) -> ACTabViewController {
         let vc = instantiateViewController(named: "tab", from: content) as! ACTabViewController
         vc.tab = tab
+        vc.tabBarItem.title = tab.title
         return vc
     }
     
@@ -85,7 +89,7 @@ class StoryboardHelper {
         let vc = instantiateViewController(named: "more", from: more) as! ACMoreTableViewController
         vc.tabs = tabs
         vc.nav = navigationController
-        vc.tabBarItem.title = "More"
+        vc.tabBarItem.title = "MORE"
         return vc
     }
 }
