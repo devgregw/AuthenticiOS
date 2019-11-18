@@ -15,16 +15,19 @@ class ACWatchViewController: UIPageViewController {
     private var liveViewController: ACLivestreamViewController!
     private var mainTab: ACTab!
     private var playlistTabs: [ACTab]!
+    private let liveDisabled = true
     
     @IBAction func selectionChanged(_ sender: Any) {
-        if segmentedControl.selectedSegmentIndex == 0 {
-            setViewControllers([videosViewController], direction: .reverse, animated: true, completion: { _ in
-                self.liveViewController.hide()
-            })
-        } else {
-            setViewControllers([liveViewController], direction: .forward, animated: true, completion: { _ in
-                self.liveViewController.update()
-            })
+        if !liveDisabled {
+            if segmentedControl.selectedSegmentIndex == 0 {
+                setViewControllers([videosViewController], direction: .reverse, animated: true, completion: { _ in
+                    self.liveViewController.hide()
+                })
+            } else {
+                setViewControllers([liveViewController], direction: .forward, animated: true, completion: { _ in
+                    self.liveViewController.update()
+                })
+            }
         }
     }
     
@@ -32,11 +35,16 @@ class ACWatchViewController: UIPageViewController {
         self.mainTab = main
         self.playlistTabs = playlists
         videosViewController = StoryboardHelper.instantiateVideosCollectionViewController(with: main, playlists: playlists)
-        liveViewController = StoryboardHelper.instantiateLivestreamViewController()
+        if !liveDisabled {
+            liveViewController = StoryboardHelper.instantiateLivestreamViewController()
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.setNavigationBarHidden(liveDisabled, animated: false)
+        
         segmentedControl.tintColor = UIColor.white
         segmentedControl.setTitleTextAttributes([
             .font: UIFont(name: "Alpenglow-ExpandedRegular", size: 12)!
@@ -51,15 +59,17 @@ class ACWatchViewController: UIPageViewController {
 
 extension ACWatchViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        guard !liveDisabled else {return nil}
         return String(describing: type(of: viewController)) == "ACVideosCollectionViewController" ? liveViewController : videosViewController
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        guard !liveDisabled else {return nil}
         return String(describing: type(of: viewController)) == "ACVideosCollectionViewController" ? liveViewController : videosViewController
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        guard completed else {return}
+        guard !liveDisabled || completed else {return}
         segmentedControl.selectedSegmentIndex = 1 - ([videosViewController, liveViewController].firstIndex(of: previousViewControllers[0]) ?? 0)
         if segmentedControl.selectedSegmentIndex == 0 {
             liveViewController.hide()
