@@ -15,7 +15,17 @@ class ACTabBarViewController: UITabBarController {
     private var backgroundView: UIView!
     
     private var buildText: String!
-    static public var shortcutTabId: String?
+    static private var shortcutTabId: String?
+    static private var instance: ACTabBarViewController?
+    static public func setShortcutTabId(_ id: String?) {
+        if let i = instance {
+            if let tabIndex = i.tabs.map({t in t.id}).firstIndex(of: id ?? "") {
+                i.selectedIndex = tabIndex + 1
+            }
+        } else {
+            shortcutTabId = id
+        }
+    }
     
     @IBAction func showMoreOptions(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: buildText, message: "This menu will not be visible to users.", preferredStyle: .actionSheet)
@@ -77,8 +87,8 @@ class ACTabBarViewController: UITabBarController {
         applyDefaultAppearance()
         loadData(first: true)
         self.view.setNeedsLayout()
-        
         self.view.layoutIfNeeded()
+        ACTabBarViewController.instance = self
     }
     
     private var isLoaderVisible = true
@@ -194,7 +204,7 @@ extension ACTabBarViewController {
                     }
                     self.setViewControllers(tabBarVcs, animated: false)
                     if let tabIndex = self.tabs.map({t in t.id}).firstIndex(of: ACTabBarViewController.shortcutTabId ?? "") {
-                        self.selectedIndex = tabIndex
+                        self.selectedIndex = tabIndex + 1
                         ACTabBarViewController.shortcutTabId = nil
                     }
                     self.tabBar.items?.forEach({i in

@@ -171,7 +171,7 @@ extension AppDelegate {
                     let appearance = ACAppearance(dict: appearanceSnapshot.value as! NSDictionary)
                     ACEventCollectionViewController.present(withAppearance: appearance.events)
                 })*/
-                ACTabBarViewController.shortcutTabId = nil
+                ACTabBarViewController.setShortcutTabId(nil)
             case "tab":
                 // Get the tab id from the shortcut info
                 let tabId = item.userInfo!["id"] as? String
@@ -180,7 +180,7 @@ extension AppDelegate {
                     let val = snapshot.value as! NSDictionary
                     ACTabViewController.present(tab: ACTab(dict: val), origin: "shortcut", medium: "shortcut")
                 }) { error in AppDelegate.topViewController.present(UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert), animated: true) }*/
-                ACTabBarViewController.shortcutTabId = tabId
+                ACTabBarViewController.setShortcutTabId(tabId)
             default:
                 handled = false
             }
