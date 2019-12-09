@@ -25,18 +25,32 @@ class ACEventCollectionViewController: UICollectionViewController {
         present(withTitle: app.title)
     }
     
+    private func setupRefreshControl() {
+        var color: UIColor
+        if #available(iOS 13.0, *) {
+            color = traitCollection.userInterfaceStyle == .dark ? .white : .black
+        } else {
+            color = .white
+        }
+        self.collectionView?.refreshControl = UIRefreshControl()
+        self.collectionView?.refreshControl?.tintColor = color
+        self.collectionView?.refreshControl?.addTarget(self, action: #selector(self.refreshData), for: .valueChanged)
+        self.collectionView?.refreshControl?.attributedTitle = NSAttributedString(string: "PULL TO REFRESH", attributes: [
+            //.kern: 2.5,
+            .font: UIFont(name: "Alpenglow-ExpandedRegular", size: 12)!,
+            .foregroundColor: color
+        ])
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        setupRefreshControl()
+    }
+    
     private func configureCollectionView() {
         collectionView?.indicatorStyle = .default
         collectionView?.register(UINib(nibName: "ACCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         collectionView?.register(UINib(nibName: "ACTextCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "none")
-        self.collectionView?.refreshControl = UIRefreshControl()
-        self.collectionView?.refreshControl?.attributedTitle = NSAttributedString(string: "PULL TO REFRESH", attributes: [
-            //.kern: 2.5,
-            .font: UIFont(name: "Alpenglow-ExpandedRegular", size: 12)!,
-            .foregroundColor: UIColor.black
-            ])
-        self.collectionView?.refreshControl?.tintColor = UIColor.black
-        self.collectionView?.refreshControl?.addTarget(self, action: #selector(self.refreshData), for: .valueChanged)
+        setupRefreshControl()
         collectionView?.delegate = self
     }
     
