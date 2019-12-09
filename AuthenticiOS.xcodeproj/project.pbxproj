@@ -458,7 +458,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AuthenticiOS/Pods-AuthenticiOS-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-AuthenticiOS/Pods-AuthenticiOS-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
@@ -479,7 +479,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AuthenticiOS/Pods-AuthenticiOS-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AuthenticiOS/Pods-AuthenticiOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B2FF5E8F1C0C4FFA7869C496 /* [CP] Check Pods Manifest.lock */ = {
@@ -575,6 +575,7 @@
 				FC3A7FE7211279D500CAFC90 /* UIViewController.swift in Sources */,
 				FC5F914720D94FB700516095 /* ACEventCollectionViewController.swift in Sources */,
 				FC3A7FDF2112792700CAFC90 /* Date.swift in Sources */,
+				FC780B81239EEC3C0035E5C8 /* ACTabBarItem.swift in Sources */,
 				FCC928F82348DAB70051C496 /* ACVideosCollectionViewController.swift in Sources */,
 				FC84F2052364DA6F00524198 /* ACLivestreamViewController.swift in Sources */,
 				FCAD5C12208624CC0010B5C9 /* ACEvent.swift in Sources */,
