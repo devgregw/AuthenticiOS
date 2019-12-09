@@ -16,14 +16,17 @@ class ACAppearance {
         
         let header: ACImageResource
         
-        init(title: String, hideTitle: Bool, header: ACImageResource) {
+        let index: Int
+        
+        init(title: String, hideTitle: Bool, header: ACImageResource, index: Int) {
             self.title = title
             self.hideTitle = hideTitle
             self.header = header
+            self.index = index
         }
         
         convenience init(dict: NSDictionary) {
-            self.init(title: dict["title"] as! String, hideTitle: dict["hideTitle"] as! Bool, header: ACImageResource(dict: dict["header"] as! NSDictionary))
+            self.init(title: dict["title"] as! String, hideTitle: dict["hideTitle"] as! Bool, header: ACImageResource(dict: dict["header"] as! NSDictionary), index: dict["index"] as? Int ?? -999)
         }
     }
     
