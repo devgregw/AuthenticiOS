@@ -51,6 +51,7 @@
 		FC75FB74210A7A3600E396A8 /* ACImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75FB72210A7A3500E396A8 /* ACImageCollectionViewCell.swift */; };
 		FC75FB75210A7A3600E396A8 /* ACImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC75FB73210A7A3500E396A8 /* ACImageCollectionViewCell.xib */; };
 		FC75FB78210ABE0F00E396A8 /* ACWallpaperPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75FB76210ABE0E00E396A8 /* ACWallpaperPreviewViewController.swift */; };
+		FC780B81239EEC3C0035E5C8 /* ACTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC780B80239EEC3C0035E5C8 /* ACTabBarItem.swift */; };
 		FC84F2052364DA6F00524198 /* ACLivestreamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC84F2042364DA6F00524198 /* ACLivestreamViewController.swift */; };
 		FC84F2072365FCCB00524198 /* Watch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC84F2062365FCCB00524198 /* Watch.storyboard */; };
 		FC84F20A2365FD2500524198 /* Events.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC84F2092365FD2500524198 /* Events.storyboard */; };
@@ -128,6 +129,7 @@
 		FC75FB72210A7A3500E396A8 /* ACImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		FC75FB73210A7A3500E396A8 /* ACImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ACImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		FC75FB76210ABE0E00E396A8 /* ACWallpaperPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACWallpaperPreviewViewController.swift; sourceTree = "<group>"; };
+		FC780B80239EEC3C0035E5C8 /* ACTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabBarItem.swift; sourceTree = "<group>"; };
 		FC84F2042364DA6F00524198 /* ACLivestreamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACLivestreamViewController.swift; sourceTree = "<group>"; };
 		FC84F2062365FCCB00524198 /* Watch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Watch.storyboard; sourceTree = "<group>"; };
 		FC84F2092365FD2500524198 /* Events.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Events.storyboard; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				FC535C0821CC06F800FC5FAA /* AnalyticsHelper.swift */,
 				FC3CC55A21DD997F000C59B0 /* CalendarInterface.swift */,
 				FC84F2132366052600524198 /* StoryboardHelper.swift */,
+				FC780B80239EEC3C0035E5C8 /* ACTabBarItem.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";

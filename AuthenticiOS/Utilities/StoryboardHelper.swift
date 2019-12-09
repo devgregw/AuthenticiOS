@@ -85,9 +85,9 @@ class StoryboardHelper {
         return vc
     }
     
-    static public func instantiateMoreTableViewController(with tabs: [ACTab], navigationController: UINavigationController) -> ACMoreTableViewController {
+    static public func instantiateMoreTableViewController(with items: [ACTabBarItem], navigationController: UINavigationController) -> ACMoreTableViewController {
         let vc = instantiateViewController(named: "more", from: more) as! ACMoreTableViewController
-        vc.tabs = tabs
+        vc.items = items
         vc.nav = navigationController
         vc.tabBarItem.title = "MORE"
         return vc

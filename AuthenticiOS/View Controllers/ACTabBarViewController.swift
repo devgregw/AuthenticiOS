@@ -19,8 +19,8 @@ class ACTabBarViewController: UITabBarController {
     static private var instance: ACTabBarViewController?
     static public func setShortcutTabId(_ id: String?) {
         if let i = instance {
-            if let tabIndex = i.tabs.map({t in t.id}).firstIndex(of: id ?? "") {
-                i.selectedIndex = tabIndex + 1
+            if let tabIndex = i.items.prefix(i.items.count <= 5 ? 5 : 4).map({t in t.id}).firstIndex(of: id ?? "") {
+                i.selectedIndex = tabIndex
             }
         } else {
             shortcutTabId = id
@@ -49,6 +49,7 @@ class ACTabBarViewController: UITabBarController {
     }
     
     private var tabs: [ACTab] = []
+    private var items: [ACTabBarItem] = []
     
     override func viewDidAppear(_ animated: Bool) {
         self.view.setNeedsLayout()
@@ -160,32 +161,31 @@ extension ACTabBarViewController {
                 ref.child("tabs").observeSingleEvent(of: .value, with: {snap in
                     let val = snap.value as? NSDictionary
                     var playlists: [ACTab] = []
+                    self.items.removeAll()
+                    var watchTab: ACTab!
                     self.tabs.removeAll()
                     val?.forEach({(key, value) in
                         let tab = ACTab(dict: value as! NSDictionary)
                         if tab.specialType == "watchPlaylist" {
                             playlists.append(tab)
                         }
-                        if (tab.isVisible()) {
+                        if tab.title == "WATCH" {
+                            watchTab = tab
                             self.tabs.append(tab)
+                            return
+                        } else if tab.title == "WALLPAPERS" {
+                            self.items.append(ACTabBarItem(with: StoryboardHelper.instantiateWallpaperCollectionViewController(with: tab), id: tab.id, index: tab.index, title: tab.title, action: tab.action))
+                        } else if (tab.isVisible()) {
+                            self.tabs.append(tab)
+                            self.items.append(ACTabBarItem(with: StoryboardHelper.instantiateTabViewController(with: tab), id: tab.id, index: tab.index, title: tab.title, action: tab.action))
                         }
                     })
-                    self.tabs.sort(by: { (a, b) in a.index < b.index })
+                    self.items.append(ACTabBarItem(with: StoryboardHelper.instantiateWatchViewController(with: watchTab, playlists: playlists), id: watchTab.id, index: watchTab.index, title: watchTab.title, action: watchTab.action))
+                    self.items.append(ACTabBarItem(with: StoryboardHelper.instantiateEventCollectionViewController(), id: "upcoming_events", index: -999, title: "EVENTS", action: nil))
+                    self.items.sort(by: {(a, b) in a.index < b.index})
+                    //self.tabs.sort(by: { (a, b) in a.index < b.index })
                     self.tabBar.tintColor = UIColor.white
                     self.tabBar.unselectedItemTintColor = UIColor.lightText
-                    let eventsVc = StoryboardHelper.instantiateEventCollectionViewController()
-                    var tabVcs: [UIViewController] = [eventsVc]
-                    self.tabs.forEach({tab in
-                        if tab.title == "WATCH" {
-                            tabVcs.append(StoryboardHelper.instantiateWatchViewController(with: tab, playlists: playlists))
-                        } else if tab.title == "WALLPAPERS" {
-                            tabVcs.append(StoryboardHelper.instantiateWallpaperCollectionViewController(with: tab))
-                        } else if tab.id != "ME6HV83IM0" {
-                            let vc = ACTabViewController.instantiateViewController(for: tab) as! ACTabViewController
-                            vc.tabBarItem.title = tab.title
-                            tabVcs.append(vc)
-                        }
-                    })
                     
                     if !AppDelegate.useDevelopmentDatabase {
                         var shortcuts = [UIApplicationShortcutItem(type: "upcoming_events", localizedTitle: "Upcoming Events", localizedSubtitle: nil, icon: .init(type: .date), userInfo: nil)]
@@ -195,16 +195,9 @@ extension ACTabBarViewController {
                         UIApplication.shared.shortcutItems = shortcuts
                     }
                     
-                    var tabBarVcs: [UIViewController] = []
-                    if tabVcs.count > 5 {
-                        tabBarVcs.append(contentsOf: tabVcs.prefix(4))
-                        tabBarVcs.append(StoryboardHelper.instantiateMoreTableViewController(with: Array(self.tabs.suffix(from: 3)), navigationController: self.navigationController!))
-                    } else {
-                        tabBarVcs = tabVcs
-                    }
-                    self.setViewControllers(tabBarVcs, animated: false)
-                    if let tabIndex = self.tabs.map({t in t.id}).firstIndex(of: ACTabBarViewController.shortcutTabId ?? "") {
-                        self.selectedIndex = tabIndex + 1
+                    self.setViewControllers(ACTabBarItem.map(from: self.items, self.navigationController!), animated: false)
+                    if let tabIndex = self.items.map({t in t.id}).firstIndex(of: ACTabBarViewController.shortcutTabId ?? "") {
+                        self.selectedIndex = tabIndex
                         ACTabBarViewController.shortcutTabId = nil
                     }
                     self.tabBar.items?.forEach({i in

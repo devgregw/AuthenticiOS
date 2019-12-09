@@ -9,7 +9,7 @@
 import UIKit
 
 class ACMoreTableViewController: UITableViewController {
-    public var tabs: [ACTab]!
+    public var items: [ACTabBarItem]!
     public var nav: UINavigationController!
     
     override func viewDidLoad() {
@@ -22,26 +22,25 @@ class ACMoreTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tabs?.count ?? 0
+        return items?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let t = self.tabs[indexPath.item]
-        if let action = t.action {
-            action.invoke(viewController: nav, origin: "/tabs/\(t.id)", medium: "more")
+        let item = self.items[indexPath.item]
+        if let action = item.action {
+            action.invoke(viewController: nav, origin: "/tabs/\(item.id)", medium: "more")
             return
         }
-        nav.show(ACTabViewController.instantiateViewController(for: t), sender: nil)
+        nav.show(item.viewController, sender: nil)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let t = self.tabs[indexPath.item]
+        let item = self.items[indexPath.item]
         let cell = tableView.dequeueReusableCell(withIdentifier: "moreCell")!
         cell.selectionStyle = .none
-        let vc = StoryboardHelper.instantiateTabViewController(with: t)
-        vc.tabBarItem.title = t.title
+        item.viewController.tabBarItem.title = item.title
         cell.textLabel?.font = UIFont(name: "Alpenglow-ExpandedRegular", size: UIFont.labelFontSize - 2)!
-        cell.textLabel?.text = self.tabs[indexPath.item].title
+        cell.textLabel?.text = item.title
         cell.accessoryType = .disclosureIndicator
         return cell
     }

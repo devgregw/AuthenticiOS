@@ -171,7 +171,7 @@ extension AppDelegate {
                     let appearance = ACAppearance(dict: appearanceSnapshot.value as! NSDictionary)
                     ACEventCollectionViewController.present(withAppearance: appearance.events)
                 })*/
-                ACTabBarViewController.setShortcutTabId(nil)
+                ACTabBarViewController.setShortcutTabId("upcoming_events")
             case "tab":
                 // Get the tab id from the shortcut info
                 let tabId = item.userInfo!["id"] as? String
