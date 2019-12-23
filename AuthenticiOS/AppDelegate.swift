@@ -40,10 +40,9 @@ extension AppDelegate {
     }
 }
 
-@available(iOS 10, *)
 extension AppDelegate : UNUserNotificationCenterDelegate {
     
-    // Receive displayed notifications for iOS 10 devices.
+    // Receive displayed notifications for iOS 10+ devices.
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
@@ -70,12 +69,8 @@ extension AppDelegate: MessagingDelegate {
     // Register the app for notifications
     func configureNotifications(forApplication application: UIApplication) {
         Messaging.messaging().delegate = self
-        if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().delegate = self
-            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: {_, _ in })
-        } else {
-            application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
-        }
+        UNUserNotificationCenter.current().delegate = self
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound], completionHandler: {_, _ in })
         application.registerForRemoteNotifications()
     }
     
@@ -175,11 +170,6 @@ extension AppDelegate {
             case "tab":
                 // Get the tab id from the shortcut info
                 let tabId = item.userInfo!["id"] as? String
-                // Load the tab and present the view controller
-                /*Database.database().reference().child("tabs/\(tabId)").observeSingleEvent(of: .value, with: {snapshot in
-                    let val = snapshot.value as! NSDictionary
-                    ACTabViewController.present(tab: ACTab(dict: val), origin: "shortcut", medium: "shortcut")
-                }) { error in AppDelegate.topViewController.present(UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert), animated: true) }*/
                 ACTabBarViewController.setShortcutTabId(tabId)
             default:
                 handled = false
