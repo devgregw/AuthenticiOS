@@ -38,6 +38,7 @@
 		FC4CD2A320FE94430096ED0D /* ACTextCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4CD2A220FE94430096ED0D /* ACTextCollectionViewCell.swift */; };
 		FC4D15432324517A008786B7 /* ACTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4D15422324517A008786B7 /* ACTabBarViewController.swift */; };
 		FC535C0921CC06F800FC5FAA /* AnalyticsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC535C0821CC06F800FC5FAA /* AnalyticsHelper.swift */; };
+		FC5378B923A07FC2002CC327 /* DatabaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5378B823A07FC2002CC327 /* DatabaseHelper.swift */; };
 		FC565D102001395B00DE7C9A /* ACTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC565D0F2001395B00DE7C9A /* ACTab.swift */; };
 		FC565D1420013AB600DE7C9A /* ACButtonInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC565D1320013AB600DE7C9A /* ACButtonInfo.swift */; };
 		FC565D1620013ACE00DE7C9A /* ACButtonAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC565D1520013ACE00DE7C9A /* ACButtonAction.swift */; };
@@ -115,6 +116,7 @@
 		FC4CD2A220FE94430096ED0D /* ACTextCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTextCollectionViewCell.swift; sourceTree = "<group>"; };
 		FC4D15422324517A008786B7 /* ACTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTabBarViewController.swift; sourceTree = "<group>"; };
 		FC535C0821CC06F800FC5FAA /* AnalyticsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsHelper.swift; sourceTree = "<group>"; };
+		FC5378B823A07FC2002CC327 /* DatabaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseHelper.swift; sourceTree = "<group>"; };
 		FC565D0A200118A400DE7C9A /* AuthenticiOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AuthenticiOS.entitlements; sourceTree = "<group>"; };
 		FC565D0F2001395B00DE7C9A /* ACTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTab.swift; sourceTree = "<group>"; };
 		FC565D1320013AB600DE7C9A /* ACButtonInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACButtonInfo.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				FC3CC55A21DD997F000C59B0 /* CalendarInterface.swift */,
 				FC84F2132366052600524198 /* StoryboardHelper.swift */,
 				FC780B80239EEC3C0035E5C8 /* ACTabBarItem.swift */,
+				FC5378B823A07FC2002CC327 /* DatabaseHelper.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -539,6 +542,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC3A7FEB21127B3800CAFC90 /* ACSavableImageView.swift in Sources */,
+				FC5378B923A07FC2002CC327 /* DatabaseHelper.swift in Sources */,
 				FC3A7FE32112798E00CAFC90 /* String.swift in Sources */,
 				FC023D6523493FA200F561FC /* ACTileCollectionViewCell.swift in Sources */,
 				FCC928FA2348DB140051C496 /* ACWatchViewController.swift in Sources */,
@@ -726,7 +730,7 @@
 				CODE_SIGN_ENTITLEMENTS = AuthenticiOS/AuthenticiOS.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 44;
+				CURRENT_PROJECT_VERSION = 47;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = L586WSJPG7;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -751,7 +755,7 @@
 				CODE_SIGN_ENTITLEMENTS = AuthenticiOS/AuthenticiOS.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 44;
+				CURRENT_PROJECT_VERSION = 47;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = L586WSJPG7;
 				INFOPLIST_FILE = AuthenticiOS/Info.plist;
