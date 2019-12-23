@@ -60,6 +60,9 @@ class ACImageResource {
     }
     
     func load(intoImageView view: UIImageView, fadeIn fade: Bool, setSize: Bool, scaleDownLargeImages scale: Bool = true, completion: @escaping () -> Void = {}) {
+        if let task = view.sd_currentDownloadTask {
+            task.cancel()
+        }
         if fade {
             view.alpha = 0
         }
