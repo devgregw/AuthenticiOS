@@ -9,6 +9,18 @@
 import Foundation
 
 class ACAppearance {
+    class Livestream {
+        let enable: Bool
+        
+        init(enable: Bool) {
+            self.enable = enable
+        }
+        
+        convenience init(dict: NSDictionary) {
+            self.init(enable: dict["enable"] as! Bool)
+        }
+    }
+    
     class Events {
         let title: String
         
@@ -43,11 +55,12 @@ class ACAppearance {
     }
     
     let events: Events
-    
+    let livestream: Livestream
     let tabs: Tabs
     
     init(dict: NSDictionary) {
         self.events = Events(dict: dict["events"] as! NSDictionary)
         self.tabs = Tabs(dict: dict["tabs"] as! NSDictionary)
+        self.livestream = Livestream(dict: dict["livestream"] as! NSDictionary)
     }
 }
