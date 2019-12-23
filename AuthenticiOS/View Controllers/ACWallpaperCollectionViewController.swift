@@ -8,18 +8,31 @@
 
 import UIKit
 
-private let reuseIdentifier = "wallpaper"
+private let reuseIdentifier = "ACImageCollectionViewCell"
 
 class ACWallpaperCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-    private var elements: [ACElement]!
-    private var tab: ACTab!
+    var wallpapers: [ACImageResource]!
     
-    public func initialize(withTab tab: ACTab) {
-        self.tab = tab
-        self.elements = self.tab.elements.filter({element in element.type == "image"})
-        self.title = tab.title
-        self.tabBarItem.title = "Wallpapers"
+    public func initialize() {
+        self.title = "Wallpapers"
+        self.tabBarItem.title = "WALLPAPERS"
         applyDefaultAppearance()
+    }
+    
+    @objc public func refreshData() {
+        wallpapers?.removeAll()
+        if !(collectionView.refreshControl?.isRefreshing ?? false) {
+            collectionView.refreshControl?.beginRefreshing()
+        }
+        collectionView.reloadSections(IndexSet(arrayLiteral: 0))
+        DatabaseHelper.loadTab(id: "ME6HV83IM0", keepSynced: false, completion: {result in
+            guard let tab = result else {return}
+            self.wallpapers = tab.elements.filter({element in element.type == "image"}).map({element in ACImageResource(dict: element.getProperty("image") as! NSDictionary)})
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(125), execute: {
+                self.collectionView.reloadSections(IndexSet(arrayLiteral: 0))
+                self.collectionView.refreshControl?.endRefreshing()
+            })
+        })
     }
     
     override func viewDidLoad() {
@@ -30,15 +43,17 @@ class ACWallpaperCollectionViewController: UICollectionViewController, UICollect
         collectionView?.delegate = self
         collectionView?.reloadData()
         collectionView?.collectionViewLayout.invalidateLayout()
+        refreshData()
+        setupRefreshControl(selector: #selector(self.refreshData))
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return elements.count
+        return wallpapers?.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ACImageCollectionViewCell
-        cell.setImage(ACImageResource(dict: elements[indexPath.item].getProperty("image") as! NSDictionary), viewController: AppDelegate.topViewController)
+        cell.setImage(wallpapers[indexPath.item], viewController: AppDelegate.topViewController)
         return cell
     }
     
