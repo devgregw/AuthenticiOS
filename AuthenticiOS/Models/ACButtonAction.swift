@@ -60,13 +60,13 @@ class ACButtonAction {
         case "OpenEventsPageAction":
             return ACEventCollectionViewController.present(withTitle: "UPCOMING EVENTS")
         case "OpenTabAction":
-            Database.database().reference().child(AppDelegate.useDevelopmentDatabase ? "/dev/" : "/").child("/tabs/\(self.getProperty(withName: "tabId") as! String)/").observeSingleEvent(of: .value, with: {snapshot in
-                guard let val = snapshot.value as? NSDictionary else {
+            DatabaseHelper.loadTab(id: getProperty(withName: "tabId") as! String, keepSynced: false, completion: {result in
+                guard result != nil else {
                     self.presentAlert(title: "Error", message: "We were unable to open the page because it does not exist.", vc: vc)
                     return
                 }
-                ACTabViewController.present(tab: ACTab(dict: val), origin: origin, medium: self.type)
-            }) { error in self.presentAlert(title: "Error", message: "We were unable to access the database.\n\n\(error.localizedDescription as String)", vc: vc) }
+                ACTabViewController.present(tab: result!, origin: origin, medium: self.type)
+            })
         case "OpenEventAction":
             Database.database().reference().child("/events/\(self.getProperty(withName: "eventId") as! String)/").observeSingleEvent(of: .value, with: {snapshot in
                 guard let val = snapshot.value as? NSDictionary else {

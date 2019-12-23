@@ -31,8 +31,8 @@ class ACTabViewController: UIViewController {
         if let specialType = tab.specialType {
             switch specialType {
             case "wallpapers":
-                let vc = StoryboardHelper.instantiateWallpaperCollectionViewController(with: tab)
-                vc.initialize(withTab: tab)
+                let vc = StoryboardHelper.instantiateWallpaperCollectionViewController()
+                vc.initialize()
                 return vc
             default: return StoryboardHelper.instantiateTabViewController(with: tab)
             }
@@ -49,8 +49,8 @@ class ACTabViewController: UIViewController {
         }
         if let type = tab.specialType {
             if type == "wallpapers" {
-                let vc = StoryboardHelper.instantiateWallpaperCollectionViewController(with: tab)
-                vc.initialize(withTab: tab)
+                let vc = StoryboardHelper.instantiateWallpaperCollectionViewController()
+                vc.initialize()
                 vc.presentSelf(sender: nil)
                 return
             }

@@ -12,7 +12,7 @@ import Firebase
 private let reuseIdentifier = "accvcell"
 
 class ACEventCollectionViewController: UICollectionViewController {
-    static public var title = ""
+    static public var title = "UPCOMING EVENTS"
     
     private var eventsRef: DatabaseReference!
     
@@ -25,39 +25,24 @@ class ACEventCollectionViewController: UICollectionViewController {
         present(withTitle: app.title)
     }
     
-    private func setupRefreshControl() {
-        var color: UIColor
-        if #available(iOS 13.0, *) {
-            color = traitCollection.userInterfaceStyle == .dark ? .white : .black
-        } else {
-            color = .white
-        }
-        self.collectionView?.refreshControl = UIRefreshControl()
-        self.collectionView?.refreshControl?.tintColor = color
-        self.collectionView?.refreshControl?.addTarget(self, action: #selector(self.refreshData), for: .valueChanged)
-        self.collectionView?.refreshControl?.attributedTitle = NSAttributedString(string: "PULL TO REFRESH", attributes: [
-            //.kern: 2.5,
-            .font: UIFont(name: "Alpenglow-ExpandedRegular", size: 12)!,
-            .foregroundColor: color
-        ])
-    }
-    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        setupRefreshControl()
+        setupRefreshControl(selector: #selector(self.refreshData))
     }
     
     private func configureCollectionView() {
         collectionView?.indicatorStyle = .default
         collectionView?.register(UINib(nibName: "ACCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
         collectionView?.register(UINib(nibName: "ACTextCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "none")
-        setupRefreshControl()
+        setupRefreshControl(selector: #selector(self.refreshData))
         collectionView?.delegate = self
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         applyDefaultAppearance()
+        self.title = ACEventCollectionViewController.title
         self.navigationItem.title = ACEventCollectionViewController.title
+        self.tabBarItem.title = "EVENTS"
         self.navigationController?.navigationBar.titleTextAttributes = [
             //.kern: 3.5,
             .font: UIFont(name: "Alpenglow-ExpandedRegular", size: 19)!,
@@ -74,21 +59,6 @@ class ACEventCollectionViewController: UICollectionViewController {
     @objc public func refreshData() {
         //(tabBarController as? ACTabBarViewController)?.loadData(first: false)
         loadData(wasRefreshed: true)
-    }
-    
-    private func listenForEventChange() {
-        if eventsRef != nil {
-            eventsRef.removeAllObservers()
-        }
-        eventsRef = Database.database().reference()
-        if AppDelegate.useDevelopmentDatabase {
-            eventsRef = eventsRef.child("dev")
-        }
-        eventsRef = eventsRef.child("events")
-        eventsRef.observe(.value, with: self.onEventChange) { error in
-            self.present(UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert), animated: true)
-            self.trace?.stop()
-        }
     }
     
     private func onEventChange(_ snapshot: DataSnapshot) {
@@ -117,26 +87,36 @@ class ACEventCollectionViewController: UICollectionViewController {
         self.events.append(contentsOf: placeholders)
         self.events.append(contentsOf: regularEvents)
         self.complete = true
-        DispatchQueue.main.async {
-            self.collectionView?.reloadData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(125), execute: {
+            self.collectionView?.reloadSections(IndexSet(arrayLiteral: 0))
             self.collectionView?.collectionViewLayout.invalidateLayout()
             self.collectionView?.invalidateIntrinsicContentSize()
-            if #available(iOS 10.0, *) {
-                self.collectionView?.refreshControl?.endRefreshing()
-            }
+            self.collectionView?.refreshControl?.endRefreshing()
             self.trace?.stop()
-        }
+        })
     }
     
     public func loadData(wasRefreshed: Bool) {
         self.events = []
         self.complete = false
-        self.collectionView?.reloadData()
+        self.collectionView?.reloadSections(IndexSet(arrayLiteral: 0))
         trace = Performance.startTrace(name: "load events")
         if wasRefreshed {
             trace?.incrementMetric("refresh events", by: 1)
         }
-        listenForEventChange()
+        if eventsRef != nil {
+            eventsRef.removeAllObservers()
+        }
+        eventsRef = Database.database().reference()
+        if AppDelegate.useDevelopmentDatabase {
+            eventsRef = eventsRef.child("dev")
+        }
+        eventsRef = eventsRef.child("events")
+        
+        eventsRef.observeSingleEvent(of: .value, with: self.onEventChange, withCancel: {error in
+            self.present(UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert), animated: true)
+            self.trace?.stop()
+        })
     }
 
 }
