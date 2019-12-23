@@ -23,7 +23,8 @@ class ACTileCollectionViewCell: UICollectionViewCell {
     
     public func initialize(imageResource: ACImageResource, width: CGFloat, action: @escaping () -> Void) {
         self.action = action
-        imageResource.load(intoImageView: imageView, fadeIn: true, setSize: false, scaleDownLargeImages: false, completion: {})
+        self.indicator.startAnimating()
+        imageResource.load(intoImageView: imageView, fadeIn: true, setSize: false, scaleDownLargeImages: false, completion: {self.indicator.stopAnimating()})
         rootView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.clicked)))
         imageWidthConstraint.constant = width - 16
         imageHeightConstraint.constant = ACImageResource(imageName: "", width: 1920, height: 1080).calculateHeight(fromWidth: width - 16)
