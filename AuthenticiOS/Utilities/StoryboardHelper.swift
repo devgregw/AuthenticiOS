@@ -29,9 +29,9 @@ class StoryboardHelper {
         return instantiateMainViewController(from: launchScreen)
     }
     
-    static public func instantiateWallpaperCollectionViewController(with tab: ACTab) -> ACWallpaperCollectionViewController {
+    static public func instantiateWallpaperCollectionViewController() -> ACWallpaperCollectionViewController {
         let vc = instantiateViewController(named: "wallpapersCollectionViewController", from: wallpapers) as! ACWallpaperCollectionViewController
-        vc.initialize(withTab: tab)
+        vc.initialize()
         vc.tabBarItem.title = "WALLPAPERS"
         return vc
     }
@@ -42,17 +42,15 @@ class StoryboardHelper {
         return vc
     }
     
-    static public func instantiateWatchViewController(with main: ACTab, playlists: [ACTab]) -> UINavigationController {
+    static public func instantiateWatchViewController(with appearance: ACAppearance) -> UINavigationController {
         let nav = instantiateViewController(named: "watch", from: watch) as! UINavigationController
         nav.tabBarItem.title = "WATCH"
-        (nav.topViewController as! ACWatchViewController).initialize(main: main, playlists: playlists)
+        (nav.topViewController as! ACWatchViewController).initialize(liveDisabled: !appearance.livestream.enable)
         return nav
     }
     
-    static public func instantiateVideosCollectionViewController(with main: ACTab, playlists: [ACTab]) -> ACVideosCollectionViewController {
-        let vc = instantiateViewController(named: "watchVideos", from: watch) as! ACVideosCollectionViewController
-        vc.initialize(main: main, playlists: playlists)
-        return vc
+    static public func instantiateVideosCollectionViewController() -> ACVideosCollectionViewController {
+        return instantiateViewController(named: "watchVideos", from: watch) as! ACVideosCollectionViewController
     }
     
     static public func instantiateLivestreamViewController() -> ACLivestreamViewController {
