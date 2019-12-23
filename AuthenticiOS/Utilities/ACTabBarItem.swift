@@ -14,7 +14,7 @@ class ACTabBarItem {
         if items.count > 5 {
             var controllers: [UIViewController] = []
             controllers.append(contentsOf: items.prefix(4).map({i in i.viewController}))
-            controllers.append(StoryboardHelper.instantiateMoreTableViewController(with: Array(items.suffix(3)), navigationController: nav))
+            controllers.append(StoryboardHelper.instantiateMoreTableViewController(with: Array(items.suffix(from: 4)), navigationController: nav))
             return controllers
         } else {
             return items.map({i in i.viewController})
