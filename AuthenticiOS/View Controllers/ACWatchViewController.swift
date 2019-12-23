@@ -13,9 +13,7 @@ class ACWatchViewController: UIPageViewController {
     
     private var videosViewController: ACVideosCollectionViewController!
     private var liveViewController: ACLivestreamViewController!
-    private var mainTab: ACTab!
-    private var playlistTabs: [ACTab]!
-    private let liveDisabled = true
+    private var liveDisabled: Bool!
     
     @IBAction func selectionChanged(_ sender: Any) {
         if !liveDisabled {
@@ -31,10 +29,9 @@ class ACWatchViewController: UIPageViewController {
         }
     }
     
-    public func initialize(main: ACTab, playlists: [ACTab]) {
-        self.mainTab = main
-        self.playlistTabs = playlists
-        videosViewController = StoryboardHelper.instantiateVideosCollectionViewController(with: main, playlists: playlists)
+    public func initialize(liveDisabled: Bool) {
+        self.liveDisabled = liveDisabled
+        videosViewController = StoryboardHelper.instantiateVideosCollectionViewController()
         if !liveDisabled {
             liveViewController = StoryboardHelper.instantiateLivestreamViewController()
         }
