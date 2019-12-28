@@ -32,7 +32,7 @@ extension UIViewController {
             if #available(iOS 13.0, *) {
                 color = traitCollection.userInterfaceStyle == .dark ? .white : .black
             } else {
-                color = .white
+                color = .black
             }
         } else {
             color = style == .light ? .white : .black
