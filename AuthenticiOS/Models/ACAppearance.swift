@@ -16,8 +16,8 @@ class ACAppearance {
             self.enable = enable
         }
         
-        convenience init(dict: NSDictionary) {
-            self.init(enable: dict["enable"] as! Bool)
+        convenience init(dict: NSDictionary?) {
+            self.init(enable: dict?["enable"] as? Bool ?? true)
         }
     }
     
@@ -37,8 +37,8 @@ class ACAppearance {
             self.index = index
         }
         
-        convenience init(dict: NSDictionary) {
-            self.init(title: dict["title"] as! String, hideTitle: dict["hideTitle"] as! Bool, header: ACImageResource(dict: dict["header"] as! NSDictionary), index: dict["index"] as? Int ?? -999)
+        convenience init(dict: NSDictionary?) {
+            self.init(title: dict?["title"] as? String ?? "EVENTS", hideTitle: dict?["hideTitle"] as? Bool ?? true, header: dict == nil ? ACImageResource(imageName: "unknown.png", width: 1080, height: 1920) : ACImageResource(dict: dict!["header"] as! NSDictionary), index: dict?["index"] as? Int ?? -999)
         }
     }
     
@@ -49,8 +49,8 @@ class ACAppearance {
             self.fill = fill
         }
         
-        convenience init(dict: NSDictionary) {
-            self.init(fill: dict["fill"] as? Bool ?? true)
+        convenience init(dict: NSDictionary?) {
+            self.init(fill: dict?["fill"] as? Bool ?? true)
         }
     }
     
@@ -59,8 +59,8 @@ class ACAppearance {
     let tabs: Tabs
     
     init(dict: NSDictionary) {
-        self.events = Events(dict: dict["events"] as! NSDictionary)
-        self.tabs = Tabs(dict: dict["tabs"] as! NSDictionary)
-        self.livestream = Livestream(dict: dict["livestream"] as! NSDictionary)
+        self.events = Events(dict: dict["events"] as? NSDictionary)
+        self.tabs = Tabs(dict: dict["tabs"] as? NSDictionary)
+        self.livestream = Livestream(dict: dict["livestream"] as? NSDictionary)
     }
 }
