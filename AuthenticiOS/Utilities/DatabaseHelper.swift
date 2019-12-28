@@ -23,7 +23,7 @@ class DatabaseHelper {
     }
     
     static func setKeepSynced(_ value: Bool, _ ref: DatabaseReference) -> DatabaseReference {
-        ref.keepSynced(value)
+        ref.keepSynced(false)
         return ref
     }
     

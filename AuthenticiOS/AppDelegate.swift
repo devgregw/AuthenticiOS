@@ -200,7 +200,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func configureFirebase() {
         FirebaseApp.configure()
         Analytics.setAnalyticsCollectionEnabled(AppDelegate.appMode != .Debug)
-        Database.database().isPersistenceEnabled = true
+        Database.database().isPersistenceEnabled = false
     }
     
     // Update the version displayed in the settings app
