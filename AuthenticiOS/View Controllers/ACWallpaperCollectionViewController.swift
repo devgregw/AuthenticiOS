@@ -14,7 +14,7 @@ class ACWallpaperCollectionViewController: UICollectionViewController, UICollect
     var wallpapers: [ACImageResource]!
     
     public func initialize() {
-        self.title = "Wallpapers"
+        self.title = "WALLPAPERS"
         self.tabBarItem.title = "WALLPAPERS"
         applyDefaultAppearance()
     }
