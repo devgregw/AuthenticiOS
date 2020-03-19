@@ -129,8 +129,8 @@ static RCNConfigFetcherTestBlock gGlobalTestBlock;
 
 #pragma mark - Fetch Config API
 
-- (void)fetchAllConfigsWithExpirationDuration:(NSTimeInterval)expirationDuration
-                            completionHandler:(FIRRemoteConfigFetchCompletion)completionHandler {
+- (void)fetchConfigWithExpirationDuration:(NSTimeInterval)expirationDuration
+                        completionHandler:(FIRRemoteConfigFetchCompletion)completionHandler {
   // Note: We expect the googleAppID to always be available.
   BOOL hasDeviceContextChanged =
       FIRRemoteConfigHasDeviceContextChanged(_settings.deviceContext, _options.googleAppID);
@@ -139,6 +139,7 @@ static RCNConfigFetcherTestBlock gGlobalTestBlock;
   RCNConfigFetch *fetchWithExpirationSelf = weakSelf;
   dispatch_async(fetchWithExpirationSelf->_lockQueue, ^{
     RCNConfigFetch *strongSelf = fetchWithExpirationSelf;
+
     // Check whether we are outside of the minimum fetch interval.
     if (![strongSelf->_settings hasMinimumFetchIntervalElapsed:expirationDuration] &&
         !hasDeviceContextChanged) {
@@ -147,7 +148,10 @@ static RCNConfigFetcherTestBlock gGlobalTestBlock;
                                         withStatus:FIRRemoteConfigFetchStatusSuccess
                                          withError:nil];
     }
+
+    // Check if a fetch is already in progress.
     if (strongSelf->_settings.isFetchInProgress) {
+      // Check if we have some fetched data.
       if (strongSelf->_settings.lastFetchTimeInterval > 0) {
         FIRLogDebug(kFIRLoggerRemoteConfig, @"I-RCN000052",
                     @"A fetch is already in progress. Using previous fetch results.");
@@ -161,7 +165,8 @@ static RCNConfigFetcherTestBlock gGlobalTestBlock;
             [NSError errorWithDomain:FIRRemoteConfigErrorDomain
                                 code:FIRErrorCodeConfigFailed
                             userInfo:@{
-                              @"FetchError" : @"Duplicate request while the previous one is pending"
+                              NSLocalizedDescriptionKey :
+                                  @"FetchError: Duplicate request while the previous one is pending"
                             }];
         return [strongSelf reportCompletionOnHandler:completionHandler
                                           withStatus:FIRRemoteConfigFetchStatusFailure
@@ -193,58 +198,79 @@ static RCNConfigFetcherTestBlock gGlobalTestBlock;
 
 #pragma mark - Fetch helpers
 
-/// Refresh instance ID token before fetching config. Instance ID is an optional field in config
-/// request.
+/// Refresh instance ID token before fetching config. Instance ID is now mandatory for fetch
+/// requests to work.(b/14751422).
 - (void)refreshInstanceIDTokenAndFetchCheckInInfoWithCompletionHandler:
     (FIRRemoteConfigFetchCompletion)completionHandler {
   FIRInstanceID *instanceID = [FIRInstanceID instanceID];
-  // Only refresh instance ID when a valid sender ID is provided. If not, continue without
-  // fetching instance ID. Instance ID is for data analytics purpose, which is only optional for
-  // config fetching.
   if (!_options.GCMSenderID) {
-    [self fetchCheckinInfoWithCompletionHandler:completionHandler];
-    return;
+    NSString *errorDescription = @"Failed to get GCMSenderID";
+    FIRLogError(kFIRLoggerRemoteConfig, @"I-RCN000074", @"%@",
+                [NSString stringWithFormat:@"%@", errorDescription]);
+    self->_settings.isFetchInProgress = NO;
+    return [self
+        reportCompletionOnHandler:completionHandler
+                       withStatus:FIRRemoteConfigFetchStatusFailure
+                        withError:[NSError errorWithDomain:FIRRemoteConfigErrorDomain
+                                                      code:FIRRemoteConfigErrorInternalError
+                                                  userInfo:@{
+                                                    NSLocalizedDescriptionKey : errorDescription
+                                                  }]];
   }
   FIRInstanceIDTokenHandler instanceIDHandler = ^(NSString *token, NSError *error) {
-    if (error) {
-      FIRLogError(kFIRLoggerRemoteConfig, @"I-RCN000020",
-                  @"Failed to register InstanceID with error : %@.", error);
+    if (!token || error) {
+      NSString *errorDescription =
+          [NSString stringWithFormat:@"Failed to get InstanceID token. Error : %@.", error];
+      FIRLogError(kFIRLoggerRemoteConfig, @"I-RCN000073", @"%@",
+                  [NSString stringWithFormat:@"%@", errorDescription]);
+      self->_settings.isFetchInProgress = NO;
+      return [self
+          reportCompletionOnHandler:completionHandler
+                         withStatus:FIRRemoteConfigFetchStatusFailure
+                          withError:[NSError errorWithDomain:FIRRemoteConfigErrorDomain
+                                                        code:FIRRemoteConfigErrorInternalError
+                                                    userInfo:@{
+                                                      NSLocalizedDescriptionKey : errorDescription
+                                                    }]];
     }
 
     // If the token is available, try to get the instanceID.
     __weak RCNConfigFetch *weakSelf = self;
-    if (token) {
-      [instanceID getIDWithHandler:^(NSString *_Nullable identity, NSError *_Nullable error) {
-        RCNConfigFetch *strongSelf = weakSelf;
+    [instanceID getIDWithHandler:^(NSString *_Nullable identity, NSError *_Nullable error) {
+      RCNConfigFetch *strongSelf = weakSelf;
 
-        // Dispatch to the RC serial queue to update settings on the queue.
-        dispatch_async(strongSelf->_lockQueue, ^{
-          RCNConfigFetch *strongSelfQueue = weakSelf;
-
-          // Update config settings with the IID and token.
-          strongSelfQueue->_settings.configInstanceIDToken = [token copy];
-          strongSelfQueue->_settings.configInstanceID = identity;
-
-          if (identity && !error) {
-            FIRLogInfo(kFIRLoggerRemoteConfig, @"I-RCN000022", @"Success to get iid : %@.",
-                       strongSelfQueue->_settings.configInstanceID);
-          } else {
-            FIRLogWarning(kFIRLoggerRemoteConfig, @"I-RCN000055", @"Error getting iid : %@.",
-                          error);
-          }
-
-          // Continue the fetch regardless of whether fetch of instance ID succeeded.
-          [strongSelfQueue fetchCheckinInfoWithCompletionHandler:completionHandler];
-        });
-      }];
-
-    } else {
-      dispatch_async(self->_lockQueue, ^{
+      // Dispatch to the RC serial queue to update settings on the queue.
+      dispatch_async(strongSelf->_lockQueue, ^{
         RCNConfigFetch *strongSelfQueue = weakSelf;
+
+        // Update config settings with the IID and token.
+        strongSelfQueue->_settings.configInstanceIDToken = [token copy];
+        strongSelfQueue->_settings.configInstanceID = identity;
+
+        if (!identity || error) {
+          NSString *errorDescription =
+              [NSString stringWithFormat:@"Error getting iid : %@.", error];
+          FIRLogError(kFIRLoggerRemoteConfig, @"I-RCN000055", @"%@",
+                      [NSString stringWithFormat:@"%@", errorDescription]);
+          strongSelfQueue->_settings.isFetchInProgress = NO;
+          return [strongSelfQueue
+              reportCompletionOnHandler:completionHandler
+                             withStatus:FIRRemoteConfigFetchStatusFailure
+                              withError:[NSError
+                                            errorWithDomain:FIRRemoteConfigErrorDomain
+                                                       code:FIRRemoteConfigErrorInternalError
+                                                   userInfo:@{
+                                                     NSLocalizedDescriptionKey : errorDescription
+                                                   }]];
+        }
+
+        FIRLogInfo(kFIRLoggerRemoteConfig, @"I-RCN000022", @"Success to get iid : %@.",
+                   strongSelfQueue->_settings.configInstanceID);
+
         // Continue the fetch regardless of whether fetch of instance ID succeeded.
         [strongSelfQueue fetchCheckinInfoWithCompletionHandler:completionHandler];
       });
-    }
+    }];
   };
   FIRLogDebug(kFIRLoggerRemoteConfig, @"I-RCN000039", @"Starting requesting token.");
   // Note: We expect the GCMSenderID to always be available by the time this request is made.
@@ -323,6 +349,7 @@ static RCNConfigFetcherTestBlock gGlobalTestBlock;
     NSString *errString = [NSString stringWithFormat:@"Failed to compress the config request."];
     FIRLogWarning(kFIRLoggerRemoteConfig, @"I-RCN000033", @"%@", errString);
 
+    self->_settings.isFetchInProgress = NO;
     return [self
         reportCompletionOnHandler:completionHandler
                        withStatus:FIRRemoteConfigFetchStatusFailure
@@ -339,6 +366,10 @@ static RCNConfigFetcherTestBlock gGlobalTestBlock;
     FIRLogDebug(kFIRLoggerRemoteConfig, @"I-RCN000050",
                 @"config fetch completed. Error: %@ StatusCode: %ld", (error ? error : @"nil"),
                 (long)[((NSHTTPURLResponse *)response) statusCode]);
+
+    // The fetch has completed.
+    self->_settings.isFetchInProgress = NO;
+
     RCNConfigFetch *fetcherCompletionSelf = weakSelf;
     if (!fetcherCompletionSelf) {
       return;
@@ -350,11 +381,10 @@ static RCNConfigFetcherTestBlock gGlobalTestBlock;
         return;
       }
 
-      strongSelf->_settings.isFetchInProgress = NO;
       NSInteger statusCode = [((NSHTTPURLResponse *)response) statusCode];
 
       if (error || (statusCode != kRCNFetchResponseHTTPStatusCodeOK)) {
-        // Update failure fetch time and database.
+        // Update metadata about fetch failure.
         [strongSelf->_settings updateMetadataWithFetchSuccessStatus:NO];
         if (error) {
           if (strongSelf->_settings.lastFetchStatus == FIRRemoteConfigFetchStatusSuccess) {
@@ -389,27 +419,25 @@ static RCNConfigFetcherTestBlock gGlobalTestBlock;
               return [strongSelf reportCompletionOnHandler:completionHandler
                                                 withStatus:strongSelf->_settings.lastFetchStatus
                                                  withError:error];
-            } else {
-              // Return back the received error.
-              // Must set lastFetchStatus before setting Fetch Error.
-              strongSelf->_settings.lastFetchStatus = FIRRemoteConfigFetchStatusFailure;
-              strongSelf->_settings.lastFetchError = FIRRemoteConfigErrorInternalError;
-              NSDictionary<NSErrorUserInfoKey, id> *userInfo = @{
-                NSLocalizedDescriptionKey :
-                    (error ? [error localizedDescription]
-                           : [NSString stringWithFormat:@"Internal Error. Status code: %ld",
-                                                        (long)statusCode])
-              };
-              return [strongSelf
-                  reportCompletionOnHandler:completionHandler
-                                 withStatus:FIRRemoteConfigFetchStatusFailure
-                                  withError:[NSError
-                                                errorWithDomain:FIRRemoteConfigErrorDomain
-                                                           code:FIRRemoteConfigErrorInternalError
-                                                       userInfo:userInfo]];
             }
-          }
-        }
+          }  // Response error code 429, 500, 503
+        }    // StatusCode != kRCNFetchResponseHTTPStatusCodeOK
+        // Return back the received error.
+        // Must set lastFetchStatus before setting Fetch Error.
+        strongSelf->_settings.lastFetchStatus = FIRRemoteConfigFetchStatusFailure;
+        strongSelf->_settings.lastFetchError = FIRRemoteConfigErrorInternalError;
+        NSDictionary<NSErrorUserInfoKey, id> *userInfo = @{
+          NSLocalizedDescriptionKey :
+              (error ? [error localizedDescription]
+                     : [NSString
+                           stringWithFormat:@"Internal Error. Status code: %ld", (long)statusCode])
+        };
+        return [strongSelf
+            reportCompletionOnHandler:completionHandler
+                           withStatus:FIRRemoteConfigFetchStatusFailure
+                            withError:[NSError errorWithDomain:FIRRemoteConfigErrorDomain
+                                                          code:FIRRemoteConfigErrorInternalError
+                                                      userInfo:userInfo]];
       }
 
       // Fetch was successful. Check if we have data.
