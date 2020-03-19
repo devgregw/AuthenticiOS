@@ -130,6 +130,10 @@ extension ACTabBarViewController {
     }
     
     private func checkForUpdate(completion: @escaping () -> Void) {
+        guard !AppDelegate.useDevelopmentDatabase else {
+            completion()
+            return
+        }
         let versionRef = Database.database().reference(withPath: "versions/ios")
         versionRef.keepSynced(true)
         versionRef.observeSingleEvent(of: .value, with: { snapshot in
