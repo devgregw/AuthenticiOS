@@ -11,13 +11,15 @@ import Foundation
 class ACAppearance {
     class Livestream {
         let enable: Bool
+        let image: String?
         
-        init(enable: Bool) {
+        init(enable: Bool, image: String?) {
             self.enable = enable
+            self.image = image
         }
         
         convenience init(dict: NSDictionary?) {
-            self.init(enable: dict?["enable"] as? Bool ?? true)
+            self.init(enable: dict?["enable"] as? Bool ?? true, image: dict?["image"] as? String ?? nil)
         }
     }
     

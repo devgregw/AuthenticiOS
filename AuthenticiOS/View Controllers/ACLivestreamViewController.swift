@@ -14,6 +14,7 @@ class ACLivestreamViewController: UIViewController {
     @IBOutlet weak var placeholderView: UIView!
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var loadingView: UIVisualEffectView!
+    @IBOutlet weak var placeholderActivityIndicator: UIActivityIndicatorView!
     
     var state = false
     
@@ -111,5 +112,22 @@ class ACLivestreamViewController: UIViewController {
         loadingView.layer.cornerRadius = 16
         loadingView.layer.masksToBounds = true
         // Do any additional setup after loading the view.
+        self.placeholderActivityIndicator.startAnimating()
+        DatabaseHelper.loadAppearance(completion: {appearance in
+            if appearance.livestream.image != nil {
+                let res = ACImageResource(imageName: appearance.livestream.image!, width: 1080, height: 1920)
+                res.load(intoImageView: self.placeholderImageView, fadeIn: true, setSize: false, scaleDownLargeImages: false, completion: {
+                    self.placeholderActivityIndicator.stopAnimating()
+                })
+            } else {
+                self.placeholderImageView.alpha = 0
+                self.placeholderImageView.image = UIImage(named: "unknown")
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.placeholderImageView.alpha = 1
+                }, completion: {_ in
+                    self.placeholderActivityIndicator.stopAnimating()
+                })
+            }
+        })
     }
 }

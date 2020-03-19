@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -99,7 +99,15 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KGm-Lj-Djp">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unknown" translatesAutoresizingMaskIntoConstraints="NO" id="oi5-uC-n5C">
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="lKg-6K-RPb">
+                                        <rect key="frame" x="197" y="438" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="ReR-WU-WfO"/>
+                                            <constraint firstAttribute="width" constant="20" id="e2v-18-PBG"/>
+                                        </constraints>
+                                        <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </activityIndicatorView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oi5-uC-n5C">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                     </imageView>
                                     <visualEffectView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yg6-ZF-1tc">
@@ -124,7 +132,7 @@
                                                     <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </activityIndicatorView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOADING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HwN-a5-EQs">
-                                                    <rect key="frame" x="0.0" y="109.5" width="150" height="14"/>
+                                                    <rect key="frame" x="0.0" y="109.5" width="150" height="11.5"/>
                                                     <fontDescription key="fontDescription" name="Alpenglow-ExpandedRegular" family="Alpenglow" pointSize="12"/>
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -149,7 +157,9 @@
                                 <constraints>
                                     <constraint firstItem="Yg6-ZF-1tc" firstAttribute="centerY" secondItem="KGm-Lj-Djp" secondAttribute="centerY" id="0gd-EE-mVH"/>
                                     <constraint firstAttribute="bottom" secondItem="oi5-uC-n5C" secondAttribute="bottom" id="8is-Ip-Eq5"/>
+                                    <constraint firstItem="lKg-6K-RPb" firstAttribute="centerX" secondItem="KGm-Lj-Djp" secondAttribute="centerX" id="A2I-ka-TLo"/>
                                     <constraint firstItem="Yg6-ZF-1tc" firstAttribute="centerX" secondItem="KGm-Lj-Djp" secondAttribute="centerX" id="Piw-Dc-9f4"/>
+                                    <constraint firstItem="lKg-6K-RPb" firstAttribute="centerY" secondItem="KGm-Lj-Djp" secondAttribute="centerY" id="eiL-SU-eSH"/>
                                     <constraint firstAttribute="trailing" secondItem="oi5-uC-n5C" secondAttribute="trailing" id="kwR-Mh-4Yi"/>
                                     <constraint firstItem="oi5-uC-n5C" firstAttribute="top" secondItem="KGm-Lj-Djp" secondAttribute="top" id="tHQ-P2-0AZ"/>
                                     <constraint firstItem="oi5-uC-n5C" firstAttribute="leading" secondItem="KGm-Lj-Djp" secondAttribute="leading" id="yGc-lr-OCN"/>
@@ -171,6 +181,7 @@
                     </view>
                     <connections>
                         <outlet property="loadingView" destination="Yg6-ZF-1tc" id="PpX-yA-moX"/>
+                        <outlet property="placeholderActivityIndicator" destination="lKg-6K-RPb" id="1QZ-Wb-gfv"/>
                         <outlet property="placeholderImageView" destination="oi5-uC-n5C" id="ZHH-g0-ANJ"/>
                         <outlet property="placeholderView" destination="KGm-Lj-Djp" id="i4h-Tk-yio"/>
                         <outlet property="webView" destination="j1R-dz-2Kv" id="788-bO-75S"/>
@@ -258,7 +269,4 @@
             <point key="canvasLocation" x="6284" y="725"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="unknown" width="720" height="1080"/>
-    </resources>
 </document>
