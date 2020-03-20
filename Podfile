@@ -13,6 +13,6 @@ target 'AuthenticiOS' do
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
   pod 'FirebaseUI/Storage'
-  pod 'Fabric'
-  pod 'Crashlytics'
+  pod 'Firebase/Crashlytics'
+  pod 'Firebase/Analytics'
 end
