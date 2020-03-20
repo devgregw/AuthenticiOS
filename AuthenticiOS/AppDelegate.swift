@@ -46,7 +46,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        self.print("UN willPresent: \(notification.request.content.title)")
+        self.log("UN willPresent: \(notification.request.content.title)")
         // Tell the system how to present the notification
         completionHandler([.alert, .sound])
     }
@@ -54,7 +54,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
-        self.print("UN didReceive: \(response.notification.request.content.title)::\(response.actionIdentifier)")
+        self.log("UN didReceive: \(response.notification.request.content.title)::\(response.actionIdentifier)")
         // Notify the app that a notification was received
         self.application(UIApplication.shared, didReceiveRemoteNotification: response.notification.request.content.userInfo)
         // The application(_:didReceiveRemoteNotification:) method populates AppDelegate.notificationAction
@@ -97,7 +97,7 @@ extension AppDelegate: MessagingDelegate {
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
-        self.print("didReceiveRemoteNotification")
+        self.log("didReceiveRemoteNotification")
         let dict = NSDictionary(dictionary: userInfo.filter({ (arg) -> Bool in
             let (key, _) = arg
             return key as! String != "aps"
@@ -113,17 +113,17 @@ extension AppDelegate: MessagingDelegate {
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        self.print("didReceiveRemoteNotification completionHandler")
+        self.log("didReceiveRemoteNotification completionHandler")
         self.application(application, didReceiveRemoteNotification: userInfo)
         completionHandler(.newData)
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        self.print("Unable to register for notifications: \(error.localizedDescription)")
+        self.log("Unable to register for notifications: \(error.localizedDescription)")
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        self.print("APNS token received: \(deviceToken)")
+        self.log("APNS token received: \(deviceToken)")
         // Subscribe to the main channel
         Messaging.messaging().subscribe(toTopic: "main")
     }
@@ -187,13 +187,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     // Utility method to print and log to Firebase Analytics
-    static func print(_ string: String) {
-        CLSLogv("%@", getVaList([string]))
+    static func log(_ string: String) {
+        print(string)
     }
     
     // Wrapper method for the static counterpart
-    func print(_ string: String) {
-        AppDelegate.print(string)
+    func log(_ string: String) {
+        AppDelegate.log(string)
     }
     
     // Configure Firebase and settings
@@ -219,7 +219,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category(rawValue: "playback"))
         } catch let error as NSError {
-            self.print(error.localizedDescription)
+            self.log(error.localizedDescription)
         }
         
         UITabBarItem.appearance().setTitleTextAttributes([.font : UIFont(name: "Alpenglow-ExpandedRegular", size: UIFont.smallSystemFontSize - 2) ?? UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)], for: .normal)
