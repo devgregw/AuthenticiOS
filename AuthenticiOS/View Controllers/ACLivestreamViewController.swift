@@ -114,6 +114,7 @@ class ACLivestreamViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.placeholderActivityIndicator.startAnimating()
         DatabaseHelper.loadAppearance(completion: {appearance in
+            self.placeholderView.backgroundColor = appearance.livestream.color
             if appearance.livestream.image != nil {
                 let res = ACImageResource(imageName: appearance.livestream.image!, width: 1080, height: 1920)
                 res.load(intoImageView: self.placeholderImageView, fadeIn: true, setSize: false, scaleDownLargeImages: false, completion: {

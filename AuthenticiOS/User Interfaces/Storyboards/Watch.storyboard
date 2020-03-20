@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -20,7 +20,7 @@
                     <navigationItem key="navigationItem" id="zj3-bA-GJa">
                         <nil key="title"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Sug-N7-lsA">
-                            <rect key="frame" x="123.5" y="5.5" width="167" height="33"/>
+                            <rect key="frame" x="123.66666666666669" y="5.6666666666666679" width="167" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="VIDEOS"/>
@@ -44,7 +44,7 @@
             <objects>
                 <navigationController storyboardIdentifier="watch" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gUh-QH-1f6" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="e7T-Fc-Dxc">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -60,7 +60,7 @@
             <objects>
                 <collectionViewController storyboardIdentifier="watchVideos" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BZb-uA-7UD" customClass="ACVideosCollectionViewController" customModule="AuthenticiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="black" dataMode="prototypes" id="787-Vm-Wb3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gD0-ty-FVC">
@@ -85,11 +85,11 @@
             <objects>
                 <viewController storyboardIdentifier="watchLive" useStoryboardIdentifierAsRestorationIdentifier="YES" id="B79-0j-i4Q" customClass="ACLivestreamViewController" customModule="AuthenticiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sIF-2H-OH7">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView hidden="YES" contentMode="scaleToFill" allowsBackForwardNavigationGestures="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j1R-dz-2Kv">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration" allowsInlineMediaPlayback="YES" applicationNameForUserAgent="Authentic">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" video="YES"/>
@@ -97,21 +97,21 @@
                                 </wkWebViewConfiguration>
                             </wkWebView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KGm-Lj-Djp">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="lKg-6K-RPb">
-                                        <rect key="frame" x="197" y="438" width="20" height="20"/>
+                                        <rect key="frame" x="197" y="358" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="ReR-WU-WfO"/>
                                             <constraint firstAttribute="width" constant="20" id="e2v-18-PBG"/>
                                         </constraints>
                                         <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </activityIndicatorView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oi5-uC-n5C">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oi5-uC-n5C">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                     </imageView>
                                     <visualEffectView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yg6-ZF-1tc">
-                                        <rect key="frame" x="132" y="373" width="150" height="150"/>
+                                        <rect key="frame" x="132" y="293" width="150" height="150"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="dV5-xL-09o">
                                             <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -128,11 +128,11 @@
                                                     </vibrancyEffect>
                                                 </visualEffectView>
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="j1p-gY-3qB">
-                                                    <rect key="frame" x="56.5" y="56.5" width="37" height="37"/>
+                                                    <rect key="frame" x="56.666666666666657" y="56.666666666666686" width="37" height="37"/>
                                                     <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </activityIndicatorView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOADING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HwN-a5-EQs">
-                                                    <rect key="frame" x="0.0" y="109.5" width="150" height="11.5"/>
+                                                    <rect key="frame" x="0.0" y="109.66666666666669" width="150" height="11.333333333333329"/>
                                                     <fontDescription key="fontDescription" name="Alpenglow-ExpandedRegular" family="Alpenglow" pointSize="12"/>
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -155,27 +155,27 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="Yg6-ZF-1tc" firstAttribute="centerY" secondItem="KGm-Lj-Djp" secondAttribute="centerY" id="0gd-EE-mVH"/>
-                                    <constraint firstAttribute="bottom" secondItem="oi5-uC-n5C" secondAttribute="bottom" id="8is-Ip-Eq5"/>
-                                    <constraint firstItem="lKg-6K-RPb" firstAttribute="centerX" secondItem="KGm-Lj-Djp" secondAttribute="centerX" id="A2I-ka-TLo"/>
-                                    <constraint firstItem="Yg6-ZF-1tc" firstAttribute="centerX" secondItem="KGm-Lj-Djp" secondAttribute="centerX" id="Piw-Dc-9f4"/>
-                                    <constraint firstItem="lKg-6K-RPb" firstAttribute="centerY" secondItem="KGm-Lj-Djp" secondAttribute="centerY" id="eiL-SU-eSH"/>
-                                    <constraint firstAttribute="trailing" secondItem="oi5-uC-n5C" secondAttribute="trailing" id="kwR-Mh-4Yi"/>
-                                    <constraint firstItem="oi5-uC-n5C" firstAttribute="top" secondItem="KGm-Lj-Djp" secondAttribute="top" id="tHQ-P2-0AZ"/>
-                                    <constraint firstItem="oi5-uC-n5C" firstAttribute="leading" secondItem="KGm-Lj-Djp" secondAttribute="leading" id="yGc-lr-OCN"/>
+                                    <constraint firstItem="lKg-6K-RPb" firstAttribute="centerX" secondItem="KGm-Lj-Djp" secondAttribute="centerX" id="6jR-Xh-GVb"/>
+                                    <constraint firstItem="Yg6-ZF-1tc" firstAttribute="centerY" secondItem="KGm-Lj-Djp" secondAttribute="centerY" id="WvS-jL-hHZ"/>
+                                    <constraint firstItem="lKg-6K-RPb" firstAttribute="centerY" secondItem="KGm-Lj-Djp" secondAttribute="centerY" id="ffO-iV-5Cd"/>
+                                    <constraint firstItem="Yg6-ZF-1tc" firstAttribute="centerX" secondItem="KGm-Lj-Djp" secondAttribute="centerX" id="yAS-ap-aNE"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="KGm-Lj-Djp" secondAttribute="bottom" id="3KF-II-yhI"/>
-                            <constraint firstItem="KGm-Lj-Djp" firstAttribute="leading" secondItem="sIF-2H-OH7" secondAttribute="leading" id="Ogx-Qg-IKG"/>
+                            <constraint firstItem="Wxm-FH-kBx" firstAttribute="bottom" secondItem="oi5-uC-n5C" secondAttribute="bottom" id="FT0-4S-zYj"/>
+                            <constraint firstItem="Wxm-FH-kBx" firstAttribute="trailing" secondItem="KGm-Lj-Djp" secondAttribute="trailing" id="HfH-BH-eWB"/>
+                            <constraint firstItem="oi5-uC-n5C" firstAttribute="top" secondItem="Wxm-FH-kBx" secondAttribute="top" id="Iaf-4c-b5u"/>
+                            <constraint firstItem="KGm-Lj-Djp" firstAttribute="top" secondItem="Wxm-FH-kBx" secondAttribute="top" id="KHC-C9-1D9"/>
+                            <constraint firstItem="oi5-uC-n5C" firstAttribute="leading" secondItem="Wxm-FH-kBx" secondAttribute="leading" id="PjL-lB-pbB"/>
+                            <constraint firstItem="Wxm-FH-kBx" firstAttribute="trailing" secondItem="oi5-uC-n5C" secondAttribute="trailing" id="RVn-2Z-R6F"/>
                             <constraint firstItem="j1R-dz-2Kv" firstAttribute="leading" secondItem="Wxm-FH-kBx" secondAttribute="leading" id="aKG-HT-3Ma"/>
                             <constraint firstItem="Wxm-FH-kBx" firstAttribute="bottom" secondItem="j1R-dz-2Kv" secondAttribute="bottom" id="an2-gZ-sab"/>
                             <constraint firstItem="j1R-dz-2Kv" firstAttribute="trailing" secondItem="Wxm-FH-kBx" secondAttribute="trailing" id="gO8-Jc-l7p"/>
-                            <constraint firstAttribute="trailing" secondItem="KGm-Lj-Djp" secondAttribute="trailing" id="mkO-yE-XTv"/>
-                            <constraint firstItem="KGm-Lj-Djp" firstAttribute="top" secondItem="sIF-2H-OH7" secondAttribute="top" id="uF8-Fn-sWo"/>
+                            <constraint firstItem="KGm-Lj-Djp" firstAttribute="leading" secondItem="Wxm-FH-kBx" secondAttribute="leading" id="pEr-Ya-8RT"/>
                             <constraint firstItem="j1R-dz-2Kv" firstAttribute="top" secondItem="Wxm-FH-kBx" secondAttribute="top" id="xEW-ar-c0m"/>
+                            <constraint firstItem="Wxm-FH-kBx" firstAttribute="bottom" secondItem="KGm-Lj-Djp" secondAttribute="bottom" id="y8h-im-ZwT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Wxm-FH-kBx"/>
                     </view>
@@ -196,14 +196,14 @@
             <objects>
                 <viewController storyboardIdentifier="video" useStoryboardIdentifierAsRestorationIdentifier="YES" id="MAv-Dr-gid" customClass="ACVideoViewController" customModule="AuthenticiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="R4j-8d-hSi">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="692"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="aIS-z2-BCV">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="692"/>
                             </activityIndicatorView>
                             <wkWebView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZD0-Is-B9q">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="692"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <wkWebViewConfiguration key="configuration" allowsPictureInPictureMediaPlayback="NO">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -211,7 +211,7 @@
                                 </wkWebViewConfiguration>
                             </wkWebView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n2s-Vy-AkR">
-                                <rect key="frame" x="0.0" y="774" width="414" height="34"/>
+                                <rect key="frame" x="0.0" y="692" width="414" height="0.0"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
@@ -254,7 +254,7 @@
             <objects>
                 <navigationController storyboardIdentifier="_video" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3h9-iA-9ux" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="WfL-A2-O74">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="Alpenglow-ExpandedRegular" family="Alpenglow" pointSize="17"/>

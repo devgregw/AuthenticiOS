@@ -368,7 +368,7 @@
 				2B3630581FF56BD9002469E5 /* Frameworks */,
 				2B3630591FF56BD9002469E5 /* Resources */,
 				8C4A9A9EB35FCD77EB3576B1 /* [CP] Embed Pods Frameworks */,
-				FC746D0B20BDD08200D0ACB3 /* Fabric */,
+				FC746D0B20BDD08200D0ACB3 /* Crashlytics */,
 				FC56D6672337082600B87001 /* unused.rb */,
 			);
 			buildRules = (
@@ -522,19 +522,20 @@
 			shellPath = /bin/sh;
 			shellScript = "file=\"unused.rb\"\nif [ -f \"$file\" ]\nthen\necho \"$file found.\"\nruby unused.rb xcode\nelse\necho \"unused.rb doesn't exist\"\nfi\n";
 		};
-		FC746D0B20BDD08200D0ACB3 /* Fabric */ = {
+		FC746D0B20BDD08200D0ACB3 /* Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
 			);
-			name = Fabric;
+			name = Crashlytics;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\"\n";
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -732,14 +733,14 @@
 				CODE_SIGN_ENTITLEMENTS = AuthenticiOS/AuthenticiOS.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 51;
+				CURRENT_PROJECT_VERSION = 52;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = L586WSJPG7;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = AuthenticiOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.20.2;
+				MARKETING_VERSION = 1.20.3;
 				PRODUCT_BUNDLE_IDENTIFIER = church.authenticcity.app.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -757,13 +758,13 @@
 				CODE_SIGN_ENTITLEMENTS = AuthenticiOS/AuthenticiOS.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 51;
+				CURRENT_PROJECT_VERSION = 52;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = L586WSJPG7;
 				INFOPLIST_FILE = AuthenticiOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.20.2;
+				MARKETING_VERSION = 1.20.3;
 				PRODUCT_BUNDLE_IDENTIFIER = church.authenticcity.app.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
