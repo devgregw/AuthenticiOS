@@ -26,7 +26,7 @@ class ACButtonAction {
     
     public let rootDictionary: NSDictionary
     
-    public static let empty = ACButtonAction(type: "__UNDEFINED__", paramGroup: -1, params: [:])
+    public static let empty = ACButtonAction(type: "none", paramGroup: -1, params: [:])
     
     public func getProperty(withName name: String) -> Any? {
         return properties[name]
@@ -44,6 +44,7 @@ class ACButtonAction {
         case "GetDirectionsAction": return "Get directions"
         case "EmailAction": return "Send email"
         case "AddToCalendarAction": return "Add to calendar"
+        case "none": return "None"
         default: return "Invalid action"
         }
     }
@@ -182,6 +183,7 @@ class ACButtonAction {
             } else {
                 self.presentAlert(title: "Error", message: "We were unable to run this action because an invalid parameter group was specified.\n\n\(self.type): \(self.paramGroup)", vc: vc)
             }
+        case "none": break
         default:
             let alert = UIAlertController(title: "Error", message: "We were unable to parse this action because the type \"\(self.type)\" is not a recognized action.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))

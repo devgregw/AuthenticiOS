@@ -43,7 +43,7 @@ class ACLargeThumbnailButtonView: UIView {
         self.origin = origin
         self.hideTitle = hideTitle
         super.init(frame: CGRect.zero)
-        initialize(action: #selector(self.open), resource: thumb, title: title)
+        initialize(action: #selector(self.open), resource: thumb, title: label/*title*/)
         self.buttonAction = action
         titleLabel.text = label
         thumb.load(intoImageView: thumbnailImage, fadeIn: true, setSize: false, scaleDownLargeImages: true, completion: {
@@ -71,7 +71,7 @@ class ACLargeThumbnailButtonView: UIView {
     
     private var buttonAction: ACButtonAction!
     
-    private var title: String!
+    //private var title: String!
     
     @objc func open() {
         buttonAction.invoke(viewController: AppDelegate.topViewController, origin: "thumbnailButton:\(origin)", medium: "open")

@@ -101,12 +101,19 @@ class ACTabViewController: UIViewController {
             if #available(iOS 13, *) {
                 self.view.backgroundColor = UIColor.systemBackground
             }
-            var elements = self.tab!.elements
-            let first = elements.first!
-            let videoInfo = first.getProperty("videoInfo") as! NSDictionary
+            let elements = self.tab!.elements
+            //let first = elements.first!
+            //let videoInfo = first.getProperty("videoInfo") as! NSDictionary
             (self.stackView.superview as! UIScrollView).indicatorStyle = .default
-            self.stackView.addArrangedSubview(ACElement.createVideo(provider: videoInfo.object(forKey: "provider") as! String, videoId: videoInfo.object(forKey: "id") as! String, thumbnail: videoInfo.object(forKey: "thumbnail") as! String, title: videoInfo.object(forKey: "title") as! String, large: true, hideTitle: true, origin: "/tabs/\(self.tab!.id)"))
-            elements.removeFirst()
+            
+            // Tile
+            //self.stackView.addArrangedSubview(ACElement.createThumbnailButton(info: ACButtonInfo(label: "", action: ACButtonAction.empty), thumbnail: self.tab!.header, large: true, hideTitle: true, origin: ""))
+            
+            // Full width image
+            self.stackView.addArrangedSubview(ACElement.createImage(imageResource: self.tab!.header, enlargable: false, vc: self))
+            
+            /*self.stackView.addArrangedSubview(ACElement.createVideo(provider: videoInfo.object(forKey: "provider") as! String, videoId: videoInfo.object(forKey: "id") as! String, thumbnail: videoInfo.object(forKey: "thumbnail") as! String, title: videoInfo.object(forKey: "title") as! String, large: true, hideTitle: true, origin: "/tabs/\(self.tab!.id)"))*/
+            //elements.removeFirst()
             guard elements.count > 0 else {return}
             var skip = false
             for i in 0...(elements.count - 1) {
