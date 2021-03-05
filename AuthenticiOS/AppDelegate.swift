@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseAnalytics
 import Foundation
 import AVKit
 import UserNotifications
@@ -75,7 +76,7 @@ extension AppDelegate: MessagingDelegate {
     }
     
     // Update the dev subscription once a Firebase token is received
-    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         AppDelegate.updateDevSubscription()
     }
     

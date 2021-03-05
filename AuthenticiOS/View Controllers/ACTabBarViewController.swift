@@ -35,7 +35,8 @@ class ACTabBarViewController: UITabBarController {
             self.loadData(first: true)
         }))
         alert.addAction(UIAlertAction(title: "Share FCM Registration Token", style: .default, handler: {_ in
-            let activityController = UIActivityViewController(activityItems: [(Messaging.messaging().fcmToken ?? "<unavailable>") as NSString], applicationActivities: nil)
+            let token = Messaging.messaging().fcmToken
+            let activityController = UIActivityViewController(activityItems: [(token ?? "<unavailable>") as NSString], applicationActivities: nil)
             activityController.popoverPresentationController?.barButtonItem = sender
             self.present(activityController, animated: true, completion: nil)
         }))

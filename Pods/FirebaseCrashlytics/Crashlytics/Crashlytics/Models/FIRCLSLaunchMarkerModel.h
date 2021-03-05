@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,25 +14,26 @@
 
 #import <Foundation/Foundation.h>
 
-#import <GoogleDataTransport/GoogleDataTransport.h>
+#import "Crashlytics/Crashlytics/Models/FIRCLSFileManager.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class FPRMSGPerfMetric;
-
-/**
- * Google Data Transport event wrapper used for converting Fireperf Proto object to
- * GDTEvent object.
+/*
+ * Writes a file during startup, and deletes it at the end. Existence
+ * of this file on the next run means there was a crash at launch,
+ * because the file wasn't deleted. This is used to make Crashlytics
+ * block startup on uploading the crash.
  */
-@interface FPRGDTEvent : NSObject <GDTCOREventDataObject>
+@interface FIRCLSLaunchMarkerModel : NSObject
 
-/** Perf metric that is going to be converted. */
-@property(nonatomic, readonly) FPRMSGPerfMetric *metric;
+- (instancetype)initWithFileManager:(FIRCLSFileManager *)fileManager;
 
 - (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
 
-/** Converts a PerfMetric event to a GDTEvent. */
-+ (instancetype)gdtEventForPerfMetric:(FPRMSGPerfMetric *)perfMetric;
+- (BOOL)checkForAndCreateLaunchMarker;
+- (BOOL)createLaunchFailureMarker;
+- (BOOL)removeLaunchFailureMarker;
 
 @end
 

@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import FirebaseAnalytics
 
 class AnalyticsHelper {
     static func invokeAction(_ action: ACButtonAction, origin: String, medium: String) {
