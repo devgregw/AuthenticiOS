@@ -102,18 +102,11 @@ class ACTabViewController: UIViewController {
                 self.view.backgroundColor = UIColor.systemBackground
             }
             let elements = self.tab!.elements
-            //let first = elements.first!
-            //let videoInfo = first.getProperty("videoInfo") as! NSDictionary
+            
             (self.stackView.superview as! UIScrollView).indicatorStyle = .default
             
-            // Tile
-            //self.stackView.addArrangedSubview(ACElement.createThumbnailButton(info: ACButtonInfo(label: "", action: ACButtonAction.empty), thumbnail: self.tab!.header, large: true, hideTitle: true, origin: ""))
+            self.stackView.addArrangedSubview(ACElement.createThumbnailButton(info: ACButtonInfo(label: "", action: ACButtonAction.empty), thumbnail: self.tab!.header, large: true, hideTitle: true, origin: ""))
             
-            // Full width image
-            self.stackView.addArrangedSubview(ACElement.createImage(imageResource: self.tab!.header, enlargable: false, vc: self))
-            
-            /*self.stackView.addArrangedSubview(ACElement.createVideo(provider: videoInfo.object(forKey: "provider") as! String, videoId: videoInfo.object(forKey: "id") as! String, thumbnail: videoInfo.object(forKey: "thumbnail") as! String, title: videoInfo.object(forKey: "title") as! String, large: true, hideTitle: true, origin: "/tabs/\(self.tab!.id)"))*/
-            //elements.removeFirst()
             guard elements.count > 0 else {return}
             var skip = false
             for i in 0...(elements.count - 1) {
@@ -129,12 +122,10 @@ class ACTabViewController: UIViewController {
                 horizontal.spacing = 0
                 let fVideoInfo = elements[i].getProperty("videoInfo") as! NSDictionary
                 horizontal.addArrangedSubview(ACHalfThumbnailButtonView(vendor: fVideoInfo.object(forKey: "provider") as! String, id: fVideoInfo.object(forKey: "id") as! String, thumb: fVideoInfo.object(forKey: "thumbnail") as! String, title: fVideoInfo.object(forKey: "title") as! String, hideTitle: true, origin: "/tabs/\(self.tab!.id)"))
-                //horizontal.addConstraint(NSLayoutConstraint(item: horizontal.arrangedSubviews[0], attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: UIScreen.main.bounds.width / 2))
                 if i + 1 != elements.count {
                     let sVideoInfo = elements[i + 1].getProperty("videoInfo") as! NSDictionary
                     let nView = ACHalfThumbnailButtonView(vendor: sVideoInfo.object(forKey: "provider") as! String, id: sVideoInfo.object(forKey: "id") as! String, thumb: sVideoInfo.object(forKey: "thumbnail") as! String, title: sVideoInfo.object(forKey: "title") as! String, hideTitle: true, origin: "/tabs/\(self.tab!.id)")
                     horizontal.addArrangedSubview(nView)
-                    //horizontal.addConstraint(NSLayoutConstraint(item: view, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: UIScreen.main.bounds.width / 2))
                     horizontal.addConstraint(NSLayoutConstraint(item: nView, attribute: .leading, relatedBy: .equal, toItem: horizontal.arrangedSubviews[0], attribute: .trailing, multiplier: 1, constant: 0))
                 } else {
                     horizontal.addConstraint(NSLayoutConstraint(item: horizontal.arrangedSubviews[0], attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: UIScreen.main.bounds.width / 2))
