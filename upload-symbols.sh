@@ -7,7 +7,7 @@
 #  Usage: Find the archive to upload dSYMs from and click "Download Debug Symbols" from Xcode Organizer.  Drag script into terminal then drag archive file (~/Library/Developer/Xcode/Archives) into terminal after script.  Press return.
 
 ARCHIVE=$1
-UPLOADSCRIPT="/Users/devgregw/Desktop/GitHub/AuthenticiOS/Pods/Fabric/upload-symbols"
+UPLOADSCRIPT="/Users/devgregw/Desktop/GitHub/AuthenticiOS/Pods/FirebaseCrashlytics/upload-symbols"
 GOOGLECONFIG="/Users/devgregw/Desktop/GitHub/AuthenticiOS/AuthenticiOS/GoogleService-Info.plist"
 
 if [ -d "$ARCHIVE" ]; then
