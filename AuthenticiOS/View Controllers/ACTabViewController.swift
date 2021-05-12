@@ -171,7 +171,11 @@ class ACTabViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        initLayout()
+        if self.tab?.password != nil && !alreadyInitialized {
+            passwordLoop()
+        } else {
+            finishLoading()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -179,15 +183,52 @@ class ACTabViewController: UIViewController {
         self.view.layoutIfNeeded()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func finishLoading() {
         self.title = self.tab!.title
         self.tabBarItem.title = self.tab!.title
         if let action = self.tab!.action {
             action.invoke(viewController: navigationController!, origin: "/tabs/\(self.tab!.id)", medium: "action")
             navigationController!.popViewController(animated: false)
         } else {
+            initLayout()
             applyDefaultAppearance()
+        }
+    }
+    
+    func passwordLoop() {
+        let alert = UIAlertController(title: "Enter Password", message: "This page is protected.", preferredStyle: .alert)
+        alert.addTextField(configurationHandler: {field in
+            field.placeholder = "Password"
+            field.isSecureTextEntry = true
+        })
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
+            self.navigationController?.popViewController(animated: true)
+        })
+        let acceptAction = UIAlertAction(title: "Login", style: .default, handler: { _ in
+            guard let field = alert.textFields?[0], let password = field.text else {
+                self.navigationController?.popViewController(animated: true)
+                return
+            }
+            if self.tab!.password! == password.sha256() {
+                self.finishLoading()
+            } else {
+                self.passwordLoop()
+            }
+        })
+        alert.addAction(acceptAction)
+        alert.addAction(cancel)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.title = self.tab!.title
+        self.tabBarItem.title = self.tab!.title
+        applyDefaultAppearance()
+        if tab!.password != nil {
+            passwordLoop()
+        } else {
+            finishLoading()
         }
     }
 }

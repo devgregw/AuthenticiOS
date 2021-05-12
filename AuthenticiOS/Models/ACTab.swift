@@ -27,6 +27,8 @@ class ACTab {
     
     public let specialType: String?
     
+    public let password: String?
+    
     public func isVisible() -> Bool {
         return !getShouldBeHidden()
     }
@@ -61,6 +63,7 @@ class ACTab {
         self.hideTitle = dict.value(forKey: "hideTitle", default: false)
         self.visibilityRules = dict.value(forKey: "visibility", default: NSDictionary())
         self.specialType = dict.value(forKey: "specialType", default: nil)
+        self.password = dict.value(forKey: "password", default: nil)
         if dict.contains(where: { (k, _) -> Bool in
             return (k as! String) == "action"
         }) {
