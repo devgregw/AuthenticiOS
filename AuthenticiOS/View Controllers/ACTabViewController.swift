@@ -196,7 +196,7 @@ class ACTabViewController: UIViewController {
     }
     
     func passwordLoop() {
-        let alert = UIAlertController(title: "Enter Password", message: "This page is protected.", preferredStyle: .alert)
+        let alert = UIAlertController(title: self.tab!.title, message: "Enter password to access.", preferredStyle: .alert)
         alert.addTextField(configurationHandler: {field in
             field.placeholder = "Password"
             field.isSecureTextEntry = true
