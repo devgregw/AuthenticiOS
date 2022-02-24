@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FirebaseUI
 import FirebaseStorage
 
 class ACCollectionViewCell: UICollectionViewCell {

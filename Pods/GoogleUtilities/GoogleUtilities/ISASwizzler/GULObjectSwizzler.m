@@ -160,6 +160,20 @@
 }
 
 - (void)dealloc {
+  // When the Zombies instrument is enabled, a zombie is created for the swizzled object upon
+  // deallocation. Because this zombie subclasses the generated class, the swizzler should not
+  // dispose it during the swizzler's deallocation.
+  //
+  // There are other special cases where the generated class might be subclassed by a third-party
+  // generated classes, for example: https://github.com/firebase/firebase-ios-sdk/issues/9083
+  // To avoid errors in such cases, the environment variable `GULGeneratedClassDisposeDisabled` can
+  // be set with `YES`.
+  NSDictionary *environment = [[NSProcessInfo processInfo] environment];
+  if ([[environment objectForKey:@"NSZombieEnabled"] boolValue] ||
+      [[environment objectForKey:@"GULGeneratedClassDisposeDisabled"] boolValue]) {
+    return;
+  }
+
   if (_generatedClass) {
     if (_swizzledObject == nil) {
       // The swizzled object has been deallocated already, so the generated class can be disposed
